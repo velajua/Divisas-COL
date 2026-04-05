@@ -25,9 +25,33 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Generate result.json
-        run: python main.py save
+        id: generate
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python main.py save > run_output.log 2>&1
+          CMD_EXIT=$?
+
+          echo "================ PYTHON OUTPUT ================"
+          cat run_output.log
+          echo "==============================================="
+
+          echo "cmd_exit=$CMD_EXIT" >> "$GITHUB_OUTPUT"
+
+          if grep -Eq 'Failed:[[:space:]]*0/[0-9]+' run_output.log; then
+            echo "health_ok=true" >> "$GITHUB_OUTPUT"
+            echo "Health summary is OK"
+          else
+            echo "health_ok=false" >> "$GITHUB_OUTPUT"
+            echo "Health summary is NOT OK"
+          fi
+
+          exit 0
 
       - name: Commit updated JSON if changed
+        if: always()
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -36,9 +60,30 @@ jobs:
           git push
 
       - name: Deploy to Firebase Hosting
+        if: always()
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_CEDAR_SETUP_376217 }}"
           channelId: live
           projectId: cedar-setup-376217
+
+      - name: Fail at end if scraper health was bad
+        if: always()
+        shell: bash
+        run: |
+          echo "cmd_exit=${{ steps.generate.outputs.cmd_exit }}"
+          echo "health_ok=${{ steps.generate.outputs.health_ok }}"
+          echo "================ FINAL PYTHON OUTPUT ================"
+          cat run_output.log
+          echo "===================================================="
+
+          if [ "${{ steps.generate.outputs.cmd_exit }}" != "0" ]; then
+            echo "python main.py save exited with a non-zero status"
+            exit 1
+          fi
+
+          if [ "${{ steps.generate.outputs.health_ok }}" != "true" ]; then
+            echo "Health check summary was not 'Failed: 0/X'"
+            exit 1
+          fi
