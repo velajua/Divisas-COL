@@ -105,7 +105,7 @@ function getNowLabel() {
 }
 
 async function loadResultData() {
-  const candidates = ["result.json", "result.jon"];
+  const candidates = ["result.json"];
 
   for (const path of candidates) {
     try {
