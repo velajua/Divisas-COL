@@ -1,0 +1,7 @@
+requests
+envyaml
+beautifulsoup4
+pandas
+pandas-gbq
+lxml
+Unidecode

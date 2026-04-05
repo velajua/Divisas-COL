@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DiviSAS COL | Casas de cambio por ciudad</title>
+  <meta name="description" content="Comparador de casas de cambio por ciudad en Colombia, con referencias de mercado y detalle por moneda.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="templatemo-aurum-gold.css">
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#inicio" class="logo">DiviSAS <span>COL</span></a>
+        <ul class="nav-links">
+          <li><a href="#resumen">Resumen</a></li>
+          <li><a href="#casas">Casas</a></li>
+          <li><a href="#monedas">Monedas</a></li>
+          <li><a href="#detalle">Detalle</a></li>
+        </ul>
+        <div class="nav-cta">
+          <div class="city-selector-wrap">
+            <label for="citySelector" class="sr-only">Seleccionar ciudad</label>
+            <select id="citySelector" class="city-selector" aria-label="Seleccionar ciudad">
+              <option value="Bogotá">Bogotá</option>
+            </select>
+          </div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Cerrar menú">✕</button>
+    <ul class="mobile-nav-links">
+      <li><a href="#resumen">Resumen</a></li>
+      <li><a href="#casas">Casas</a></li>
+      <li><a href="#monedas">Monedas</a></li>
+      <li><a href="#detalle">Detalle</a></li>
+    </ul>
+    <div class="mobile-menu-cta">
+      <div class="city-selector-wrap mobile-only-selector">
+        <label for="mobileCitySelector" class="sr-only">Seleccionar ciudad</label>
+        <select id="mobileCitySelector" class="city-selector" aria-label="Seleccionar ciudad">
+          <option value="Bogotá">Bogotá</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-grid forex-hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge"><span class="dot"></span> Referencia de mercado y casas de cambio</div>
+          <h1 class="hero-title">
+            Tasas de cambio en <span class="gold" id="heroCityName">Bogotá</span>
+          </h1>
+
+          <p class="hero-desc" style="margin-bottom: 20px;">
+            Referencias rápidas del mercado para USD y EUR frente al peso colombiano, y comparación con las tasas publicadas por casas de cambio de las ciudades de Colombia.
+          </p>
+          <div class="hero-actions">
+            <a href="#casas" class="btn btn-primary">Explorar casas</a>
+            <a href="#detalle" class="btn btn-outline">Ver detalle completo</a>
+          </div>
+          <div class="hero-stats compact-stats">
+            <div class="stat-item">
+              <div class="stat-value" id="heroExchangeHouseCount">—</div>
+              <div class="stat-label">Puntos / sedes</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="heroCurrencyCount">—</div>
+              <div class="stat-label">Monedas detectadas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" id="heroUpdatedAt">—</div>
+              <div class="stat-label">Última carga</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="price-card forex-card-main">
+            <div class="price-header">
+              <span class="price-label">Referencia general</span>
+              <span class="price-live" id="heroPriceCity">Bogotá</span>
+            </div>
+            <div class="hero-rate-grid">
+              <article class="hero-rate-box">
+                <div class="hero-rate-title">USD → COP</div>
+                <div class="hero-rate-value" id="usdGoogleRate">—</div>
+                <p class="hero-rate-meta" id="usdGoogleMeta">Cargando referencia general…</p>
+                <div class="hero-rate-divider"></div>
+                <div class="hero-rate-value alt">
+                  <a id="usdBestBuyLink" href="#" target="_blank" rel="noopener noreferrer">—</a>
+                </div>
+                <p class="hero-rate-meta" id="usdBestBuyMeta"></p>
+              </article>
+              <article class="hero-rate-box">
+                <div class="hero-rate-title">EUR → COP</div>
+                <div class="hero-rate-value" id="eurGoogleRate">—</div>
+                <p class="hero-rate-meta" id="eurGoogleMeta">Cargando referencia general…</p>
+                <div class="hero-rate-divider"></div>
+                <div class="hero-rate-value alt">
+                  <a id="eurBestBuyLink" href="#" target="_blank" rel="noopener noreferrer">—</a>
+                </div>
+                <p class="hero-rate-meta" id="eurBestBuyMeta"></p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="resumen">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Resumen</div>
+        <h2 class="section-title">Lectura rápida de oportunidades</h2>
+        <p class="section-desc">Mejor compra y menor venta para cada moneda, diferencia entre ambas en la ciudad..</p>
+      </div>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </div>
+  </section>
+
+  <section class="products" id="casas">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Casas de cambio</div>
+        <h2 class="section-title">Casas y sedes destacadas</h2>
+        <p class="section-desc">Datos por sede: monedas disponibles, tasas de USD y EUR y acceso a la fuente.</p>
+      </div>
+      <div class="exchange-grid" id="exchangeGrid"></div>
+    </div>
+  </section>
+
+  <section class="why-gold" id="monedas">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Monedas</div>
+        <h2 class="section-title">Comparativo por moneda</h2>
+        <p class="section-desc">Comparación por moneda: mejor compra, menor venta y diferencia entre casas en la ciudad.</p>
+      </div>
+      <div class="currency-grid" id="currencyGrid"></div>
+    </div>
+  </section>
+
+  <section class="contact" id="detalle">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Detalle completo</div>
+        <h2 class="section-title">Monedas por casa de cambio</h2>
+        <p class="section-desc">Vista completa del panorama.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="rates-table">
+          <thead>
+            <tr>
+              <th>Ciudad</th>
+              <th>Casa</th>
+              <th>Sede / ID</th>
+              <th>Moneda</th>
+              <th>Compra</th>
+              <th>Venta</th>
+              <th>Fuente</th>
+            </tr>
+          </thead>
+          <tbody id="ratesTableBody"></tbody>
+        </table>
+      </div>
+      <div class="contact-alt-box hidden" id="loadStatus" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo footer-logo">DiviSAS <span>COL</span></div>
+        <p class="footer-text">Comparador de casas de cambio en Colombia con foco en contexto de mercado, tasas por ciudad y detalle por sede.</p>
+      </div>
+      <a href="#inicio" class="back-to-top">Volver arriba</a>
+    </div>
+  </footer>
+
+  <script src="templatemo-aurum-script.js"></script>
+</body>
+</html>

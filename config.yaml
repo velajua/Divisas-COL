@@ -1,0 +1,262 @@
+function_dicto: {
+  "Bogotá": {
+    "https://www.puntodollar.com/tasa-de-cambio-en-sede-unicentro/": {
+        "fn": "puntoDollar",
+        "args": "Unicentro",
+    },
+    "https://www.puntodollar.com/tasa-de-cambio-salitre-plaza/": {
+        "fn": "puntoDollar",
+        "args": "Salitre",
+    },
+    "https://cambiosvancouver.com/tasa-de-cambio/": {
+        "fn": "cambiosVancouver",
+    },
+    "https://cambioskapital.com/": {
+        "fn": "cambiosKapital",
+    },
+    "https://www.bancounion.com/wps/portal/bancounion/web/productos-servicios/compra-venta-divisas": {
+        "fn": "bancounion",
+    },
+    "https://eurodolar.co/palatino/": {
+        "fn": "eurodolar",
+    },
+  },
+  "Medellín": {
+    "https://www.puntodollar.com/tasa-de-cambio-envigado/": {
+        "fn": "puntoDollar",
+        "args": "Envigado",
+    }
+  },
+  "Cali": {
+    "https://www.puntodollar.com/tasa-de-cambio-cali/": {
+        "fn": "puntoDollar",
+        "args": "Cali",
+    }
+  },
+  "Barranquilla": {
+    "https://www.puntodollar.com/tasa-de-cambio-en-barranquilla/": {
+        "fn": "puntoDollar",
+        "args": "Barranquilla",
+    }
+  },
+  "Cartagena": {
+    "https://www.puntodollar.com/tasa-de-cambio-cartagena/": {
+        "fn": "puntoDollar",
+        "args": "Cartagena",
+    }
+  },
+}
+
+currency_dicto: {
+
+  "Dólar Estadounidense":       "AmericanDollar",
+  "Dólar Americano 20 (US)":    "AmericanDollar",
+  "Dólar Americano 100 (US)":   "AmericanDollar",
+  "Dólar Americano de 100 (US)":"AmericanDollar",
+  "DOLAR AMERICANO (USD) 20":   "AmericanDollar",
+  "DOLAR AMERICANO (USD) 100":  "AmericanDollar",
+  "USD de 100":                 "AmericanDollar",
+  "USD de 20":                  "AmericanDollar",
+  "Dólar":                      "AmericanDollar",
+  "Dólar Americano de 20 (US)": "AmericanDollar",
+  "US Dólar Americano":         "AmericanDollar",
+  "US Dolar Americano":         "AmericanDollar",
+  "Dolar americano (USD) 20":   "AmericanDollar",
+  "Dolar americano (USD) 100":  "AmericanDollar",
+
+  "Euro":                       "Euro",
+  "Euro (EUR) 50":              "Euro",
+  "Euro  (EUR) 100":            "Euro",
+  "Euro (EUR) 200":             "Euro",
+  "Euro (EUR) 500":             "Euro",
+  "EURO SENCILLO (EUR)":        "Euro",
+  "EURO BILLETE DE 500 (EUR)":  "Euro",
+  "Euro Sencillo":              "Euro",
+  "Euro Billete 500":           "Euro",
+  "Euro Pequeño (EUR)":         "Euro",
+  "Euro Pequeno (EUR)":         "Euro",
+  "EUR Euro pequeño":           "Euro",
+  "EUR Euro pequeno":           "Euro",
+  "EUR Euro grande":            "Euro",
+  "Euro Grande (EUR)":          "Euro",
+  "€ Euro pequeño":             "Euro",
+  "€ Euro grande":              "Euro",
+  "Euro sencillo (EUR)":        "Euro",
+  "Euro billete de 500 (EUR)":  "Euro",
+
+  "Libra":                      "BritishPound",
+  "Libra Esterlina (GBP)":      "BritishPound",
+  "LIBRA ESTERLINA (GBP)":      "BritishPound",
+  "Libra Esterlina":            "BritishPound",
+  "GBP Libra Esterlina":        "BritishPound",
+  "Libra esterlina (GBP)":      "BritishPound",
+
+  "Dólar Canadiense (CAD)":     "CanadianDollar",
+  "Dólar Canadiense":           "CanadianDollar",
+  "DOLAR CANADIENSE (CAD)":     "CanadianDollar",
+  "Dolar Canadiense":           "CanadianDollar",
+  "CAD Dólar Canadiense":       "CanadianDollar",
+  "CAD Dolar Canadiense":       "CanadianDollar",
+  "Dolar canadiense (CAD)":     "CanadianDollar",
+
+  "Dólar Australiano (AUD)":    "AustralianDollar",
+  "Dólar Australiano":          "AustralianDollar",
+  "DOLAR AUSTRALIANO (AUD)":    "AustralianDollar",
+  "AUD Dólar Australiano":      "AustralianDollar",
+  "AUD Dolar Australiano":      "AustralianDollar",
+  "Dolar australiano (AUD)":    "AustralianDollar",
+
+  "Peso Mexicano":              "MexicanPeso",
+  "Peso Mexicano (MXN)":        "MexicanPeso",
+  "PESO MEXICANO (MXN)":        "MexicanPeso",
+  "Peso mexicano (MXN)":        "MexicanPeso",
+
+  "Peso Argentino":             "ArgentineanPeso",
+  "Peso Argentino (APS)":       "ArgentineanPeso",
+  "PESO ARGENTINO (ARS)":       "ArgentineanPeso",
+  "PESO ARGENTINO":             "ArgentineanPeso",
+  "Peso argentino (ARS)":       "ArgentineanPeso",
+
+  "Peso Chileno":               "ChileanPeso",
+  "Peso Chileno (CLP)":         "ChileanPeso",
+  "PESO CHILENO (CLP)":         "ChileanPeso",
+  "Peso chileno (CLP)":         "ChileanPeso",
+
+  "Real Brasilero":             "BrasilianReal",
+  "Real (BR)":                  "BrasilianReal",
+  "REAL BRASIL (BRL)":          "BrasilianReal",
+  "Reales":                     "BrasilianReal",
+  "Real Brasileño (BR)":        "BrasilianReal",
+  "Real Brasileno (BR)":        "BrasilianReal",
+  "Real Brasil (BRL)":          "BrasilianReal",
+
+  "Franco Suizo":               "SwissFranc",
+  "Franco Suizo (CHF)":         "SwissFranc",
+  "FRANCO SUIZO (CHF)":         "SwissFranc",
+  "CHF Franco Suizo":           "SwissFranc",
+  "Franco suizo (CHF)":         "SwissFranc",
+
+  "Nuevo Sol":                  "PeruveanNewSun",
+  "Nuevo sol":                  "PeruveanNewSun",
+  "Nuevo Sol (PEN)":            "PeruveanNewSun",
+  "NUEVO SOL PERU (PEN)":       "PeruveanNewSun",
+  "Nuevo Sol    (PEN)":         "PeruveanNewSun",
+  "Nuevo Sol Peru (PEN)":       "PeruveanNewSun",
+
+  "YEN JAPONES (JPY)":          "JapaneseYen",
+  "Yen (JPY)":                  "JapaneseYen",
+  "YEN (JPY)":                  "JapaneseYen",
+  "Yen Japonés":                "JapaneseYen",
+  "Yen":                        "JapaneseYen",
+  "Yen - Japones":              "JapaneseYen",
+  "Yen japones (JPY)":          "JapaneseYen",
+
+  "YUAN CHINO (CNY)":           "ChineseYuan",
+  "Yuan Chino":                 "ChineseYuan",
+  "Yuan":                       "ChineseYuan",
+  "Yuan (CNY)":                 "ChineseYuan",
+  "YUAN (CNY)":                 "ChineseYuan",
+  "Yuan chino (CNY)":           "ChineseYuan",
+
+  "PESO DOMINICANO (DOP)":      "DominicanPeso",
+  "Peso Dominicano (DOP)":      "DominicanPeso",
+  "Peso Dominicano":            "DominicanPeso",
+  "Peso dominicano (DOP)":      "DominicanPeso",
+
+  "Colón (CRC)":                "CostarricanColon",
+  "COLON (CRC)":                "CostarricanColon",
+  "Colon (CRC)":                "CostarricanColon",
+  "Colon - Costa Rica":         "CostarricanColon",
+
+  "QUETZAL (GTQ)":              "GuatemalanQuetzal",
+  "Quetzal (GTQ)":              "GuatemalanQuetzal",
+  "Quetzal - Guatemala":        "GuatemalanQuetzal",
+
+  "Won - Corea del Sur":        "SouthKoreanWon",
+  "Rublo - Rusia":              "RussianRuble",
+  "Liras- Turquia":             "TurkishLira",
+}
+
+expected_currencies: {
+  "puntoDollar": {
+      "AmericanDollar": True,
+      "Euro": True,
+      "BritishPound": True,
+      "CanadianDollar": True,
+      "AustralianDollar": True,
+      "MexicanPeso": True,
+      "ChileanPeso": True,
+      "BrasilianReal": True,
+      "SwissFranc": True,
+      "PeruveanNewSun": True,
+  },
+  "cambiosVancouver": {
+      "AmericanDollar": True,
+      "Euro": True,
+      "BritishPound": True,
+      "CanadianDollar": True,
+      "AustralianDollar": True,
+      "MexicanPeso": True,
+      "ArgentineanPeso": True,
+      "ChileanPeso": True,
+      "BrasilianReal": True,
+      "PeruveanNewSun": True,
+      "SwissFranc": True,
+      "DominicanPeso": True,
+      "ChineseYuan": True,
+      "CostarricanColon": True,
+      "JapaneseYen": True,
+      "GuatemalanQuetzal": True,
+  },
+  "cambiosKapital": {
+      "AmericanDollar": True,
+      "Euro": True,
+      "BritishPound": True,
+      "CanadianDollar": True,
+      "AustralianDollar": True,
+      "MexicanPeso": True,
+      "ArgentineanPeso": True,
+      "ChileanPeso": True,
+      "BrasilianReal": True,
+      "PeruveanNewSun": True,
+      "SwissFranc": True,
+      "JapaneseYen": True,
+      "ChineseYuan": True,
+      "DominicanPeso": True,
+      "CostarricanColon": True,
+      "GuatemalanQuetzal": True,
+  },
+  "bancounion": {
+      "AmericanDollar": True,
+      "Euro": True,
+  },
+  "eurodolar": {
+      "AmericanDollar": True,
+      "Euro": True,
+      "CanadianDollar": True,
+      "AustralianDollar": True,
+      "SwissFranc": True,
+      "BritishPound": True,
+      "ChineseYuan": True,
+      "MexicanPeso": True,
+      "ArgentineanPeso": True,
+      "ChileanPeso": True,
+      "BrasilianReal": True,
+      "PeruveanNewSun": True,
+      "DominicanPeso": True,
+      "CostarricanColon": True,
+      "JapaneseYen": True,
+      "SouthKoreanWon": True,
+      "GuatemalanQuetzal": True,
+      "RussianRuble": True,
+      "TurkishLira": True,
+  },
+}
+
+periodic_check: {
+    "interval_seconds": 300,
+    "max_retries": 3,
+    "retry_delay_seconds": 10,
+    "alert_on_failure": True,
+    "log_each_attempt": True,
+}

@@ -1,0 +1,235 @@
+/* Base original template intentionally replaced and simplified for forex use */
+:root {
+  --bg-dark: #0f0e0c;
+  --bg-section: #171511;
+  --bg-card: #1f1b16;
+  --bg-card-soft: #241f19;
+  --gold-primary: #c9a96b;
+  --gold-light: #f2d39b;
+  --text-primary: #f7f1e5;
+  --text-secondary: #c7bba8;
+  --border-color: rgba(201, 169, 107, 0.18);
+  --success: #9fd69c;
+  --shadow: 0 18px 45px rgba(0,0,0,0.28);
+}
+* { box-sizing: border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Libre Franklin', sans-serif;
+  background: linear-gradient(180deg, #0f0e0c 0%, #14110d 35%, #0f0e0c 100%);
+  color: var(--text-primary);
+  line-height:1.6;
+}
+a { color: inherit; text-decoration:none; }
+.container { max-width: 1280px; margin:0 auto; padding:0 24px; }
+.nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000; padding:18px 0;
+  transition: all .3s ease;
+}
+.nav.scrolled { background: rgba(15, 14, 12, 0.95); backdrop-filter: blur(14px); border-bottom:1px solid var(--border-color); }
+.nav-inner { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.logo { font-family:'Cormorant Garamond', serif; font-size:30px; color:var(--gold-light); letter-spacing:.08em; text-transform:uppercase; }
+.logo span { color: var(--text-primary); font-weight:500; }
+.nav-links { list-style:none; display:flex; gap:28px; }
+.nav-links a, .mobile-nav-links a { color:var(--text-secondary); text-transform:uppercase; font-size:13px; letter-spacing:.08em; }
+.nav-links a:hover, .nav-links a.active, .mobile-nav-links a:hover, .mobile-nav-links a.active { color:var(--gold-light); }
+.nav-cta, .mobile-menu-cta, .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+
+.city-selector-wrap { position: relative; }
+.city-selector {
+  min-height: 46px;
+  padding: 0 44px 0 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: linear-gradient(135deg, #b98b41, #d8b06c);
+  color: #16110a;
+  font-weight: 700;
+  appearance: none;
+  cursor: pointer;
+}
+.city-selector-wrap::after {
+  content: "▾";
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #16110a;
+  pointer-events: none;
+  font-size: 14px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.btn {
+  display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:0 18px;
+  border:1px solid var(--border-color); border-radius:999px; transition:all .25s ease; font-weight:600;
+}
+.btn-primary { background: linear-gradient(135deg, #b98b41, #d8b06c); color:#16110a; border-color:transparent; }
+.btn-outline { color:var(--gold-light); }
+.btn:hover { transform:translateY(-1px); }
+.mobile-menu-btn { display:none; width:48px; height:48px; background:none; border:none; cursor:pointer; }
+.mobile-menu-btn span { display:block; width:24px; height:2px; background:var(--text-primary); margin:5px auto; }
+.mobile-menu {
+  position:fixed; top:0; right:-100%; width:min(100%, 380px); height:100vh; background:var(--bg-card);
+  z-index:2000; padding:92px 28px 28px; transition:right .3s ease; border-left:1px solid var(--border-color);
+}
+.mobile-menu.open { right:0; }
+.mobile-menu-overlay { position:fixed; inset:0; background:rgba(0,0,0,.65); z-index:1999; opacity:0; visibility:hidden; transition:all .3s ease; }
+.mobile-menu-overlay.open { opacity:1; visibility:visible; }
+.mobile-menu-close { position:absolute; top:18px; right:18px; width:44px; height:44px; background:none; color:var(--text-primary); border:1px solid var(--border-color); border-radius:50%; }
+.mobile-nav-links { list-style:none; display:grid; gap:16px; margin-bottom:24px; }
+section { padding: 96px 0; }
+.hero { padding-top: 150px; min-height:100vh; display:flex; align-items:center; }
+.hero-grid, .forex-hero-grid { display:grid; grid-template-columns: 1.1fr .9fr; gap:36px; align-items:center; }
+.hero-badge, .section-label {
+  display:inline-flex; align-items:center; gap:10px; padding:9px 14px; border-radius:999px; font-size:12px;
+  text-transform:uppercase; letter-spacing:.12em; color:var(--gold-light); background:rgba(201,169,107,.08); border:1px solid var(--border-color);
+}
+.dot { width:8px; height:8px; border-radius:50%; background:var(--success); box-shadow:0 0 0 4px rgba(159,214,156,.15); }
+.hero-title, .section-title { font-family:'Cormorant Garamond', serif; line-height:1.05; }
+.hero-title { font-size:clamp(48px, 7vw, 86px); margin:18px 0; }
+.gold { color:var(--gold-light); }
+.hero-desc, .section-desc, .footer-text { color:var(--text-secondary); max-width:760px; }
+.hero-stats, .summary-grid, .exchange-grid, .currency-grid { display:grid; gap:18px; }
+.compact-stats { grid-template-columns:repeat(3, minmax(0,1fr)); margin-top:32px; }
+.stat-item, .summary-card, .exchange-card, .currency-card, .price-card, .contact-alt-box {
+  background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+  border:1px solid var(--border-color); border-radius:24px; box-shadow:var(--shadow);
+}
+.stat-item { padding:20px; }
+.stat-value { font-size:28px; font-weight:700; color:var(--gold-light); }
+.stat-label { color:var(--text-secondary); font-size:14px; }
+.price-card { padding:28px; }
+.price-header { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:20px; }
+.price-label, .price-live { text-transform:uppercase; letter-spacing:.12em; font-size:12px; }
+.price-live { color:var(--success); }
+.hero-rate-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+.hero-rate-box { padding:18px; border-radius:20px; background:var(--bg-card-soft); border:1px solid var(--border-color); }
+.hero-rate-title { color:var(--text-secondary); font-size:13px; text-transform:uppercase; letter-spacing:.08em; }
+.hero-rate-value { font-size:34px; font-weight:700; margin-top:8px; color:var(--gold-light); }
+.hero-rate-value.alt { margin-top:14px; color:var(--text-primary); }
+.hero-rate-meta { margin-top:6px; color:var(--text-secondary); font-size:14px; }
+.hero-rate-divider { height:1px; background:var(--border-color); margin:14px 0; }
+.section-header { margin-bottom:34px; display:grid; gap:16px; }
+.summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.summary-card, .currency-card { padding:24px; }
+.summary-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; margin-bottom:14px; }
+.summary-title, .exchange-title, .currency-title { font-family:'Cormorant Garamond', serif; font-size:34px; }
+.summary-chip, .city-chip { font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--gold-light); }
+.summary-rows { display:grid; gap:10px; }
+.summary-row { padding:14px; border-radius:16px; background:var(--bg-card-soft); }
+.summary-row strong { display:block; color:var(--text-primary); }
+.exchange-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.exchange-card { padding:24px; display:grid; gap:18px; }
+.exchange-head { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+.exchange-title-wrap { display:grid; gap:8px; }
+.exchange-subtitle { color:var(--text-secondary); font-size:14px; }
+.exchange-link { color:var(--gold-light); text-decoration:underline; text-underline-offset:4px; }
+.exchange-rates { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.rate-pill { padding:16px; border-radius:18px; background:var(--bg-card-soft); border:1px solid var(--border-color); }
+.rate-pill .label { color:var(--text-secondary); font-size:13px; }
+.rate-pill .value { color:var(--gold-light); font-size:28px; font-weight:700; margin-top:6px; }
+.rate-pill .meta { color:var(--text-secondary); font-size:13px; }
+.exchange-footer { color:var(--text-secondary); font-size:14px; }
+.currency-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.currency-card { display:grid; gap:14px; }
+.currency-lines { display:grid; gap:10px; }
+.currency-line { padding:14px; border-radius:16px; background:var(--bg-card-soft); }
+.table-wrap { overflow:auto; border:1px solid var(--border-color); border-radius:24px; box-shadow:var(--shadow); }
+.rates-table { width:100%; border-collapse:collapse; min-width:960px; background:rgba(255,255,255,.02); }
+.rates-table th, .rates-table td { padding:15px 16px; border-bottom:1px solid var(--border-color); text-align:left; }
+.rates-table th { position:sticky; top:0; background:#18140f; color:var(--gold-light); text-transform:uppercase; font-size:12px; letter-spacing:.08em; }
+.rates-table td { color:var(--text-secondary); }
+.rates-table tr:hover td { background:rgba(255,255,255,.02); }
+.footer { padding:28px 0 44px; border-top:1px solid var(--border-color); }
+.footer-inner { display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.back-to-top { color:var(--gold-light); }
+.hidden { display:none !important; }
+
+@media (max-width: 1100px) {
+  .hero-grid, .forex-hero-grid, .summary-grid, .exchange-grid, .currency-grid { grid-template-columns:1fr; }
+}
+@media (max-width: 840px) {
+  .nav-links, .nav-cta { display:none; }
+  .mobile-menu-btn { display:block; }
+  section { padding:72px 0; }
+  .hero { padding-top:120px; min-height:auto; }
+  .compact-stats, .hero-rate-grid, .exchange-rates { grid-template-columns:1fr; }
+  .summary-title, .exchange-title, .currency-title { font-size:28px; }
+  .footer-inner { flex-direction:column; align-items:flex-start; }
+}
+
+.summary-card .currency-line + .currency-line {
+  margin-top: 14px;
+}
+
+.summary-card .currency-line strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.exchange-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.exchange-card-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.exchange-card-top > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.exchange-house {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+.exchange-sub {
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.exchange-link {
+  display: inline-block;
+  margin-top: 2px;
+  color: var(--gold-light);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.exchange-stats {
+  display: grid;
+  gap: 14px;
+}
+
+.exchange-stats > div {
+  line-height: 1.45;
+}
+
+.exchange-stats strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--text-primary);
+}
