@@ -1,112 +1,131 @@
-# Divisas COL
+# 💱 Divisas Bogotá
 
-## Overview
+Live site: https://cedar-setup-376217.web.app
 
-This project scrapes currency exchange rates from multiple providers across Colombia and publishes a static website that displays the results.
-
-The system is composed of two main parts:
-
-1. **Data Pipeline (Python)**
-   - Runs scrapers for multiple exchange providers (Bogotá, Medellín, Cali, etc.)
-   - Performs health checks on each scraper
-   - Aggregates results into a single JSON output
-   - Writes the final file to:
-     html/result.json
-
-2. **Frontend (Static Site)**
-   - Located in the `html/` directory
-   - Uses HTML, CSS, and JavaScript
-   - Fetches `/result.json` on page load
-   - Renders exchange rate data dynamically
+A lightweight data pipeline + static site that aggregates daily currency exchange data in Bogotá and serves it via Firebase Hosting.
 
 ---
 
-## Deployment Architecture
+## 🚀 Overview
 
-This project uses a **serverless deployment model**:
+This project:
 
-- **Firebase Hosting**
-  - Serves the static site (`html/`)
-  - URL:  
-    https://cedar-setup-376217.web.app
+- Scrapes exchange rates from multiple sources
+- Processes and normalizes the data
+- Generates a `result.json`
+- Serves a static frontend that displays:
+  - Best buy/sell rates
+  - Comparisons across exchange houses
+  - City-scoped insights
 
-- **GitHub Actions**
-  - Runs daily via cron
-  - Executes:
-    python main.py save
-  - Updates `html/result.json`
-  - Deploys the updated site to Firebase Hosting
+Deployment is fully automated via GitHub Actions and Firebase Hosting.
 
 ---
 
-## Repository Structure
+## 🏗️ Architecture
+
+Scrapers (Python)
+↓
+Data processing
+↓
+result.json
+↓
+Static frontend (html/)
+↓
+Firebase Hosting
+
+---
+
+## ⚙️ Project structure
 
 .
 ├── html/
 │   ├── index.html
-│   ├── templatemo-aurum-script.js
-│   ├── templatemo-aurum-gold.css
+│   ├── app.js
 │   └── result.json
 ├── exchanges/
-├── helpers.py
-├── health_check.py
+├── helpers/
+├── config.yaml
 ├── main.py
 ├── requirements.txt
-├── .github/
-│   └── workflows/
-│       └── daily-update.yml
-├── firebase.json
-└── README.md
+└── .github/workflows/
 
 ---
 
-## Data Flow
+## 🔄 Data pipeline
 
-1. GitHub Actions runs daily
-2. `main.py save` executes
-3. Output written to html/result.json
-4. GitHub commits updated JSON
-5. Firebase deploys updated site
-6. Frontend fetches latest data
-
----
-
-## Health Check Behavior
-
-Summary example:
-
-SUMMARY: ALL PASSED
-Passed: 10/10
-Failed: 0/10
-
-If any failure occurs:
-- deployment still happens
-- workflow fails at the end
-- notification is triggered
+1. Scrapers pull data  
+2. Data is cleaned and normalized  
+3. Sources are merged  
+4. Output → html/result.json  
+5. Frontend renders  
 
 ---
 
-## Local Development
+## 🧪 Local testing
 
-Run:
+Run static site:
 
-python main.py save
+cd html
+python -m http.server 8000
 
-Preview:
+Open:
+http://localhost:8000
 
-firebase serve --only hosting
+Alternatives:
+python3 -m http.server 8000
+py -m http.server 8000
+
+Stop:
+Ctrl + C
 
 ---
 
-## Firebase Hosting
+## ▶️ Run pipeline locally
 
-Check deployments:
-https://console.firebase.google.com/project/cedar-setup-376217/hosting
+pip install -r requirements.txt
+python main.py
 
 ---
 
-## Notes
+## ☁️ Deployment
 
-- No backend server required
-- Fully static deployment
-- JSON regenerated daily
+Handled via GitHub Actions:
+- Daily cron
+- Manual trigger
+
+Steps:
+1. Run pipeline  
+2. Generate result.json  
+3. Deploy to Firebase  
+
+---
+
+## 🌍 Hosting
+
+https://cedar-setup-376217.web.app
+
+---
+
+## 🌐 Custom domain
+
+Firebase → Hosting → Add custom domain
+
+DNS:
+
+A     @     199.36.158.100
+CNAME www   ghs.googlehosted.com
+
+---
+
+## 💰 AdSense
+
+1. https://www.google.com/adsense/
+2. Add domain
+3. Add script:
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+ crossorigin="anonymous"></script>
+
+Deploy:
+firebase deploy
