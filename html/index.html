@@ -14,12 +14,17 @@
   <nav class="nav" id="navbar">
     <div class="container">
       <div class="nav-inner">
-        <a href="#inicio" class="logo">DiviSAS <span>COL</span></a>
+        <div style="display:flex; align-items:center; gap:14px;">
+          <a href="newsletter.html" class="back-to-top" style="padding:8px 14px;">Newsletter</a>
+          <a href="#inicio" class="logo">DiviSAS <span>COL</span></a>
+        </div>
         <ul class="nav-links">
           <li><a href="#resumen">Resumen</a></li>
           <li><a href="#casas">Casas</a></li>
           <li><a href="#monedas">Monedas</a></li>
           <li><a href="#detalle">Detalle</a></li>
+          <li><a href="about.html">Acerca de</a></li>
+      <li><a href="privacy.html">Privacidad</a></li>
         </ul>
         <div class="nav-cta">
           <div class="city-selector-wrap">
@@ -44,6 +49,8 @@
       <li><a href="#casas">Casas</a></li>
       <li><a href="#monedas">Monedas</a></li>
       <li><a href="#detalle">Detalle</a></li>
+      <li><a href="about.html">Acerca de</a></li>
+      <li><a href="privacy.html">Privacidad</a></li>
     </ul>
     <div class="mobile-menu-cta">
       <div class="city-selector-wrap mobile-only-selector">
@@ -125,7 +132,7 @@
       <div class="section-header">
         <div class="section-label">Resumen</div>
         <h2 class="section-title">Lectura rápida de oportunidades</h2>
-        <p class="section-desc">Mejor compra y menor venta para cada moneda, diferencia entre ambas en la ciudad..</p>
+        <p class="section-desc">Mejor compra y menor venta para cada moneda, diferencia entre ambas en la ciudad.</p>
       </div>
       <div class="summary-grid" id="summaryGrid"></div>
     </div>
@@ -180,13 +187,41 @@
     </div>
   </section>
 
+
+  <section class="contact" id="contacto">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Contacto</div>
+        <h2 class="section-title">¿Falta una casa de cambio?</h2>
+        <p class="section-desc">Si conoces una casa de cambio o sede que debería aparecer aquí, envíala por GitHub para revisarla y agregarla.</p>
+      </div>
+      <div class="contact-alt-box" style="display:block; max-width: 900px; margin: 0 auto; text-align: center;">
+        <p style="margin-bottom: 16px;">El enlace abre un GitHub issue nuevo con una plantilla básica.</p>
+        <div class="hero-actions" style="justify-content:center;">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/velajua/Divisas-COL/issues/new?title=Agregar%20casa%20de%20cambio&body=Ciudad%3A%20%0ANombre%20de%20la%20casa%3A%20%0AURL%20oficial%3A%20%0ADirecci%C3%B3n%20o%20sede%3A%20%0AMonedas%20disponibles%3A%20%0AComentarios%3A%20"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Abrir issue en GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container footer-inner">
       <div>
         <div class="logo footer-logo">DiviSAS <span>COL</span></div>
         <p class="footer-text">Comparador de casas de cambio en Colombia con foco en contexto de mercado, tasas por ciudad y detalle por sede.</p>
+        <p class="footer-text" style="margin-top: 10px;">Este sitio publica contenido original sobre tasas de cambio, referencias de mercado y comparación de casas de cambio por ciudad.</p>
       </div>
-      <a href="#inicio" class="back-to-top">Volver arriba</a>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:flex-end;">
+        <a href="about.html" class="back-to-top">Acerca de</a>
+        <a href="privacy.html" class="back-to-top">Privacidad</a>
+        <a href="#contacto" class="back-to-top">Sugerir casa</a>
+        <a href="#inicio" class="back-to-top">Volver arriba</a>
+      </div>
     </div>
   </footer>
 

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Newsletter | DiviSAS COL</title>
+  <meta name="description" content="Boletines y entradas de DiviSAS COL sobre tasas de cambio, mercado y comparativos por ciudad.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="templatemo-aurum-gold.css">
+</head>
+<body>
+  <section class="hero" id="inicio">
+    <div class="container">
+      <div class="hero-grid" style="grid-template-columns: 1fr;">
+        <div class="hero-content">
+          <div class="hero-badge"><span class="dot"></span> Newsletter de DiviSAS COL</div>
+          <h1 class="hero-title">Entradas y boletines sobre <span class="gold">divisas en Colombia</span></h1>
+          <p class="hero-desc" style="margin-bottom: 18px;">
+            Explora análisis, comparativos y notas editoriales sobre casas de cambio, tasas de compra y venta, y movimientos relevantes del mercado.
+          </p>
+          <div class="hero-actions">
+            <a href="index.html" class="btn btn-primary">Volver al inicio</a>
+            <a href="#entradas" class="btn btn-outline">Ver entradas</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="entradas">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label">Entradas</div>
+        <h2 class="section-title">Archivo de boletines</h2>
+      </div>
+
+      <div class="summary-grid" id="entriesGrid"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo footer-logo">DiviSAS <span>COL</span></div>
+        <p class="footer-text">Boletines editoriales y contenido adicional sobre tasas de cambio y contexto de mercado.</p>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:flex-end;">
+        <a href="index.html" class="back-to-top">Volver al inicio</a>
+        <a href="about.html" class="back-to-top">Acerca de</a>
+        <a href="privacy.html" class="back-to-top">Privacidad</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    async function loadNewsletterEntries() {
+      const grid = document.getElementById("entriesGrid");
+      if (!grid) return;
+
+      try {
+        const response = await fetch("entries.json", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("No se pudo cargar entries.json");
+        }
+
+        const entries = await response.json();
+
+        if (!Array.isArray(entries) || !entries.length) {
+          grid.innerHTML = `
+            <article class="summary-card">
+              <div class="summary-card-head">
+                <div>
+                  <div class="summary-currency">Sin entradas</div>
+                  <div class="summary-line" style="margin-top: 8px;">
+                    Aún no hay artículos publicados.
+                  </div>
+                </div>
+              </div>
+            </article>
+          `;
+          return;
+        }
+
+        grid.innerHTML = entries.map(entry => `
+          <article class="summary-card">
+            <a href="${entry.url}" style="text-decoration:none; color:inherit; display:block; height:100%;">
+              <div class="summary-card-head">
+                <div>
+                  <div class="summary-currency">${entry.date}</div>
+                  <div class="summary-line" style="margin-top: 8px; font-size: 1.1rem; font-weight: 600;">
+                    ${entry.title}
+                  </div>
+                </div>
+              </div>
+              <div class="summary-card-body" style="margin-top: 18px;">
+                <p class="footer-text" style="margin: 0 0 14px 0;">
+                  ${entry.summary}
+                </p>
+                <span class="btn btn-outline">Leer entrada</span>
+              </div>
+            </a>
+          </article>
+        `).join("");
+      } catch (error) {
+        console.error(error);
+        grid.innerHTML = `
+          <article class="summary-card">
+            <div class="summary-card-head">
+              <div>
+                <div class="summary-currency">Error</div>
+                <div class="summary-line" style="margin-top: 8px;">
+                  No fue posible cargar las entradas.
+                </div>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+    }
+
+    loadNewsletterEntries();
+  </script>
+</body>
+</html>

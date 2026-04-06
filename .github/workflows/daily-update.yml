@@ -49,14 +49,78 @@ jobs:
 
           exit 0
 
+      - name: Generate entries.json
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+
+          ENTRIES_DIR = "html/entries"
+          OUTPUT_FILE = "html/entries.json"
+
+          def extract(pattern, text, default=""):
+              match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
+              return match.group(1).strip() if match else default
+
+          def clean_html(text):
+              text = re.sub(r"<[^>]+>", "", text)
+              text = re.sub(r"\s+", " ", text)
+              return text.strip()
+
+          entries = []
+
+          if os.path.isdir(ENTRIES_DIR):
+              for filename in sorted(os.listdir(ENTRIES_DIR), reverse=True):
+                  if not filename.endswith(".html"):
+                      continue
+
+                  path = os.path.join(ENTRIES_DIR, filename)
+
+                  with open(path, "r", encoding="utf-8") as f:
+                      html = f.read()
+
+                  title = extract(r"<title>(.*?)</title>", html, filename.replace(".html", ""))
+                  description = extract(
+                      r'<meta\s+name="description"\s+content="(.*?)"\s*/?>',
+                      html,
+                      ""
+                  )
+                  date = extract(
+                      r'<div class="hero-badge"><span class="dot"></span>\s*(.*?)\s*</div>',
+                      html,
+                      ""
+                  )
+
+                  if not description:
+                      first_desc = extract(r'<p class="hero-desc"[^>]*>(.*?)</p>', html, "")
+                      description = clean_html(first_desc)
+
+                  title = clean_html(title).replace(" | DiviSAS COL", "").strip()
+
+                  entries.append({
+                      "date": date,
+                      "title": title,
+                      "summary": description,
+                      "url": f"entries/{filename}"
+                  })
+
+          with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+              json.dump(entries, f, ensure_ascii=False, indent=2)
+
+          print(f"Generated {OUTPUT_FILE} with {len(entries)} entries")
+          PY
+
       - name: Commit updated JSON if changed
         if: always()
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add html/result.json
-          git diff --cached --quiet || git commit -m "Update result.json"
+          git add html/result.json html/entries.json
+          git diff --cached --quiet || git commit -m "Update generated JSON files"
           git push
 
       - name: Deploy to Firebase Hosting
