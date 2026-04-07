@@ -101,24 +101,34 @@
             </div>
             <div class="hero-rate-grid">
               <article class="hero-rate-box">
-                <div class="hero-rate-title">USD → COP</div>
-                <div class="hero-rate-value" id="usdGoogleRate">—</div>
-                <p class="hero-rate-meta" id="usdGoogleMeta">Cargando referencia general…</p>
+                <div class="hero-rate-select-wrap">
+                  <label for="heroCurrencySelector1" class="sr-only">Seleccionar primera moneda</label>
+                  <select id="heroCurrencySelector1" class="hero-rate-selector" aria-label="Seleccionar primera moneda">
+                    <option value="AmericanDollar">USD</option>
+                  </select>
+                </div>
+                <div class="hero-rate-value" id="heroReferenceRate1">—</div>
+                <p class="hero-rate-meta" id="heroReferenceMeta1">Cargando referencia general…</p>
                 <div class="hero-rate-divider"></div>
                 <div class="hero-rate-value alt">
-                  <a id="usdBestBuyLink" href="#" target="_blank" rel="noopener noreferrer">—</a>
+                  <a id="heroBestBuyLink1" href="#" target="_blank" rel="noopener noreferrer">—</a>
                 </div>
-                <p class="hero-rate-meta" id="usdBestBuyMeta"></p>
+                <p class="hero-rate-meta" id="heroBestBuyMeta1"></p>
               </article>
               <article class="hero-rate-box">
-                <div class="hero-rate-title">EUR → COP</div>
-                <div class="hero-rate-value" id="eurGoogleRate">—</div>
-                <p class="hero-rate-meta" id="eurGoogleMeta">Cargando referencia general…</p>
+                <div class="hero-rate-select-wrap">
+                  <label for="heroCurrencySelector2" class="sr-only">Seleccionar segunda moneda</label>
+                  <select id="heroCurrencySelector2" class="hero-rate-selector" aria-label="Seleccionar segunda moneda">
+                    <option value="Euro">EUR</option>
+                  </select>
+                </div>
+                <div class="hero-rate-value" id="heroReferenceRate2">—</div>
+                <p class="hero-rate-meta" id="heroReferenceMeta2">Cargando referencia general…</p>
                 <div class="hero-rate-divider"></div>
                 <div class="hero-rate-value alt">
-                  <a id="eurBestBuyLink" href="#" target="_blank" rel="noopener noreferrer">—</a>
+                  <a id="heroBestBuyLink2" href="#" target="_blank" rel="noopener noreferrer">—</a>
                 </div>
-                <p class="hero-rate-meta" id="eurBestBuyMeta"></p>
+                <p class="hero-rate-meta" id="heroBestBuyMeta2"></p>
               </article>
             </div>
           </div>

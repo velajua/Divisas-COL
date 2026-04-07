@@ -6,6 +6,39 @@ let rawData = null;
 let flattenedRows = [];
 let currentCity = DEFAULT_CITY;
 
+
+const DEFAULT_HERO_CURRENCIES = ["AmericanDollar", "Euro"];
+const CURRENCY_REFERENCE_CODE_MAP = {
+  AmericanDollar: "USD",
+  Euro: "EUR",
+  PoundSterling: "GBP",
+  CanadianDollar: "CAD",
+  AustralianDollar: "AUD",
+  SwissFranc: "CHF",
+  JapaneseYen: "JPY",
+  MexicanPeso: "MXN",
+  BrazilianReal: "BRL",
+  ArgentinePeso: "ARS",
+  ChileanPeso: "CLP",
+  PeruvianSol: "PEN",
+  NewZealandDollar: "NZD",
+  SingaporeDollar: "SGD",
+  HongKongDollar: "HKD",
+  ChineseYuan: "CNY",
+  ChineseRenminbi: "CNY",
+  Renminbi: "CNY",
+  KoreanWon: "KRW",
+  NorwegianKrone: "NOK",
+  SwedishKrona: "SEK",
+  DanishKrone: "DKK"
+};
+
+let selectedHeroCurrencies = [...DEFAULT_HERO_CURRENCIES];
+let currentCityRows = [];
+let currentComparisonMap = {};
+let currentReferenceRates = { updatedAt: null, byCurrency: {} };
+const referenceRateCache = new Map();
+
 const citySelector = document.getElementById("citySelector");
 const mobileCitySelector = document.getElementById("mobileCitySelector");
 const heroCityNameEl = document.getElementById("heroCityName");
@@ -14,15 +47,16 @@ const heroExchangeHouseCountEl = document.getElementById("heroExchangeHouseCount
 const heroCurrencyCountEl = document.getElementById("heroCurrencyCount");
 const heroUpdatedAtEl = document.getElementById("heroUpdatedAt");
 
-const usdGoogleRateEl = document.getElementById("usdGoogleRate");
-const usdGoogleMetaEl = document.getElementById("usdGoogleMeta");
-const usdBestBuyLinkEl = document.getElementById("usdBestBuyLink");
-const usdBestBuyMetaEl = document.getElementById("usdBestBuyMeta");
-
-const eurGoogleRateEl = document.getElementById("eurGoogleRate");
-const eurGoogleMetaEl = document.getElementById("eurGoogleMeta");
-const eurBestBuyLinkEl = document.getElementById("eurBestBuyLink");
-const eurBestBuyMetaEl = document.getElementById("eurBestBuyMeta");
+const heroCurrencySelector1 = document.getElementById("heroCurrencySelector1");
+const heroCurrencySelector2 = document.getElementById("heroCurrencySelector2");
+const heroReferenceRateEl1 = document.getElementById("heroReferenceRate1");
+const heroReferenceMetaEl1 = document.getElementById("heroReferenceMeta1");
+const heroBestBuyLinkEl1 = document.getElementById("heroBestBuyLink1");
+const heroBestBuyMetaEl1 = document.getElementById("heroBestBuyMeta1");
+const heroReferenceRateEl2 = document.getElementById("heroReferenceRate2");
+const heroReferenceMetaEl2 = document.getElementById("heroReferenceMeta2");
+const heroBestBuyLinkEl2 = document.getElementById("heroBestBuyLink2");
+const heroBestBuyMetaEl2 = document.getElementById("heroBestBuyMeta2");
 
 const summaryGrid = document.getElementById("summaryGrid");
 const exchangeGrid = document.getElementById("exchangeGrid");
@@ -268,77 +302,234 @@ function buildReferenceComparisonText(referenceRate, bestBuyRow) {
   return `${formatSignedCop(Math.abs(diff))} COP por debajo de la referencia general.`;
 }
 
-async function fetchReferenceRates() {
-  const usdUrl = "https://api.frankfurter.dev/v2/rates?base=USD&quotes=COP";
-  const eurUrl = "https://api.frankfurter.dev/v2/rates?base=EUR&quotes=COP";
+function getCurrencyOptions(cityRows) {
+  const map = new Map();
 
-  const [usdRes, eurRes] = await Promise.all([
-    fetch(usdUrl, { cache: "no-store" }),
-    fetch(eurUrl, { cache: "no-store" }),
-  ]);
+  cityRows.forEach((row) => {
+    if (!map.has(row.currencyId)) {
+      map.set(row.currencyId, row.currencyLabel || row.currencyId);
+    }
+  });
 
-  if (!usdRes.ok || !eurRes.ok) {
-    throw new Error(`No se pudo obtener la referencia general. USD: ${usdRes.status}, EUR: ${eurRes.status}`);
+  return [...map.entries()]
+    .map(([currencyId, currencyLabel]) => ({ currencyId, currencyLabel }))
+    .sort((a, b) => a.currencyLabel.localeCompare(b.currencyLabel, "es"));
+}
+
+function getDefaultHeroCurrencies(cityRows) {
+  const available = getCurrencyOptions(cityRows).map((item) => item.currencyId);
+  const picked = [];
+
+  DEFAULT_HERO_CURRENCIES.forEach((currencyId) => {
+    if (available.includes(currencyId) && !picked.includes(currencyId)) {
+      picked.push(currencyId);
+    }
+  });
+
+  available.forEach((currencyId) => {
+    if (picked.length < 2 && !picked.includes(currencyId)) {
+      picked.push(currencyId);
+    }
+  });
+
+  while (picked.length < 2) {
+    picked.push(picked[0] || DEFAULT_HERO_CURRENCIES[picked.length] || "");
   }
 
-  const [usdData, eurData] = await Promise.all([
-    usdRes.json(),
-    eurRes.json(),
-  ]);
+  return picked;
+}
 
-  const usdRow = Array.isArray(usdData) ? usdData[0] : null;
-  const eurRow = Array.isArray(eurData) ? eurData[0] : null;
+function fillHeroCurrencySelectors(cityRows, resetToDefault) {
+  const options = getCurrencyOptions(cityRows);
+  const defaults = getDefaultHeroCurrencies(cityRows);
+  const availableIds = options.map((item) => item.currencyId);
 
-  return {
-    usdCop: normalizeNumber(usdRow?.rate),
-    eurCop: normalizeNumber(eurRow?.rate),
-    sourceLabel: "Referencia general",
-    updatedAt: usdRow?.date || eurRow?.date || null,
-    usdSourceUrl: usdUrl,
-    eurSourceUrl: eurUrl,
+  if (
+    resetToDefault ||
+    !availableIds.includes(selectedHeroCurrencies[0]) ||
+    !availableIds.includes(selectedHeroCurrencies[1])
+  ) {
+    selectedHeroCurrencies = [...defaults];
+  }
+
+  const optionsHtml = options
+    .map((item) => `<option value="${item.currencyId}">${item.currencyLabel}</option>`)
+    .join("");
+
+  heroCurrencySelector1.innerHTML = optionsHtml;
+  heroCurrencySelector2.innerHTML = optionsHtml;
+
+  heroCurrencySelector1.value = selectedHeroCurrencies[0] || defaults[0];
+  heroCurrencySelector2.value = selectedHeroCurrencies[1] || defaults[1];
+}
+
+function getCurrencyReferenceCode(currencyId, currencyLabel) {
+  if (CURRENCY_REFERENCE_CODE_MAP[currencyId]) {
+    return CURRENCY_REFERENCE_CODE_MAP[currencyId];
+  }
+
+  const label = String(currencyLabel || "").toUpperCase();
+
+  if (label.includes("USD") || label.includes("DÓLAR ESTADOUNIDENSE") || label.includes("DOLAR ESTADOUNIDENSE")) return "USD";
+  if (label.includes("EUR") || label.includes("EURO")) return "EUR";
+  if (label.includes("GBP") || label.includes("LIBRA")) return "GBP";
+  if (label.includes("CAD")) return "CAD";
+  if (label.includes("AUD")) return "AUD";
+  if (label.includes("CHF") || label.includes("FRANCO SUIZO")) return "CHF";
+  if (label.includes("JPY") || label.includes("YEN")) return "JPY";
+  if (label.includes("MXN") || label.includes("PESO MEXICANO")) return "MXN";
+  if (label.includes("BRL") || label.includes("REAL BRASILEÑO") || label.includes("REAL BRASILENO")) return "BRL";
+  if (label.includes("ARS") || label.includes("PESO ARGENTINO")) return "ARS";
+  if (label.includes("CLP") || label.includes("PESO CHILENO")) return "CLP";
+  if (label.includes("PEN") || label.includes("SOL PERUANO")) return "PEN";
+  if (label.includes("CNY") || label.includes("YUAN") || label.includes("RENMINBI")) return "CNY";
+
+  return null;
+}
+
+function extractReferenceRate(data) {
+  if (Array.isArray(data) && data[0]) {
+    return {
+      rate: normalizeNumber(data[0].rate),
+      date: data[0].date || null,
+    };
+  }
+
+  if (data && typeof data === "object") {
+    return {
+      rate: normalizeNumber(data?.rates?.COP),
+      date: data?.date || null,
+    };
+  }
+
+  return { rate: null, date: null };
+}
+
+async function fetchReferenceRate(currencyId, currencyLabel) {
+  const referenceCode = getCurrencyReferenceCode(currencyId, currencyLabel);
+
+  if (!referenceCode) {
+    return {
+      currencyId,
+      currencyLabel,
+      referenceCode: null,
+      rate: null,
+      updatedAt: null,
+      sourceUrl: "",
+    };
+  }
+
+  if (referenceRateCache.has(referenceCode)) {
+    return referenceRateCache.get(referenceCode);
+  }
+
+  const sourceUrl = `https://api.frankfurter.dev/v2/rates?base=${encodeURIComponent(referenceCode)}&quotes=COP`;
+  const response = await fetch(sourceUrl, { cache: "no-store" });
+
+  if (!response.ok) {
+    throw new Error(`No se pudo obtener la referencia general para ${referenceCode}. Status ${response.status}`);
+  }
+
+  const data = await response.json();
+  const parsed = extractReferenceRate(data);
+  const result = {
+    currencyId,
+    currencyLabel,
+    referenceCode,
+    rate: parsed.rate,
+    updatedAt: parsed.date,
+    sourceUrl,
   };
+
+  referenceRateCache.set(referenceCode, result);
+  return result;
+}
+
+async function loadReferenceRatesForSelectedCurrencies(cityRows) {
+  const labelsById = new Map(cityRows.map((row) => [row.currencyId, row.currencyLabel || row.currencyId]));
+  const byCurrency = {};
+
+  await Promise.all(
+    selectedHeroCurrencies.map(async (currencyId) => {
+      if (!currencyId) return;
+
+      try {
+        byCurrency[currencyId] = await fetchReferenceRate(currencyId, labelsById.get(currencyId));
+      } catch (error) {
+        console.error(error);
+        byCurrency[currencyId] = {
+          currencyId,
+          currencyLabel: labelsById.get(currencyId) || currencyId,
+          referenceCode: getCurrencyReferenceCode(currencyId, labelsById.get(currencyId)),
+          rate: null,
+          updatedAt: null,
+          sourceUrl: "",
+        };
+      }
+    })
+  );
+
+  const updatedAt = Object.values(byCurrency).find((item) => item?.updatedAt)?.updatedAt || null;
+
+  return { updatedAt, byCurrency };
+}
+
+function renderHeroRateCard({ cityRows, currencyId, referenceData, rateEl, metaEl, bestBuyLinkEl, bestBuyMetaEl }) {
+  const rows = cityRows.filter((row) => row.currencyId === currencyId);
+  const bestBuy = getBestBuyRow(rows, currencyId);
+  const referenceRate = referenceData?.rate;
+  const referenceCode = referenceData?.referenceCode;
+
+  if (Number.isFinite(referenceRate)) {
+    rateEl.textContent = `${formatCop(referenceRate)} COP`;
+    metaEl.innerHTML = referenceData?.sourceUrl
+      ? `<a href="${referenceData.sourceUrl}" target="_blank" rel="noopener noreferrer">Referencia ${referenceCode}/COP</a>`
+      : "Referencia disponible";
+  } else {
+    rateEl.textContent = "—";
+    metaEl.textContent = referenceCode
+      ? `No hay referencia disponible ahora para ${referenceCode}/COP.`
+      : "No hay referencia disponible para esta moneda.";
+  }
+
+  setRateLink(bestBuyLinkEl, bestBuyMetaEl, bestBuy, "Mejor compra");
+
+  const compareText = buildReferenceComparisonText(referenceRate, bestBuy);
+
+  if (bestBuy && compareText) {
+    bestBuyMetaEl.innerHTML += `<br>${compareText}`;
+  }
 }
 
 function renderHeroRates(cityRows, referenceRates) {
-  const bestUsdBuy = getBestBuyRow(cityRows, "AmericanDollar");
-  const bestEurBuy = getBestBuyRow(cityRows, "Euro");
+  const firstCurrencyId = selectedHeroCurrencies[0];
+  const secondCurrencyId = selectedHeroCurrencies[1];
 
-  if (Number.isFinite(referenceRates.usdCop)) {
-    usdGoogleRateEl.textContent = `${formatCop(referenceRates.usdCop)} COP`;
-    usdGoogleMetaEl.innerHTML = `<a href="${referenceRates.usdSourceUrl}" target="_blank" rel="noopener noreferrer">Referencia general USD/COP</a>`;
-  } else {
-    usdGoogleRateEl.textContent = "—";
-    usdGoogleMetaEl.textContent = "Referencia no disponible";
-  }
+  renderHeroRateCard({
+    cityRows,
+    currencyId: firstCurrencyId,
+    referenceData: referenceRates.byCurrency[firstCurrencyId],
+    rateEl: heroReferenceRateEl1,
+    metaEl: heroReferenceMetaEl1,
+    bestBuyLinkEl: heroBestBuyLinkEl1,
+    bestBuyMetaEl: heroBestBuyMetaEl1,
+  });
 
-  if (Number.isFinite(referenceRates.eurCop)) {
-    eurGoogleRateEl.textContent = `${formatCop(referenceRates.eurCop)} COP`;
-    eurGoogleMetaEl.innerHTML = `<a href="${referenceRates.eurSourceUrl}" target="_blank" rel="noopener noreferrer">Referencia general EUR/COP</a>`;
-  } else {
-    eurGoogleRateEl.textContent = "—";
-    eurGoogleMetaEl.textContent = "Referencia no disponible";
-  }
-
-  setRateLink(usdBestBuyLinkEl, usdBestBuyMetaEl, bestUsdBuy, "Mejor compra");
-  setRateLink(eurBestBuyLinkEl, eurBestBuyMetaEl, bestEurBuy, "Mejor compra");
-
-  const usdCompare = buildReferenceComparisonText(referenceRates.usdCop, bestUsdBuy);
-  const eurCompare = buildReferenceComparisonText(referenceRates.eurCop, bestEurBuy);
-
-  if (bestUsdBuy && usdCompare) {
-    usdBestBuyMetaEl.innerHTML += `<br>${usdCompare}`;
-  }
-
-  if (bestEurBuy && eurCompare) {
-    eurBestBuyMetaEl.innerHTML += `<br>${eurCompare}`;
-  }
+  renderHeroRateCard({
+    cityRows,
+    currencyId: secondCurrencyId,
+    referenceData: referenceRates.byCurrency[secondCurrencyId],
+    rateEl: heroReferenceRateEl2,
+    metaEl: heroReferenceMetaEl2,
+    bestBuyLinkEl: heroBestBuyLinkEl2,
+    bestBuyMetaEl: heroBestBuyMetaEl2,
+  });
 }
 
 function renderSummary(cityRows, comparisonMap) {
-  const currencies = ["AmericanDollar", "Euro"];
   const cards = [];
 
-  currencies.forEach((currencyId) => {
+  selectedHeroCurrencies.forEach((currencyId) => {
     const rows = cityRows.filter((row) => row.currencyId === currencyId);
     if (!rows.length) return;
 
@@ -446,20 +637,26 @@ function renderTable(cityRows) {
   ratesTableBody.innerHTML = rowsHtml.join("");
 }
 
-function renderCity(city, referenceRates) {
+async function renderSelectedCurrencySections() {
+  currentReferenceRates = await loadReferenceRatesForSelectedCurrencies(currentCityRows);
+  renderHeroCounts(currentCityRows, currentReferenceRates);
+  renderHeroRates(currentCityRows, currentReferenceRates);
+  renderSummary(currentCityRows, currentComparisonMap);
+}
+
+async function renderCity(city, resetCurrencySelection) {
   currentCity = city;
   citySelector.value = city;
   mobileCitySelector.value = city;
 
-  const cityRows = getRowsByCity(city);
-  const comparisonMap = buildComparisonMap(rawData?.comparison_data, city);
+  currentCityRows = getRowsByCity(city);
+  currentComparisonMap = buildComparisonMap(rawData?.comparison_data, city);
 
-  renderHeroCounts(cityRows, referenceRates);
-  renderHeroRates(cityRows, referenceRates);
-  renderSummary(cityRows, comparisonMap);
-  renderExchangeGrid(cityRows);
-  renderCurrencyGrid(cityRows, comparisonMap);
-  renderTable(cityRows);
+  fillHeroCurrencySelectors(currentCityRows, Boolean(resetCurrencySelection));
+  await renderSelectedCurrencySections();
+  renderExchangeGrid(currentCityRows);
+  renderCurrencyGrid(currentCityRows, currentComparisonMap);
+  renderTable(currentCityRows);
 }
 
 function setLoadStatus(message, isError) {
@@ -478,29 +675,24 @@ async function init() {
     const cities = getAvailableCities(flattenedRows);
     fillCitySelectors(cities);
 
-    let referenceRates = {
-      usdCop: null,
-      eurCop: null,
-      sourceLabel: "Referencia general",
-      updatedAt: null,
-      usdSourceUrl: "",
-      eurSourceUrl: "",
-    };
+    await renderCity(currentCity, true);
 
-    try {
-      referenceRates = await fetchReferenceRates();
-    } catch (err) {
-      console.error(err);
-    }
-
-    renderCity(currentCity, referenceRates);
-
-    citySelector.addEventListener("change", () => {
-      renderCity(citySelector.value, referenceRates);
+    citySelector.addEventListener("change", async () => {
+      await renderCity(citySelector.value, true);
     });
 
-    mobileCitySelector.addEventListener("change", () => {
-      renderCity(mobileCitySelector.value, referenceRates);
+    mobileCitySelector.addEventListener("change", async () => {
+      await renderCity(mobileCitySelector.value, true);
+    });
+
+    heroCurrencySelector1.addEventListener("change", async () => {
+      selectedHeroCurrencies[0] = heroCurrencySelector1.value;
+      await renderSelectedCurrencySections();
+    });
+
+    heroCurrencySelector2.addEventListener("change", async () => {
+      selectedHeroCurrencies[1] = heroCurrencySelector2.value;
+      await renderSelectedCurrencySections();
     });
   } catch (err) {
     console.error(err);
@@ -508,4 +700,55 @@ async function init() {
   }
 }
 
-document.addEventListener("DOMContentLoaded", init);
+function initMobileMenu() {
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileMenuOverlay = document.getElementById("mobileMenuOverlay");
+  const mobileMenuClose = document.getElementById("mobileMenuClose");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-links a");
+
+  if (!mobileMenuBtn || !mobileMenu || !mobileMenuOverlay || !mobileMenuClose) {
+    return;
+  }
+
+  function openMobileMenu() {
+    mobileMenu.classList.add("open");
+    mobileMenuOverlay.classList.add("open");
+    document.body.classList.add("menu-open");
+  }
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    mobileMenuOverlay.classList.remove("open");
+    document.body.classList.remove("menu-open");
+  }
+
+  mobileMenuBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
+    openMobileMenu();
+  });
+
+  mobileMenuClose.addEventListener("click", function (event) {
+    event.preventDefault();
+    closeMobileMenu();
+  });
+
+  mobileMenuOverlay.addEventListener("click", closeMobileMenu);
+
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeMobileMenu();
+    }
+  });
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  initMobileMenu();
+  init();
+});
