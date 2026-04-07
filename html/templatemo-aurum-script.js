@@ -553,18 +553,38 @@ function renderSummary(cityRows, comparisonMap) {
 function renderExchangeGrid(cityRows) {
   const locations = [];
   const seen = new Set();
+  const selectedCurrencies = [...new Set(selectedHeroCurrencies.filter(Boolean))];
 
   cityRows.forEach((row) => {
     if (seen.has(row.locationId)) return;
     seen.add(row.locationId);
 
     const locationRows = cityRows.filter((r) => r.locationId === row.locationId);
-    const usd = getBestBuyRow(locationRows, "AmericanDollar");
-    const eur = getBestBuyRow(locationRows, "Euro");
+
+    const filteredCurrencyRows = selectedCurrencies
+      .map((currencyId) => {
+        const rowsForCurrency = locationRows.filter((r) => r.currencyId === currencyId);
+        if (!rowsForCurrency.length) return null;
+
+        return {
+          currencyId,
+          currencyLabel: rowsForCurrency[0].currencyLabel || currencyId,
+          bestBuy: getBestBuyRow(rowsForCurrency, currencyId),
+        };
+      })
+      .filter(Boolean);
+
+    if (!filteredCurrencyRows.length) return;
+
+    const ratePillsHtml = filteredCurrencyRows.map((item) => `
+        <div class="rate-pill">
+          <div class="label">${item.currencyLabel} compra</div>
+          <div class="value">${item.bestBuy ? `${formatCop(item.bestBuy.buy)} COP` : "—"}</div>
+        </div>
+    `).join("");
 
     locations.push(`
       <article class="exchange-card">
-        
         <div class="exchange-head">
           <div class="exchange-title-wrap">
             <div class="exchange-title">${row.exchangeHousePretty}</div>
@@ -576,22 +596,12 @@ function renderExchangeGrid(cityRows) {
         </div>
 
         <div class="exchange-rates">
-        <div class="rate-pill">
-          <div class="label">USD compra</div>
-          <div class="value">${usd ? `${formatCop(usd.buy)} COP` : "—"}</div>
+          ${ratePillsHtml}
+          <div class="rate-pill">
+            <div class="label">Monedas filtradas</div>
+            <div class="value">${filteredCurrencyRows.length}</div>
+          </div>
         </div>
-
-        
-        <div class="rate-pill">
-        <div class="label">EUR compra</div>
-        <div class="value">${eur ? `${formatCop(eur.buy)} COP` : "—"}</div>
-        </div>
-        <div class="rate-pill">
-        <div class="label">Monedas</div>
-          <div class="value">${getDistinctCurrencies(locationRows).length}</div>
-        </div>  
-        </div>
-
       </article>
     `);
   });
@@ -642,6 +652,7 @@ async function renderSelectedCurrencySections() {
   renderHeroCounts(currentCityRows, currentReferenceRates);
   renderHeroRates(currentCityRows, currentReferenceRates);
   renderSummary(currentCityRows, currentComparisonMap);
+  renderExchangeGrid(currentCityRows);
 }
 
 async function renderCity(city, resetCurrencySelection) {
