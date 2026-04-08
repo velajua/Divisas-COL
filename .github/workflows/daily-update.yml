@@ -57,9 +57,25 @@ jobs:
           import json
           import os
           import re
+          from datetime import datetime
 
           ENTRIES_DIR = "html/entries"
           OUTPUT_FILE = "html/entries.json"
+
+          MONTHS = {
+              "ene": 1,
+              "feb": 2,
+              "mar": 3,
+              "abr": 4,
+              "may": 5,
+              "jun": 6,
+              "jul": 7,
+              "ago": 8,
+              "sep": 9,
+              "oct": 10,
+              "nov": 11,
+              "dic": 12,
+          }
 
           def extract(pattern, text, default=""):
               match = re.search(pattern, text, re.IGNORECASE | re.DOTALL)
@@ -70,10 +86,33 @@ jobs:
               text = re.sub(r"\s+", " ", text)
               return text.strip()
 
+          def parse_spanish_date(date_text):
+              value = (date_text or "").strip().lower()
+              match = re.match(r"(\d{1,2})\s+([a-záéíóú]+)\s+(\d{4})", value)
+              if not match:
+                  return datetime.min
+
+              day = int(match.group(1))
+              month_txt = (
+                  match.group(2)
+                  .replace("á", "a")
+                  .replace("é", "e")
+                  .replace("í", "i")
+                  .replace("ó", "o")
+                  .replace("ú", "u")
+              )[:3]
+              year = int(match.group(3))
+
+              month = MONTHS.get(month_txt)
+              if not month:
+                  return datetime.min
+
+              return datetime(year, month, day)
+
           entries = []
 
           if os.path.isdir(ENTRIES_DIR):
-              for filename in sorted(os.listdir(ENTRIES_DIR), reverse=True):
+              for filename in os.listdir(ENTRIES_DIR):
                   if not filename.endswith(".html"):
                       continue
 
@@ -104,8 +143,14 @@ jobs:
                       "date": date,
                       "title": title,
                       "summary": description,
-                      "url": f"entries/{filename}"
+                      "url": f"entries/{filename}",
+                      "_sort_date": parse_spanish_date(date),
                   })
+
+          entries.sort(key=lambda x: x["_sort_date"], reverse=True)
+
+          for entry in entries:
+              entry.pop("_sort_date", None)
 
           with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
               json.dump(entries, f, ensure_ascii=False, indent=2)
