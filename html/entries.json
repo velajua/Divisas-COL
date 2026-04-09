@@ -1,14 +1,14 @@
 [
   {
-    "date": "05 abr 2026",
-    "title": "Petro vs Banco de la República",
-    "summary": "Análisis crítico del choque entre Gustavo Petro y el Banco de la República y su impacto en el dólar en Colombia.",
-    "url": "entries/petro-banco-republica.html"
-  },
-  {
     "date": "08 abr 2026",
     "title": "Inflación, tasas y presión global",
     "summary": "Análisis del impacto de la inflación, las tasas de interés y el entorno global en el dólar en Colombia.",
     "url": "entries/inflacion-tasas-presion-global.html"
+  },
+  {
+    "date": "05 abr 2026",
+    "title": "Petro vs Banco de la República",
+    "summary": "Análisis crítico del choque entre Gustavo Petro y el Banco de la República y su impacto en el dólar en Colombia.",
+    "url": "entries/petro-banco-republica.html"
   }
 ]
