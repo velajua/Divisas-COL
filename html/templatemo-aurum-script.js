@@ -6,7 +6,6 @@ let rawData = null;
 let flattenedRows = [];
 let currentCity = DEFAULT_CITY;
 
-
 const DEFAULT_HERO_CURRENCIES = ["AmericanDollar", "Euro"];
 const CURRENCY_REFERENCE_CODE_MAP = {
   AmericanDollar: "USD",
@@ -526,7 +525,7 @@ function renderHeroRates(cityRows, referenceRates) {
   });
 }
 
-function renderSummary(cityRows, comparisonMap) {
+function renderSummary(cityRows) {
   const cards = [];
 
   selectedHeroCurrencies.forEach((currencyId) => {
@@ -535,7 +534,6 @@ function renderSummary(cityRows, comparisonMap) {
 
     const bestBuy = getBestBuyRow(rows, currencyId);
     const bestSell = getBestSellRow(rows, currencyId);
-    const comp = comparisonMap[currencyId];
     const displayName = rows[0]?.currencyLabel || currencyId;
 
     cards.push(`
@@ -543,7 +541,8 @@ function renderSummary(cityRows, comparisonMap) {
         <h3>${displayName}</h3>
         <div class="currency-line"><strong>Mejor compra</strong><br>${bestBuy ? `<a href="${bestBuy.sourceUrl}" target="_blank" rel="noopener noreferrer">${bestBuy.exchangeHousePretty}</a> · ${formatCop(bestBuy.buy)} COP` : "—"}</div>
         <div class="currency-line"><strong>Menor venta</strong><br>${bestSell ? `<a href="${bestSell.sourceUrl}" target="_blank" rel="noopener noreferrer">${bestSell.exchangeHousePretty}</a> · ${formatCop(bestSell.sell)} COP` : "—"}</div>
-        ${bestBuy && bestSell ? `<div class="currency-line"><strong>Lectura del mercado</strong><br>La diferencia entre la mejor compra y la menor venta reportadas es de ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}      </article>
+        ${bestBuy && bestSell ? `<div class="currency-line"><strong>Lectura del mercado</strong><br>La diferencia entre la mejor compra y la menor venta reportadas es de ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}
+      </article>
     `);
   });
 
@@ -577,10 +576,10 @@ function renderExchangeGrid(cityRows) {
     if (!filteredCurrencyRows.length) return;
 
     const ratePillsHtml = filteredCurrencyRows.map((item) => `
-        <div class="rate-pill">
-          <div class="label">${item.currencyLabel} compra</div>
-          <div class="value">${item.bestBuy ? `${formatCop(item.bestBuy.buy)} COP` : "—"}</div>
-        </div>
+      <div class="rate-pill">
+        <div class="label">${item.currencyLabel} compra</div>
+        <div class="value">${item.bestBuy ? `${formatCop(item.bestBuy.buy)} COP` : "—"}</div>
+      </div>
     `).join("");
 
     locations.push(`
@@ -609,14 +608,13 @@ function renderExchangeGrid(cityRows) {
   exchangeGrid.innerHTML = locations.join("");
 }
 
-function renderCurrencyGrid(cityRows, comparisonMap) {
+function renderCurrencyGrid(cityRows) {
   const currencyIds = getDistinctCurrencies(cityRows);
 
   const cards = currencyIds.map((currencyId) => {
     const rows = cityRows.filter((row) => row.currencyId === currencyId);
     const bestBuy = getBestBuyRow(rows, currencyId);
     const bestSell = getBestSellRow(rows, currencyId);
-    const comp = comparisonMap[currencyId];
     const displayName = rows[0]?.currencyLabel || currencyId;
 
     return `
@@ -624,7 +622,8 @@ function renderCurrencyGrid(cityRows, comparisonMap) {
         <h3>${displayName}</h3>
         <div class="currency-line"><strong>Mejor compra</strong><br>${bestBuy ? `<a href="${bestBuy.sourceUrl}" target="_blank" rel="noopener noreferrer">${prettyHouseName(bestBuy.locationId)}</a> · ${formatCop(bestBuy.buy)} COP` : "—"}</div>
         <div class="currency-line"><strong>Menor venta</strong><br>${bestSell ? `<a href="${bestSell.sourceUrl}" target="_blank" rel="noopener noreferrer">${prettyHouseName(bestSell.locationId)}</a> · ${formatCop(bestSell.sell)} COP` : "—"}</div>
-        ${bestBuy && bestSell ? `<div class="currency-line"><strong>Lectura del mercado</strong><br>La diferencia entre la mejor compra y la menor venta reportadas es de ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}      </article>
+        ${bestBuy && bestSell ? `<div class="currency-line"><strong>Lectura del mercado</strong><br>La diferencia entre la mejor compra y la menor venta reportadas es de ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}
+      </article>
     `;
   });
 
@@ -651,7 +650,7 @@ async function renderSelectedCurrencySections() {
   currentReferenceRates = await loadReferenceRatesForSelectedCurrencies(currentCityRows);
   renderHeroCounts(currentCityRows, currentReferenceRates);
   renderHeroRates(currentCityRows, currentReferenceRates);
-  renderSummary(currentCityRows, currentComparisonMap);
+  renderSummary(currentCityRows);
   renderExchangeGrid(currentCityRows);
 }
 
@@ -757,7 +756,6 @@ function initMobileMenu() {
     }
   });
 }
-
 
 document.addEventListener("DOMContentLoaded", function () {
   initMobileMenu();
