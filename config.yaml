@@ -33,25 +33,28 @@ function_dicto: {
     "https://www.puntodollar.com/tasa-de-cambio-envigado/": {
         "fn": "puntoDollar",
         "args": "Envigado",
-    }
+    },
+    "https://euroservicios.com.co/": {
+        "fn": "euroservicios",
+    },
   },
   "Cali": {
     "https://www.puntodollar.com/tasa-de-cambio-cali/": {
         "fn": "puntoDollar",
         "args": "Cali",
-    }
+    },
   },
   "Barranquilla": {
     "https://www.puntodollar.com/tasa-de-cambio-en-barranquilla/": {
         "fn": "puntoDollar",
         "args": "Barranquilla",
-    }
+    },
   },
   "Cartagena": {
     "https://www.puntodollar.com/tasa-de-cambio-cartagena/": {
         "fn": "puntoDollar",
         "args": "Cartagena",
-    }
+    },
   },
 }
 
@@ -71,6 +74,7 @@ currency_dicto: {
   "US Dolar Americano":          "AmericanDollar",
   "Dolar americano (USD) 20":    "AmericanDollar",
   "Dolar americano (USD) 100":   "AmericanDollar",
+  "DÓLAR (USD)":                 "AmericanDollar",
 
   "Euro":                        "Euro",
   "Euro (EUR) 50":               "Euro",
@@ -92,6 +96,7 @@ currency_dicto: {
   "Euro sencillo (EUR)":         "Euro",
   "Euro billete de 500 (EUR)":   "Euro",
   "EURO Peq./Small":             "Euro",
+  "EURO (EUR)":                  "Euro",
 
   "Libra":                       "BritishPound",
   "Libra Esterlina (GBP)":       "BritishPound",
@@ -129,6 +134,7 @@ currency_dicto: {
   "PESO ARGENTINO":              "ArgentineanPeso",
   "Peso argentino (ARS)":        "ArgentineanPeso",
   "Argentino":                   "ArgentineanPeso",
+  "Peso Argentino (ARS)":        "ArgentineanPeso",
 
   "Peso Chileno":                "ChileanPeso",
   "Peso Chileno (CLP)":          "ChileanPeso",
@@ -144,6 +150,7 @@ currency_dicto: {
   "Real Brasileno (BR)":         "BrasilianReal",
   "Real Brasil (BRL)":           "BrasilianReal",
   "Real":                        "BrasilianReal",
+  "Real Brasileño (BRL)":        "BrasilianReal",
 
   "Franco Suizo":                "SwissFranc",
   "Franco Suizo (CHF)":          "SwissFranc",
@@ -167,6 +174,7 @@ currency_dicto: {
   "Yen":                         "JapaneseYen",
   "Yen - Japones":               "JapaneseYen",
   "Yen japones (JPY)":           "JapaneseYen",
+  "Yen Japones (JPY)":           "JapaneseYen",
 
   "YUAN CHINO (CNY)":            "ChineseYuan",
   "Yuan Chino":                  "ChineseYuan",
@@ -174,6 +182,7 @@ currency_dicto: {
   "Yuan (CNY)":                  "ChineseYuan",
   "YUAN (CNY)":                  "ChineseYuan",
   "Yuan chino (CNY)":            "ChineseYuan",
+  "Yuan Chino (CNY)":            "ChineseYuan",
 
   "PESO DOMINICANO (DOP)":       "DominicanPeso",
   "Peso Dominicano (DOP)":       "DominicanPeso",
@@ -186,18 +195,39 @@ currency_dicto: {
   "Colon (CRC)":                 "CostarricanColon",
   "Colon - Costa Rica":          "CostarricanColon",
   "Colon":                       "CostarricanColon",
+  "Colón Costarricense (CRC)":   "CostarricanColon",
 
   "QUETZAL (GTQ)":               "GuatemalanQuetzal",
   "Quetzal (GTQ)":               "GuatemalanQuetzal",
   "Quetzal - Guatemala":         "GuatemalanQuetzal",
   "Quetzal":                     "GuatemalanQuetzal",
+  "Quetzal Guatemala (GTQ)":     "GuatemalanQuetzal",
 
   "Won - Corea del Sur":         "SouthKoreanWon",
+  "Won Corea del Sur (KOR)":     "SouthKoreanWon",
+
   "Rublo - Rusia":               "RussianRuble",
+
   "Liras- Turquia":              "TurkishLira",
   "Lira":                        "TurkishLira",
+  "Lira Turca (TRY)":            "TurkishLira",
 
   "Dirham":                      "UAEDirham",
+  "Dirham Emiratos (AED)":       "UAEDirham",
+
+  "cordoba (nio)":               "NicaraguanCordoba",
+  "Dólar newzelanda (nzd)":      "NewZealandDollar",
+  "Dólar bahamas (psd)":         "BahamianDollar",
+  "corona danesa (dnk)":         "DanishKrone",
+  "corona noruega (nok)":        "NorwegianKrone",
+  "corona sueca (sek)":          "SwedishKrone",
+  "Florin Aruba (AWG)":          "ArubanFlorin",
+  "Florin caribeño (ANG)":       "NetherlandsAntilleanGuilder",
+  "Peso Boliviano (BOP)":        "BolivianBoliviano",
+  "Baht Tailandia (THB)":        "ThaiBaht",
+  "Peso Uruguayo (UYU)":         "UruguayanPeso",
+  "Dólar Hong Kong (HKD)":       "HongKongDollar",
+  "Lempira (HNL)":               "HonduranLempira",
 }
 
 expected_currencies: {
@@ -293,6 +323,40 @@ expected_currencies: {
       "GuatemalanQuetzal": True,
       "TurkishLira": True,
       "UAEDirham": True,
+  },
+  "euroservicios": {
+      "AmericanDollar": True,
+      "Euro": True,
+      "MexicanPeso": True,
+      "NicaraguanCordoba": True,
+      "NewZealandDollar": True,
+      "BahamianDollar": True,
+      "DanishKrone": True,
+      "NorwegianKrone": True,
+      "SwedishKrone": True,
+      "BritishPound": True,
+      "CanadianDollar": True,
+      "PeruveanNewSun": True,
+      "ChileanPeso": True,
+      "AustralianDollar": True,
+      "BrasilianReal": True,
+      "SwissFranc": True,
+      "ArgentineanPeso": True,
+      "GuatemalanQuetzal": True,
+      "JapaneseYen": True,
+      "DominicanPeso": True,
+      "ChineseYuan": True,
+      "ArubanFlorin": True,
+      "NetherlandsAntilleanGuilder": True,
+      "BolivianBoliviano": True,
+      "TurkishLira": True,
+      "ThaiBaht": True,
+      "CostarricanColon": True,
+      "SouthKoreanWon": True,
+      "UruguayanPeso": True,
+      "UAEDirham": True,
+      "HongKongDollar": True,
+      "HonduranLempira": True,
   },
 }
 
