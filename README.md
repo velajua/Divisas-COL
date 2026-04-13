@@ -38,6 +38,7 @@ Firebase Hosting
 
 ## ⚙️ Project structure
 
+```
 .
 ├── html/
 │   ├── index.html
@@ -49,6 +50,7 @@ Firebase Hosting
 ├── main.py
 ├── requirements.txt
 └── .github/workflows/
+```
 
 ---
 
