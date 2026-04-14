@@ -3,7 +3,7 @@ import re
 import time
 import requests
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 from envyaml import EnvYAML
 
 CONF = EnvYAML(
@@ -25,7 +25,7 @@ def euroservicios(url, total_data=None):
             value = re.sub(r"\s+", " ", value).strip()
             return value
 
-        if value in ("-X", "-", "–", "-0"):
+        if value in ("-X", "-", "–", "-0", ""):
             return "0"
 
         value = re.sub(r"^\$\s*", "", value)
@@ -45,8 +45,14 @@ def euroservicios(url, total_data=None):
         return value
 
     headers = {
-        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-        "accept-language": "es-419,es;q=0.9,en;q=0.8,es-ES;q=0.7,en-GB;q=0.6,en-US;q=0.5,ca;q=0.4,es-CO;q=0.3",
+        "accept": (
+            "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,"
+            "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+        ),
+        "accept-language": (
+            "es-419,es;q=0.9,en;q=0.8,es-ES;q=0.7,en-GB;q=0.6,en-US;q=0.5,"
+            "ca;q=0.4,es-CO;q=0.3"
+        ),
         "cache-control": "no-cache",
         "pragma": "no-cache",
         "priority": "u=0, i",
@@ -80,7 +86,6 @@ def euroservicios(url, total_data=None):
             )
             response.raise_for_status()
             break
-
         except requests.exceptions.RequestException as exc:
             last_error = exc
             if attempt < 3:
@@ -91,52 +96,68 @@ def euroservicios(url, total_data=None):
     if response is None:
         raise last_error
 
-    euroserviciosSoup = BeautifulSoup(response.content, "lxml")
-
+    soup = BeautifulSoup(response.content, "lxml")
     euroserviciosData = {}
 
-    cards = euroserviciosSoup.find_all(
-        "div",
-        class_=lambda x: isinstance(x, str) and "group" in x
-    )
-
-    for card in cards:
-        title_tag = card.find("h4")
-        if not title_tag:
-            continue
-
+    for title_tag in soup.find_all("h4"):
         currency = clean_data(title_tag.get_text(" ", strip=True), "title")
-
-        buy = None
-        sell = None
-
-        for p_tag in card.find_all("p"):
-            text = p_tag.get_text(" ", strip=True)
-
-            if "Compra:" in text:
-                buy = clean_data(text.split(":", 1)[1])
-
-            elif "Venta:" in text:
-                sell = clean_data(text.split(":", 1)[1])
-
-        if buy is None or sell is None:
-            continue
-
-        if currency in euroserviciosData:
+        if not currency:
             continue
 
         currency_id = CONF["currency_dicto"].get(currency)
         if currency_id is None:
-            print(
-                f"Warning: Unknown currency '{currency}' in euroservicios, skipping"
-            )
             continue
 
-        euroserviciosData[currency] = {
-            "buy": buy,
-            "sell": sell,
-            "id": currency_id,
-        }
+        block_parts = []
+
+        for elem in title_tag.next_elements:
+            if elem is title_tag:
+                continue
+
+            if isinstance(elem, Tag) and elem.name == "h4":
+                break
+
+            if isinstance(elem, Tag):
+                text = elem.get_text(" ", strip=True)
+                if text:
+                    block_parts.append(text)
+
+        block_text = " ".join(block_parts)
+        block_text = re.sub(r"\s+", " ", block_text).strip()
+
+        buy_match = re.search(
+            r"Compra:\s*\$?\s*([\d\.,]+)",
+            block_text,
+            flags=re.IGNORECASE,
+        )
+        sell_match = re.search(
+            r"Venta:\s*\$?\s*([\d\.,]+)",
+            block_text,
+            flags=re.IGNORECASE,
+        )
+
+        if not buy_match or not sell_match:
+            continue
+
+        buy = clean_data(buy_match.group(1))
+        sell = clean_data(sell_match.group(1))
+
+        if currency_id == "AmericanDollar":
+            try:
+                buy_num = float(buy.replace(",", "."))
+                sell_num = float(sell.replace(",", "."))
+            except ValueError:
+                continue
+
+            if not (3000 <= buy_num <= 5000 and 3000 <= sell_num <= 5000):
+                continue
+
+        if currency not in euroserviciosData:
+            euroserviciosData[currency] = {
+                "buy": buy,
+                "sell": sell,
+                "id": currency_id,
+            }
 
     total_data.append({"id": "euroservicios", "data": euroserviciosData})
     return total_data
