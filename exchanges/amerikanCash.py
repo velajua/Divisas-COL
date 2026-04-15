@@ -48,9 +48,9 @@ def amerikanCash(url, total_data=None, local=None):
     response = requests.get(url, timeout=30)
     response.raise_for_status()
 
-    americanCashData = {}
-    americanCashSoup = BeautifulSoup(response.text, "lxml")
-    tokens = [text.strip() for text in americanCashSoup.stripped_strings if text.strip()]
+    amerikanCashData = {}
+    amerikanCashSoup = BeautifulSoup(response.text, "lxml")
+    tokens = [text.strip() for text in amerikanCashSoup.stripped_strings if text.strip()]
 
     start_idx = None
     for i, token in enumerate(tokens):
@@ -69,14 +69,14 @@ def amerikanCash(url, total_data=None, local=None):
         sell = clean_data(tokens[i + 2])
 
         if is_rate(buy) and is_rate(sell):
-            if currency not in americanCashData and "\xa0" not in currency:
+            if currency not in amerikanCashData and "\xa0" not in currency:
                 currency_id = CONF["currency_dicto"].get(currency)
                 if currency_id is None:
                     print(f"Warning: Unknown currency '{currency}' in amerikanCash, skipping")
                     i += 3
                     continue
 
-                americanCashData[currency] = {
+                amerikanCashData[currency] = {
                     "buy": buy,
                     "sell": sell,
                     "id": currency_id,
@@ -85,5 +85,5 @@ def amerikanCash(url, total_data=None, local=None):
         else:
             i += 1
 
-    total_data.append({"id": f"americanCash{local}", "data": americanCashData})
+    total_data.append({"id": f"amerikanCash{local}", "data": amerikanCashData})
     return total_data
