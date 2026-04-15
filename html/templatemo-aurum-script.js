@@ -596,10 +596,6 @@ function renderExchangeGrid(cityRows) {
 
         <div class="exchange-rates">
           ${ratePillsHtml}
-          <div class="rate-pill">
-            <div class="label">Monedas filtradas</div>
-            <div class="value">${filteredCurrencyRows.length}</div>
-          </div>
         </div>
       </article>
     `);
