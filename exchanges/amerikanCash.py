@@ -62,28 +62,58 @@ def amerikanCash(url, total_data=None, local=None):
     if start_idx is None:
         raise ValueError("Could not find DIVISA / COMPRA / VENTA section")
 
-    i = start_idx
-    while i < len(tokens) - 2:
-        currency = clean_data(tokens[i], "title")
-        buy = clean_data(tokens[i + 1])
-        sell = clean_data(tokens[i + 2])
+    current_currency = None
+    current_rates = []
 
-        if is_rate(buy) and is_rate(sell):
-            if currency not in amerikanCashData and "\xa0" not in currency:
-                currency_id = CONF["currency_dicto"].get(currency)
-                if currency_id is None:
-                    print(f"Warning: Unknown currency '{currency}' in amerikanCash, skipping")
-                    i += 3
-                    continue
+    def flush_currency():
+        nonlocal current_currency, current_rates
 
-                amerikanCashData[currency] = {
-                    "buy": buy,
-                    "sell": sell,
-                    "id": currency_id,
-                }
-            i += 3
-        else:
-            i += 1
+        if current_currency is None or len(current_rates) < 2:
+            current_currency = None
+            current_rates = []
+            return
+
+        if current_currency in amerikanCashData or "\xa0" in current_currency:
+            current_currency = None
+            current_rates = []
+            return
+
+        currency_id = CONF["currency_dicto"].get(current_currency)
+        if currency_id is None:
+            print(f"Warning: Unknown currency '{current_currency}' in amerikanCash, skipping")
+            current_currency = None
+            current_rates = []
+            return
+
+        amerikanCashData[current_currency] = {
+            "buy": current_rates[0],
+            "sell": current_rates[1],
+            "id": currency_id,
+        }
+        current_currency = None
+        current_rates = []
+
+    for token in tokens[start_idx:]:
+        currency = clean_data(token, "title")
+        rate = clean_data(token)
+        currency_id = CONF["currency_dicto"].get(currency)
+
+        if currency_id is not None:
+            if current_currency is None:
+                current_currency = currency
+                current_rates = []
+            elif currency != current_currency and current_rates:
+                flush_currency()
+                current_currency = currency
+            elif currency != current_currency:
+                current_currency = currency
+                current_rates = []
+            continue
+
+        if current_currency is not None and is_rate(rate):
+            current_rates.append(rate)
+            if len(current_rates) >= 2:
+                flush_currency()
 
     total_data.append({"id": f"amerikanCash{local}", "data": amerikanCashData})
     return total_data
