@@ -158,6 +158,10 @@ jobs:
           print(f"Generated {OUTPUT_FILE} with {len(entries)} entries")
           PY
 
+      - name: Apply site domain metadata
+        if: always()
+        run: python update_site_domain.py
+
       - name: Commit updated JSON if changed
         if: always()
         shell: bash
