@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cedar-setup-376217.web.app/sitemap.xml
