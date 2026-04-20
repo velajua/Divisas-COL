@@ -1,10 +1,11 @@
 const DEFAULT_CITY = "Bogotá";
+const INITIAL_CITY = document.documentElement.dataset.city || DEFAULT_CITY;
 
 const GOOGLE_RATES_ENDPOINT = null;
 
 let rawData = null;
 let flattenedRows = [];
-let currentCity = DEFAULT_CITY;
+let currentCity = INITIAL_CITY;
 
 const DEFAULT_HERO_CURRENCIES = ["AmericanDollar", "Euro"];
 const CURRENCY_REFERENCE_CODE_MAP = {
@@ -62,6 +63,20 @@ const exchangeGrid = document.getElementById("exchangeGrid");
 const currencyGrid = document.getElementById("currencyGrid");
 const ratesTableBody = document.getElementById("ratesTableBody");
 const loadStatus = document.getElementById("loadStatus");
+
+function slugifyCity(value) {
+  return String(value || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function cityPagePath(city) {
+  const slug = slugifyCity(city || DEFAULT_CITY);
+  return `/${slug || "bogota"}/`;
+}
 
 function formatCop(value) {
   const num = Number(value);
@@ -138,7 +153,7 @@ function getNowLabel() {
 }
 
 async function loadResultData() {
-  const candidates = ["result.json"];
+  const candidates = ["../result.json", "result.json", "/result.json"];
 
   for (const path of candidates) {
     try {
@@ -192,6 +207,8 @@ function getAvailableCities(rows) {
 }
 
 function fillCitySelectors(cities) {
+  if (!citySelector || !mobileCitySelector) return;
+
   const html = cities
     .map((city) => `<option value="${city}">${city}</option>`)
     .join("");
@@ -199,7 +216,9 @@ function fillCitySelectors(cities) {
   citySelector.innerHTML = html;
   mobileCitySelector.innerHTML = html;
 
-  const initial = cities.includes(DEFAULT_CITY) ? DEFAULT_CITY : (cities[0] || DEFAULT_CITY);
+  const initial = cities.includes(INITIAL_CITY)
+    ? INITIAL_CITY
+    : (cities.includes(DEFAULT_CITY) ? DEFAULT_CITY : (cities[0] || DEFAULT_CITY));
 
   citySelector.value = initial;
   mobileCitySelector.value = initial;
@@ -263,6 +282,8 @@ function buildComparisonMap(rawComparisonData, city) {
 }
 
 function renderHeroCounts(cityRows, referenceRates) {
+  if (!heroCityNameEl || !heroPriceCityEl || !heroExchangeHouseCountEl || !heroCurrencyCountEl || !heroUpdatedAtEl) return;
+
   heroCityNameEl.textContent = currentCity;
   heroPriceCityEl.textContent = currentCity;
   heroExchangeHouseCountEl.textContent = getDistinctLocations(cityRows).length || "0";
@@ -339,6 +360,8 @@ function getDefaultHeroCurrencies(cityRows) {
 }
 
 function fillHeroCurrencySelectors(cityRows, resetToDefault) {
+  if (!heroCurrencySelector1 || !heroCurrencySelector2) return;
+
   const options = getCurrencyOptions(cityRows);
   const defaults = getDefaultHeroCurrencies(cityRows);
   const availableIds = options.map((item) => item.currencyId);
@@ -526,6 +549,8 @@ function renderHeroRates(cityRows, referenceRates) {
 }
 
 function renderSummary(cityRows) {
+  if (!summaryGrid) return;
+
   const cards = [];
 
   selectedHeroCurrencies.forEach((currencyId) => {
@@ -550,6 +575,8 @@ function renderSummary(cityRows) {
 }
 
 function renderExchangeGrid(cityRows) {
+  if (!exchangeGrid) return;
+
   const locations = [];
   const seen = new Set();
   const selectedCurrencies = [...new Set(selectedHeroCurrencies.filter(Boolean))];
@@ -605,6 +632,8 @@ function renderExchangeGrid(cityRows) {
 }
 
 function renderCurrencyGrid(cityRows) {
+  if (!currencyGrid) return;
+
   const currencyIds = getDistinctCurrencies(cityRows);
 
   const cards = currencyIds.map((currencyId) => {
@@ -627,6 +656,8 @@ function renderCurrencyGrid(cityRows) {
 }
 
 function renderTable(cityRows) {
+  if (!ratesTableBody) return;
+
   const rowsHtml = cityRows.map((row) => `
     <tr>
       <td>${row.city}</td>
@@ -666,6 +697,8 @@ async function renderCity(city, resetCurrencySelection) {
 }
 
 function setLoadStatus(message, isError) {
+  if (!loadStatus) return;
+
   loadStatus.textContent = message || "";
   loadStatus.classList.toggle("hidden", !message);
   loadStatus.classList.toggle("error", Boolean(isError));
@@ -673,6 +706,10 @@ function setLoadStatus(message, isError) {
 
 async function init() {
   try {
+    if (!citySelector || !mobileCitySelector) {
+      return;
+    }
+
     setLoadStatus("");
 
     rawData = await loadResultData();
@@ -683,23 +720,31 @@ async function init() {
 
     await renderCity(currentCity, true);
 
-    citySelector.addEventListener("change", async () => {
-      await renderCity(citySelector.value, true);
-    });
+    if (citySelector) {
+      citySelector.addEventListener("change", () => {
+        window.location.href = cityPagePath(citySelector.value);
+      });
+    }
 
-    mobileCitySelector.addEventListener("change", async () => {
-      await renderCity(mobileCitySelector.value, true);
-    });
+    if (mobileCitySelector) {
+      mobileCitySelector.addEventListener("change", () => {
+        window.location.href = cityPagePath(mobileCitySelector.value);
+      });
+    }
 
-    heroCurrencySelector1.addEventListener("change", async () => {
-      selectedHeroCurrencies[0] = heroCurrencySelector1.value;
-      await renderSelectedCurrencySections();
-    });
+    if (heroCurrencySelector1) {
+      heroCurrencySelector1.addEventListener("change", async () => {
+        selectedHeroCurrencies[0] = heroCurrencySelector1.value;
+        await renderSelectedCurrencySections();
+      });
+    }
 
-    heroCurrencySelector2.addEventListener("change", async () => {
-      selectedHeroCurrencies[1] = heroCurrencySelector2.value;
-      await renderSelectedCurrencySections();
-    });
+    if (heroCurrencySelector2) {
+      heroCurrencySelector2.addEventListener("change", async () => {
+        selectedHeroCurrencies[1] = heroCurrencySelector2.value;
+        await renderSelectedCurrencySections();
+      });
+    }
   } catch (err) {
     console.error(err);
     setLoadStatus("No se pudo cargar la información disponible en este momento.", true);

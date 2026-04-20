@@ -158,18 +158,22 @@ jobs:
           print(f"Generated {OUTPUT_FILE} with {len(entries)} entries")
           PY
 
+      - name: Generate city pages
+        if: always()
+        run: python generate_city_pages.py
+
       - name: Apply site domain metadata
         if: always()
         run: python update_site_domain.py
 
-      - name: Commit updated JSON if changed
+      - name: Commit generated site files if changed
         if: always()
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add html/result.json html/entries.json
-          git diff --cached --quiet || git commit -m "Update generated JSON files"
+          git add html
+          git diff --cached --quiet || git commit -m "Update generated site files"
           git push
 
       - name: Deploy to Firebase Hosting

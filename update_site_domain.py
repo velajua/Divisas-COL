@@ -7,11 +7,11 @@ HTML_DIR = ROOT / "html"
 DOMAIN_FILE = ROOT / "domain_name.txt"
 
 STATIC_PAGES = [
-    ("index.html", "/", "daily", "1.0"),
     ("newsletter.html", "/newsletter.html", "weekly", "0.8"),
     ("about.html", "/about.html", "monthly", "0.7"),
     ("privacy.html", "/privacy.html", "monthly", "0.6"),
 ]
+DEFAULT_CITY_ROUTE = "/bogota/"
 
 
 def read_base_url():
@@ -45,7 +45,17 @@ def update_html_url_tags(path, url):
         r'<meta\s+property="og:url"\s+content="[^"]*"\s*/?>',
         f'<meta property="og:url" content="{url}">',
     )
-    path.write_text(html, encoding="utf-8", )
+    path.write_text(html, encoding="utf-8")
+
+
+def city_routes():
+    routes = []
+    for path in sorted(HTML_DIR.iterdir()):
+        if not path.is_dir() or path.name == "entries":
+            continue
+        if (path / "index.html").exists():
+            routes.append((f"{path.name}/index.html", f"/{path.name}/", "daily", "1.0" if path.name == "bogota" else "0.9"))
+    return routes
 
 
 def entry_routes():
@@ -93,7 +103,7 @@ def write_sitemap(base_url, pages):
 
 def main():
     base_url = read_base_url()
-    pages = STATIC_PAGES + entry_routes()
+    pages = city_routes() + STATIC_PAGES + entry_routes()
 
     for filename, route, _, _ in pages:
         path = HTML_DIR / filename
@@ -103,6 +113,10 @@ def main():
     not_found = HTML_DIR / "404.html"
     if not_found.exists():
         update_html_url_tags(not_found, page_url(base_url, "/404.html"))
+
+    root_index = HTML_DIR / "index.html"
+    if root_index.exists():
+        update_html_url_tags(root_index, page_url(base_url, DEFAULT_CITY_ROUTE))
 
     write_robots(base_url)
     write_sitemap(base_url, pages)
