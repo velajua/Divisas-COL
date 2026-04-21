@@ -250,7 +250,7 @@ def combine_hashtags(*sources, limit=30):
 def hidden_hashtag_block(hashtags):
     if not hashtags:
         return ""
-    return "\n\n.\n.\n.\n.\n.\n\n" + "\n".join(parse_hashtags(hashtags))
+    return "\n\n.\n.\n.\n.\n.\n.\n\n" + " ".join(parse_hashtags(hashtags))
 
 
 def render_city_description(city, rows, date_label, hashtags):
