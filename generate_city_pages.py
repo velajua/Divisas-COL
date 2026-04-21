@@ -173,6 +173,8 @@ def make_root_relative(html):
         'href="/aurum-gold.css"': 'href="../aurum-gold.css"',
         'src="aurum-script.js"': 'src="../aurum-script.js"',
         'src="/aurum-script.js"': 'src="../aurum-script.js"',
+        'src="newsletter-capture.js"': 'src="../newsletter-capture.js"',
+        'src="/newsletter-capture.js"': 'src="../newsletter-capture.js"',
     }
 
     for old, new in replacements.items():
@@ -183,6 +185,7 @@ def make_root_relative(html):
     html = re.sub(r'href="(?:/)?(?:\.\./)*newsletter\.html"', 'href="../newsletter.html"', html)
     html = re.sub(r'href="(?:/)?(?:\.\./)*about\.html"', 'href="../about.html"', html)
     html = re.sub(r'href="(?:/)?(?:\.\./)*privacy\.html"', 'href="../privacy.html"', html)
+    html = re.sub(r'src="(?:/)?(?:\.\./)*newsletter-capture\.js"', 'src="../newsletter-capture.js"', html)
 
     return html
 
@@ -226,6 +229,7 @@ def root_redirect_html():
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <meta http-equiv="refresh" content="0; url=/bogota/">
   <script>window.location.replace("/bogota/");</script>
+  <meta property="og:url" content="https://divisascol.com/bogota/">
 </head>
 <body>
   <p>Redirigiendo a <a href="/bogota/">tasas de cambio en Bogotá</a>.</p>
