@@ -1,6 +1,6 @@
 # 💱 Divisas Bogotá
 
-Live site: https://cedar-setup-376217.web.app
+Live site: https://cedar-setup-376217.web.app / https://www.divisascol.com
 
 A lightweight data pipeline + static site that aggregates daily currency exchange data in Bogotá and serves it via Firebase Hosting.
 

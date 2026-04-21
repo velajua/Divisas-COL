@@ -16,6 +16,13 @@
           }
         ]
       }
+    ],
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/bogota/",
+        "type": 301
+      }
     ]
   }
 }
