@@ -90,6 +90,36 @@ python main.py
 
 ---
 
+## 📣 Generate Instagram cards
+
+Create daily carousel-ready SVG cards from `html/result.json`:
+
+python generate_instagram_cards.py
+
+Output is organized at the repository root by day:
+
+```
+instagram_cards/
+└── YYYY-MM-DD/
+    ├── bogota-01.svg
+    ├── medellin-01.svg
+    ├── ...
+    └── manifest.json
+```
+
+The generator creates city cards showing the best buy and sell places per
+currency. If the run date matches an entry in `html/entries.json`, it also
+adds a `newsletter.svg` card with the latest newsletter title and short
+description.
+
+Useful options:
+
+python generate_instagram_cards.py --date 2026-04-18
+python generate_instagram_cards.py --currencies AmericanDollar Euro BritishPound
+python generate_instagram_cards.py --max-rows 5
+
+---
+
 ## ☁️ Deployment
 
 Handled via GitHub Actions:
