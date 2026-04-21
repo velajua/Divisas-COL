@@ -62,6 +62,30 @@
           <p class="hero-desc" style="margin-bottom: 18px;">
             Explora análisis, comparativos y notas editoriales sobre casas de cambio, tasas de compra y venta, y movimientos relevantes del mercado.
           </p>
+          <div class="newsletter-signup newsletter-hero-capture" data-newsletter-capture="newsletter-page">
+            <div>
+              <div class="newsletter-signup-kicker">Suscripcion</div>
+              <h2>Recibe cambios relevantes y nuevas entradas</h2>
+              <p>
+                Deja tu correo para recibir avisos sobre movimientos importantes de tasas, comparativos por ciudad y nuevas notas editoriales de Divisas COL.
+              </p>
+            </div>
+            <form class="newsletter-form" data-newsletter-form>
+              <label class="sr-only" for="newsletterPageEmail">Correo electronico</label>
+              <label class="newsletter-hp" aria-hidden="true">
+                Sitio web
+                <input name="website" type="text" tabindex="-1" autocomplete="off">
+              </label>
+              <div class="newsletter-input-row">
+                <input id="newsletterPageEmail" name="email" type="email" autocomplete="email" placeholder="tu@email.com" required>
+                <button type="submit">Suscribirme</button>
+              </div>
+              <div class="newsletter-consent">
+                Al enviar aceptas recibir correos de Divisas COL. Puedes darte de baja cuando quieras.
+              </div>
+              <div class="newsletter-message" data-newsletter-message aria-live="polite"></div>
+            </form>
+          </div>
           <div class="hero-actions">
             <a href="index.html" class="btn btn-primary">Volver al inicio</a>
             <a href="#entradas" class="btn btn-outline">Ver entradas</a>
@@ -96,6 +120,7 @@
     </div>
   </footer>
 
+  <script src="newsletter-capture.js"></script>
   <script>
     async function loadNewsletterEntries() {
       const grid = document.getElementById("entriesGrid");
