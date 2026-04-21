@@ -210,14 +210,47 @@ def currency_label(row):
 def load_hashtag_template(repo_root):
     path = repo_root / "hashtag_template.txt"
     if not path.exists():
-        return ""
+        return []
     return path.read_text(encoding="utf-8").strip()
+
+
+def normalize_hashtag(value):
+    text = str(value or "").strip()
+    if not text:
+        return ""
+    text = re.sub(r"\s+", "", text)
+    if not text.startswith("#"):
+        text = "#" + text
+    return text
+
+
+def parse_hashtags(value):
+    if not value:
+        return []
+    if isinstance(value, str):
+        return [normalize_hashtag(item) for item in re.split(r"[\s,]+", value) if item.strip()]
+    return [normalize_hashtag(item) for item in value if str(item or "").strip()]
+
+
+def combine_hashtags(*sources, limit=30):
+    hashtags = []
+    seen = set()
+    for source in sources:
+        for hashtag in parse_hashtags(source):
+            key = hashtag.lower()
+            if key in seen:
+                continue
+            hashtags.append(hashtag)
+            seen.add(key)
+            if len(hashtags) >= limit:
+                return hashtags
+    return hashtags
 
 
 def hidden_hashtag_block(hashtags):
     if not hashtags:
         return ""
-    return "\n\n.\n.\n.\n.\n.\n\n" + hashtags
+    return "\n\n.\n.\n.\n.\n.\n\n" + "\n".join(parse_hashtags(hashtags))
 
 
 def render_city_description(city, rows, date_label, hashtags):
@@ -254,6 +287,7 @@ def render_city_description(city, rows, date_label, hashtags):
 
 
 def render_newsletter_description(entry, date_label, hashtags):
+    post_hashtags = combine_hashtags(entry.get("hashtags"), hashtags)
     body = [
         f"Newsletter Divisas COL - {date_label}",
         "",
@@ -269,7 +303,7 @@ def render_newsletter_description(entry, date_label, hashtags):
             f"Lee la nota completa: {entry.get('url', 'newsletter.html')}",
         ]
     )
-    return "\n".join(body) + hidden_hashtag_block(hashtags)
+    return "\n".join(body) + hidden_hashtag_block(post_hashtags)
 
 
 def svg_text(x, y, text, size, weight=500, color="#f8fafc", anchor="start"):
@@ -496,6 +530,7 @@ def main():
 
     newsletter = matching_newsletter(entries, run_date)
     if newsletter:
+        newsletter_hashtags = combine_hashtags(newsletter.get("hashtags"), hashtags)
         filename = "newsletter.svg"
         description_filename = "newsletter-description.txt"
         write_card(day_dir / filename, render_newsletter_card(newsletter, date_label))
@@ -509,6 +544,7 @@ def main():
             "date": newsletter.get("date"),
             "path": str((day_dir / filename).as_posix()),
             "description_path": str((day_dir / description_filename).as_posix()),
+            "hashtags": newsletter_hashtags,
         }
         manifest["descriptions"].append(
             {
