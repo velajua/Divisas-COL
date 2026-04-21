@@ -36,6 +36,14 @@ CITY_SLUGS = {
     "Cartagena": "cartagena",
 }
 
+CHEERS_BY_CITY = {
+    "Bogotá": "Animo, Bogota.",
+    "Medellín": "Animo, Medellin.",
+    "Cali": "Arriba ese animo, Cali.",
+    "Barranquilla": "Pilas y animo, Barranquilla.",
+    "Cartagena": "Animo, Cartagena.",
+}
+
 CURRENCY_ORDER = [
     "AmericanDollar",
     "Euro",
@@ -192,6 +200,76 @@ def choose_rows(rows, requested_currency_ids):
 def chunks(items, size):
     for index in range(0, len(items), size):
         yield items[index : index + size]
+
+
+def currency_label(row):
+    text = row["name"].split("(")[0].strip()
+    return " ".join([part.capitalize() for part in text.split()])
+
+
+def load_hashtag_template(repo_root):
+    path = repo_root / "hashtag_template.txt"
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8").strip()
+
+
+def hidden_hashtag_block(hashtags):
+    if not hashtags:
+        return ""
+    return "\n\n.\n.\n.\n.\n.\n\n" + hashtags
+
+
+def render_city_description(city, rows, date_label, hashtags):
+    buy_rows = [row for row in rows if row.get("best_sell")]
+    if not buy_rows:
+        body = [
+            f"{city} - mejores lugares para comprar divisas hoy ({date_label})",
+            "",
+            "No encontramos tasas de venta disponibles para esta ciudad en la corrida de hoy.",
+        ]
+    else:
+        body = [
+            f"{city} - donde conviene comprar divisas hoy ({date_label})",
+            "",
+            "Estas son las mejores tasas de venta encontradas para comprar monedas:",
+            "",
+        ]
+        for row in buy_rows[:8]:
+            best_sell = row["best_sell"]
+            body.append(
+                f"- {currency_label(row)}: {format_rate(best_sell['value'])} en {best_sell['place']}"
+            )
+        if len(buy_rows) > 8:
+            body.append(f"- Y {len(buy_rows) - 8} monedas mas en el resumen del dia.")
+
+    body.extend(
+        [
+            "",
+            CHEERS_BY_CITY.get(city, "Animo, que hoy se compra mejor informado."),
+            "Fuente: divisascol.com",
+        ]
+    )
+    return "\n".join(body) + hidden_hashtag_block(hashtags)
+
+
+def render_newsletter_description(entry, date_label, hashtags):
+    body = [
+        f"Newsletter Divisas COL - {date_label}",
+        "",
+        entry.get("title", "Analisis cambiario del dia"),
+    ]
+    summary = str(entry.get("summary") or "").strip()
+    if summary:
+        body.extend(["", summary])
+    body.extend(
+        [
+            "",
+            "Animo, que entender el mercado tambien ayuda a comprar mejor.",
+            f"Lee la nota completa: {entry.get('url', 'newsletter.html')}",
+        ]
+    )
+    return "\n".join(body) + hidden_hashtag_block(hashtags)
 
 
 def svg_text(x, y, text, size, weight=500, color="#f8fafc", anchor="start"):
@@ -370,6 +448,7 @@ def main():
     result = load_json(html_dir / "result.json")
     entries_path = html_dir / "entries.json"
     entries = load_json(entries_path) if entries_path.exists() else []
+    hashtags = load_hashtag_template(repo_root)
 
     rankings = collect_city_rankings(result.get("grouped_by_city", {}))
     manifest = {
@@ -377,6 +456,7 @@ def main():
         "generated_at": datetime.now(BOGOTA_TZ).isoformat(timespec="seconds"),
         "source": str((html_dir / "result.json").as_posix()),
         "cards": [],
+        "descriptions": [],
         "newsletter": None,
     }
 
@@ -384,8 +464,24 @@ def main():
         selected_rows = choose_rows(rows, args.currencies)
         row_groups = list(chunks(selected_rows, max(1, args.max_rows)))
         total_pages = len(row_groups)
+        city_slug = CITY_SLUGS.get(city, slugify(city))
+        description_path = None
+        if selected_rows:
+            description_filename = f"{city_slug}-description.txt"
+            description_path = str((day_dir / description_filename).as_posix())
+            write_card(
+                day_dir / description_filename,
+                render_city_description(city, selected_rows, date_label, hashtags),
+            )
+            manifest["descriptions"].append(
+                {
+                    "type": "city_rates",
+                    "city": city,
+                    "path": description_path,
+                }
+            )
         for page, row_group in enumerate(row_groups, start=1):
-            filename = f"{CITY_SLUGS.get(city, slugify(city))}-{page:02d}.svg"
+            filename = f"{city_slug}-{page:02d}.svg"
             write_card(day_dir / filename, render_city_card(city, row_group, date_label, page, total_pages))
             manifest["cards"].append(
                 {
@@ -393,6 +489,7 @@ def main():
                     "city": city,
                     "page": page,
                     "path": str((day_dir / filename).as_posix()),
+                    "description_path": description_path,
                     "currencies": [row["id"] for row in row_group],
                 }
             )
@@ -400,17 +497,31 @@ def main():
     newsletter = matching_newsletter(entries, run_date)
     if newsletter:
         filename = "newsletter.svg"
+        description_filename = "newsletter-description.txt"
         write_card(day_dir / filename, render_newsletter_card(newsletter, date_label))
+        write_card(
+            day_dir / description_filename,
+            render_newsletter_description(newsletter, date_label, hashtags),
+        )
         manifest["newsletter"] = {
             "matched": True,
             "title": newsletter.get("title"),
             "date": newsletter.get("date"),
             "path": str((day_dir / filename).as_posix()),
+            "description_path": str((day_dir / description_filename).as_posix()),
         }
+        manifest["descriptions"].append(
+            {
+                "type": "newsletter",
+                "path": str((day_dir / description_filename).as_posix()),
+                "title": newsletter.get("title"),
+            }
+        )
         manifest["cards"].append(
             {
                 "type": "newsletter",
                 "path": str((day_dir / filename).as_posix()),
+                "description_path": str((day_dir / description_filename).as_posix()),
                 "title": newsletter.get("title"),
             }
         )
