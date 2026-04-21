@@ -1,9 +1,47 @@
 import argparse
 import json
 import re
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 
+
+DEFAULT_ENTRY_HASHTAGS = [
+    "#DivisasCOL",
+    "#DolarColombia",
+    "#PesoColombiano",
+    "#MercadoCambiario",
+    "#FinanzasPersonales",
+]
+
+HASHTAG_STOPWORDS = {
+    "actual",
+    "alta",
+    "altas",
+    "ante",
+    "bajo",
+    "como",
+    "con",
+    "contra",
+    "del",
+    "desde",
+    "dia",
+    "donde",
+    "entre",
+    "esta",
+    "este",
+    "estos",
+    "impacto",
+    "las",
+    "los",
+    "mas",
+    "para",
+    "por",
+    "que",
+    "sobre",
+    "sus",
+    "una",
+}
 
 MONTHS = {
     "ene": 1,
@@ -19,6 +57,76 @@ MONTHS = {
     "nov": 11,
     "dic": 12,
 }
+
+
+def strip_accents(text):
+    normalized = unicodedata.normalize("NFKD", text)
+    return "".join(char for char in normalized if not unicodedata.combining(char))
+
+
+def normalize_hashtag(value):
+    text = strip_accents(str(value or "").strip())
+    text = re.sub(r"^#+", "", text)
+    words = re.findall(r"[A-Za-z0-9]+", text)
+    if not words:
+        return ""
+    return "#" + "".join(word[:1].upper() + word[1:] for word in words)
+
+
+def unique_hashtags(values, limit=20):
+    hashtags = []
+    seen = set()
+    for value in values:
+        hashtag = normalize_hashtag(value)
+        if not hashtag:
+            continue
+        key = hashtag.lower()
+        if key in seen:
+            continue
+        hashtags.append(hashtag)
+        seen.add(key)
+        if len(hashtags) >= limit:
+            break
+    return hashtags
+
+
+def extract_meta_keywords(html):
+    content = extract(
+        r'<meta\s+name=["\']keywords["\']\s+content=["\'](.*?)["\']\s*/?>',
+        html,
+        "",
+    )
+    if not content:
+        return []
+    return [item.strip() for item in content.split(",") if item.strip()]
+
+
+def extract_article_tags(html):
+    return re.findall(
+        r'<meta\s+property=["\']article:tag["\']\s+content=["\'](.*?)["\']\s*/?>',
+        html,
+        re.IGNORECASE,
+    )
+
+
+def content_hashtag_candidates(*values):
+    text = strip_accents(" ".join(str(value or "") for value in values)).lower()
+    candidates = []
+    for word in re.findall(r"[a-z0-9]{4,}", text):
+        if word in HASHTAG_STOPWORDS:
+            continue
+        candidates.append(word)
+    return candidates
+
+
+def build_hashtags(title, description, html):
+    editorial_tags = [
+        "#AnalisisEconomico",
+        "#NoticiasColombia",
+    ]
+    source_tags = extract_article_tags(html) + extract_meta_keywords(html)
+    topic_tags = content_hashtag_candidates(title, description)
+    return unique_hashtags(DEFAULT_ENTRY_HASHTAGS + editorial_tags + source_tags + topic_tags)
 
 
 def extract(pattern, text, default=""):
@@ -81,6 +189,7 @@ def build_entry(path):
         "date": date,
         "title": title,
         "summary": description,
+        "hashtags": build_hashtags(title, description, html),
         "url": f"entries/{path.name}",
         "_sort_date": parse_spanish_date(date),
     }
