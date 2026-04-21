@@ -137,7 +137,7 @@ jobs:
                       first_desc = extract(r'<p class="hero-desc"[^>]*>(.*?)</p>', html, "")
                       description = clean_html(first_desc)
 
-                  title = clean_html(title).replace(" | DiviSAS COL", "").strip()
+                  title = clean_html(title).replace(" | Divisas COL", "").strip()
 
                   entries.append({
                       "date": date,
@@ -165,6 +165,10 @@ jobs:
       - name: Apply site domain metadata
         if: always()
         run: python update_site_domain.py
+
+      - name: Audit SEO metadata
+        if: always()
+        run: python seo_audit.py
 
       - name: Commit generated site files if changed
         if: always()
