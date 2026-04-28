@@ -199,10 +199,10 @@ def generate_entries_json(entries_dir, output_file):
     entries = []
 
     if entries_dir.is_dir():
-        for path in entries_dir.iterdir():
-            if path.suffix == ".html":
-                entries.append(build_entry(path))
+        for path in sorted(entries_dir.glob("*.html")):
+            entries.append(build_entry(path))
 
+    entries.sort(key=lambda entry: (entry["url"], entry["title"], entry["summary"]))
     entries.sort(key=lambda entry: entry["_sort_date"], reverse=True)
 
     for entry in entries:

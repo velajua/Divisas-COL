@@ -142,7 +142,7 @@ def display_place(item):
 
 def collect_city_rankings(grouped_by_city):
     rankings = {}
-    for city, groups in grouped_by_city.items():
+    for city, groups in sorted(grouped_by_city.items()):
         currencies = {}
         for exchange_items in groups.values():
             for item in exchange_items:
@@ -161,7 +161,7 @@ def collect_city_rankings(grouped_by_city):
                         bucket["sell"].append({"place": place, "value": sell})
 
         city_rows = []
-        for currency in currencies.values():
+        for currency in sorted(currencies.values(), key=currency_sort_key):
             best_buy = max(currency["buy"], key=lambda row: row["value"], default=None)
             best_sell = min(currency["sell"], key=lambda row: row["value"], default=None)
             if not best_buy and not best_sell:
@@ -179,7 +179,7 @@ def collect_city_rankings(grouped_by_city):
                     ),
                 }
             )
-        rankings[city] = sorted(city_rows, key=currency_sort_key)
+        rankings[city] = city_rows
     return rankings
 
 
@@ -458,7 +458,7 @@ def render_newsletter_card(entry, date_label):
 
 
 def write_card(path, content):
-    path.write_text(content, encoding="utf-8")
+    path.write_text(content, encoding="utf-8", newline="\r\n")
 
 
 def main():
@@ -494,7 +494,8 @@ def main():
         "newsletter": None,
     }
 
-    for city, rows in rankings.items():
+    for city in sorted(rankings):
+        rows = rankings[city]
         selected_rows = choose_rows(rows, args.currencies)
         row_groups = list(chunks(selected_rows, max(1, args.max_rows)))
         total_pages = len(row_groups)
@@ -565,7 +566,11 @@ def main():
         manifest["newsletter"] = {"matched": False}
 
     manifest_path = day_dir / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\r\n",
+        encoding="utf-8",
+        newline="\r\n",
+    )
     print(f"Generated {len(manifest['cards'])} cards in {day_dir}")
     print(f"Manifest: {manifest_path}")
 
