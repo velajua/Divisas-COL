@@ -1,2 +1,2 @@
 GitHub connector test file
-Created on 2026-05-01
+Re-added on 2026-05-01 for PR validation
