@@ -1,13 +1,13 @@
 {
-  "date": "2026-04-28",
+  "date": "2026-04-30",
   "source": "html/result.json",
   "cards": [
     {
       "type": "city_rates",
       "city": "Barranquilla",
       "page": 1,
-      "path": "instagram_cards/2026-04-28/barranquilla-01.svg",
-      "description_path": "instagram_cards/2026-04-28/barranquilla-description.txt",
+      "path": "instagram_cards/2026-04-30/barranquilla-01.svg",
+      "description_path": "instagram_cards/2026-04-30/barranquilla-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -21,8 +21,8 @@
       "type": "city_rates",
       "city": "Barranquilla",
       "page": 2,
-      "path": "instagram_cards/2026-04-28/barranquilla-02.svg",
-      "description_path": "instagram_cards/2026-04-28/barranquilla-description.txt",
+      "path": "instagram_cards/2026-04-30/barranquilla-02.svg",
+      "description_path": "instagram_cards/2026-04-30/barranquilla-description.txt",
       "currencies": [
         "BrasilianReal",
         "SwissFranc",
@@ -34,8 +34,8 @@
       "type": "city_rates",
       "city": "Bogotá",
       "page": 1,
-      "path": "instagram_cards/2026-04-28/bogota-01.svg",
-      "description_path": "instagram_cards/2026-04-28/bogota-description.txt",
+      "path": "instagram_cards/2026-04-30/bogota-01.svg",
+      "description_path": "instagram_cards/2026-04-30/bogota-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -49,8 +49,8 @@
       "type": "city_rates",
       "city": "Bogotá",
       "page": 2,
-      "path": "instagram_cards/2026-04-28/bogota-02.svg",
-      "description_path": "instagram_cards/2026-04-28/bogota-description.txt",
+      "path": "instagram_cards/2026-04-30/bogota-02.svg",
+      "description_path": "instagram_cards/2026-04-30/bogota-description.txt",
       "currencies": [
         "BrasilianReal",
         "SwissFranc",
@@ -64,8 +64,8 @@
       "type": "city_rates",
       "city": "Bogotá",
       "page": 3,
-      "path": "instagram_cards/2026-04-28/bogota-03.svg",
-      "description_path": "instagram_cards/2026-04-28/bogota-description.txt",
+      "path": "instagram_cards/2026-04-30/bogota-03.svg",
+      "description_path": "instagram_cards/2026-04-30/bogota-description.txt",
       "currencies": [
         "ChineseYuan",
         "DominicanPeso",
@@ -79,8 +79,8 @@
       "type": "city_rates",
       "city": "Bogotá",
       "page": 4,
-      "path": "instagram_cards/2026-04-28/bogota-04.svg",
-      "description_path": "instagram_cards/2026-04-28/bogota-description.txt",
+      "path": "instagram_cards/2026-04-30/bogota-04.svg",
+      "description_path": "instagram_cards/2026-04-30/bogota-description.txt",
       "currencies": [
         "RussianRuble",
         "SouthKoreanWon"
@@ -90,8 +90,8 @@
       "type": "city_rates",
       "city": "Cali",
       "page": 1,
-      "path": "instagram_cards/2026-04-28/cali-01.svg",
-      "description_path": "instagram_cards/2026-04-28/cali-description.txt",
+      "path": "instagram_cards/2026-04-30/cali-01.svg",
+      "description_path": "instagram_cards/2026-04-30/cali-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -105,8 +105,8 @@
       "type": "city_rates",
       "city": "Cali",
       "page": 2,
-      "path": "instagram_cards/2026-04-28/cali-02.svg",
-      "description_path": "instagram_cards/2026-04-28/cali-description.txt",
+      "path": "instagram_cards/2026-04-30/cali-02.svg",
+      "description_path": "instagram_cards/2026-04-30/cali-description.txt",
       "currencies": [
         "BrasilianReal",
         "PeruveanNewSun",
@@ -117,8 +117,8 @@
       "type": "city_rates",
       "city": "Cartagena",
       "page": 1,
-      "path": "instagram_cards/2026-04-28/cartagena-01.svg",
-      "description_path": "instagram_cards/2026-04-28/cartagena-description.txt",
+      "path": "instagram_cards/2026-04-30/cartagena-01.svg",
+      "description_path": "instagram_cards/2026-04-30/cartagena-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -132,8 +132,8 @@
       "type": "city_rates",
       "city": "Cartagena",
       "page": 2,
-      "path": "instagram_cards/2026-04-28/cartagena-02.svg",
-      "description_path": "instagram_cards/2026-04-28/cartagena-description.txt",
+      "path": "instagram_cards/2026-04-30/cartagena-02.svg",
+      "description_path": "instagram_cards/2026-04-30/cartagena-description.txt",
       "currencies": [
         "BrasilianReal",
         "SwissFranc",
@@ -145,8 +145,8 @@
       "type": "city_rates",
       "city": "Medellín",
       "page": 1,
-      "path": "instagram_cards/2026-04-28/medellin-01.svg",
-      "description_path": "instagram_cards/2026-04-28/medellin-description.txt",
+      "path": "instagram_cards/2026-04-30/medellin-01.svg",
+      "description_path": "instagram_cards/2026-04-30/medellin-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -160,8 +160,8 @@
       "type": "city_rates",
       "city": "Medellín",
       "page": 2,
-      "path": "instagram_cards/2026-04-28/medellin-02.svg",
-      "description_path": "instagram_cards/2026-04-28/medellin-description.txt",
+      "path": "instagram_cards/2026-04-30/medellin-02.svg",
+      "description_path": "instagram_cards/2026-04-30/medellin-description.txt",
       "currencies": [
         "BrasilianReal",
         "SwissFranc",
@@ -175,8 +175,8 @@
       "type": "city_rates",
       "city": "Medellín",
       "page": 3,
-      "path": "instagram_cards/2026-04-28/medellin-03.svg",
-      "description_path": "instagram_cards/2026-04-28/medellin-description.txt",
+      "path": "instagram_cards/2026-04-30/medellin-03.svg",
+      "description_path": "instagram_cards/2026-04-30/medellin-description.txt",
       "currencies": [
         "ChineseYuan",
         "DominicanPeso",
@@ -190,8 +190,8 @@
       "type": "city_rates",
       "city": "Medellín",
       "page": 4,
-      "path": "instagram_cards/2026-04-28/medellin-04.svg",
-      "description_path": "instagram_cards/2026-04-28/medellin-description.txt",
+      "path": "instagram_cards/2026-04-30/medellin-04.svg",
+      "description_path": "instagram_cards/2026-04-30/medellin-description.txt",
       "currencies": [
         "BahamianDollar",
         "NewZealandDollar",
@@ -205,8 +205,8 @@
       "type": "city_rates",
       "city": "Medellín",
       "page": 5,
-      "path": "instagram_cards/2026-04-28/medellin-05.svg",
-      "description_path": "instagram_cards/2026-04-28/medellin-description.txt",
+      "path": "instagram_cards/2026-04-30/medellin-05.svg",
+      "description_path": "instagram_cards/2026-04-30/medellin-description.txt",
       "currencies": [
         "BolivianBoliviano",
         "UruguayanPeso",
@@ -220,42 +220,89 @@
       "type": "city_rates",
       "city": "Medellín",
       "page": 6,
-      "path": "instagram_cards/2026-04-28/medellin-06.svg",
-      "description_path": "instagram_cards/2026-04-28/medellin-description.txt",
+      "path": "instagram_cards/2026-04-30/medellin-06.svg",
+      "description_path": "instagram_cards/2026-04-30/medellin-description.txt",
       "currencies": [
         "NorwegianKrone",
         "SwedishKrone"
       ]
+    },
+    {
+      "type": "newsletter",
+      "path": "instagram_cards/2026-04-30/newsletter.svg",
+      "description_path": "instagram_cards/2026-04-30/newsletter-description.txt",
+      "title": "Colpensiones, freno judicial y dólar en alerta"
     }
   ],
   "descriptions": [
     {
       "type": "city_rates",
       "city": "Barranquilla",
-      "path": "instagram_cards/2026-04-28/barranquilla-description.txt"
+      "path": "instagram_cards/2026-04-30/barranquilla-description.txt"
     },
     {
       "type": "city_rates",
       "city": "Bogotá",
-      "path": "instagram_cards/2026-04-28/bogota-description.txt"
+      "path": "instagram_cards/2026-04-30/bogota-description.txt"
     },
     {
       "type": "city_rates",
       "city": "Cali",
-      "path": "instagram_cards/2026-04-28/cali-description.txt"
+      "path": "instagram_cards/2026-04-30/cali-description.txt"
     },
     {
       "type": "city_rates",
       "city": "Cartagena",
-      "path": "instagram_cards/2026-04-28/cartagena-description.txt"
+      "path": "instagram_cards/2026-04-30/cartagena-description.txt"
     },
     {
       "type": "city_rates",
       "city": "Medellín",
-      "path": "instagram_cards/2026-04-28/medellin-description.txt"
+      "path": "instagram_cards/2026-04-30/medellin-description.txt"
+    },
+    {
+      "type": "newsletter",
+      "path": "instagram_cards/2026-04-30/newsletter-description.txt",
+      "title": "Colpensiones, freno judicial y dólar en alerta"
     }
   ],
   "newsletter": {
-    "matched": false
+    "matched": true,
+    "title": "Colpensiones, freno judicial y dólar en alerta",
+    "date": "30 abr 2026",
+    "path": "instagram_cards/2026-04-30/newsletter.svg",
+    "description_path": "instagram_cards/2026-04-30/newsletter-description.txt",
+    "hashtags": [
+      "#DivisasCOL",
+      "#DolarColombia",
+      "#PesoColombiano",
+      "#MercadoCambiario",
+      "#FinanzasPersonales",
+      "#AnalisisEconomico",
+      "#NoticiasColombia",
+      "#Colpensiones",
+      "#Freno",
+      "#Judicial",
+      "#Dolar",
+      "#Alerta",
+      "#Analisis",
+      "#Editorial",
+      "#Suspension",
+      "#Parcial",
+      "#Traslado",
+      "#Recursos",
+      "#Ruido",
+      "#Politico",
+      "#Divisas",
+      "#Forex",
+      "#ForexTrading",
+      "#Trading",
+      "#Trader",
+      "#MercadoDeDivisas",
+      "#TipoDeCambio",
+      "#TasasDeCambio",
+      "#USD",
+      "#EUR"
+    ]
   }
 }

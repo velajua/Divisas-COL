@@ -140,12 +140,39 @@ def display_place(item):
     return source or location or "N/D"
 
 
+def stable_item_key(item):
+    data = item.get("data", {}) if isinstance(item, dict) else {}
+    return (
+        str(item.get("exchange_house", "")),
+        str(item.get("id", "")),
+        str(item.get("source_url", "")),
+        json.dumps(data, ensure_ascii=False, sort_keys=True),
+    )
+
+
+def choose_best_buy(rows):
+    if not rows:
+        return None
+    return sorted(rows, key=lambda row: (-row["value"], row["place"]))[0]
+
+
+def choose_best_sell(rows):
+    if not rows:
+        return None
+    return sorted(rows, key=lambda row: (row["value"], row["place"]))[0]
+
+
+def relative_manifest_path(path, repo_root):
+    return str(path.relative_to(repo_root).as_posix())
+
+
 def collect_city_rankings(grouped_by_city):
     rankings = {}
     for city, groups in sorted(grouped_by_city.items()):
         currencies = {}
-        for exchange_items in groups.values():
-            for item in exchange_items:
+        for exchange_name in sorted(groups):
+            exchange_items = groups[exchange_name]
+            for item in sorted(exchange_items, key=stable_item_key):
                 place = display_place(item)
                 for currency_name, rate_data in item.get("data", {}).items():
                     currency_id = rate_data.get("id") or slugify(currency_name)
@@ -162,8 +189,8 @@ def collect_city_rankings(grouped_by_city):
 
         city_rows = []
         for currency in sorted(currencies.values(), key=currency_sort_key):
-            best_buy = max(currency["buy"], key=lambda row: row["value"], default=None)
-            best_sell = min(currency["sell"], key=lambda row: row["value"], default=None)
+            best_buy = choose_best_buy(currency["buy"])
+            best_sell = choose_best_sell(currency["sell"])
             if not best_buy and not best_sell:
                 continue
             city_rows.append(
@@ -487,8 +514,7 @@ def main():
     rankings = collect_city_rankings(result.get("grouped_by_city", {}))
     manifest = {
         "date": date_label,
-        "generated_at": datetime.now(BOGOTA_TZ).isoformat(timespec="seconds"),
-        "source": str((html_dir / "result.json").as_posix()),
+        "source": relative_manifest_path(html_dir / "result.json", repo_root),
         "cards": [],
         "descriptions": [],
         "newsletter": None,
@@ -503,7 +529,7 @@ def main():
         description_path = None
         if selected_rows:
             description_filename = f"{city_slug}-description.txt"
-            description_path = str((day_dir / description_filename).as_posix())
+            description_path = relative_manifest_path(day_dir / description_filename, repo_root)
             write_card(
                 day_dir / description_filename,
                 render_city_description(city, selected_rows, date_label, hashtags),
@@ -523,7 +549,7 @@ def main():
                     "type": "city_rates",
                     "city": city,
                     "page": page,
-                    "path": str((day_dir / filename).as_posix()),
+                    "path": relative_manifest_path(day_dir / filename, repo_root),
                     "description_path": description_path,
                     "currencies": [row["id"] for row in row_group],
                 }
@@ -543,36 +569,36 @@ def main():
             "matched": True,
             "title": newsletter.get("title"),
             "date": newsletter.get("date"),
-            "path": str((day_dir / filename).as_posix()),
-            "description_path": str((day_dir / description_filename).as_posix()),
+            "path": relative_manifest_path(day_dir / filename, repo_root),
+            "description_path": relative_manifest_path(day_dir / description_filename, repo_root),
             "hashtags": newsletter_hashtags,
         }
         manifest["descriptions"].append(
             {
                 "type": "newsletter",
-                "path": str((day_dir / description_filename).as_posix()),
+                "path": relative_manifest_path(day_dir / description_filename, repo_root),
                 "title": newsletter.get("title"),
             }
         )
         manifest["cards"].append(
             {
                 "type": "newsletter",
-                "path": str((day_dir / filename).as_posix()),
-                "description_path": str((day_dir / description_filename).as_posix()),
+                "path": relative_manifest_path(day_dir / filename, repo_root),
+                "description_path": relative_manifest_path(day_dir / description_filename, repo_root),
                 "title": newsletter.get("title"),
             }
         )
     else:
         manifest["newsletter"] = {"matched": False}
 
-    manifest_path = day_dir / "manifest.json"
-    manifest_path.write_text(
+    manifest_file = day_dir / "manifest.json"
+    manifest_file.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\r\n",
         encoding="utf-8",
         newline="\r\n",
     )
     print(f"Generated {len(manifest['cards'])} cards in {day_dir}")
-    print(f"Manifest: {manifest_path}")
+    print(f"Manifest: {manifest_file}")
 
 
 if __name__ == "__main__":
