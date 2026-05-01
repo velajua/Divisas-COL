@@ -52,7 +52,7 @@ def slugify(value):
 
 def read_cities():
     data = json.loads(RESULT_FILE.read_text(encoding="utf-8"))
-    return list((data.get("grouped_by_city") or {}).keys())
+    return sorted((data.get("grouped_by_city") or {}).keys())
 
 
 def read_template():
@@ -69,6 +69,10 @@ def replace_tag(html, pattern, replacement):
 def json_ld(data):
     payload = json.dumps(data, ensure_ascii=False, indent=2)
     return f'<script type="application/ld+json">\n{payload}\n  </script>'
+
+
+def write_text_file(path, content):
+    path.write_text(content, encoding="utf-8", newline="\r\n")
 
 
 def city_head(city, slug, copy):
@@ -153,8 +157,14 @@ def city_head(city, slug, copy):
 
 
 def replace_head_intro(html, replacement):
-    pattern = r"<head>\s*.*?(?=\s*<link rel=\"preconnect\" href=\"https://fonts\.googleapis\.com\">)"
-    return re.sub(pattern, "<head>\n" + replacement, html, count=1, flags=re.IGNORECASE | re.DOTALL)
+    pattern = r"<head>\s*.*?(?=<link rel=\"preconnect\" href=\"https://fonts\.googleapis\.com\">)"
+    return re.sub(
+        pattern,
+        "<head>\n" + replacement.rstrip() + "\n",
+        html,
+        count=1,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
 
 
 def make_root_relative(html):
@@ -246,14 +256,14 @@ def main():
         slug = slugify(city)
         city_dir = HTML_DIR / slug
         city_dir.mkdir(parents=True, exist_ok=True)
-        (city_dir / "index.html").write_text(
+        write_text_file(
+            city_dir / "index.html",
             city_page_html(template, city),
-            encoding="utf-8",
         )
 
-    (HTML_DIR / "index.html").write_text(
+    write_text_file(
+        HTML_DIR / "index.html",
         root_redirect_html(),
-        encoding="utf-8",
     )
 
     print(f"Generated {len(cities)} city pages")

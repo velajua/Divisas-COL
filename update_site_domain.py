@@ -33,6 +33,10 @@ def replace_or_insert_head_tag(html, pattern, replacement):
     return html.replace("</head>", f"  {replacement}\n</head>", 1)
 
 
+def write_text_file(path, content):
+    path.write_text(content, encoding="utf-8", newline="\r\n")
+
+
 def update_html_url_tags(path, url):
     html = path.read_text(encoding="utf-8")
     html = replace_or_insert_head_tag(
@@ -45,7 +49,7 @@ def update_html_url_tags(path, url):
         r'<meta\s+property="og:url"\s+content="[^"]*"\s*/?>',
         f'<meta property="og:url" content="{url}">',
     )
-    path.write_text(html, encoding="utf-8")
+    write_text_file(path, html)
 
 
 def city_routes():
@@ -69,11 +73,11 @@ def entry_routes():
 
 
 def write_robots(base_url):
-    (HTML_DIR / "robots.txt").write_text(
+    write_text_file(
+        HTML_DIR / "robots.txt",
         f"User-agent: *\n"
         f"Allow: /\n\n"
         f"Sitemap: {base_url}/sitemap.xml\n",
-        encoding="utf-8",
     )
 
 
@@ -95,10 +99,7 @@ def write_sitemap(base_url, pages):
         )
 
     lines.append("</urlset>")
-    (HTML_DIR / "sitemap.xml").write_text(
-        "\n".join(lines) + "\n",
-        encoding="utf-8",
-    )
+    write_text_file(HTML_DIR / "sitemap.xml", "\n".join(lines) + "\n")
 
 
 def main():

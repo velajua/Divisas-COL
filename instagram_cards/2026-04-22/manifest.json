@@ -1,0 +1,309 @@
+{
+  "date": "2026-04-22",
+  "generated_at": "2026-04-22T09:30:37-05:00",
+  "source": "C:/Users/juanv/Downloads/Divisas-COL/html/result.json",
+  "cards": [
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 1,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-01.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 2,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-02.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso",
+        "ArgentineanPeso",
+        "JapaneseYen"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 3,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-03.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-description.txt",
+      "currencies": [
+        "ChineseYuan",
+        "DominicanPeso",
+        "CostarricanColon",
+        "UAEDirham",
+        "TurkishLira",
+        "GuatemalanQuetzal"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 4,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-04.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-description.txt",
+      "currencies": [
+        "RussianRuble",
+        "SouthKoreanWon"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 1,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-01.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 2,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-02.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso",
+        "ArgentineanPeso",
+        "JapaneseYen"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 3,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-03.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt",
+      "currencies": [
+        "ChineseYuan",
+        "DominicanPeso",
+        "ThaiBaht",
+        "CostarricanColon",
+        "UAEDirham",
+        "HongKongDollar"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 4,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-04.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt",
+      "currencies": [
+        "BahamianDollar",
+        "NewZealandDollar",
+        "ArubanFlorin",
+        "NetherlandsAntilleanGuilder",
+        "HonduranLempira",
+        "TurkishLira"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 5,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-05.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt",
+      "currencies": [
+        "BolivianBoliviano",
+        "UruguayanPeso",
+        "GuatemalanQuetzal",
+        "SouthKoreanWon",
+        "NicaraguanCordoba",
+        "DanishKrone"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 6,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-06.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt",
+      "currencies": [
+        "NorwegianKrone",
+        "SwedishKrone"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cali",
+      "page": 1,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cali-01.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cali-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cali",
+      "page": 2,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cali-02.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cali-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Barranquilla",
+      "page": 1,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/barranquilla-01.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/barranquilla-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Barranquilla",
+      "page": 2,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/barranquilla-02.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/barranquilla-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cartagena",
+      "page": 1,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cartagena-01.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cartagena-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cartagena",
+      "page": 2,
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cartagena-02.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cartagena-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "newsletter",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/newsletter.svg",
+      "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/newsletter-description.txt",
+      "title": "Dólar barato, tasas altas y riesgo fiscal latente"
+    }
+  ],
+  "descriptions": [
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/bogota-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/medellin-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Cali",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cali-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Barranquilla",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/barranquilla-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Cartagena",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/cartagena-description.txt"
+    },
+    {
+      "type": "newsletter",
+      "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/newsletter-description.txt",
+      "title": "Dólar barato, tasas altas y riesgo fiscal latente"
+    }
+  ],
+  "newsletter": {
+    "matched": true,
+    "title": "Dólar barato, tasas altas y riesgo fiscal latente",
+    "date": "22 abr 2026",
+    "path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/newsletter.svg",
+    "description_path": "C:/Users/juanv/Downloads/Divisas-COL/instagram_cards/2026-04-22/newsletter-description.txt",
+    "hashtags": [
+      "#DivisasCOL",
+      "#DolarColombia",
+      "#PesoColombiano",
+      "#MercadoCambiario",
+      "#FinanzasPersonales",
+      "#AnalisisEconomico",
+      "#NoticiasColombia",
+      "#Dolar",
+      "#Barato",
+      "#Tasas",
+      "#Riesgo",
+      "#Fiscal",
+      "#Latente",
+      "#Analisis",
+      "#Editorial",
+      "#Caida",
+      "#Reciente",
+      "#Colombia",
+      "#Efecto",
+      "#Inflacion",
+      "#Divisas",
+      "#Forex",
+      "#ForexTrading",
+      "#Trading",
+      "#Trader",
+      "#MercadoDeDivisas",
+      "#TipoDeCambio",
+      "#TasasDeCambio",
+      "#USD",
+      "#EUR"
+    ]
+  }
+}

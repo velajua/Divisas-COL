@@ -20,6 +20,23 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from health_check import run_health_check, format_report
 
 
+def _stable_row_key(row):
+    data = row.get("data", {}) if isinstance(row, dict) else {}
+    return (
+        str(row.get("city", "")),
+        str(row.get("exchange_house", "")),
+        str(row.get("source_url", "")),
+        str(row.get("id", "")),
+        json.dumps(data, ensure_ascii=False, sort_keys=True),
+    )
+
+
+def _write_json_file(path, payload):
+    with open(path, "w", encoding="utf-8", newline="\r\n") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2)
+        handle.write("\r\n")
+
+
 def _get_mode(request=None, argv=None):
     if request is not None:
         request_args = getattr(request, "args", {}) or {}
@@ -88,6 +105,7 @@ def _run_scrapers(write_to_bq=False):
                 except Exception as e:
                     print(f"Error on {city} | {url} ({fn_name}): {e}")
 
+        total_data.sort(key=_stable_row_key)
         grouped_by_city = _group_by_city(total_data)
         comparison_data = _build_comparison_data_by_city(total_data)
 
@@ -178,6 +196,5 @@ if __name__ == "__main__":
         result = _run_scrapers(write_to_bq=write_to_bq)
         print(f"\n{result=}\n")
         if mode == "save":
-            with open("html/result.json", "w") as f:
-                f.write(json.dumps(result))
+            _write_json_file("html/result.json", result)
         sys.exit(0 if result["ok"] else 1)
