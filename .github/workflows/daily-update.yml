@@ -53,10 +53,6 @@ jobs:
         if: always()
         run: python generate_entries_json.py
 
-      - name: Generate Instagram cards
-        if: always()
-        run: python generate_instagram_cards.py
-
       - name: Generate city pages
         if: always()
         run: python generate_city_pages.py
@@ -75,7 +71,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add html instagram_cards
+          git add html
           git diff --cached --quiet || git commit -m "Update generated site files"
           git push
 
