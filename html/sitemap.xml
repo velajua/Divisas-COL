@@ -41,6 +41,21 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/entries/banrep-sin-recortes-y-peso-sin-alivio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/entries/colpensiones-freno-judicial-y-dolar-en-alerta.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/entries/deficit-banrep-y-rebote-del-dolar.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/entries/dolar-barato-riesgo-fiscal.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
