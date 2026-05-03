@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "health_passed": 12,
-  "health_failed": 1,
+  "health_passed": 13,
+  "health_failed": 0,
   "comparison_data": {
     "Barranquilla": [
       [
@@ -982,20 +982,15 @@
               "sell": "730",
               "id": "ChineseYuan"
             },
-            "Colon": {
-              "buy": "6",
-              "sell": "10",
-              "id": "CostarricanColon"
-            },
             "Yen": {
               "buy": "26",
               "sell": "36",
               "id": "JapaneseYen"
             },
-            "Quetzal": {
-              "buy": "500",
-              "sell": "650",
-              "id": "GuatemalanQuetzal"
+            "Colon": {
+              "buy": "6",
+              "sell": "10",
+              "id": "CostarricanColon"
             },
             "Argentino": {
               "buy": "2",
@@ -1006,6 +1001,11 @@
               "buy": "1150",
               "sell": "1150",
               "id": "UAEDirham"
+            },
+            "Quetzal": {
+              "buy": "500",
+              "sell": "650",
+              "id": "GuatemalanQuetzal"
             },
             "Lira": {
               "buy": "180",
@@ -1022,12 +1022,12 @@
           "data": {
             "EURO Peq./Small": {
               "buy": "4360",
-              "sell": "4460",
+              "sell": "4450",
               "id": "Euro"
             },
             "Dólar": {
-              "buy": "3580",
-              "sell": "3690",
+              "buy": "3570",
+              "sell": "3670",
               "id": "AmericanDollar"
             },
             "Sol": {
@@ -1147,7 +1147,7 @@
             },
             "Dolar americano (USD) 100": {
               "buy": "3620",
-              "sell": "3660",
+              "sell": "3650",
               "id": "AmericanDollar"
             },
             "Euro sencillo (EUR)": {
@@ -1236,12 +1236,122 @@
           "source_url": "https://cambioskapital.com/"
         }
       ],
+      "cambiosVancouver": [
+        {
+          "id": "cambiosVancouver",
+          "data": {
+            "Dólar Americano 20 (US)": {
+              "buy": "3610",
+              "sell": "3650",
+              "id": "AmericanDollar"
+            },
+            "Dólar Americano 100 (US)": {
+              "buy": "3620",
+              "sell": "3660",
+              "id": "AmericanDollar"
+            },
+            "Euro (EUR) 50": {
+              "buy": "4370",
+              "sell": "4430",
+              "id": "Euro"
+            },
+            "Euro  (EUR) 100": {
+              "buy": "4370",
+              "sell": "4430",
+              "id": "Euro"
+            },
+            "Euro (EUR) 200": {
+              "buy": "4350",
+              "sell": "4430",
+              "id": "Euro"
+            },
+            "Euro (EUR) 500": {
+              "buy": "4300",
+              "sell": "4360",
+              "id": "Euro"
+            },
+            "Libra Esterlina (GBP)": {
+              "buy": "4750",
+              "sell": "4920",
+              "id": "BritishPound"
+            },
+            "Dólar Canadiense (CAD)": {
+              "buy": "2600",
+              "sell": "2700",
+              "id": "CanadianDollar"
+            },
+            "Dólar Australiano (AUD)": {
+              "buy": "2300",
+              "sell": "2470",
+              "id": "AustralianDollar"
+            },
+            "Peso Mexicano (MXN)": {
+              "buy": "195",
+              "sell": "207",
+              "id": "MexicanPeso"
+            },
+            "Peso Argentino (APS)": {
+              "buy": "2,0",
+              "sell": "3,6",
+              "id": "ArgentineanPeso"
+            },
+            "Peso Chileno (CLP)": {
+              "buy": "3,7",
+              "sell": "4,4",
+              "id": "ChileanPeso"
+            },
+            "Real (BR)": {
+              "buy": "690",
+              "sell": "730",
+              "id": "BrasilianReal"
+            },
+            "Nuevo Sol (PEN)": {
+              "buy": "1000",
+              "sell": "1080",
+              "id": "PeruveanNewSun"
+            },
+            "Franco Suizo (CHF)": {
+              "buy": "4400",
+              "sell": "4650",
+              "id": "SwissFranc"
+            },
+            "Peso Dominicano (DOP)": {
+              "buy": "60",
+              "sell": "70",
+              "id": "DominicanPeso"
+            },
+            "Yuan (CNY)": {
+              "buy": "540",
+              "sell": "700",
+              "id": "ChineseYuan"
+            },
+            "Colón (CRC)": {
+              "buy": "6",
+              "sell": "7,8",
+              "id": "CostarricanColon"
+            },
+            "Yen (JPY)": {
+              "buy": "23",
+              "sell": "34",
+              "id": "JapaneseYen"
+            },
+            "Quetzal (GTQ)": {
+              "buy": "500",
+              "sell": "600",
+              "id": "GuatemalanQuetzal"
+            }
+          },
+          "city": "Bogotá",
+          "exchange_house": "cambiosVancouver",
+          "source_url": "https://cambiosvancouver.com/tasa-de-cambio/"
+        }
+      ],
       "eurodolar": [
         {
           "id": "eurodolar",
           "data": {
             "US Dolar Americano": {
-              "buy": "3620",
+              "buy": "3610",
               "sell": "3660",
               "id": "AmericanDollar"
             },
@@ -1256,13 +1366,13 @@
               "id": "Euro"
             },
             "CAD Dolar Canadiense": {
-              "buy": "2620",
-              "sell": "2730",
+              "buy": "2610",
+              "sell": "2720",
               "id": "CanadianDollar"
             },
             "AUD Dolar Australiano": {
-              "buy": "2400",
-              "sell": "2530",
+              "buy": "2350",
+              "sell": "2500",
               "id": "AustralianDollar"
             },
             "CHF Franco Suizo": {
@@ -1271,7 +1381,7 @@
               "id": "SwissFranc"
             },
             "GBP Libra Esterlina": {
-              "buy": "4700",
+              "buy": "4750",
               "sell": "4920",
               "id": "BritishPound"
             },
@@ -1296,7 +1406,7 @@
               "id": "ChileanPeso"
             },
             "Real Brasileno (BR)": {
-              "buy": "690",
+              "buy": "680",
               "sell": "750",
               "id": "BrasilianReal"
             },
