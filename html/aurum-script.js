@@ -41,7 +41,7 @@ const referenceRateCache = new Map();
 
 const citySelector = document.getElementById("citySelector");
 const mobileCitySelector = document.getElementById("mobileCitySelector");
-const heroCityNameEl = document.getElementById("heroCityName");
+const heroCitySelector = document.getElementById("heroCitySelector");
 const heroPriceCityEl = document.getElementById("heroPriceCity");
 const heroExchangeHouseCountEl = document.getElementById("heroExchangeHouseCount");
 const heroCurrencyCountEl = document.getElementById("heroCurrencyCount");
@@ -215,6 +215,9 @@ function fillCitySelectors(cities) {
 
   citySelector.innerHTML = html;
   mobileCitySelector.innerHTML = html;
+  if (heroCitySelector) {
+    heroCitySelector.innerHTML = html;
+  }
 
   const initial = cities.includes(INITIAL_CITY)
     ? INITIAL_CITY
@@ -222,6 +225,9 @@ function fillCitySelectors(cities) {
 
   citySelector.value = initial;
   mobileCitySelector.value = initial;
+  if (heroCitySelector) {
+    heroCitySelector.value = initial;
+  }
   currentCity = initial;
 }
 
@@ -282,9 +288,11 @@ function buildComparisonMap(rawComparisonData, city) {
 }
 
 function renderHeroCounts(cityRows, referenceRates) {
-  if (!heroCityNameEl || !heroPriceCityEl || !heroExchangeHouseCountEl || !heroCurrencyCountEl || !heroUpdatedAtEl) return;
+  if (!heroPriceCityEl || !heroExchangeHouseCountEl || !heroCurrencyCountEl || !heroUpdatedAtEl) return;
 
-  heroCityNameEl.textContent = currentCity;
+  if (heroCitySelector) {
+    heroCitySelector.value = currentCity;
+  }
   heroPriceCityEl.textContent = currentCity;
   heroExchangeHouseCountEl.textContent = getDistinctLocations(cityRows).length || "0";
   heroCurrencyCountEl.textContent = getDistinctCurrencies(cityRows).length || "0";
@@ -685,6 +693,9 @@ async function renderCity(city, resetCurrencySelection) {
   currentCity = city;
   citySelector.value = city;
   mobileCitySelector.value = city;
+  if (heroCitySelector) {
+    heroCitySelector.value = city;
+  }
 
   currentCityRows = getRowsByCity(city);
   currentComparisonMap = buildComparisonMap(rawData?.comparison_data, city);
@@ -729,6 +740,12 @@ async function init() {
     if (mobileCitySelector) {
       mobileCitySelector.addEventListener("change", () => {
         window.location.href = cityPagePath(mobileCitySelector.value);
+      });
+    }
+
+    if (heroCitySelector) {
+      heroCitySelector.addEventListener("change", () => {
+        window.location.href = cityPagePath(heroCitySelector.value);
       });
     }
 
