@@ -1,5 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Divisas COL">
-  <rect width="64" height="64" rx="14" fill="#0f0e0c"/>
-  <path fill="#f2d39b" d="M18 14h19c9 0 15 7 15 18s-6 18-15 18H18V14Zm12 11v14h6c4 0 7-3 7-7s-3-7-7-7h-6Z"/>
-  <path fill="#ffffff" d="M13 45h38v5H13z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Divisas COL generated logo">
+  <rect width="512" height="512" rx="92" fill="#0f0e0c"/>
+  <path id="outer-d" fill="#f2d39b" d="M75 104H195C371 104 425 196 425 256C425 316 371 408 195 408H75V408H125V182H195V330H125V104H75Z"/>
+  <path id="d-counter" fill="#0f0e0c" d="M183 154C340 154 378 208 378 256C378 304 340 358 183 358Z"/>
+  <path id="inner-c" d="M326 216A64 64 0 1 0 326 296" stroke="#f2d39b" stroke-width="28" stroke-linecap="round" fill="none"/>
+  <path id="dollar-mark" d="M285 202.0V310.0" stroke="#ffffff" stroke-width="0" stroke-linecap="round" fill="none"/>
+  <path d="M270.0 234H300.0" stroke="#ffffff" stroke-width="0" stroke-linecap="round" fill="none"/>
+  <path d="M276.0 278H294.0" stroke="#ffffff" stroke-width="0" stroke-linecap="round" fill="none"/>
 </svg>
