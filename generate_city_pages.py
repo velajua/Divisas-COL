@@ -1,4 +1,5 @@
 from pathlib import Path
+import html as html_lib
 import json
 import re
 import unicodedata
@@ -207,6 +208,16 @@ def city_page_html(template, city):
         "intro": f"Referencias rápidas del mercado para monedas extranjeras frente al peso colombiano, con comparación de tasas publicadas por casas de cambio en {city}.",
     })
     slug = slugify(city)
+    escaped_city = html_lib.escape(city)
+    hero_city_dropdown = f'''<h1 class="hero-title">
+            Tasas de cambio en
+            <span class="hero-city-select-wrap">
+              <label for="heroCitySelector" class="sr-only">Seleccionar ciudad</label>
+              <select id="heroCitySelector" class="hero-city-selector gold" aria-label="Seleccionar ciudad desde el título">
+                <option value="{escaped_city}" selected>{escaped_city}</option>
+              </select>
+            </span>
+          </h1>'''
 
     html = make_root_relative(template)
     html = html.replace("DiviSAS COL", SITE_NAME)
@@ -216,7 +227,7 @@ def city_page_html(template, city):
     html = replace_tag(
         html,
         r'<h1 class="hero-title">\s*Tasas de cambio en <span class="gold" id="heroCityName">.*?</span>\s*</h1>',
-        f'<h1 class="hero-title">\n            Tasas de cambio en <span class="gold" id="heroCityName">{city}</span>\n          </h1>',
+        hero_city_dropdown,
     )
     html = replace_tag(
         html,
