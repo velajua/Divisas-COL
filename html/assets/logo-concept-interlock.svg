@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Divisas COL interlock concept">
+  <rect width="512" height="512" rx="92" fill="#0f0e0c"/>
+  <path fill="#f2d39b" d="M124 114h132c99 0 162 55 162 142 0 87-63 142-162 142H124V114Zm88 72v140h44c47 0 74-26 74-70 0-44-27-70-74-70h-44Z"/>
+  <path fill="#0f0e0c" d="M295 130c52 0 95 18 124 54l-35 28c-21-25-47-38-83-38-52 0-91 35-91 82 0 49 38 82 93 82 34 0 61-11 82-33l32 31c-28 31-70 47-122 47-86 0-149-54-149-127 0-72 61-126 149-126Z"/>
+  <path fill="#f2d39b" d="M252 128h30v256h-30z"/>
+  <rect x="260" y="156" width="14" height="200" rx="7" fill="#ffffff"/>
+  <path fill="#f2d39b" d="M322 220h63v32h-63z"/>
+  <path fill="#f2d39b" d="M322 260h63v32h-63z"/>
+</svg>
