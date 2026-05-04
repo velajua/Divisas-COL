@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "health_passed": 13,
-  "health_failed": 0,
+  "health_passed": 12,
+  "health_failed": 1,
   "comparison_data": {
     "Barranquilla": [
       [
@@ -673,39 +673,39 @@
     ],
     "Medellín": [
       [
-        "Value for buying AmericanDollar is best value at euroservicios with value 3510",
-        "Value for selling AmericanDollar is best value at euroservicios with value 3660",
-        "Difference for AmericanDollar in value is -150"
+        "",
+        "",
+        "Difference for AmericanDollar in value is -10000000000.0"
       ],
       [
-        "Value for buying Euro is best value at euroservicios with value 4370",
+        "Value for buying Euro is best value at puntoDollarEnvigado with value 4320",
         "Value for selling Euro is best value at puntoDollarEnvigado with value 4510",
-        "Difference for Euro in value is -140"
+        "Difference for Euro in value is -190"
       ],
       [
-        "Value for buying BritishPound is best value at euroservicios with value 4650",
-        "Value for selling BritishPound is best value at euroservicios with value 4850",
-        "Difference for BritishPound in value is -200"
+        "",
+        "",
+        "Difference for BritishPound in value is -10000000000.0"
       ],
       [
-        "Value for buying CanadianDollar is best value at euroservicios with value 2520",
-        "Value for selling CanadianDollar is best value at euroservicios with value 2670",
-        "Difference for CanadianDollar in value is -150"
+        "",
+        "",
+        "Difference for CanadianDollar in value is -10000000000.0"
       ],
       [
-        "Value for buying AustralianDollar is best value at euroservicios with value 2300",
-        "Value for selling AustralianDollar is best value at euroservicios with value 2550",
-        "Difference for AustralianDollar in value is -250"
+        "Value for buying AustralianDollar is best value at puntoDollarEnvigado with value 2300",
+        "Value for selling AustralianDollar is best value at puntoDollarEnvigado with value 2600",
+        "Difference for AustralianDollar in value is -300"
       ],
       [
-        "Value for buying MexicanPeso is best value at euroservicios with value 195",
-        "Value for selling MexicanPeso is best value at euroservicios with value 205",
-        "Difference for MexicanPeso in value is -10"
+        "Value for buying MexicanPeso is best value at puntoDollarEnvigado with value 190",
+        "Value for selling MexicanPeso is best value at puntoDollarEnvigado with value 210",
+        "Difference for MexicanPeso in value is -20"
       ],
       [
-        "Value for buying ArgentineanPeso is best value at euroservicios with value 2",
+        "",
         "Value for selling ArgentineanPeso is best value at puntoDollarEnvigado with value 0",
-        "Difference for ArgentineanPeso in value is 2"
+        "Difference for ArgentineanPeso in value is 0"
       ],
       [
         "",
@@ -713,49 +713,49 @@
         "Difference for ChileanPeso in value is -10000000000.0"
       ],
       [
-        "Value for buying BrasilianReal is best value at euroservicios with value 730",
+        "Value for buying BrasilianReal is best value at puntoDollarEnvigado with value 680",
         "Value for selling BrasilianReal is best value at puntoDollarEnvigado with value 740",
-        "Difference for BrasilianReal in value is -10"
+        "Difference for BrasilianReal in value is -60"
       ],
       [
-        "Value for buying SwissFranc is best value at euroservicios with value 4350",
-        "Value for selling SwissFranc is best value at euroservicios with value 4600",
-        "Difference for SwissFranc in value is -250"
+        "",
+        "",
+        "Difference for SwissFranc in value is -10000000000.0"
       ],
       [
-        "Value for buying PeruveanNewSun is best value at euroservicios with value 1020",
-        "Value for selling PeruveanNewSun is best value at euroservicios with value 1100",
-        "Difference for PeruveanNewSun in value is -80"
+        "",
+        "",
+        "Difference for PeruveanNewSun in value is -10000000000.0"
       ],
       [
-        "Value for buying JapaneseYen is best value at euroservicios with value 21",
+        "",
         "Value for selling JapaneseYen is best value at puntoDollarEnvigado with value 0",
-        "Difference for JapaneseYen in value is 21"
+        "Difference for JapaneseYen in value is 0"
       ],
       [
-        "Value for buying ChineseYuan is best value at euroservicios with value 300",
+        "",
         "Value for selling ChineseYuan is best value at puntoDollarEnvigado with value 0",
-        "Difference for ChineseYuan in value is 300"
+        "Difference for ChineseYuan in value is 0"
       ],
       [
-        "Value for buying DominicanPeso is best value at euroservicios with value 50",
-        "Value for selling DominicanPeso is best value at euroservicios with value 60",
-        "Difference for DominicanPeso in value is -10"
+        "",
+        "",
+        "Difference for DominicanPeso in value is -10000000000.0"
       ],
       [
-        "Value for buying CostarricanColon is best value at euroservicios with value 5",
-        "Value for selling CostarricanColon is best value at euroservicios with value 8",
-        "Difference for CostarricanColon in value is -3"
+        "",
+        "",
+        "Difference for CostarricanColon in value is -10000000000.0"
       ],
       [
-        "Value for buying GuatemalanQuetzal is best value at euroservicios with value 250",
-        "Value for selling GuatemalanQuetzal is best value at euroservicios with value 500",
-        "Difference for GuatemalanQuetzal in value is -250"
+        "",
+        "",
+        "Difference for GuatemalanQuetzal in value is -10000000000.0"
       ],
       [
-        "Value for buying SouthKoreanWon is best value at euroservicios with value 1",
-        "Value for selling SouthKoreanWon is best value at euroservicios with value 2",
-        "Difference for SouthKoreanWon in value is -1"
+        "",
+        "",
+        "Difference for SouthKoreanWon in value is -10000000000.0"
       ],
       [
         "",
@@ -763,79 +763,79 @@
         "Difference for RussianRuble in value is -10000000000.0"
       ],
       [
-        "Value for buying TurkishLira is best value at euroservicios with value 40",
-        "Value for selling TurkishLira is best value at euroservicios with value 100",
-        "Difference for TurkishLira in value is -60"
+        "",
+        "",
+        "Difference for TurkishLira in value is -10000000000.0"
       ],
       [
-        "Value for buying UAEDirham is best value at euroservicios with value 600",
-        "Value for selling UAEDirham is best value at euroservicios with value 900",
-        "Difference for UAEDirham in value is -300"
+        "",
+        "",
+        "Difference for UAEDirham in value is -10000000000.0"
       ],
       [
-        "Value for buying NicaraguanCordoba is best value at euroservicios with value 28",
-        "Value for selling NicaraguanCordoba is best value at euroservicios with value 80",
-        "Difference for NicaraguanCordoba in value is -52"
+        "",
+        "",
+        "Difference for NicaraguanCordoba in value is -10000000000.0"
       ],
       [
-        "Value for buying NewZealandDollar is best value at euroservicios with value 1500",
-        "Value for selling NewZealandDollar is best value at euroservicios with value 2200",
-        "Difference for NewZealandDollar in value is -700"
+        "",
+        "",
+        "Difference for NewZealandDollar in value is -10000000000.0"
       ],
       [
-        "Value for buying BahamianDollar is best value at euroservicios with value 1500",
-        "Value for selling BahamianDollar is best value at euroservicios with value 3000",
-        "Difference for BahamianDollar in value is -1500"
+        "",
+        "",
+        "Difference for BahamianDollar in value is -10000000000.0"
       ],
       [
-        "Value for buying DanishKrone is best value at euroservicios with value 200",
-        "Value for selling DanishKrone is best value at euroservicios with value 500",
-        "Difference for DanishKrone in value is -300"
+        "",
+        "",
+        "Difference for DanishKrone in value is -10000000000.0"
       ],
       [
-        "Value for buying NorwegianKrone is best value at euroservicios with value 150",
-        "Value for selling NorwegianKrone is best value at euroservicios with value 300",
-        "Difference for NorwegianKrone in value is -150"
+        "",
+        "",
+        "Difference for NorwegianKrone in value is -10000000000.0"
       ],
       [
-        "Value for buying SwedishKrone is best value at euroservicios with value 150",
-        "Value for selling SwedishKrone is best value at euroservicios with value 300",
-        "Difference for SwedishKrone in value is -150"
+        "",
+        "",
+        "Difference for SwedishKrone in value is -10000000000.0"
       ],
       [
-        "Value for buying ArubanFlorin is best value at euroservicios with value 1500",
-        "Value for selling ArubanFlorin is best value at euroservicios with value 2050",
-        "Difference for ArubanFlorin in value is -550"
+        "",
+        "",
+        "Difference for ArubanFlorin in value is -10000000000.0"
       ],
       [
-        "Value for buying NetherlandsAntilleanGuilder is best value at euroservicios with value 1500",
-        "Value for selling NetherlandsAntilleanGuilder is best value at euroservicios with value 1950",
-        "Difference for NetherlandsAntilleanGuilder in value is -450"
+        "",
+        "",
+        "Difference for NetherlandsAntilleanGuilder in value is -10000000000.0"
       ],
       [
-        "Value for buying BolivianBoliviano is best value at euroservicios with value 150",
-        "Value for selling BolivianBoliviano is best value at euroservicios with value 400",
-        "Difference for BolivianBoliviano in value is -250"
+        "",
+        "",
+        "Difference for BolivianBoliviano in value is -10000000000.0"
       ],
       [
-        "Value for buying ThaiBaht is best value at euroservicios with value 30",
-        "Value for selling ThaiBaht is best value at euroservicios with value 60",
-        "Difference for ThaiBaht in value is -30"
+        "",
+        "",
+        "Difference for ThaiBaht in value is -10000000000.0"
       ],
       [
-        "Value for buying UruguayanPeso is best value at euroservicios with value 30",
-        "Value for selling UruguayanPeso is best value at euroservicios with value 75",
-        "Difference for UruguayanPeso in value is -45"
+        "",
+        "",
+        "Difference for UruguayanPeso in value is -10000000000.0"
       ],
       [
-        "Value for buying HongKongDollar is best value at euroservicios with value 200",
-        "Value for selling HongKongDollar is best value at euroservicios with value 350",
-        "Difference for HongKongDollar in value is -150"
+        "",
+        "",
+        "Difference for HongKongDollar in value is -10000000000.0"
       ],
       [
-        "Value for buying HonduranLempira is best value at euroservicios with value 50",
-        "Value for selling HonduranLempira is best value at euroservicios with value 120",
-        "Difference for HonduranLempira in value is -70"
+        "",
+        "",
+        "Difference for HonduranLempira in value is -10000000000.0"
       ]
     ]
   },
@@ -1763,168 +1763,7 @@
       "euroservicios": [
         {
           "id": "euroservicios",
-          "data": {
-            "DÓLAR (USD)": {
-              "buy": "3510",
-              "sell": "3660",
-              "id": "AmericanDollar"
-            },
-            "EURO (EUR)": {
-              "buy": "4370",
-              "sell": "4520",
-              "id": "Euro"
-            },
-            "Peso Mexicano (MXN)": {
-              "buy": "195",
-              "sell": "205",
-              "id": "MexicanPeso"
-            },
-            "cordoba (nio)": {
-              "buy": "28",
-              "sell": "80",
-              "id": "NicaraguanCordoba"
-            },
-            "Dólar newzelanda (nzd)": {
-              "buy": "1500",
-              "sell": "2200",
-              "id": "NewZealandDollar"
-            },
-            "Dólar bahamas (psd)": {
-              "buy": "1500",
-              "sell": "3000",
-              "id": "BahamianDollar"
-            },
-            "corona danesa (dnk)": {
-              "buy": "200",
-              "sell": "500",
-              "id": "DanishKrone"
-            },
-            "corona noruega (nok)": {
-              "buy": "150",
-              "sell": "300",
-              "id": "NorwegianKrone"
-            },
-            "corona sueca (sek)": {
-              "buy": "150",
-              "sell": "300",
-              "id": "SwedishKrone"
-            },
-            "Libra Esterlina (GBP)": {
-              "buy": "4650",
-              "sell": "4850",
-              "id": "BritishPound"
-            },
-            "Dólar Canadiense (CAD)": {
-              "buy": "2520",
-              "sell": "2670",
-              "id": "CanadianDollar"
-            },
-            "Nuevo Sol (PEN)": {
-              "buy": "1020",
-              "sell": "1100",
-              "id": "PeruveanNewSun"
-            },
-            "Peso Chileno (CLP)": {
-              "buy": "3",
-              "sell": "4,5",
-              "id": "ChileanPeso"
-            },
-            "Dólar Australiano (AUD)": {
-              "buy": "2300",
-              "sell": "2550",
-              "id": "AustralianDollar"
-            },
-            "Real Brasileño (BRL)": {
-              "buy": "730",
-              "sell": "800",
-              "id": "BrasilianReal"
-            },
-            "Franco Suizo (CHF)": {
-              "buy": "4350",
-              "sell": "4600",
-              "id": "SwissFranc"
-            },
-            "Peso Argentino (ARS)": {
-              "buy": "2",
-              "sell": "3",
-              "id": "ArgentineanPeso"
-            },
-            "Quetzal Guatemala (GTQ)": {
-              "buy": "250",
-              "sell": "500",
-              "id": "GuatemalanQuetzal"
-            },
-            "Yen Japones (JPY)": {
-              "buy": "21",
-              "sell": "25",
-              "id": "JapaneseYen"
-            },
-            "Peso Dominicano (DOP)": {
-              "buy": "50",
-              "sell": "60",
-              "id": "DominicanPeso"
-            },
-            "Yuan Chino (CNY)": {
-              "buy": "300",
-              "sell": "550",
-              "id": "ChineseYuan"
-            },
-            "Florin Aruba (AWG)": {
-              "buy": "1500",
-              "sell": "2050",
-              "id": "ArubanFlorin"
-            },
-            "Florin caribeño (ANG)": {
-              "buy": "1500",
-              "sell": "1950",
-              "id": "NetherlandsAntilleanGuilder"
-            },
-            "Peso Boliviano (BOP)": {
-              "buy": "150",
-              "sell": "400",
-              "id": "BolivianBoliviano"
-            },
-            "Lira Turca (TRY)": {
-              "buy": "40",
-              "sell": "100",
-              "id": "TurkishLira"
-            },
-            "Baht Tailandia (THB)": {
-              "buy": "30",
-              "sell": "60",
-              "id": "ThaiBaht"
-            },
-            "Colón Costarricense (CRC)": {
-              "buy": "5",
-              "sell": "8",
-              "id": "CostarricanColon"
-            },
-            "Won Corea del Sur (KOR)": {
-              "buy": "1",
-              "sell": "2",
-              "id": "SouthKoreanWon"
-            },
-            "Peso Uruguayo (UYU)": {
-              "buy": "30",
-              "sell": "75",
-              "id": "UruguayanPeso"
-            },
-            "Dirham Emiratos (AED)": {
-              "buy": "600",
-              "sell": "900",
-              "id": "UAEDirham"
-            },
-            "Dólar Hong Kong (HKD)": {
-              "buy": "200",
-              "sell": "350",
-              "id": "HongKongDollar"
-            },
-            "Lempira (HNL)": {
-              "buy": "50",
-              "sell": "120",
-              "id": "HonduranLempira"
-            }
-          },
+          "data": {},
           "city": "Medellín",
           "exchange_house": "euroservicios",
           "source_url": "https://euroservicios.com.co/"
