@@ -1,0 +1,203 @@
+{
+  "date": "2026-05-05",
+  "source": "html/result.json",
+  "cards": [
+    {
+      "type": "city_rates",
+      "city": "Barranquilla",
+      "page": 1,
+      "path": "instagram_cards/2026-05-05/barranquilla-01.svg",
+      "description_path": "instagram_cards/2026-05-05/barranquilla-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Barranquilla",
+      "page": 2,
+      "path": "instagram_cards/2026-05-05/barranquilla-02.svg",
+      "description_path": "instagram_cards/2026-05-05/barranquilla-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 1,
+      "path": "instagram_cards/2026-05-05/bogota-01.svg",
+      "description_path": "instagram_cards/2026-05-05/bogota-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 2,
+      "path": "instagram_cards/2026-05-05/bogota-02.svg",
+      "description_path": "instagram_cards/2026-05-05/bogota-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso",
+        "ArgentineanPeso",
+        "JapaneseYen"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 3,
+      "path": "instagram_cards/2026-05-05/bogota-03.svg",
+      "description_path": "instagram_cards/2026-05-05/bogota-description.txt",
+      "currencies": [
+        "ChineseYuan",
+        "DominicanPeso",
+        "CostarricanColon",
+        "UAEDirham",
+        "TurkishLira",
+        "GuatemalanQuetzal"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "page": 4,
+      "path": "instagram_cards/2026-05-05/bogota-04.svg",
+      "description_path": "instagram_cards/2026-05-05/bogota-description.txt",
+      "currencies": [
+        "RussianRuble",
+        "SouthKoreanWon"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cali",
+      "page": 1,
+      "path": "instagram_cards/2026-05-05/cali-01.svg",
+      "description_path": "instagram_cards/2026-05-05/cali-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cali",
+      "page": 2,
+      "path": "instagram_cards/2026-05-05/cali-02.svg",
+      "description_path": "instagram_cards/2026-05-05/cali-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cartagena",
+      "page": 1,
+      "path": "instagram_cards/2026-05-05/cartagena-01.svg",
+      "description_path": "instagram_cards/2026-05-05/cartagena-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Cartagena",
+      "page": 2,
+      "path": "instagram_cards/2026-05-05/cartagena-02.svg",
+      "description_path": "instagram_cards/2026-05-05/cartagena-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 1,
+      "path": "instagram_cards/2026-05-05/medellin-01.svg",
+      "description_path": "instagram_cards/2026-05-05/medellin-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "page": 2,
+      "path": "instagram_cards/2026-05-05/medellin-02.svg",
+      "description_path": "instagram_cards/2026-05-05/medellin-description.txt",
+      "currencies": [
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    }
+  ],
+  "descriptions": [
+    {
+      "type": "city_rates",
+      "city": "Barranquilla",
+      "path": "instagram_cards/2026-05-05/barranquilla-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Bogotá",
+      "path": "instagram_cards/2026-05-05/bogota-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Cali",
+      "path": "instagram_cards/2026-05-05/cali-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Cartagena",
+      "path": "instagram_cards/2026-05-05/cartagena-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "city": "Medellín",
+      "path": "instagram_cards/2026-05-05/medellin-description.txt"
+    }
+  ],
+  "newsletter": {
+    "matched": false
+  }
+}

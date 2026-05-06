@@ -3,8 +3,8 @@ import re
 import time
 import requests
 
-from bs4 import BeautifulSoup, Tag
 from envyaml import EnvYAML
+from unidecode import unidecode
 
 CONF = EnvYAML(
     os.path.join(
@@ -13,36 +13,49 @@ CONF = EnvYAML(
 )
 
 
+NORMALIZED_CURRENCY_IDS = {
+    re.sub(r"\s+", " ", re.sub(r"\([^)]*\)", "", unidecode(currency_name)).strip().lower()): currency_id
+    for currency_name, currency_id in CONF["currency_dicto"].items()
+}
+
+
 def euroservicios(url, total_data=None):
     if total_data is None:
         total_data = []
 
-    def clean_data(value, type=None):
-        value = value.strip()
+    def clean_name(value):
+        return re.sub(r"\s+", " ", unidecode(str(value)).strip())
 
-        if type == "title":
-            value = re.sub(r"^\#+\s*", "", value).strip()
-            value = re.sub(r"\s+", " ", value).strip()
-            return value
-
-        if value in ("-X", "-", "–", "-0", ""):
+    def clean_rate(value):
+        if value is None:
             return "0"
 
-        value = re.sub(r"^\$\s*", "", value)
-        value = value.replace("\xa0", " ")
-        value = re.sub(r"\s+", "", value)
-        value = value.strip("-–")
+        if isinstance(value, str):
+            value = value.strip()
+            if value in ("-X", "-", "–", "-0", ""):
+                return "0"
+            value = value.replace("\xa0", " ")
+            value = re.sub(r"\s+", "", value)
+            value = value.strip("-–")
+            return value.replace(".", ",") if "." in value else value
 
-        if "." in value:
-            parts = value.split(".")
-            if (
-                len(parts) > 1
-                and all(part.isdigit() for part in parts)
-                and all(len(part) == 3 for part in parts[1:])
-            ):
-                value = "".join(parts)
+        if isinstance(value, float):
+            if value.is_integer():
+                return str(int(value))
+            return str(value).replace(".", ",")
 
-        return value
+        return str(value)
+
+    def resolve_currency_id(item):
+        normalized_name = re.sub(
+            r"\s+",
+            " ",
+            re.sub(r"\([^)]*\)", "", unidecode(str(item.get("name", "")))).strip().lower(),
+        )
+        if normalized_name in NORMALIZED_CURRENCY_IDS:
+            return NORMALIZED_CURRENCY_IDS[normalized_name]
+
+        return None
 
     headers = {
         "accept": (
@@ -77,10 +90,12 @@ def euroservicios(url, total_data=None):
     response = None
     last_error = None
 
+    api_url = "https://admin.euroservicios.com.co/api/getTasas"
+
     for attempt in range(4):
         try:
             response = session.get(
-                url,
+                api_url,
                 timeout=(15, 60),
                 allow_redirects=True,
             )
@@ -96,68 +111,32 @@ def euroservicios(url, total_data=None):
     if response is None:
         raise last_error
 
-    soup = BeautifulSoup(response.content, "lxml")
+    payload = response.json()
     euroserviciosData = {}
 
-    for title_tag in soup.find_all("h4"):
-        currency = clean_data(title_tag.get_text(" ", strip=True), "title")
-        if not currency:
+    for item in payload.get("dataTasas", []):
+        if not isinstance(item, dict):
             continue
 
-        currency_id = CONF["currency_dicto"].get(currency)
+        if not item.get("available", 1):
+            continue
+
+        currency_id = resolve_currency_id(item)
         if currency_id is None:
             continue
 
-        block_parts = []
-
-        for elem in title_tag.next_elements:
-            if elem is title_tag:
-                continue
-
-            if isinstance(elem, Tag) and elem.name == "h4":
-                break
-
-            if isinstance(elem, Tag):
-                text = elem.get_text(" ", strip=True)
-                if text:
-                    block_parts.append(text)
-
-        block_text = " ".join(block_parts)
-        block_text = re.sub(r"\s+", " ", block_text).strip()
-
-        buy_match = re.search(
-            r"Compra:\s*\$?\s*([\d\.,]+)",
-            block_text,
-            flags=re.IGNORECASE,
-        )
-        sell_match = re.search(
-            r"Venta:\s*\$?\s*([\d\.,]+)",
-            block_text,
-            flags=re.IGNORECASE,
-        )
-
-        if not buy_match or not sell_match:
+        currency_name = clean_name(item.get("name", ""))
+        if not currency_name:
             continue
 
-        buy = clean_data(buy_match.group(1))
-        sell = clean_data(sell_match.group(1))
+        buy = clean_rate(item.get("buyMedellin"))
+        sell = clean_rate(item.get("sellMedellin"))
 
-        if currency_id == "AmericanDollar":
-            try:
-                buy_num = float(buy.replace(",", "."))
-                sell_num = float(sell.replace(",", "."))
-            except ValueError:
-                continue
-
-            if not (3000 <= buy_num <= 5000 and 3000 <= sell_num <= 5000):
-                continue
-
-        if currency not in euroserviciosData:
-            euroserviciosData[currency] = {
-                "buy": buy,
-                "sell": sell,
-                "id": currency_id,
-            }
+        euroserviciosData[currency_name] = {
+            "buy": buy,
+            "sell": sell,
+            "id": currency_id,
+        }
 
     total_data.append({"id": "euroservicios", "data": euroserviciosData})
     return total_data
