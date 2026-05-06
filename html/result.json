@@ -172,19 +172,19 @@
     ],
     "Bogotá": [
       [
-        "Value for buying AmericanDollar is best value at amerikanCashCalle122 with value 3630",
-        "Value for selling AmericanDollar is best value at cambiosVancouver with value 3660",
+        "Value for buying AmericanDollar is best value at amerikanCashCalle122 with value 3620",
+        "Value for selling AmericanDollar is best value at cambiosKapital with value 3650",
         "Difference for AmericanDollar in value is -30"
       ],
       [
-        "Value for buying Euro is best value at amerikanCashCalle122 with value 4390",
+        "Value for buying Euro is best value at amerikanCashCalle122 with value 4380",
         "Value for selling Euro is best value at cambiosKapital with value 4360",
-        "Difference for Euro in value is 30"
+        "Difference for Euro in value is 20"
       ],
       [
-        "Value for buying BritishPound is best value at amerikanCashCalle122 with value 4850",
+        "Value for buying BritishPound is best value at amerikanCashCalle122 with value 4830",
         "Value for selling BritishPound is best value at cambiosKapital with value 4920",
-        "Difference for BritishPound in value is -70"
+        "Difference for BritishPound in value is -90"
       ],
       [
         "Value for buying CanadianDollar is best value at amerikanCashCalle122 with value 2650",
@@ -198,8 +198,8 @@
       ],
       [
         "Value for buying MexicanPeso is best value at amerikanCashCalle122 with value 198",
-        "Value for selling MexicanPeso is best value at eurodolar with value 206",
-        "Difference for MexicanPeso in value is -8"
+        "Value for selling MexicanPeso is best value at cambiosKapital with value 207",
+        "Difference for MexicanPeso in value is -9"
       ],
       [
         "Value for buying ArgentineanPeso is best value at amerikanCashCalle122 with value 2",
@@ -213,7 +213,7 @@
       ],
       [
         "Value for buying BrasilianReal is best value at amerikanCashCalle122 with value 715",
-        "Value for selling BrasilianReal is best value at cambiosKapital with value 730",
+        "Value for selling BrasilianReal is best value at puntoDollarSalitre with value 730",
         "Difference for BrasilianReal in value is -15"
       ],
       [
@@ -227,14 +227,14 @@
         "Difference for PeruveanNewSun in value is -50"
       ],
       [
-        "Value for buying JapaneseYen is best value at amerikanCashCalle122 with value 26",
+        "Value for buying JapaneseYen is best value at amerikanCashCalle122 with value 28",
         "Value for selling JapaneseYen is best value at puntoDollarUnicentro with value 0",
-        "Difference for JapaneseYen in value is 26"
+        "Difference for JapaneseYen in value is 28"
       ],
       [
-        "Value for buying ChineseYuan is best value at amerikanCashCalle122 with value 630",
+        "Value for buying ChineseYuan is best value at amerikanCashCalle122 with value 640",
         "Value for selling ChineseYuan is best value at puntoDollarUnicentro with value 0",
-        "Difference for ChineseYuan in value is 630"
+        "Difference for ChineseYuan in value is 640"
       ],
       [
         "Value for buying DominicanPeso is best value at cambiosKapital with value 60",
@@ -923,13 +923,13 @@
           "id": "amerikanCashCalle122",
           "data": {
             "EURO Peq./Small": {
-              "buy": "4390",
+              "buy": "4380",
               "sell": "4430",
               "id": "Euro"
             },
             "Dólar": {
-              "buy": "3630",
-              "sell": "3680",
+              "buy": "3620",
+              "sell": "3670",
               "id": "AmericanDollar"
             },
             "Sol": {
@@ -968,8 +968,8 @@
               "id": "SwissFranc"
             },
             "Libra": {
-              "buy": "4850",
-              "sell": "4980",
+              "buy": "4830",
+              "sell": "4970",
               "id": "BritishPound"
             },
             "Real": {
@@ -978,7 +978,7 @@
               "id": "BrasilianReal"
             },
             "Yuan": {
-              "buy": "630",
+              "buy": "640",
               "sell": "730",
               "id": "ChineseYuan"
             },
@@ -988,7 +988,7 @@
               "id": "CostarricanColon"
             },
             "Yen": {
-              "buy": "26",
+              "buy": "28",
               "sell": "36",
               "id": "JapaneseYen"
             },
@@ -1022,12 +1022,12 @@
           "data": {
             "EURO Peq./Small": {
               "buy": "4380",
-              "sell": "4460",
+              "sell": "4470",
               "id": "Euro"
             },
             "Dólar": {
-              "buy": "3600",
-              "sell": "3700",
+              "buy": "3590",
+              "sell": "3690",
               "id": "AmericanDollar"
             },
             "Sol": {
@@ -1066,8 +1066,8 @@
               "id": "SwissFranc"
             },
             "Libra": {
-              "buy": "4800",
-              "sell": "5030",
+              "buy": "4770",
+              "sell": "5020",
               "id": "BritishPound"
             },
             "Real": {
@@ -1081,7 +1081,7 @@
               "id": "ChineseYuan"
             },
             "Yen": {
-              "buy": "24",
+              "buy": "26",
               "sell": "40",
               "id": "JapaneseYen"
             },
@@ -1141,13 +1141,13 @@
           "id": "cambiosKapital",
           "data": {
             "Dolar americano (USD) 20": {
-              "buy": "3620",
-              "sell": "3670",
+              "buy": "3610",
+              "sell": "3650",
               "id": "AmericanDollar"
             },
             "Dolar americano (USD) 100": {
-              "buy": "3630",
-              "sell": "3670",
+              "buy": "3620",
+              "sell": "3660",
               "id": "AmericanDollar"
             },
             "Euro sencillo (EUR)": {
@@ -1192,7 +1192,7 @@
             },
             "Real Brasil (BRL)": {
               "buy": "700",
-              "sell": "730",
+              "sell": "735",
               "id": "BrasilianReal"
             },
             "Nuevo Sol Peru (PEN)": {
@@ -1241,13 +1241,13 @@
           "id": "cambiosVancouver",
           "data": {
             "Dólar Americano 20 (US)": {
-              "buy": "3620",
-              "sell": "3660",
+              "buy": "3600",
+              "sell": "3650",
               "id": "AmericanDollar"
             },
             "Dólar Americano 100 (US)": {
-              "buy": "3630",
-              "sell": "3670",
+              "buy": "3600",
+              "sell": "3660",
               "id": "AmericanDollar"
             },
             "Euro (EUR) 50": {
@@ -1302,7 +1302,7 @@
             },
             "Real (BR)": {
               "buy": "690",
-              "sell": "730",
+              "sell": "735",
               "id": "BrasilianReal"
             },
             "Nuevo Sol (PEN)": {
@@ -1351,8 +1351,8 @@
           "id": "eurodolar",
           "data": {
             "US Dolar Americano": {
-              "buy": "3620",
-              "sell": "3690",
+              "buy": "3600",
+              "sell": "3680",
               "id": "AmericanDollar"
             },
             "EUR Euro pequeno": {
@@ -1367,7 +1367,7 @@
             },
             "CAD Dolar Canadiense": {
               "buy": "2610",
-              "sell": "2730",
+              "sell": "2750",
               "id": "CanadianDollar"
             },
             "AUD Dolar Australiano": {
@@ -1381,7 +1381,7 @@
               "id": "SwissFranc"
             },
             "GBP Libra Esterlina": {
-              "buy": "4750",
+              "buy": "4700",
               "sell": "4920",
               "id": "BritishPound"
             },
@@ -1391,8 +1391,8 @@
               "id": "ChineseYuan"
             },
             "Peso Mexicano (MXN)": {
-              "buy": "195",
-              "sell": "206",
+              "buy": "198",
+              "sell": "208",
               "id": "MexicanPeso"
             },
             "Peso Argentino (APS)": {
