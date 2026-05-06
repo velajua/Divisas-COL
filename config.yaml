@@ -143,6 +143,7 @@ currency_dicto: {
   "Chileno":                     "ChileanPeso",
 
   "Real Brasilero":              "BrasilianReal",
+  "Real Brasileño":              "BrasilianReal",
   "Real (BR)":                   "BrasilianReal",
   "REAL BRASIL (BRL)":           "BrasilianReal",
   "Reales":                      "BrasilianReal",
@@ -195,6 +196,7 @@ currency_dicto: {
   "Colon (CRC)":                 "CostarricanColon",
   "Colon - Costa Rica":          "CostarricanColon",
   "Colon":                       "CostarricanColon",
+  "Colon Costarricense":         "CostarricanColon",
   "Colón Costarricense (CRC)":   "CostarricanColon",
 
   "QUETZAL (GTQ)":               "GuatemalanQuetzal",
@@ -202,6 +204,7 @@ currency_dicto: {
   "Quetzal - Guatemala":         "GuatemalanQuetzal",
   "Quetzal":                     "GuatemalanQuetzal",
   "Quetzal Guatemala (GTQ)":     "GuatemalanQuetzal",
+  "Quetzal Guatemala":          "GuatemalanQuetzal",
 
   "Won - Corea del Sur":         "SouthKoreanWon",
   "Won Corea del Sur (KOR)":     "SouthKoreanWon",
@@ -209,24 +212,39 @@ currency_dicto: {
   "Rublo - Rusia":               "RussianRuble",
 
   "Liras- Turquia":              "TurkishLira",
+  "Lira Turca":                  "TurkishLira",
   "Lira":                        "TurkishLira",
   "Lira Turca (TRY)":            "TurkishLira",
 
   "Dirham":                      "UAEDirham",
+  "Dirham Emiratos":             "UAEDirham",
   "Dirham Emiratos (AED)":       "UAEDirham",
 
+  "cordoba":                     "NicaraguanCordoba",
   "cordoba (nio)":               "NicaraguanCordoba",
+  "Dolar newzelanda":            "NewZealandDollar",
   "Dólar newzelanda (nzd)":      "NewZealandDollar",
+  "Dolar bahamas":               "BahamianDollar",
   "Dólar bahamas (psd)":         "BahamianDollar",
+  "corona danesa":               "DanishKrone",
   "corona danesa (dnk)":         "DanishKrone",
+  "corona noruega":              "NorwegianKrone",
   "corona noruega (nok)":        "NorwegianKrone",
+  "corona sueca":                "SwedishKrone",
   "corona sueca (sek)":          "SwedishKrone",
+  "Florin Aruba":                "ArubanFlorin",
   "Florin Aruba (AWG)":          "ArubanFlorin",
+  "Florin caribeno":             "NetherlandsAntilleanGuilder",
   "Florin caribeño (ANG)":       "NetherlandsAntilleanGuilder",
+  "Peso Boliviano":              "BolivianBoliviano",
   "Peso Boliviano (BOP)":        "BolivianBoliviano",
+  "Baht Tailandia":              "ThaiBaht",
   "Baht Tailandia (THB)":        "ThaiBaht",
+  "Peso Uruguayo":               "UruguayanPeso",
   "Peso Uruguayo (UYU)":         "UruguayanPeso",
+  "Dolar Hong Kong":             "HongKongDollar",
   "Dólar Hong Kong (HKD)":       "HongKongDollar",
+  "Lempira":                     "HonduranLempira",
   "Lempira (HNL)":               "HonduranLempira",
 }
 
