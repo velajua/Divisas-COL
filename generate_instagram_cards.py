@@ -474,7 +474,7 @@ def render_newsletter_card(entry, date_label):
     parts.extend(
         [
             f'<rect x="100" y="{cta_y}" width="790" height="92" rx="24" fill="#0f5132"/>',
-            svg_text(136, cta_y + 58, "Leer en divisascol.com", 32, 800, "#ffffff"),
+            svg_text(136, cta_y + 58, "Leer en divisascol.com/newsletter.html", 32, 800, "#ffffff"),
             svg_text(100, 1088, entry.get("url", "newsletter.html"), 25, 600, "#475569"),
             svg_text(72, 1256, "Opinion y contexto para moverse mejor con el dolar", 24, 600, "#cbd5e1"),
             svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"),
