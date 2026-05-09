@@ -28,3 +28,5 @@ node_modules/
 .dataconnect
 __pycache__
 AGENTS.md
+mobile/.expo/ 
+mobile/node_modules/

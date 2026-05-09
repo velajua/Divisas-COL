@@ -1,0 +1,36 @@
+{
+  "name": "divisas-col-mobile",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Native Expo app for Divisas COL.",
+  "main": "expo/AppEntry.js",
+  "engines": {
+    "node": ">=20.19.4"
+  },
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "test": "tsx --test src/data/snapshotCache.test.ts src/data/resultParser.test.ts src/data/api.test.ts src/data/cityInference.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "^6.1.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "54.0.34",
+    "expo-location": "~19.0.8",
+    "expo-status-bar": "^3.0.9",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-svg": "15.12.1",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/react": "~19.1.10",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

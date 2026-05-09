@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Divisas COL",
+    "slug": "divisas-col",
+    "scheme": "divisascol",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.divisascol.app"
+    },
+    "android": {
+      "package": "com.divisascol.app"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Usamos tu ubicación para seleccionar la ciudad inicial más cercana."
+        }
+      ]
+    ],
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
