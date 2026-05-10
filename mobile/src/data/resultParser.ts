@@ -45,6 +45,22 @@ export function normalizeNumber(value: string | number | null | undefined): numb
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+export function formatDisplayName(value: string): string {
+  return value
+    .trim()
+    .replace(/[_-]+/g, " ")
+    .replace(/([a-z])([A-Z0-9])/g, "$1 $2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2")
+    .replace(/\s+/g, " ")
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => {
+      if (/^[A-Z0-9]+$/.test(word)) return word;
+      return `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
+    })
+    .join(" ");
+}
+
 export function flattenRates(result: RawResult): RateRow[] {
   const rows: RateRow[] = [];
 
@@ -85,7 +101,7 @@ export function getCurrencies(rows: RateRow[]): CurrencyOption[] {
   });
 
   return [...byId.entries()]
-    .map(([id, label]) => ({ id, label }))
+    .map(([id, label]) => ({ id, label: formatDisplayName(label) }))
     .sort((a, b) => a.label.localeCompare(b.label, "es"));
 }
 
