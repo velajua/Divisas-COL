@@ -102,6 +102,9 @@ Output is organized at the repository root by day:
 instagram_cards/
 └── YYYY-MM-DD/
     ├── bogota-01.svg
+    ├── public/
+    │   ├── bogota-01.jpg
+    │   └── publish-manifest.json
     ├── medellin-01.svg
     ├── ...
     └── manifest.json
@@ -117,6 +120,38 @@ Useful options:
 python generate_instagram_cards.py --date 2026-04-18
 python generate_instagram_cards.py --currencies AmericanDollar Euro BritishPound
 python generate_instagram_cards.py --max-rows 5
+
+## 📲 Publish Instagram cards
+
+Instagram publishing uses the Meta API. The Instagram account must be a
+professional account connected to the Facebook Page, and `.env` needs:
+
+```
+INSTAGRAM_USER_ID=1784...
+META_PAGE_ACCESS_TOKEN=EAAB...
+META_APP_ACCESS_TOKEN=APP_ID|APP_TOKEN
+SITE_BASE_URL=https://divisascol.com
+META_GRAPH_VERSION=v24.0
+```
+
+Do not use `FB_USER`, `FB_PASS`, `INSTA_USER`, or `INSTA_PASS` for API
+publishing. Those are login credentials, not Meta publishing tokens.
+
+python -m playwright install chromium
+python generate_instagram_cards.py
+
+Publish today's generated cards. The script starts a temporary HTTPS tunnel,
+updates `instagram_cards/YYYY-MM-DD/public/publish-manifest.json` with tunnel
+URLs, groups images into carousels by filename prefix, and publishes them:
+
+python instagram_publish.py
+
+Publish a specific date folder:
+
+python instagram_publish.py --date 2026-05-10
+
+Cards named `bogota-01.jpg`, `bogota-02.jpg`, etc. publish as one carousel.
+`newsletter.jpg` publishes as its own single-image post.
 
 ---
 

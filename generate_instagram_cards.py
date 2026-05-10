@@ -2,6 +2,7 @@ import argparse
 import json
 import re
 import textwrap
+from io import BytesIO
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -485,7 +486,100 @@ def render_newsletter_card(entry, date_label):
 
 
 def write_card(path, content):
-    path.write_text(content, encoding="utf-8", newline="\r\n")
+    path.write_text(content, encoding="utf-8")
+
+
+def render_city_cover_card(city, date_label):
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{CARD_WIDTH}" height="{CARD_HEIGHT}" viewBox="0 0 {CARD_WIDTH} {CARD_HEIGHT}">',
+        "<defs>",
+        '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">',
+        '<stop offset="0%" stop-color="#0b1220"/>',
+        '<stop offset="100%" stop-color="#0f5132"/>',
+        "</linearGradient>",
+        "</defs>",
+
+        '<rect width="1080" height="1350" fill="url(#bg)"/>',
+
+        # BIG CITY
+        svg_text(540, 520, city.upper(), 120, 900, "#ffffff", "middle"),
+
+        # DATE
+        svg_text(540, 700, date_label, 60, 600, "#cbd5e1", "middle"),
+
+        # BRAND
+        svg_text(540, 1150, "@divisascol", 28, 700, "#d9f99d", "middle"),
+
+        "</svg>",
+    ]
+    return "\n".join(parts)
+
+
+def card_public_filename(card):
+    return Path(card["path"]).with_suffix(".jpg").name
+
+
+def read_caption(repo_root, card):
+    description_path = card.get("description_path")
+    if not description_path:
+        return ""
+    path = repo_root / description_path
+    if not path.exists():
+        return ""
+    return path.read_text(encoding="utf-8").strip()
+
+
+def render_public_cards(repo_root, day_dir, manifest):
+    try:
+        from PIL import Image
+        from playwright.sync_api import sync_playwright
+    except ImportError as exc:
+        raise RuntimeError(
+            "Missing Instagram image renderer dependency. Run `pip install -r requirements.txt` "
+            "and `python -m playwright install chromium`."
+        ) from exc
+
+    public_dir = day_dir / "public"
+    public_dir.mkdir(parents=True, exist_ok=True)
+    posts = []
+
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch()
+        page = browser.new_page(viewport={"width": CARD_WIDTH, "height": CARD_HEIGHT}, device_scale_factor=1)
+        for index, card in enumerate(manifest.get("cards", []), start=1):
+            source = repo_root / card["path"]
+            if not source.exists():
+                raise FileNotFoundError(f"Missing card file: {source}")
+            jpg_path = public_dir / card_public_filename(card)
+            page.goto(source.resolve().as_uri(), wait_until="load")
+            png_bytes = page.screenshot(full_page=False, type="png")
+            image = Image.open(BytesIO(png_bytes)).convert("RGB")
+            image.save(jpg_path, format="JPEG", quality=92, optimize=True)
+            posts.append(
+                {
+                    "index": index,
+                    "type": card.get("type"),
+                    "city": card.get("city"),
+                    "title": card.get("title"),
+                    "source_path": card["path"],
+                    "public_path": relative_manifest_path(jpg_path, repo_root),
+                    "image_url": "",
+                    "caption": read_caption(repo_root, card),
+                }
+            )
+        browser.close()
+
+    publish_manifest = {
+        "date": manifest.get("date") or day_dir.name,
+        "source_manifest": relative_manifest_path(day_dir / "manifest.json", repo_root),
+        "posts": posts,
+    }
+    publish_manifest_file = public_dir / "publish-manifest.json"
+    publish_manifest_file.write_text(
+        json.dumps(publish_manifest, ensure_ascii=False, indent=2) + "\r\n",
+        encoding="utf-8",
+    )
+    return public_dir, publish_manifest_file
 
 
 def main():
@@ -541,6 +635,20 @@ def main():
                     "path": description_path,
                 }
             )
+        cover_filename = f"{city_slug}-00.svg"
+        write_card(
+            day_dir / cover_filename,
+            render_city_cover_card(city, date_label),
+        )
+        manifest["cards"].append(
+            {
+                "type": "city_cover",
+                "city": city,
+                "page": 0,
+                "path": relative_manifest_path(day_dir / cover_filename, repo_root),
+                "description_path": description_path,
+            }
+        )
         for page, row_group in enumerate(row_groups, start=1):
             filename = f"{city_slug}-{page:02d}.svg"
             write_card(day_dir / filename, render_city_card(city, row_group, date_label, page, total_pages))
@@ -595,10 +703,12 @@ def main():
     manifest_file.write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\r\n",
         encoding="utf-8",
-        newline="\r\n",
     )
+    public_dir, publish_manifest_file = render_public_cards(repo_root, day_dir, manifest)
     print(f"Generated {len(manifest['cards'])} cards in {day_dir}")
     print(f"Manifest: {manifest_file}")
+    print(f"Public JPGs: {public_dir}")
+    print(f"Publish manifest: {publish_manifest_file}")
 
 
 if __name__ == "__main__":

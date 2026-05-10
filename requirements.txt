@@ -5,3 +5,5 @@ pandas
 pandas-gbq
 lxml
 Unidecode
+pillow
+playwright

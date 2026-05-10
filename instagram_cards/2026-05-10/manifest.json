@@ -3,6 +3,13 @@
   "source": "html/result.json",
   "cards": [
     {
+      "type": "city_cover",
+      "city": "Barranquilla",
+      "page": 0,
+      "path": "instagram_cards/2026-05-10/barranquilla-00.svg",
+      "description_path": "instagram_cards/2026-05-10/barranquilla-description.txt"
+    },
+    {
       "type": "city_rates",
       "city": "Barranquilla",
       "page": 1,
@@ -29,6 +36,13 @@
         "PeruveanNewSun",
         "ChileanPeso"
       ]
+    },
+    {
+      "type": "city_cover",
+      "city": "Bogotá",
+      "page": 0,
+      "path": "instagram_cards/2026-05-10/bogota-00.svg",
+      "description_path": "instagram_cards/2026-05-10/bogota-description.txt"
     },
     {
       "type": "city_rates",
@@ -87,6 +101,13 @@
       ]
     },
     {
+      "type": "city_cover",
+      "city": "Cali",
+      "page": 0,
+      "path": "instagram_cards/2026-05-10/cali-00.svg",
+      "description_path": "instagram_cards/2026-05-10/cali-description.txt"
+    },
+    {
       "type": "city_rates",
       "city": "Cali",
       "page": 1,
@@ -112,6 +133,13 @@
         "PeruveanNewSun",
         "ChileanPeso"
       ]
+    },
+    {
+      "type": "city_cover",
+      "city": "Cartagena",
+      "page": 0,
+      "path": "instagram_cards/2026-05-10/cartagena-00.svg",
+      "description_path": "instagram_cards/2026-05-10/cartagena-description.txt"
     },
     {
       "type": "city_rates",
@@ -140,6 +168,13 @@
         "PeruveanNewSun",
         "ChileanPeso"
       ]
+    },
+    {
+      "type": "city_cover",
+      "city": "Medellín",
+      "page": 0,
+      "path": "instagram_cards/2026-05-10/medellin-00.svg",
+      "description_path": "instagram_cards/2026-05-10/medellin-description.txt"
     },
     {
       "type": "city_rates",
