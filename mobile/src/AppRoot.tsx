@@ -16,7 +16,14 @@ import Svg, { Path, Rect } from "react-native-svg";
 
 import { fetchResultJson, RESULT_JSON_URL } from "./data/api";
 import { inferNearestCity } from "./data/cityInference";
-import { flattenRates, getBestRates, getCities, getCurrencies, type RateRow } from "./data/resultParser";
+import {
+  flattenRates,
+  formatDisplayName,
+  getBestRates,
+  getCities,
+  getCurrencies,
+  type RateRow,
+} from "./data/resultParser";
 import { getSnapshotDate, type Snapshot, upsertSnapshot } from "./data/snapshotCache";
 import { loadSnapshots, saveSnapshots } from "./storage/snapshotStorage";
 
@@ -90,7 +97,9 @@ function RateCard({ label, row, valueType }: { label: string; row: RateRow | nul
     <View style={styles.rateCard}>
       <Text style={styles.cardLabel}>{label}</Text>
       <Text style={styles.rateValue}>{formatCop(row?.[valueType])}</Text>
-      <Text style={styles.cardMeta}>{row ? `${row.exchangeHouse} / ${row.locationId}` : "Sin datos"}</Text>
+      <Text style={styles.cardMeta}>
+        {row ? `${formatDisplayName(row.exchangeHouse)} / ${formatDisplayName(row.locationId)}` : "Sin datos"}
+      </Text>
     </View>
   );
 }
@@ -341,8 +350,8 @@ export default function AppRoot() {
           {visibleRows.map((row) => (
             <View key={`${row.locationId}-${row.currencyLabel}-${row.buy}-${row.sell}`} style={styles.rateRow}>
               <View style={styles.rateRowMain}>
-                <Text style={styles.rowTitle}>{row.exchangeHouse}</Text>
-                <Text style={styles.muted}>{row.locationId}</Text>
+                <Text style={styles.rowTitle}>{formatDisplayName(row.exchangeHouse)}</Text>
+                <Text style={styles.muted}>{formatDisplayName(row.locationId)}</Text>
               </View>
               <View style={styles.rateRowValues}>
                 <Text style={styles.rowValue}>Compra {formatCop(row.buy)}</Text>
@@ -380,6 +389,10 @@ export default function AppRoot() {
           <Text style={styles.infoLine}>Días guardados: {snapshots.length} / 5</Text>
           <Text style={styles.infoLine}>Fecha seleccionada: {selectedSnapshot?.date || "-"}</Text>
           <Text style={styles.infoLine}>Última actualización: {selectedSnapshot ? new Date(selectedSnapshot.fetchedAt).toLocaleString("es-CO") : "-"}</Text>
+          <Text style={styles.infoLine}>
+            Privacidad: la ubicación solo se usa en este dispositivo para escoger la ciudad inicial más cercana. No la
+            guardamos ni la enviamos a Divisas COL.
+          </Text>
           <Text style={styles.muted}>{message}</Text>
           <Pressable
             style={[styles.primaryButton, isRefreshing && styles.pressedButton]}

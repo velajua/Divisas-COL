@@ -5,27 +5,41 @@
     "scheme": "divisascol",
     "version": "0.1.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "assetBundlePatterns": [
       "**/*"
     ],
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f0e0c"
+    },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.divisascol.app"
+      "bundleIdentifier": "com.divisascol.app",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Solo usamos tu ubicación en este dispositivo para seleccionar la ciudad inicial más cercana."
+      }
     },
     "android": {
-      "package": "com.divisascol.app"
+      "package": "com.divisascol.app",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f0e0c"
+      }
     },
     "plugins": [
       [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Usamos tu ubicación para seleccionar la ciudad inicial más cercana."
+          "locationWhenInUsePermission": "Solo usamos tu ubicación para seleccionar la ciudad inicial más cercana."
         }
       ]
     ],
     "web": {
-      "bundler": "metro"
+      "bundler": "metro",
+      "favicon": "./assets/favicon.png"
     }
   }
 }

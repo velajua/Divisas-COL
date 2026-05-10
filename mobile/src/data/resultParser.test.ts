@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   flattenRates,
+  formatDisplayName,
   getBestRates,
   getCities,
   getCurrencies,
@@ -74,6 +75,24 @@ test("getCities and getCurrencies return sorted unique values", () => {
   ]);
 });
 
+test("getCurrencies formats compact currency labels without changing ids", () => {
+  assert.deepEqual(
+    getCurrencies([
+      {
+        city: "Bogota",
+        exchangeHouse: "casaUno",
+        locationId: "sedeUno",
+        sourceUrl: "",
+        currencyLabel: "AmericanDollar",
+        currencyId: "AmericanDollar",
+        buy: 3600,
+        sell: 3700,
+      },
+    ]),
+    [{ id: "AmericanDollar", label: "American Dollar" }],
+  );
+});
+
 test("getBestRates returns best buy and lowest sell for a city and currency", () => {
   const rows = flattenRates(sampleResult);
   const best = getBestRates(rows, "Bogota", "AmericanDollar");
@@ -82,4 +101,10 @@ test("getBestRates returns best buy and lowest sell for a city and currency", ()
   assert.equal(best.bestBuy?.buy, 3650);
   assert.equal(best.bestSell?.locationId, "sedeDos");
   assert.equal(best.bestSell?.sell, 3680);
+});
+
+test("formatDisplayName separates compact store and location names", () => {
+  assert.equal(formatDisplayName("casaDeCambiosBogota"), "Casa De Cambios Bogota");
+  assert.equal(formatDisplayName("sede_norte_2"), "Sede Norte 2");
+  assert.equal(formatDisplayName("USDExpressCOL"), "USD Express COL");
 });
