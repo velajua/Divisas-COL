@@ -1351,12 +1351,12 @@
           "id": "eurodolar",
           "data": {
             "US Dolar Americano": {
-              "buy": "3620",
+              "buy": "3630",
               "sell": "3700",
               "id": "AmericanDollar"
             },
             "EUR Euro pequeno": {
-              "buy": "4360",
+              "buy": "4380",
               "sell": "4490",
               "id": "Euro"
             },
