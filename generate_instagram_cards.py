@@ -328,7 +328,8 @@ def render_newsletter_description(entry, date_label, hashtags):
         [
             "",
             "Animo, que entender el mercado tambien ayuda a comprar mejor.",
-            f"Lee la nota completa: {entry.get('url', 'newsletter.html')}",
+            "Lee la nota completa: divisascol.com",
+            f"{entry.get('url', 'newsletter.html')}",
         ]
     )
     return "\n".join(body) + hidden_hashtag_block(post_hashtags)

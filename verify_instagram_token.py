@@ -24,7 +24,7 @@ GRAPH_BASE_URL = "https://graph.facebook.com"
 OAUTH_URL = f"{GRAPH_BASE_URL}/oauth/access_token"
 
 
-DEBUG = True
+DEBUG = False
 
 def mask_value(value):
     if not value:
