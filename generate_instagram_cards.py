@@ -93,7 +93,9 @@ def parse_rate(value):
     text = re.sub(r"[^\d,.-]", "", text)
     if not text:
         return None
-    if "," in text and "." in text:
+    if re.fullmatch(r"\d{1,3}([.,]\d{3})+", text):
+        text = re.sub(r"[.,]", "", text)
+    elif "," in text and "." in text:
         text = text.replace(".", "").replace(",", ".")
     elif "," in text:
         text = text.replace(",", ".")
