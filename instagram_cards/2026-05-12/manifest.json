@@ -3,14 +3,16 @@
   "source": "html/result.json",
   "cards": [
     {
-      "type": "city_cover",
-      "city": "Barranquilla",
+      "type": "country_cover",
+      "group": "cities",
+      "city": null,
       "page": 0,
-      "path": "instagram_cards/2026-05-12/barranquilla-00.svg",
-      "description_path": "instagram_cards/2026-05-12/barranquilla-description.txt"
+      "path": "instagram_cards/2026-05-12/country-00.svg",
+      "description_path": null
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Barranquilla",
       "page": 1,
       "path": "instagram_cards/2026-05-12/barranquilla-01.svg",
@@ -26,6 +28,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Barranquilla",
       "page": 2,
       "path": "instagram_cards/2026-05-12/barranquilla-02.svg",
@@ -38,14 +41,8 @@
       ]
     },
     {
-      "type": "city_cover",
-      "city": "Bogotá",
-      "page": 0,
-      "path": "instagram_cards/2026-05-12/bogota-00.svg",
-      "description_path": "instagram_cards/2026-05-12/bogota-description.txt"
-    },
-    {
       "type": "city_rates",
+      "group": "cities",
       "city": "Bogotá",
       "page": 1,
       "path": "instagram_cards/2026-05-12/bogota-01.svg",
@@ -61,6 +58,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Bogotá",
       "page": 2,
       "path": "instagram_cards/2026-05-12/bogota-02.svg",
@@ -76,6 +74,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Bogotá",
       "page": 3,
       "path": "instagram_cards/2026-05-12/bogota-03.svg",
@@ -91,6 +90,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Bogotá",
       "page": 4,
       "path": "instagram_cards/2026-05-12/bogota-04.svg",
@@ -101,14 +101,8 @@
       ]
     },
     {
-      "type": "city_cover",
-      "city": "Cali",
-      "page": 0,
-      "path": "instagram_cards/2026-05-12/cali-00.svg",
-      "description_path": "instagram_cards/2026-05-12/cali-description.txt"
-    },
-    {
       "type": "city_rates",
+      "group": "cities",
       "city": "Cali",
       "page": 1,
       "path": "instagram_cards/2026-05-12/cali-01.svg",
@@ -124,6 +118,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Cali",
       "page": 2,
       "path": "instagram_cards/2026-05-12/cali-02.svg",
@@ -135,14 +130,8 @@
       ]
     },
     {
-      "type": "city_cover",
-      "city": "Cartagena",
-      "page": 0,
-      "path": "instagram_cards/2026-05-12/cartagena-00.svg",
-      "description_path": "instagram_cards/2026-05-12/cartagena-description.txt"
-    },
-    {
       "type": "city_rates",
+      "group": "cities",
       "city": "Cartagena",
       "page": 1,
       "path": "instagram_cards/2026-05-12/cartagena-01.svg",
@@ -158,6 +147,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Cartagena",
       "page": 2,
       "path": "instagram_cards/2026-05-12/cartagena-02.svg",
@@ -170,14 +160,8 @@
       ]
     },
     {
-      "type": "city_cover",
-      "city": "Medellín",
-      "page": 0,
-      "path": "instagram_cards/2026-05-12/medellin-00.svg",
-      "description_path": "instagram_cards/2026-05-12/medellin-description.txt"
-    },
-    {
       "type": "city_rates",
+      "group": "cities",
       "city": "Medellín",
       "page": 1,
       "path": "instagram_cards/2026-05-12/medellin-01.svg",
@@ -193,6 +177,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Medellín",
       "page": 2,
       "path": "instagram_cards/2026-05-12/medellin-02.svg",
@@ -208,6 +193,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Medellín",
       "page": 3,
       "path": "instagram_cards/2026-05-12/medellin-03.svg",
@@ -223,6 +209,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Medellín",
       "page": 4,
       "path": "instagram_cards/2026-05-12/medellin-04.svg",
@@ -238,6 +225,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Medellín",
       "page": 5,
       "path": "instagram_cards/2026-05-12/medellin-05.svg",
@@ -253,6 +241,7 @@
     },
     {
       "type": "city_rates",
+      "group": "cities",
       "city": "Medellín",
       "page": 6,
       "path": "instagram_cards/2026-05-12/medellin-06.svg",

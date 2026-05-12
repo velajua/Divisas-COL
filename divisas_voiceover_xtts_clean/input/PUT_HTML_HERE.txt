@@ -1,0 +1,5 @@
+Put your Divisas COL HTML file here and name it entry.html.
+
+Example:
+
+input\entry.html

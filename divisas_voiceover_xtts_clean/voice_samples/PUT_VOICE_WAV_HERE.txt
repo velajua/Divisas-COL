@@ -1,0 +1,12 @@
+Put your clean reference voice WAV here.
+
+Expected file:
+
+voice_samples\my_voice.wav
+
+Recommended:
+- 15 to 30 seconds
+- WAV format
+- no music
+- no background noise
+- normal speaking voice

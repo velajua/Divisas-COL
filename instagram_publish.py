@@ -19,6 +19,8 @@ import requests
 DEFAULT_GRAPH_VERSION = "v24.0"
 BOGOTA_TZ = ZoneInfo("America/Bogota")
 DEFAULT_PORT = 8765
+DEFAULT_CONTAINER_POLL_SECONDS = 20
+DEFAULT_CONTAINER_TIMEOUT_SECONDS = 360
 REQUIRED_ENV = {
     "INSTAGRAM_USER_ID": "Instagram professional account ID, usually instagram_business_account.id.",
     "META_PAGE_ACCESS_TOKEN": "Page access token with instagram_content_publish permission.",
@@ -171,6 +173,29 @@ def resolve_publish_manifest(root, value):
 
 def load_manifest(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_publish_state(path):
+    if not path.exists():
+        return {"published_groups": []}
+    state = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(state, dict):
+        return {"published_groups": []}
+    published_groups = state.get("published_groups") or []
+    if not isinstance(published_groups, list):
+        published_groups = []
+    return {"published_groups": [str(group) for group in published_groups if str(group)]}
+
+
+def save_publish_state(path, state):
+    payload = {
+        "published_groups": list(dict.fromkeys(state.get("published_groups", []))),
+    }
+    path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+        newline="\n",
+    )
 
 
 def read_caption(root, card):
@@ -360,9 +385,15 @@ def media_container_status(container_id, token):
     return response.json()
 
 
-def wait_for_container_finished(container_id, token, timeout_seconds=180):
+def wait_for_container_finished(
+    container_id,
+    token,
+    timeout_seconds=DEFAULT_CONTAINER_TIMEOUT_SECONDS,
+    poll_seconds=DEFAULT_CONTAINER_POLL_SECONDS,
+):
     deadline = time.time() + timeout_seconds
     last_status = None
+    current_poll_seconds = poll_seconds
     while time.time() < deadline:
         status = media_container_status(container_id, token)
         last_status = status
@@ -372,11 +403,15 @@ def wait_for_container_finished(container_id, token, timeout_seconds=180):
             return
         if code == "ERROR":
             raise RuntimeError(f"Container {container_id} failed: {status}")
-        time.sleep(5)
+        time.sleep(current_poll_seconds)
+        current_poll_seconds = min(current_poll_seconds + poll_seconds, 60)
     raise RuntimeError(f"Container {container_id} did not finish. Last status: {last_status}")
 
 
 def group_key_for_post(post):
+    explicit_group = str(post.get("group") or "").strip()
+    if explicit_group:
+        return explicit_group.lower()
     name = Path(post.get("public_path") or post.get("source_path") or "").name
     stem = Path(name).stem
     return stem.split("-", 1)[0] if stem else "post"
@@ -395,6 +430,8 @@ def group_posts_for_instagram(posts):
                 "single": key == "newsletter",
             }
             groups.append(by_key[key])
+        elif not by_key[key]["caption"] and post.get("caption"):
+            by_key[key]["caption"] = post.get("caption", "")
         by_key[key]["posts"].append(post)
     for group in groups:
         if len(group["posts"]) == 1:
@@ -623,6 +660,18 @@ def publish_group(group, ig_user_id, token):
     return result
 
 
+def filter_unpublished_groups(groups, state):
+    published = set(state.get("published_groups", []))
+    return [group for group in groups if group["key"] not in published]
+
+
+def select_groups(groups, requested_groups):
+    if not requested_groups:
+        return groups
+    wanted = {group.strip().lower() for group in requested_groups if group.strip()}
+    return [group for group in groups if group["key"].lower() in wanted]
+
+
 def run_serve_publish(args):
     root = repo_root()
     load_dotenv(root / ".env")
@@ -652,12 +701,27 @@ def run_serve_publish(args):
             raise RuntimeError(f"No posts in {manifest_path}")
         wait_for_public_image(posts[0]["image_url"])
         groups = group_posts_for_instagram(posts)
-        print(f"Publishing {len(groups)} Instagram post group(s).")
+        state_path = public_dir / "publish-state.json"
+        if args.reset_state and state_path.exists():
+            state_path.unlink()
+            print(f"Reset publish state: {state_path.relative_to(root).as_posix()}")
+        state = load_publish_state(state_path)
+        groups_to_publish = filter_unpublished_groups(groups, state)
+        groups_to_publish = select_groups(groups_to_publish, args.group)
+        if args.group:
+            requested = ", ".join(args.group)
+            print(f"Requested group filter: {requested}")
+        skipped = len(groups) - len(groups_to_publish)
+        if skipped:
+            print(f"Skipping {skipped} already published group(s) from publish-state.json.")
+        print(f"Publishing {len(groups_to_publish)} Instagram post group(s).")
         ig_user_id = os.environ["INSTAGRAM_USER_ID"]
         token = os.environ["META_PAGE_ACCESS_TOKEN"]
-        for group in groups:
+        for group in groups_to_publish:
             print(f"Publishing group {group['key']} with {len(group['posts'])} image(s).")
             publish_group(group, ig_user_id, token)
+            state["published_groups"].append(group["key"])
+            save_publish_state(state_path, state)
         return 0
     finally:
         if tunnel and tunnel.poll() is None:
@@ -854,6 +918,16 @@ def parse_args(argv=None):
     parser.add_argument(
         "--date",
         help="Date folder to publish from instagram_cards/YYYY-MM-DD/public. Defaults to today in Bogota.",
+    )
+    parser.add_argument(
+        "--reset-state",
+        action="store_true",
+        help="Delete publish-state.json for the selected date before publishing.",
+    )
+    parser.add_argument(
+        "--group",
+        action="append",
+        help="Only publish the named group key. Can be repeated, for example --group medellin.",
     )
     return parser.parse_args(argv)
 

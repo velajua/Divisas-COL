@@ -7,7 +7,7 @@ Estas son las mejores tasas de venta encontradas para comprar monedas:
 - Libra Esterlina: $4.870 en euroservicios
 - Dolar Canadiense: $2.670 en euroservicios
 - Dolar Australiano: $2.550 en euroservicios
-- Peso Mexicano: $210 en euroservicios
+- Peso Mexicano: $210 en puntoDollar (puntoDollarEnvigado)
 - Real Brasileno: $740 en puntoDollar (puntoDollarEnvigado)
 - Franco Suizo: $4.550 en euroservicios
 - Y 24 monedas mas en el resumen del dia.
