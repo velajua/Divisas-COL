@@ -21,6 +21,8 @@ BOGOTA_TZ = ZoneInfo("America/Bogota")
 DEFAULT_PORT = 8765
 DEFAULT_CONTAINER_POLL_SECONDS = 20
 DEFAULT_CONTAINER_TIMEOUT_SECONDS = 360
+DEFAULT_META_RETRY_ATTEMPTS = 3
+DEFAULT_META_RETRY_SLEEP_SECONDS = 5
 REQUIRED_ENV = {
     "INSTAGRAM_USER_ID": "Instagram professional account ID, usually instagram_business_account.id.",
     "META_PAGE_ACCESS_TOKEN": "Page access token with instagram_content_publish permission.",
@@ -314,8 +316,48 @@ def graph_url(path):
     return f"https://graph.facebook.com/{version}/{path.lstrip('/')}"
 
 
+def meta_error_payload(response):
+    try:
+        payload = response.json()
+    except ValueError:
+        return None
+    if not isinstance(payload, dict):
+        return None
+    error = payload.get("error")
+    return error if isinstance(error, dict) else None
+
+
+def is_non_retryable_meta_error(error):
+    if not isinstance(error, dict):
+        return False
+    code = error.get("code")
+    subcode = error.get("error_subcode")
+    if code == 4 and subcode == 2207051:
+        return True
+    message = str(error.get("message") or "").lower()
+    return "request limit reached" in message or "application request limit reached" in message
+
+
+def post_with_meta_retry(url, **kwargs):
+    last_response = None
+    attempts = DEFAULT_META_RETRY_ATTEMPTS
+    for attempt in range(1, attempts + 1):
+        response = requests.post(url, **kwargs)
+        last_response = response
+        if response.ok:
+            return response
+        error = meta_error_payload(response)
+        if is_non_retryable_meta_error(error):
+            response.raise_for_status()
+        if attempt < attempts:
+            time.sleep(DEFAULT_META_RETRY_SLEEP_SECONDS)
+    if last_response is not None:
+        last_response.raise_for_status()
+    raise RuntimeError("Meta request failed without a response.")
+
+
 def create_container(ig_user_id, token, image_url, caption):
-    response = requests.post(
+    response = post_with_meta_retry(
         graph_url(f"{ig_user_id}/media"),
         data={
             "image_url": image_url,
@@ -329,7 +371,7 @@ def create_container(ig_user_id, token, image_url, caption):
 
 
 def publish_container(ig_user_id, token, creation_id):
-    response = requests.post(
+    response = post_with_meta_retry(
         graph_url(f"{ig_user_id}/media_publish"),
         data={
             "creation_id": creation_id,
@@ -342,7 +384,7 @@ def publish_container(ig_user_id, token, creation_id):
 
 
 def create_carousel_container(ig_user_id, token, children, caption):
-    response = requests.post(
+    response = post_with_meta_retry(
         graph_url(f"{ig_user_id}/media"),
         json={
             "media_type": "CAROUSEL",
@@ -359,7 +401,7 @@ def create_carousel_container(ig_user_id, token, children, caption):
 
 
 def create_carousel_item_container(ig_user_id, token, image_url):
-    response = requests.post(
+    response = post_with_meta_retry(
         graph_url(f"{ig_user_id}/media"),
         data={
             "image_url": image_url,
@@ -437,6 +479,24 @@ def group_posts_for_instagram(posts):
         if len(group["posts"]) == 1:
             group["single"] = True
     return groups
+
+
+def split_oversized_groups(groups, max_items=10):
+    split_groups = []
+    for group in groups:
+        posts = group["posts"]
+        if len(posts) <= max_items:
+            split_groups.append(group)
+            continue
+        for index in range(0, len(posts), max_items):
+            chunk = posts[index : index + max_items]
+            chunk_group = dict(group)
+            suffix = index // max_items + 1
+            chunk_group["key"] = f"{group['key']}-{suffix}"
+            chunk_group["posts"] = chunk
+            chunk_group["single"] = len(chunk) == 1
+            split_groups.append(chunk_group)
+    return split_groups
 
 
 def sanitize_caption(caption, max_length=2200, max_hashtags=30):
@@ -634,15 +694,13 @@ def wait_for_public_image(image_url, timeout_seconds=120):
     raise RuntimeError(f"Public image URL never became image/*: {image_url}. Last error: {last_error}")
 
 
-def publish_group(group, ig_user_id, token):
+def prepare_group_container(group, ig_user_id, token):
     posts = group["posts"]
     if group["single"]:
         post = posts[0]
         creation_id = create_container(ig_user_id, token, post["image_url"], group.get("caption", ""))
         print(f"Created {group['key']} image container {creation_id}")
-        result = publish_container(ig_user_id, token, creation_id)
-        print(f"Published {group['key']} media {result.get('id', '(no id returned)')}")
-        return result
+        return {"group": group, "creation_id": creation_id, "kind": "media"}
 
     child_ids = []
     for post in posts:
@@ -655,9 +713,26 @@ def publish_group(group, ig_user_id, token):
         raise RuntimeError(f"Meta returned invalid carousel container ID: {carousel_id}")
     print(f"Created {group['key']} carousel container {carousel_id}")
     wait_for_container_finished(carousel_id, token)
-    result = publish_container(ig_user_id, token, carousel_id)
-    print(f"Published {group['key']} carousel {result.get('id', '(no id returned)')}")
+    return {"group": group, "creation_id": carousel_id, "kind": "carousel"}
+
+
+def publish_prepared_group(prepared_group, ig_user_id, token):
+    group = prepared_group["group"]
+    result = publish_container(ig_user_id, token, prepared_group["creation_id"])
+    print(f"Published {group['key']} {prepared_group['kind']} {result.get('id', '(no id returned)')}")
     return result
+
+
+def publish_groups(groups, ig_user_id, token):
+    prepared_groups = []
+    for group in groups:
+        prepared_groups.append(prepare_group_container(group, ig_user_id, token))
+    return [publish_prepared_group(group, ig_user_id, token) for group in prepared_groups]
+
+
+def publish_group(group, ig_user_id, token):
+    prepared_group = prepare_group_container(group, ig_user_id, token)
+    return publish_prepared_group(prepared_group, ig_user_id, token)
 
 
 def filter_unpublished_groups(groups, state):
@@ -670,6 +745,12 @@ def select_groups(groups, requested_groups):
         return groups
     wanted = {group.strip().lower() for group in requested_groups if group.strip()}
     return [group for group in groups if group["key"].lower() in wanted]
+
+
+def prioritize_newsletter(groups):
+    newsletter = [group for group in groups if group["key"].lower() == "newsletter"]
+    others = [group for group in groups if group["key"].lower() != "newsletter"]
+    return newsletter + others
 
 
 def run_serve_publish(args):
@@ -700,7 +781,7 @@ def run_serve_publish(args):
         if not posts:
             raise RuntimeError(f"No posts in {manifest_path}")
         wait_for_public_image(posts[0]["image_url"])
-        groups = group_posts_for_instagram(posts)
+        groups = split_oversized_groups(group_posts_for_instagram(posts))
         state_path = public_dir / "publish-state.json"
         if args.reset_state and state_path.exists():
             state_path.unlink()
@@ -708,6 +789,7 @@ def run_serve_publish(args):
         state = load_publish_state(state_path)
         groups_to_publish = filter_unpublished_groups(groups, state)
         groups_to_publish = select_groups(groups_to_publish, args.group)
+        groups_to_publish = prioritize_newsletter(groups_to_publish)
         if args.group:
             requested = ", ".join(args.group)
             print(f"Requested group filter: {requested}")
@@ -717,9 +799,14 @@ def run_serve_publish(args):
         print(f"Publishing {len(groups_to_publish)} Instagram post group(s).")
         ig_user_id = os.environ["INSTAGRAM_USER_ID"]
         token = os.environ["META_PAGE_ACCESS_TOKEN"]
+        prepared_groups = []
         for group in groups_to_publish:
+            print(f"Preparing group {group['key']} with {len(group['posts'])} image(s).")
+            prepared_groups.append(prepare_group_container(group, ig_user_id, token))
+        for prepared_group in prepared_groups:
+            group = prepared_group["group"]
             print(f"Publishing group {group['key']} with {len(group['posts'])} image(s).")
-            publish_group(group, ig_user_id, token)
+            publish_prepared_group(prepared_group, ig_user_id, token)
             state["published_groups"].append(group["key"])
             save_publish_state(state_path, state)
         return 0
@@ -937,7 +1024,15 @@ def main():
     try:
         result = run_serve_publish(args)
     except requests.HTTPError as exc:
-        print(f"Meta API error: {exc.response.status_code} {exc.response.text}", file=sys.stderr)
+        error = meta_error_payload(exc.response) if exc.response is not None else None
+        if error and is_non_retryable_meta_error(error):
+            print(
+                "Meta API error: "
+                f"{exc.response.status_code} {exc.response.text}",
+                file=sys.stderr,
+            )
+        else:
+            print(f"Meta API error: {exc.response.status_code} {exc.response.text}", file=sys.stderr)
         return 1
     except Exception as exc:
         print(f"Error: {exc}", file=sys.stderr)

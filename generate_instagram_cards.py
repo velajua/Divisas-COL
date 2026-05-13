@@ -70,7 +70,7 @@ def parse_args():
     parser.add_argument("--html-dir", default="html", help="Folder containing result.json and entries.json.")
     parser.add_argument("--output-dir", default="instagram_cards", help="Root folder for dated card output.")
     parser.add_argument("--date", help="Run date in YYYY-MM-DD. Defaults to today in Bogota.")
-    parser.add_argument("--max-rows", type=int, default=6, help="Currency rows per city card.")
+    parser.add_argument("--max-rows", type=int, default=13, help="Currency rows per city card.")
     parser.add_argument(
         "--currencies",
         nargs="*",
@@ -138,9 +138,7 @@ def slugify(value):
 def display_place(item):
     source = item.get("exchange_house") or ""
     location = item.get("id") or ""
-    if location and location != source:
-        return f"{source} ({location})"
-    return source or location or "N/D"
+    return location or source or "N/D"
 
 
 def stable_item_key(item):
@@ -384,36 +382,36 @@ def render_city_card(city, rows, date_label, page, total_pages):
     parts = base_svg(title, subtitle, f"{page}/{total_pages}")
     parts.extend(
         [
-            svg_text(100, 360, "Moneda", 26, 800, "#334155"),
-            svg_text(420, 360, "Mejor compra", 26, 800, "#166534"),
-            svg_text(740, 360, "Mejor venta", 26, 800, "#075985"),
+            svg_text(100, 360, "Moneda", 24, 800, "#334155"),
+            svg_text(410, 360, "Mejor compra", 24, 800, "#166534"),
+            svg_text(760, 360, "Mejor venta", 24, 800, "#075985"),
             '<line x1="96" y1="386" x2="984" y2="386" stroke="#cbd5e1" stroke-width="2"/>',
         ]
     )
 
-    y = 456
+    start_y = 410
+    row_height = 60
     for index, row in enumerate(rows):
+        y = start_y + index * row_height
         if index:
             parts.append(
-                f'<line x1="96" y1="{y - 46}" x2="984" y2="{y - 46}" stroke="#e2e8f0" stroke-width="2"/>'
+                f'<line x1="96" y1="{y - 28}" x2="984" y2="{y - 28}" stroke="#e2e8f0" stroke-width="2"/>'
             )
         best_buy = row["best_buy"]
         best_sell = row["best_sell"]
         tmp = row["name"].split('(')[0].strip()
-        parts.append(svg_text(100, y, ' '.join([i.capitalize() for i in tmp.split()]), 24, 800, "#0f172a"))
-        parts.append(svg_text(100, y + 38, row["id"], 19, 500, "#64748b"))
+        parts.append(svg_text(100, y, ' '.join([i.capitalize() for i in tmp.split()]), 20, 800, "#0f172a"))
+        parts.append(svg_text(100, y + 22, row["id"], 15, 500, "#64748b"))
 
-        parts.append(svg_text(420, y, format_rate(best_buy["value"]) if best_buy else "N/D", 34, 800, "#15803d"))
+        parts.append(svg_text(410, y, format_rate(best_buy["value"]) if best_buy else "N/D", 20, 800, "#15803d"))
         buy_place = best_buy["place"] if best_buy else "Sin dato"
-        buy_text, _ = wrapped_svg_text(420, y + 38, buy_place, 270, 19, 24, "#475569", 500)
+        buy_text, _ = wrapped_svg_text(410, y + 22, buy_place, 290, 15, 15, "#475569", 500)
         parts.append(buy_text)
 
-        parts.append(svg_text(740, y, format_rate(best_sell["value"]) if best_sell else "N/D", 34, 800, "#0369a1"))
+        parts.append(svg_text(760, y, format_rate(best_sell["value"]) if best_sell else "N/D", 20, 800, "#0369a1"))
         sell_place = best_sell["place"] if best_sell else "Sin dato"
-        sell_text, _ = wrapped_svg_text(740, y + 38, sell_place, 250, 19, 24, "#475569", 500)
+        sell_text, _ = wrapped_svg_text(760, y + 22, sell_place, 230, 15, 15, "#475569", 500)
         parts.append(sell_text)
-
-        y += 126
 
     parts.append(svg_text(72, 1256, f"Fuente: divisascol.com/{unidecode(city.lower())}", 24, 600, "#cbd5e1"))
     parts.append(svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"))
@@ -587,6 +585,7 @@ def render_public_cards(repo_root, day_dir, manifest):
                 {
                     "index": index,
                     "type": card.get("type"),
+                    "group": card.get("group"),
                     "city": card.get("city"),
                     "title": card.get("title"),
                     "source_path": card["path"],
@@ -677,6 +676,7 @@ def main():
             manifest["descriptions"].append(
                 {
                     "type": "city_rates",
+                    "group": "cities",
                     "city": city,
                     "path": description_path,
                 }
