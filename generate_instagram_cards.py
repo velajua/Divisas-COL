@@ -1,9 +1,10 @@
 import argparse
 import json
 import re
+import shutil
 import textwrap
 from io import BytesIO
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 from unidecode import unidecode
@@ -490,6 +491,25 @@ def write_card(path, content):
     path.write_text(content, encoding="utf-8")
 
 
+def cleanup_old_card_dirs(output_root, run_date, retention_days=21):
+    if not output_root.exists():
+        return []
+
+    cutoff_date = run_date - timedelta(days=retention_days)
+    removed = []
+    for child in sorted(output_root.iterdir()):
+        if not child.is_dir():
+            continue
+        try:
+            folder_date = datetime.strptime(child.name, "%Y-%m-%d").date()
+        except ValueError:
+            continue
+        if folder_date < cutoff_date:
+            shutil.rmtree(child)
+            removed.append(child)
+    return removed
+
+
 def render_city_cover_card(city, date_label):
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{CARD_WIDTH}" height="{CARD_HEIGHT}" viewBox="0 0 {CARD_WIDTH} {CARD_HEIGHT}">',
@@ -623,6 +643,7 @@ def main():
         if args.date
         else datetime.now(BOGOTA_TZ).date()
     )
+    cleanup_old_card_dirs(output_root, run_date)
     date_label = run_date.strftime("%Y-%m-%d")
     day_dir = output_root / date_label
     day_dir.mkdir(parents=True, exist_ok=True)

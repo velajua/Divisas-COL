@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+from datetime import date
 from pathlib import Path
 
 from PIL import Image, ImageStat
@@ -53,6 +54,26 @@ class PublicCardRenderingTests(unittest.TestCase):
             image = Image.open(public_dir / "sample.jpg").convert("RGB")
             mean = ImageStat.Stat(image).mean
             self.assertLess(sum(mean) / len(mean), 245)
+
+    def test_cleanup_removes_only_dated_card_folders_older_than_three_weeks(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            cards_root = Path(temp_dir) / "instagram_cards"
+            cards_root.mkdir()
+            old_dir = cards_root / "2026-04-21"
+            cutoff_dir = cards_root / "2026-04-22"
+            recent_dir = cards_root / "2026-05-13"
+            non_date_dir = cards_root / "drafts"
+            for folder in (old_dir, cutoff_dir, recent_dir, non_date_dir):
+                folder.mkdir()
+                (folder / "marker.txt").write_text("keep track", encoding="utf-8")
+
+            removed = subject.cleanup_old_card_dirs(cards_root, date(2026, 5, 13))
+
+            self.assertEqual([old_dir], removed)
+            self.assertFalse(old_dir.exists())
+            self.assertTrue(cutoff_dir.exists())
+            self.assertTrue(recent_dir.exists())
+            self.assertTrue(non_date_dir.exists())
 
 
 if __name__ == "__main__":
