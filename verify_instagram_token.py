@@ -178,6 +178,10 @@ def exchange_long_lived_user_token(user_token, app_id, app_secret):
     return payload
 
 
+def refresh_user_access_token(user_token, app_id, app_secret):
+    return exchange_long_lived_user_token(user_token, app_id, app_secret)
+
+
 def refresh_page_access_token(user_token, instagram_user_id, app_token):
     pages = []
     payload = get_json(
@@ -245,7 +249,7 @@ def run(
     now=None,
     force=False,
     get_token_expiration=get_token_expiration,
-    exchange_long_lived_user_token=exchange_long_lived_user_token,
+    refresh_user_access_token=refresh_user_access_token,
     refresh_page_access_token=refresh_page_access_token,
 ):
     current_date = today or date.today()
@@ -270,6 +274,48 @@ def run(
             USER_EXPIRES_AT_KEY,
         ],
     )
+    user_token = env.get(USER_TOKEN_KEY)
+    app_token = env.get(APP_TOKEN_KEY)
+    user_expires_at_value = env.get(USER_EXPIRES_AT_KEY)
+    if user_token and (user_expires_at_value or app_token):
+        if user_expires_at_value:
+            try:
+                user_expires_at = parse_expiration(user_expires_at_value)
+            except ValueError as exc:
+                print(f"Invalid {USER_EXPIRES_AT_KEY}: {exc}", file=sys.stderr)
+                return 1
+        else:
+            try:
+                user_expires_at = get_token_expiration(user_token, app_token)
+            except RuntimeError as exc:
+                print(str(exc), file=sys.stderr)
+                return 1
+            if user_expires_at is None:
+                return 0
+
+        if not should_refresh(user_expires_at, now):
+            return 0
+
+        app_id, app_secret = get_app_credentials(env)
+        if not app_id or not app_secret:
+            print(f"Missing app id/app secret credentials to extend {USER_TOKEN_KEY}.", file=sys.stderr)
+            return 1
+        try:
+            refreshed = refresh_user_access_token(user_token, app_id, app_secret)
+        except RuntimeError as exc:
+            print(str(exc), file=sys.stderr)
+            return 1
+        user_token = refreshed["access_token"]
+        user_expires_at = now + timedelta(seconds=int(refreshed["expires_in"]))
+        set_dotenv_values(
+            env_path,
+            {
+                USER_TOKEN_KEY: user_token,
+                USER_EXPIRES_AT_KEY: user_expires_at.isoformat(),
+            },
+        )
+        return 0
+
     token = env.get(TOKEN_KEY)
     if not token:
         print(f"Missing {TOKEN_KEY} in {env_path}.", file=sys.stderr)
@@ -298,9 +344,7 @@ def run(
     if not should_refresh(expires_at, now):
         return 0
 
-    user_token = env.get(USER_TOKEN_KEY)
     instagram_user_id = env.get(INSTAGRAM_USER_ID_KEY)
-    app_token = env.get(APP_TOKEN_KEY)
     if not user_token:
         print(f"Missing {USER_TOKEN_KEY} in {env_path}.", file=sys.stderr)
         return 1
@@ -322,7 +366,7 @@ def run(
             print(f"Missing app id/app secret credentials to extend {USER_TOKEN_KEY}.", file=sys.stderr)
             return 1
         try:
-            exchanged = exchange_long_lived_user_token(user_token, app_id, app_secret)
+            exchanged = refresh_user_access_token(user_token, app_id, app_secret)
         except RuntimeError as exc:
             print(str(exc), file=sys.stderr)
             return 1

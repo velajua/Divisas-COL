@@ -14,6 +14,11 @@ class PublicCardRenderingTests(unittest.TestCase):
         self.assertEqual(2600, subject.parse_rate("2.600"))
         self.assertEqual(2.6, subject.parse_rate("2,60"))
 
+    def test_display_place_prefers_specific_branch_id_over_exchange_house(self):
+        item = {"exchange_house": "puntoDollar", "id": "PuntoDollar Barranquilla"}
+
+        self.assertEqual("PuntoDollar Barranquilla", subject.display_place(item))
+
     def test_public_renderer_renders_svg_content_into_jpeg(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             repo_root = Path(temp_dir)
