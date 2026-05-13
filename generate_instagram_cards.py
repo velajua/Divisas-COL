@@ -70,7 +70,7 @@ def parse_args():
     parser.add_argument("--html-dir", default="html", help="Folder containing result.json and entries.json.")
     parser.add_argument("--output-dir", default="instagram_cards", help="Root folder for dated card output.")
     parser.add_argument("--date", help="Run date in YYYY-MM-DD. Defaults to today in Bogota.")
-    parser.add_argument("--max-rows", type=int, default=13, help="Currency rows per city card.")
+    parser.add_argument("--max-rows", type=int, default=14, help="Currency rows per city card.")
     parser.add_argument(
         "--currencies",
         nargs="*",
@@ -382,15 +382,15 @@ def render_city_card(city, rows, date_label, page, total_pages):
     parts = base_svg(title, subtitle, f"{page}/{total_pages}")
     parts.extend(
         [
-            svg_text(100, 360, "Moneda", 24, 800, "#334155"),
-            svg_text(410, 360, "Mejor compra", 24, 800, "#166534"),
-            svg_text(760, 360, "Mejor venta", 24, 800, "#075985"),
-            '<line x1="96" y1="386" x2="984" y2="386" stroke="#cbd5e1" stroke-width="2"/>',
+            svg_text(100, 330, "Moneda", 24, 800, "#334155"),
+            svg_text(410, 330, "Mejor compra", 24, 800, "#166534"),
+            svg_text(760, 330, "Mejor venta", 24, 800, "#075985"),
+            '<line x1="96" y1="350" x2="984" y2="350" stroke="#cbd5e1" stroke-width="2"/>',
         ]
     )
 
-    start_y = 410
-    row_height = 60
+    start_y = 382
+    row_height = 57
     for index, row in enumerate(rows):
         y = start_y + index * row_height
         if index:
@@ -531,9 +531,9 @@ def render_country_cover_card(cities, date_label):
         '<circle cx="920" cy="140" r="180" fill="#d9f99d" opacity="0.12"/>',
         '<circle cx="170" cy="1120" r="260" fill="#38bdf8" opacity="0.10"/>',
         svg_text(540, 420, "DIVISAS COL", 30, 800, "#d9f99d", "middle"),
-        svg_text(540, 540, "Mercado cambiario de hoy", 72, 900, "#ffffff", "middle"),
-        svg_text(540, 640, date_label, 54, 600, "#cbd5e1", "middle"),
-        svg_text(540, 760, "Cobertura de ciudades con datos", 38, 700, "#bfdbfe", "middle"),
+        svg_text(540, 540, "Mercado Cambiario", 72, 900, "#ffffff", "middle"),
+        svg_text(540, 640, date_label, 60, 600, "#cbd5e1", "middle"),
+        svg_text(540, 760, "Cobertura de Ciudades:", 38, 700, "#bfdbfe", "middle"),
         svg_text(540, 860, city_list, 30, 500, "#e2e8f0", "middle"),
         svg_text(540, 1120, "@divisascol", 28, 700, "#d9f99d", "middle"),
         "</svg>",
