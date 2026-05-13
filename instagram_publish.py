@@ -599,7 +599,7 @@ def extract_tunnel_url(line):
 
 
 def cloudflared_path(root):
-    bundled = root / "%CODEX_HOME%" / "bin" / "cloudflared.exe"
+    bundled = root / "cf_exe" / "cloudflared.exe"
     return str(bundled) if bundled.exists() else "cloudflared"
 
 
