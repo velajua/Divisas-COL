@@ -17,100 +17,107 @@
 <text x="72" y="185" fill="#ffffff" font-size="60" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Bogotá: mejores tasas</text>
 <text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-05-13</text>
 <rect x="58" y="290" width="964" height="890" rx="34" fill="#f8fafc" opacity="0.96" filter="url(#shadow)"/>
-<text x="100" y="360" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
-<text x="410" y="360" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
-<text x="760" y="360" fill="#075985" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor venta</text>
-<line x1="96" y1="386" x2="984" y2="386" stroke="#cbd5e1" stroke-width="2"/>
-<text x="100" y="410" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dólar</text>
-<text x="100" y="432" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AmericanDollar</text>
-<text x="410" y="410" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.670</text>
-<text x="410" y="432" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="410" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.710</text>
-<text x="760" y="432" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="442" x2="984" y2="442" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="470" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Euro Peq./small</text>
-<text x="100" y="492" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Euro</text>
-<text x="410" y="470" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.500</text>
-<text x="410" y="492" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="470" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.420</text>
-<text x="760" y="492" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="502" x2="984" y2="502" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="530" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Libra</text>
-<text x="100" y="552" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BritishPound</text>
-<text x="410" y="530" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.830</text>
-<text x="410" y="552" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="530" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.920</text>
-<text x="760" y="552" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="562" x2="984" y2="562" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="590" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Canadiense</text>
-<text x="100" y="612" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">CanadianDollar</text>
-<text x="410" y="590" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.650</text>
-<text x="410" y="612" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="590" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.730</text>
-<text x="760" y="612" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="622" x2="984" y2="622" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="650" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Australiano</text>
-<text x="100" y="672" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AustralianDollar</text>
-<text x="410" y="650" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.410</text>
-<text x="410" y="672" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="650" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.470</text>
-<text x="760" y="672" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="682" x2="984" y2="682" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="710" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mexicano</text>
-<text x="100" y="732" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">MexicanPeso</text>
-<text x="410" y="710" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$200</text>
-<text x="410" y="732" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<text x="760" y="710" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$208</text>
-<text x="760" y="732" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarSalitre</text>
-<line x1="96" y1="742" x2="984" y2="742" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="770" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Real</text>
-<text x="100" y="792" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BrasilianReal</text>
-<text x="410" y="770" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$740</text>
-<text x="410" y="792" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="770" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$730</text>
-<text x="760" y="792" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarSalitre</text>
-<line x1="96" y1="802" x2="984" y2="802" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="830" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Franco</text>
-<text x="100" y="852" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">SwissFranc</text>
-<text x="410" y="830" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.460</text>
-<text x="410" y="852" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="830" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.620</text>
-<text x="760" y="852" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<line x1="96" y1="862" x2="984" y2="862" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="890" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Sol</text>
-<text x="100" y="912" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">PeruveanNewSun</text>
-<text x="410" y="890" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.030</text>
-<text x="410" y="912" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="890" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.080</text>
-<text x="760" y="912" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="922" x2="984" y2="922" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="950" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Chileno</text>
-<text x="100" y="972" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ChileanPeso</text>
-<text x="410" y="950" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3,80</text>
-<text x="410" y="972" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="950" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4,40</text>
-<text x="760" y="972" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<line x1="96" y1="982" x2="984" y2="982" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="1010" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Argentino</text>
-<text x="100" y="1032" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ArgentineanPeso</text>
-<text x="410" y="1010" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2</text>
-<text x="410" y="1032" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="1010" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3,50</text>
-<text x="760" y="1032" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="1042" x2="984" y2="1042" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="1070" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Yen</text>
-<text x="100" y="1092" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">JapaneseYen</text>
-<text x="410" y="1070" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$28</text>
-<text x="410" y="1092" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="1070" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$34</text>
-<text x="760" y="1092" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
-<line x1="96" y1="1102" x2="984" y2="1102" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="1130" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Yuan</text>
-<text x="100" y="1152" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ChineseYuan</text>
-<text x="410" y="1130" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$640</text>
-<text x="410" y="1152" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="1130" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$660</text>
-<text x="760" y="1152" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">eurodolar</text>
+<text x="100" y="330" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
+<text x="410" y="330" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
+<text x="760" y="330" fill="#075985" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor venta</text>
+<line x1="96" y1="350" x2="984" y2="350" stroke="#cbd5e1" stroke-width="2"/>
+<text x="100" y="382" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dólar</text>
+<text x="100" y="404" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AmericanDollar</text>
+<text x="410" y="382" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.670</text>
+<text x="410" y="404" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="382" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.710</text>
+<text x="760" y="404" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="411" x2="984" y2="411" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="439" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Euro Peq./small</text>
+<text x="100" y="461" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Euro</text>
+<text x="410" y="439" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.500</text>
+<text x="410" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="439" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.420</text>
+<text x="760" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="468" x2="984" y2="468" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="496" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Libra</text>
+<text x="100" y="518" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BritishPound</text>
+<text x="410" y="496" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.830</text>
+<text x="410" y="518" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="496" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.920</text>
+<text x="760" y="518" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="525" x2="984" y2="525" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="553" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Canadiense</text>
+<text x="100" y="575" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">CanadianDollar</text>
+<text x="410" y="553" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.650</text>
+<text x="410" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="553" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.730</text>
+<text x="760" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="582" x2="984" y2="582" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="610" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Australiano</text>
+<text x="100" y="632" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AustralianDollar</text>
+<text x="410" y="610" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.410</text>
+<text x="410" y="632" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="610" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.470</text>
+<text x="760" y="632" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="639" x2="984" y2="639" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="667" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mexicano</text>
+<text x="100" y="689" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">MexicanPeso</text>
+<text x="410" y="667" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$200</text>
+<text x="410" y="689" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<text x="760" y="667" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$208</text>
+<text x="760" y="689" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarSalitre</text>
+<line x1="96" y1="696" x2="984" y2="696" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="724" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Real</text>
+<text x="100" y="746" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BrasilianReal</text>
+<text x="410" y="724" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$740</text>
+<text x="410" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="724" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$730</text>
+<text x="760" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarSalitre</text>
+<line x1="96" y1="753" x2="984" y2="753" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="781" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Franco</text>
+<text x="100" y="803" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">SwissFranc</text>
+<text x="410" y="781" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.460</text>
+<text x="410" y="803" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="781" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.620</text>
+<text x="760" y="803" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<line x1="96" y1="810" x2="984" y2="810" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="838" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Sol</text>
+<text x="100" y="860" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">PeruveanNewSun</text>
+<text x="410" y="838" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.030</text>
+<text x="410" y="860" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="838" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.080</text>
+<text x="760" y="860" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="867" x2="984" y2="867" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="895" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Chileno</text>
+<text x="100" y="917" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ChileanPeso</text>
+<text x="410" y="895" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3,80</text>
+<text x="410" y="917" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="895" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4,40</text>
+<text x="760" y="917" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<line x1="96" y1="924" x2="984" y2="924" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="952" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Argentino</text>
+<text x="100" y="974" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ArgentineanPeso</text>
+<text x="410" y="952" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2</text>
+<text x="410" y="974" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="952" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3,50</text>
+<text x="760" y="974" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="981" x2="984" y2="981" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="1009" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Yen</text>
+<text x="100" y="1031" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">JapaneseYen</text>
+<text x="410" y="1009" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$28</text>
+<text x="410" y="1031" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="1009" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$34</text>
+<text x="760" y="1031" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<line x1="96" y1="1038" x2="984" y2="1038" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="1066" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Yuan</text>
+<text x="100" y="1088" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ChineseYuan</text>
+<text x="410" y="1066" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$640</text>
+<text x="410" y="1088" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="760" y="1066" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$660</text>
+<text x="760" y="1088" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">eurodolar</text>
+<line x1="96" y1="1095" x2="984" y2="1095" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="1123" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dominicano</text>
+<text x="100" y="1145" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">DominicanPeso</text>
+<text x="410" y="1123" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$60</text>
+<text x="410" y="1145" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<text x="760" y="1123" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$70</text>
+<text x="760" y="1145" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
 <text x="72" y="1256" fill="#cbd5e1" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="600" text-anchor="start">Fuente: divisascol.com/bogota</text>
 <text x="1008" y="1256" fill="#d9f99d" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="end">@divisascol</text>
 </svg>

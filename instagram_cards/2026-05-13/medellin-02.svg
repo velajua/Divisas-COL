@@ -17,100 +17,107 @@
 <text x="72" y="185" fill="#ffffff" font-size="60" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Medellín: mejores tasas</text>
 <text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-05-13</text>
 <rect x="58" y="290" width="964" height="890" rx="34" fill="#f8fafc" opacity="0.96" filter="url(#shadow)"/>
-<text x="100" y="360" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
-<text x="410" y="360" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
-<text x="760" y="360" fill="#075985" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor venta</text>
-<line x1="96" y1="386" x2="984" y2="386" stroke="#cbd5e1" stroke-width="2"/>
-<text x="100" y="410" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Dominicano</text>
-<text x="100" y="432" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">DominicanPeso</text>
-<text x="410" y="410" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$50</text>
-<text x="410" y="432" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="410" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$60</text>
-<text x="760" y="432" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="442" x2="984" y2="442" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="470" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Baht Tailandia</text>
-<text x="100" y="492" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ThaiBaht</text>
-<text x="410" y="470" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$30</text>
-<text x="410" y="492" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="470" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$60</text>
-<text x="760" y="492" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="502" x2="984" y2="502" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="530" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Colon Costarricense</text>
-<text x="100" y="552" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">CostarricanColon</text>
-<text x="410" y="530" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$5</text>
-<text x="410" y="552" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="530" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$8</text>
-<text x="760" y="552" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="562" x2="984" y2="562" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="590" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dirham Emiratos</text>
-<text x="100" y="612" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">UAEDirham</text>
-<text x="410" y="590" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$600</text>
-<text x="410" y="612" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="590" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$900</text>
-<text x="760" y="612" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="622" x2="984" y2="622" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="650" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Hong Kong</text>
-<text x="100" y="672" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">HongKongDollar</text>
-<text x="410" y="650" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$200</text>
-<text x="410" y="672" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="650" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$350</text>
-<text x="760" y="672" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="682" x2="984" y2="682" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="710" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Bahamas</text>
-<text x="100" y="732" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BahamianDollar</text>
-<text x="410" y="710" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
-<text x="410" y="732" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="710" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.000</text>
-<text x="760" y="732" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="742" x2="984" y2="742" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="770" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Newzelanda</text>
-<text x="100" y="792" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">NewZealandDollar</text>
-<text x="410" y="770" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
-<text x="410" y="792" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="770" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.200</text>
-<text x="760" y="792" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="802" x2="984" y2="802" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="830" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Florin Aruba</text>
-<text x="100" y="852" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ArubanFlorin</text>
-<text x="410" y="830" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
-<text x="410" y="852" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="830" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.050</text>
-<text x="760" y="852" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="862" x2="984" y2="862" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="890" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Florin Caribeno</text>
-<text x="100" y="912" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">NetherlandsAntilleanGuilder</text>
-<text x="410" y="890" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
-<text x="410" y="912" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="890" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.950</text>
-<text x="760" y="912" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="922" x2="984" y2="922" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="950" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Lempira</text>
-<text x="100" y="972" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">HonduranLempira</text>
-<text x="410" y="950" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$50</text>
-<text x="410" y="972" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="950" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$120</text>
-<text x="760" y="972" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="982" x2="984" y2="982" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="1010" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Lira Turca</text>
-<text x="100" y="1032" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">TurkishLira</text>
-<text x="410" y="1010" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$40</text>
-<text x="410" y="1032" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="1010" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$100</text>
-<text x="760" y="1032" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="1042" x2="984" y2="1042" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="1070" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Boliviano</text>
-<text x="100" y="1092" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BolivianBoliviano</text>
-<text x="410" y="1070" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$150</text>
-<text x="410" y="1092" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="1070" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$400</text>
-<text x="760" y="1092" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<line x1="96" y1="1102" x2="984" y2="1102" stroke="#e2e8f0" stroke-width="2"/>
-<text x="100" y="1130" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Uruguayo</text>
-<text x="100" y="1152" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">UruguayanPeso</text>
-<text x="410" y="1130" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$30</text>
-<text x="410" y="1152" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="1130" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$75</text>
-<text x="760" y="1152" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="100" y="330" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
+<text x="410" y="330" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
+<text x="760" y="330" fill="#075985" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor venta</text>
+<line x1="96" y1="350" x2="984" y2="350" stroke="#cbd5e1" stroke-width="2"/>
+<text x="100" y="382" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Baht Tailandia</text>
+<text x="100" y="404" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ThaiBaht</text>
+<text x="410" y="382" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$30</text>
+<text x="410" y="404" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="382" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$60</text>
+<text x="760" y="404" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="411" x2="984" y2="411" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="439" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Colon Costarricense</text>
+<text x="100" y="461" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">CostarricanColon</text>
+<text x="410" y="439" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$5</text>
+<text x="410" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="439" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$8</text>
+<text x="760" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="468" x2="984" y2="468" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="496" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dirham Emiratos</text>
+<text x="100" y="518" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">UAEDirham</text>
+<text x="410" y="496" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$600</text>
+<text x="410" y="518" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="496" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$900</text>
+<text x="760" y="518" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="525" x2="984" y2="525" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="553" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Hong Kong</text>
+<text x="100" y="575" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">HongKongDollar</text>
+<text x="410" y="553" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$200</text>
+<text x="410" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="553" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$350</text>
+<text x="760" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="582" x2="984" y2="582" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="610" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Bahamas</text>
+<text x="100" y="632" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BahamianDollar</text>
+<text x="410" y="610" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
+<text x="410" y="632" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="610" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.000</text>
+<text x="760" y="632" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="639" x2="984" y2="639" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="667" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Newzelanda</text>
+<text x="100" y="689" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">NewZealandDollar</text>
+<text x="410" y="667" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
+<text x="410" y="689" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="667" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.200</text>
+<text x="760" y="689" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="696" x2="984" y2="696" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="724" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Florin Aruba</text>
+<text x="100" y="746" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ArubanFlorin</text>
+<text x="410" y="724" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
+<text x="410" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="724" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.050</text>
+<text x="760" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="753" x2="984" y2="753" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="781" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Florin Caribeno</text>
+<text x="100" y="803" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">NetherlandsAntilleanGuilder</text>
+<text x="410" y="781" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
+<text x="410" y="803" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="781" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.950</text>
+<text x="760" y="803" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="810" x2="984" y2="810" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="838" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Lempira</text>
+<text x="100" y="860" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">HonduranLempira</text>
+<text x="410" y="838" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$50</text>
+<text x="410" y="860" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="838" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$120</text>
+<text x="760" y="860" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="867" x2="984" y2="867" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="895" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Lira Turca</text>
+<text x="100" y="917" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">TurkishLira</text>
+<text x="410" y="895" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$40</text>
+<text x="410" y="917" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="895" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$100</text>
+<text x="760" y="917" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="924" x2="984" y2="924" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="952" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Boliviano</text>
+<text x="100" y="974" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BolivianBoliviano</text>
+<text x="410" y="952" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$150</text>
+<text x="410" y="974" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="952" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$400</text>
+<text x="760" y="974" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="981" x2="984" y2="981" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="1009" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Uruguayo</text>
+<text x="100" y="1031" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">UruguayanPeso</text>
+<text x="410" y="1009" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$30</text>
+<text x="410" y="1031" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="1009" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$75</text>
+<text x="760" y="1031" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="1038" x2="984" y2="1038" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="1066" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Quetzal Guatemala</text>
+<text x="100" y="1088" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">GuatemalanQuetzal</text>
+<text x="410" y="1066" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$250</text>
+<text x="410" y="1088" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="1066" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$500</text>
+<text x="760" y="1088" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<line x1="96" y1="1095" x2="984" y2="1095" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100" y="1123" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Won Corea Del Sur</text>
+<text x="100" y="1145" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">SouthKoreanWon</text>
+<text x="410" y="1123" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1</text>
+<text x="410" y="1145" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
+<text x="760" y="1123" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2</text>
+<text x="760" y="1145" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
 <text x="72" y="1256" fill="#cbd5e1" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="600" text-anchor="start">Fuente: divisascol.com/medellin</text>
 <text x="1008" y="1256" fill="#d9f99d" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="end">@divisascol</text>
 </svg>
