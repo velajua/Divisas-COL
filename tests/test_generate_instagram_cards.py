@@ -9,6 +9,11 @@ import generate_instagram_cards as subject
 
 
 class PublicCardRenderingTests(unittest.TestCase):
+    def test_parse_rate_treats_three_digits_after_comma_as_thousands(self):
+        self.assertEqual(2670, subject.parse_rate("2,670"))
+        self.assertEqual(2600, subject.parse_rate("2.600"))
+        self.assertEqual(2.6, subject.parse_rate("2,60"))
+
     def test_public_renderer_renders_svg_content_into_jpeg(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             repo_root = Path(temp_dir)

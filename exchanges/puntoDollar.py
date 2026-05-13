@@ -28,17 +28,10 @@ def puntoDollar(url, total_data=None, local=None):
         value = re.sub(r"\s+", "", value)
         value = value.strip("-–")
 
-        if "." in value:
-            parts = value.split(".")
-
-            if (
-                len(parts) > 1
-                and all(part.isdigit() for part in parts)
-                and all(len(part) == 3 for part in parts[1:])
-            ):
-                value = "".join(parts)
-            else:
-                value = value.replace(".", ",")
+        if re.fullmatch(r"\d{1,3}([.,]\d{3})+", value):
+            value = re.sub(r"[.,]", "", value)
+        elif "." in value:
+            value = value.replace(".", ",")
 
         return value
 

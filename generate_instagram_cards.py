@@ -93,7 +93,9 @@ def parse_rate(value):
     text = re.sub(r"[^\d,.-]", "", text)
     if not text:
         return None
-    if "," in text and "." in text:
+    if re.fullmatch(r"\d{1,3}([.,]\d{3})+", text):
+        text = re.sub(r"[.,]", "", text)
+    elif "," in text and "." in text:
         text = text.replace(".", "").replace(",", ".")
     elif "," in text:
         text = text.replace(",", ".")
@@ -516,6 +518,31 @@ def render_city_cover_card(city, date_label):
     return "\n".join(parts)
 
 
+def render_country_cover_card(cities, date_label):
+    city_list = ", ".join(cities)
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{CARD_WIDTH}" height="{CARD_HEIGHT}" viewBox="0 0 {CARD_WIDTH} {CARD_HEIGHT}">',
+        "<defs>",
+        '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">',
+        '<stop offset="0%" stop-color="#08111f"/>',
+        '<stop offset="55%" stop-color="#12304a"/>',
+        '<stop offset="100%" stop-color="#0f5132"/>',
+        "</linearGradient>",
+        "</defs>",
+        '<rect width="1080" height="1350" fill="url(#bg)"/>',
+        '<circle cx="920" cy="140" r="180" fill="#d9f99d" opacity="0.12"/>',
+        '<circle cx="170" cy="1120" r="260" fill="#38bdf8" opacity="0.10"/>',
+        svg_text(540, 420, "DIVISAS COL", 30, 800, "#d9f99d", "middle"),
+        svg_text(540, 540, "Mercado cambiario de hoy", 72, 900, "#ffffff", "middle"),
+        svg_text(540, 640, date_label, 54, 600, "#cbd5e1", "middle"),
+        svg_text(540, 760, "Cobertura de ciudades con datos", 38, 700, "#bfdbfe", "middle"),
+        svg_text(540, 860, city_list, 30, 500, "#e2e8f0", "middle"),
+        svg_text(540, 1120, "@divisascol", 28, 700, "#d9f99d", "middle"),
+        "</svg>",
+    ]
+    return "\n".join(parts)
+
+
 def card_public_filename(card):
     return Path(card["path"]).with_suffix(".jpg").name
 
@@ -615,7 +642,25 @@ def main():
         "newsletter": None,
     }
 
-    for city in sorted(rankings):
+    cities_with_data = [city for city in sorted(rankings) if rankings[city]]
+    if cities_with_data:
+        cover_filename = "country-00.svg"
+        write_card(
+            day_dir / cover_filename,
+            render_country_cover_card(cities_with_data, date_label),
+        )
+        manifest["cards"].append(
+            {
+                "type": "country_cover",
+                "group": "cities",
+                "city": None,
+                "page": 0,
+                "path": relative_manifest_path(day_dir / cover_filename, repo_root),
+                "description_path": None,
+            }
+        )
+
+    for city in cities_with_data:
         rows = rankings[city]
         selected_rows = choose_rows(rows, args.currencies)
         row_groups = list(chunks(selected_rows, max(1, args.max_rows)))
@@ -636,26 +681,13 @@ def main():
                     "path": description_path,
                 }
             )
-        cover_filename = f"{city_slug}-00.svg"
-        write_card(
-            day_dir / cover_filename,
-            render_city_cover_card(city, date_label),
-        )
-        manifest["cards"].append(
-            {
-                "type": "city_cover",
-                "city": city,
-                "page": 0,
-                "path": relative_manifest_path(day_dir / cover_filename, repo_root),
-                "description_path": description_path,
-            }
-        )
         for page, row_group in enumerate(row_groups, start=1):
             filename = f"{city_slug}-{page:02d}.svg"
             write_card(day_dir / filename, render_city_card(city, row_group, date_label, page, total_pages))
             manifest["cards"].append(
                 {
                     "type": "city_rates",
+                    "group": "cities",
                     "city": city,
                     "page": page,
                     "path": relative_manifest_path(day_dir / filename, repo_root),
@@ -692,6 +724,7 @@ def main():
         manifest["cards"].append(
             {
                 "type": "newsletter",
+                "group": "newsletter",
                 "path": relative_manifest_path(day_dir / filename, repo_root),
                 "description_path": relative_manifest_path(day_dir / description_filename, repo_root),
                 "title": newsletter.get("title"),

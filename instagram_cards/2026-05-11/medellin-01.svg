@@ -25,7 +25,7 @@
 <text x="100" y="494" fill="#64748b" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AmericanDollar</text>
 <text x="420" y="456" fill="#15803d" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.550</text>
 <text x="420" y="494" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="740" y="456" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3,67</text>
+<text x="740" y="456" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.670</text>
 <text x="740" y="494" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollar</text>
 <text x="740" y="518" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">(puntoDollarEnvigado)</text>
 <line x1="96" y1="536" x2="984" y2="536" stroke="#e2e8f0" stroke-width="2"/>
@@ -48,9 +48,8 @@
 <text x="100" y="872" fill="#64748b" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">CanadianDollar</text>
 <text x="420" y="834" fill="#15803d" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.520</text>
 <text x="420" y="872" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="740" y="834" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2,67</text>
-<text x="740" y="872" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollar</text>
-<text x="740" y="896" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">(puntoDollarEnvigado)</text>
+<text x="740" y="834" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.670</text>
+<text x="740" y="872" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
 <line x1="96" y1="914" x2="984" y2="914" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="960" fill="#0f172a" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dolar Australiano</text>
 <text x="100" y="998" fill="#64748b" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AustralianDollar</text>

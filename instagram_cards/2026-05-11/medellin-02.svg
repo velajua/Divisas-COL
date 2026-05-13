@@ -33,17 +33,16 @@
 <text x="100" y="620" fill="#64748b" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">SwissFranc</text>
 <text x="420" y="582" fill="#15803d" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.350</text>
 <text x="420" y="620" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="740" y="582" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4,80</text>
-<text x="740" y="620" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollar</text>
-<text x="740" y="644" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">(puntoDollarEnvigado)</text>
+<text x="740" y="582" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.550</text>
+<text x="740" y="620" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
 <line x1="96" y1="662" x2="984" y2="662" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="708" fill="#0f172a" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Nuevo Sol</text>
 <text x="100" y="746" fill="#64748b" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">PeruveanNewSun</text>
-<text x="420" y="708" fill="#15803d" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.020</text>
-<text x="420" y="746" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="740" y="708" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1,15</text>
-<text x="740" y="746" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollar</text>
-<text x="740" y="770" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">(puntoDollarEnvigado)</text>
+<text x="420" y="708" fill="#15803d" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.050</text>
+<text x="420" y="746" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollar</text>
+<text x="420" y="770" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">(puntoDollarEnvigado)</text>
+<text x="740" y="708" fill="#0369a1" font-size="34" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.100</text>
+<text x="740" y="746" fill="#475569" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
 <line x1="96" y1="788" x2="984" y2="788" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="834" fill="#0f172a" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Chileno</text>
 <text x="100" y="872" fill="#64748b" font-size="19" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ChileanPeso</text>
