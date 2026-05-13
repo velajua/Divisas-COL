@@ -2,19 +2,173 @@ import re
 from pathlib import Path
 
 
+import re
+
+
+SYMBOL_REPLACEMENTS = {
+    "US$": " dólares ",
+    "$": " pesos ",
+    "€": " euros ",
+    "£": " libras ",
+    "¥": " yenes ",
+    "%": " por ciento ",
+    "&": " y ",
+    "@": " arroba ",
+    "#": " numeral ",
+    "+": " más ",
+    "-": " menos ",
+    "*": " por ",
+    "/": " dividido entre ",
+    "\\": " barra invertida ",
+    "=": " igual ",
+    "<": " menor que ",
+    ">": " mayor que ",
+    "≤": " menor o igual que ",
+    "≥": " mayor o igual que ",
+    "±": " más o menos ",
+    "≈": " aproximadamente ",
+    "°": " grados ",
+    "º": " grados ",
+    "ª": " a ",
+    "™": " marca registrada ",
+    "®": " registrado ",
+    "©": " copyright ",
+    "|": " barra vertical ",
+    "_": " guion bajo ",
+    "~": " virgulilla ",
+    "^": " elevado a ",
+    "…": " puntos suspensivos ",
+}
+
+
+CUSTOM_WORD_REPLACEMENTS = {
+    "BanRep": "Banco de la República",
+    "spot": "al contado",
+}
+
+
+UNITS = [
+    "cero", "uno", "dos", "tres", "cuatro", "cinco",
+    "seis", "siete", "ocho", "nueve",
+]
+
+SPECIALS = {
+    10: "diez",
+    11: "once",
+    12: "doce",
+    13: "trece",
+    14: "catorce",
+    15: "quince",
+    16: "dieciséis",
+    17: "diecisiete",
+    18: "dieciocho",
+    19: "diecinueve",
+    20: "veinte",
+    21: "veintiuno",
+    22: "veintidós",
+    23: "veintitrés",
+    24: "veinticuatro",
+    25: "veinticinco",
+    26: "veintiséis",
+    27: "veintisiete",
+    28: "veintiocho",
+    29: "veintinueve",
+}
+
+TENS = {
+    30: "treinta",
+    40: "cuarenta",
+    50: "cincuenta",
+    60: "sesenta",
+    70: "setenta",
+    80: "ochenta",
+    90: "noventa",
+}
+
+HUNDREDS = {
+    100: "cien",
+    200: "doscientos",
+    300: "trescientos",
+    400: "cuatrocientos",
+    500: "quinientos",
+    600: "seiscientos",
+    700: "setecientos",
+    800: "ochocientos",
+    900: "novecientos",
+}
+
+
+def number_to_spanish(n: int) -> str:
+    if not 0 <= n <= 999_999_999:
+        raise ValueError("Only numbers from 0 to 999,999,999 are supported")
+
+    if n < 10:
+        return UNITS[n]
+
+    if n in SPECIALS:
+        return SPECIALS[n]
+
+    if n < 100:
+        ten = (n // 10) * 10
+        unit = n % 10
+        return TENS[ten] if unit == 0 else f"{TENS[ten]} y {UNITS[unit]}"
+
+    if n == 100:
+        return "cien"
+
+    if n < 1000:
+        hundred = (n // 100) * 100
+        rest = n % 100
+        prefix = "ciento" if hundred == 100 else HUNDREDS[hundred]
+        return prefix if rest == 0 else f"{prefix} {number_to_spanish(rest)}"
+
+    if n < 1_000_000:
+        thousands = n // 1000
+        rest = n % 1000
+
+        if thousands == 1:
+            prefix = "mil"
+        else:
+            prefix = f"{number_to_spanish(thousands)} mil"
+
+        return prefix if rest == 0 else f"{prefix} {number_to_spanish(rest)}"
+
+    millions = n // 1_000_000
+    rest = n % 1_000_000
+
+    if millions == 1:
+        prefix = "un millón"
+    else:
+        prefix = f"{number_to_spanish(millions)} millones"
+
+    return prefix if rest == 0 else f"{prefix} {number_to_spanish(rest)}"
+
+
+def replace_numbers_with_spanish(text: str) -> str:
+    def repl(match: re.Match) -> str:
+        raw = match.group(0)
+        clean = raw.replace(".", "").replace(",", "")
+
+        try:
+            n = int(clean)
+        except ValueError:
+            return raw
+
+        return number_to_spanish(n)
+
+    return re.sub(r"\b\d{1,3}(?:[.,]\d{3})*|\b\d+\b", repl, text)
+
+
 def normalize_for_voice(text: str) -> str:
     text = text or ""
 
-    replacements = {
-        "US$": "dólares ",
-        "%": " por ciento",
-        "BanRep": "Banco de la República",
-        "spot": "al contado",
-        "72": "setenta y dos",
-    }
-
-    for old, new in replacements.items():
+    for old, new in CUSTOM_WORD_REPLACEMENTS.items():
         text = text.replace(old, new)
+
+    for old, new in sorted(SYMBOL_REPLACEMENTS.items(), key=lambda x: len(x[0]), reverse=True):
+        text = text.replace(old, new)
+
+    text = replace_numbers_with_spanish(text)
 
     text = re.sub(r"\s+", " ", text)
     return text.strip()
@@ -87,7 +241,7 @@ def build_voiceover_script(article: dict, mode: str = "full") -> str:
     return script.strip()
 
 
-def split_script_into_chunks(script: str, max_chars: int = 220) -> list[str]:
+def split_script_into_chunks(script: str, max_chars: int = 150) -> list[str]:
     import re
 
     sentences = re.split(r"(?<=[.!?¿¡:;])\s+", script.replace("\n", " "))

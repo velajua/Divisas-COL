@@ -232,3 +232,12 @@ Use this most of the time:
 ```bat
 python generate_voiceover.py --html input\entry.html --voice voice_samples\my_voice.wav --out-dir output --format mp3
 ```
+
+
+
+---
+
+python generate_voiceover.py --html input/compras-oficiales-vigilancia-fiscal-y-peso-en-alerta.html --voice voice_samples/20000leguas_09_verne_128kb_clip_36.wav --out-dir output --script-only
+python generate_voiceover.py --html input/compras-oficiales-vigilancia-fiscal-y-peso-en-alerta.html --voice voice_samples/20000leguas_09_verne_128kb_clip_36.wav --out-dir output --format wav 
+
+---
