@@ -172,34 +172,34 @@
     ],
     "Bogotá": [
       [
-        "Value for buying AmericanDollar is best value at amerikanCashCalle122 with value 3670",
-        "Value for selling AmericanDollar is best value at cambiosKapital with value 3710",
-        "Difference for AmericanDollar in value is -40"
+        "Value for buying AmericanDollar is best value at amerikanCashCalle122 with value 3700",
+        "Value for selling AmericanDollar is best value at cambiosKapital with value 3730",
+        "Difference for AmericanDollar in value is -30"
       ],
       [
-        "Value for buying Euro is best value at amerikanCashCalle122 with value 4500",
+        "Value for buying Euro is best value at amerikanCashCalle122 with value 4560",
         "Value for selling Euro is best value at cambiosKapital with value 4420",
-        "Difference for Euro in value is 80"
+        "Difference for Euro in value is 140"
       ],
       [
-        "Value for buying BritishPound is best value at amerikanCashCalle122 with value 4830",
-        "Value for selling BritishPound is best value at cambiosKapital with value 4920",
-        "Difference for BritishPound in value is -90"
+        "Value for buying BritishPound is best value at amerikanCashCalle122 with value 4880",
+        "Value for selling BritishPound is best value at puntoDollarSalitre with value 4920",
+        "Difference for BritishPound in value is -40"
       ],
       [
-        "Value for buying CanadianDollar is best value at amerikanCashCalle122 with value 2650",
+        "Value for buying CanadianDollar is best value at amerikanCashCalle122 with value 2680",
         "Value for selling CanadianDollar is best value at cambiosKapital with value 2730",
-        "Difference for CanadianDollar in value is -80"
+        "Difference for CanadianDollar in value is -50"
       ],
       [
-        "Value for buying AustralianDollar is best value at amerikanCashCalle122 with value 2410",
+        "Value for buying AustralianDollar is best value at amerikanCashCalle122 with value 2550",
         "Value for selling AustralianDollar is best value at cambiosKapital with value 2470",
-        "Difference for AustralianDollar in value is -60"
+        "Difference for AustralianDollar in value is 80"
       ],
       [
-        "Value for buying MexicanPeso is best value at cambiosKapital with value 200",
-        "Value for selling MexicanPeso is best value at puntoDollarSalitre with value 208",
-        "Difference for MexicanPeso in value is -8"
+        "Value for buying MexicanPeso is best value at amerikanCashCalle122 with value 205",
+        "Value for selling MexicanPeso is best value at cambiosVancouver with value 210",
+        "Difference for MexicanPeso in value is -5"
       ],
       [
         "Value for buying ArgentineanPeso is best value at amerikanCashCalle122 with value 2",
@@ -212,14 +212,14 @@
         "Difference for ChileanPeso in value is -10000000000.0"
       ],
       [
-        "Value for buying BrasilianReal is best value at amerikanCashCalle122 with value 740",
+        "Value for buying BrasilianReal is best value at amerikanCashCalle122 with value 750",
         "Value for selling BrasilianReal is best value at puntoDollarSalitre with value 730",
-        "Difference for BrasilianReal in value is 10"
+        "Difference for BrasilianReal in value is 20"
       ],
       [
-        "Value for buying SwissFranc is best value at amerikanCashCalle122 with value 4460",
-        "Value for selling SwissFranc is best value at amerikanCashCalle122 with value 4620",
-        "Difference for SwissFranc in value is -160"
+        "Value for buying SwissFranc is best value at amerikanCashCalle122 with value 4500",
+        "Value for selling SwissFranc is best value at puntoDollarSalitre with value 4640",
+        "Difference for SwissFranc in value is -140"
       ],
       [
         "Value for buying PeruveanNewSun is best value at amerikanCashCalle122 with value 1030",
@@ -673,14 +673,14 @@
     ],
     "Medellín": [
       [
-        "Value for buying AmericanDollar is best value at euroservicios with value 3620",
-        "Value for selling AmericanDollar is best value at euroservicios with value 3770",
-        "Difference for AmericanDollar in value is -150"
+        "Value for buying AmericanDollar is best value at euroservicios with value 3650",
+        "Value for selling AmericanDollar is best value at puntoDollarEnvigado with value 3700",
+        "Difference for AmericanDollar in value is -50"
       ],
       [
-        "Value for buying Euro is best value at euroservicios with value 4450",
+        "Value for buying Euro is best value at euroservicios with value 4480",
         "Value for selling Euro is best value at puntoDollarEnvigado with value 4560",
-        "Difference for Euro in value is -110"
+        "Difference for Euro in value is -80"
       ],
       [
         "Value for buying BritishPound is best value at euroservicios with value 4700",
@@ -688,9 +688,9 @@
         "Difference for BritishPound in value is -170"
       ],
       [
-        "Value for buying CanadianDollar is best value at euroservicios with value 2520",
-        "Value for selling CanadianDollar is best value at euroservicios with value 2670",
-        "Difference for CanadianDollar in value is -150"
+        "Value for buying CanadianDollar is best value at euroservicios with value 2600",
+        "Value for selling CanadianDollar is best value at puntoDollarEnvigado with value 2670",
+        "Difference for CanadianDollar in value is -70"
       ],
       [
         "Value for buying AustralianDollar is best value at euroservicios with value 2400",
@@ -723,9 +723,9 @@
         "Difference for SwissFranc in value is -200"
       ],
       [
-        "Value for buying PeruveanNewSun is best value at euroservicios with value 1020",
+        "Value for buying PeruveanNewSun is best value at puntoDollarEnvigado with value 1050",
         "Value for selling PeruveanNewSun is best value at euroservicios with value 1100",
-        "Difference for PeruveanNewSun in value is -80"
+        "Difference for PeruveanNewSun in value is -50"
       ],
       [
         "Value for buying JapaneseYen is best value at euroservicios with value 21",
@@ -923,13 +923,13 @@
           "id": "amerikanCashCalle122",
           "data": {
             "EURO Peq./Small": {
-              "buy": "4500",
-              "sell": "4550",
+              "buy": "4560",
+              "sell": "4620",
               "id": "Euro"
             },
             "Dólar": {
-              "buy": "3670",
-              "sell": "3730",
+              "buy": "3700",
+              "sell": "3760",
               "id": "AmericanDollar"
             },
             "Sol": {
@@ -948,33 +948,33 @@
               "id": "DominicanPeso"
             },
             "Mexicano": {
-              "buy": "198",
-              "sell": "210",
+              "buy": "205",
+              "sell": "215",
               "id": "MexicanPeso"
             },
             "Australiano": {
-              "buy": "2410",
-              "sell": "2530",
+              "buy": "2550",
+              "sell": "2650",
               "id": "AustralianDollar"
             },
             "Canadiense": {
-              "buy": "2650",
-              "sell": "2750",
+              "buy": "2680",
+              "sell": "2780",
               "id": "CanadianDollar"
             },
             "Franco": {
-              "buy": "4460",
-              "sell": "4620",
+              "buy": "4500",
+              "sell": "4650",
               "id": "SwissFranc"
             },
             "Libra": {
-              "buy": "4830",
-              "sell": "4970",
+              "buy": "4880",
+              "sell": "5020",
               "id": "BritishPound"
             },
             "Real": {
-              "buy": "740",
-              "sell": "780",
+              "buy": "750",
+              "sell": "800",
               "id": "BrasilianReal"
             },
             "Yuan": {
@@ -1021,13 +1021,13 @@
           "id": "amerikanCashRetiro",
           "data": {
             "EURO Peq./Small": {
-              "buy": "4480",
-              "sell": "4580",
+              "buy": "4560",
+              "sell": "4650",
               "id": "Euro"
             },
             "Dólar": {
-              "buy": "3630",
-              "sell": "3740",
+              "buy": "3660",
+              "sell": "3770",
               "id": "AmericanDollar"
             },
             "Sol": {
@@ -1046,18 +1046,18 @@
               "id": "DominicanPeso"
             },
             "Mexicano": {
-              "buy": "193",
-              "sell": "215",
+              "buy": "200",
+              "sell": "220",
               "id": "MexicanPeso"
             },
             "Australiano": {
-              "buy": "2380",
-              "sell": "2550",
+              "buy": "2500",
+              "sell": "2680",
               "id": "AustralianDollar"
             },
             "Canadiense": {
-              "buy": "2650",
-              "sell": "2790",
+              "buy": "2630",
+              "sell": "2800",
               "id": "CanadianDollar"
             },
             "Franco": {
@@ -1066,8 +1066,8 @@
               "id": "SwissFranc"
             },
             "Libra": {
-              "buy": "4770",
-              "sell": "5000",
+              "buy": "4800",
+              "sell": "5050",
               "id": "BritishPound"
             },
             "Real": {
@@ -1141,32 +1141,32 @@
           "id": "cambiosKapital",
           "data": {
             "Dolar americano (USD) 20": {
-              "buy": "3670",
-              "sell": "3710",
+              "buy": "3700",
+              "sell": "3730",
               "id": "AmericanDollar"
             },
             "Dolar americano (USD) 100": {
-              "buy": "3670",
-              "sell": "3710",
+              "buy": "3700",
+              "sell": "3730",
               "id": "AmericanDollar"
             },
             "Euro sencillo (EUR)": {
-              "buy": "4480",
-              "sell": "4550",
+              "buy": "4520",
+              "sell": "4590",
               "id": "Euro"
             },
             "Euro billete de 500 (EUR)": {
-              "buy": "4350",
+              "buy": "4410",
               "sell": "4420",
               "id": "Euro"
             },
             "Libra esterlina (GBP)": {
-              "buy": "4800",
-              "sell": "4920",
+              "buy": "4850",
+              "sell": "5000",
               "id": "BritishPound"
             },
             "Dolar canadiense (CAD)": {
-              "buy": "2630",
+              "buy": "2650",
               "sell": "2730",
               "id": "CanadianDollar"
             },
@@ -1192,7 +1192,7 @@
             },
             "Real Brasil (BRL)": {
               "buy": "710",
-              "sell": "770",
+              "sell": "760",
               "id": "BrasilianReal"
             },
             "Nuevo Sol Peru (PEN)": {
@@ -1201,8 +1201,8 @@
               "id": "PeruveanNewSun"
             },
             "Franco suizo (CHF)": {
-              "buy": "4400",
-              "sell": "4650",
+              "buy": "4500",
+              "sell": "4700",
               "id": "SwissFranc"
             },
             "Yen japones (JPY)": {
@@ -1241,43 +1241,43 @@
           "id": "cambiosVancouver",
           "data": {
             "Dólar Americano 20 (US)": {
-              "buy": "3660",
-              "sell": "3710",
+              "buy": "3690",
+              "sell": "3740",
               "id": "AmericanDollar"
             },
             "Dólar Americano 100 (US)": {
-              "buy": "3660",
-              "sell": "3720",
+              "buy": "3690",
+              "sell": "3740",
               "id": "AmericanDollar"
             },
             "Euro (EUR) 50": {
-              "buy": "4450",
-              "sell": "4500",
+              "buy": "4490",
+              "sell": "4590",
               "id": "Euro"
             },
             "Euro  (EUR) 100": {
-              "buy": "4450",
-              "sell": "4500",
+              "buy": "4490",
+              "sell": "4590",
               "id": "Euro"
             },
             "Euro (EUR) 200": {
-              "buy": "4440",
-              "sell": "4490",
+              "buy": "4480",
+              "sell": "4580",
               "id": "Euro"
             },
             "Euro (EUR) 500": {
-              "buy": "4300",
+              "buy": "4380",
               "sell": "4430",
               "id": "Euro"
             },
             "Libra Esterlina (GBP)": {
               "buy": "4800",
-              "sell": "4920",
+              "sell": "4950",
               "id": "BritishPound"
             },
             "Dólar Canadiense (CAD)": {
               "buy": "2650",
-              "sell": "2730",
+              "sell": "2740",
               "id": "CanadianDollar"
             },
             "Dólar Australiano (AUD)": {
@@ -1302,7 +1302,7 @@
             },
             "Real (BR)": {
               "buy": "700",
-              "sell": "735",
+              "sell": "760",
               "id": "BrasilianReal"
             },
             "Nuevo Sol (PEN)": {
@@ -1311,7 +1311,7 @@
               "id": "PeruveanNewSun"
             },
             "Franco Suizo (CHF)": {
-              "buy": "4400",
+              "buy": "4450",
               "sell": "4650",
               "id": "SwissFranc"
             },
@@ -1351,23 +1351,23 @@
           "id": "eurodolar",
           "data": {
             "US Dolar Americano": {
-              "buy": "3660",
-              "sell": "3730",
+              "buy": "3680",
+              "sell": "3770",
               "id": "AmericanDollar"
             },
             "EUR Euro pequeno": {
-              "buy": "4460",
-              "sell": "4570",
+              "buy": "4480",
+              "sell": "4600",
               "id": "Euro"
             },
             "EUR Euro grande": {
-              "buy": "4370",
-              "sell": "4500",
+              "buy": "4400",
+              "sell": "4520",
               "id": "Euro"
             },
             "CAD Dolar Canadiense": {
-              "buy": "2630",
-              "sell": "2750",
+              "buy": "2650",
+              "sell": "2760",
               "id": "CanadianDollar"
             },
             "AUD Dolar Australiano": {
@@ -1381,8 +1381,8 @@
               "id": "SwissFranc"
             },
             "GBP Libra Esterlina": {
-              "buy": "4750",
-              "sell": "4920",
+              "buy": "4780",
+              "sell": "4950",
               "id": "BritishPound"
             },
             "Yuan Chino": {
@@ -1461,32 +1461,32 @@
           "id": "puntoDollarUnicentro",
           "data": {
             "Dólar Estadounidense": {
-              "buy": "3600",
-              "sell": "3750",
+              "buy": "3650",
+              "sell": "3800",
               "id": "AmericanDollar"
             },
             "Euro": {
-              "buy": "4400",
-              "sell": "4550",
+              "buy": "4450",
+              "sell": "4600",
               "id": "Euro"
             },
             "Libra": {
-              "buy": "4400",
+              "buy": "4500",
               "sell": "5100",
               "id": "BritishPound"
             },
             "Dólar Canadiense": {
-              "buy": "2630",
+              "buy": "2600",
               "sell": "2800",
               "id": "CanadianDollar"
             },
             "Dólar Australiano": {
-              "buy": "2350",
+              "buy": "2250",
               "sell": "2600",
               "id": "AustralianDollar"
             },
             "Peso Mexicano": {
-              "buy": "190",
+              "buy": "195",
               "sell": "220",
               "id": "MexicanPeso"
             },
@@ -1501,17 +1501,17 @@
               "id": "ChileanPeso"
             },
             "Real Brasilero": {
-              "buy": "650",
+              "buy": "700",
               "sell": "800",
               "id": "BrasilianReal"
             },
             "Franco Suizo": {
-              "buy": "4200",
+              "buy": "4000",
               "sell": "4750",
               "id": "SwissFranc"
             },
             "Nuevo Sol": {
-              "buy": "1000",
+              "buy": "950",
               "sell": "1170",
               "id": "PeruveanNewSun"
             },
@@ -1535,12 +1535,12 @@
           "data": {
             "Dólar Estadounidense": {
               "buy": "3650",
-              "sell": "3720",
+              "sell": "3740",
               "id": "AmericanDollar"
             },
             "Euro": {
               "buy": "4370",
-              "sell": "4500",
+              "sell": "4570",
               "id": "Euro"
             },
             "Libra": {
@@ -1550,7 +1550,7 @@
             },
             "Dólar Canadiense": {
               "buy": "2600",
-              "sell": "2730",
+              "sell": "2750",
               "id": "CanadianDollar"
             },
             "Dólar Australiano": {
@@ -1559,8 +1559,8 @@
               "id": "AustralianDollar"
             },
             "Peso Mexicano": {
-              "buy": "190",
-              "sell": "208",
+              "buy": "195",
+              "sell": "215",
               "id": "MexicanPeso"
             },
             "Peso Argentino": {
@@ -1765,12 +1765,12 @@
           "id": "euroservicios",
           "data": {
             "DOLAR": {
-              "buy": "3620",
-              "sell": "3770",
+              "buy": "3650",
+              "sell": "3750",
               "id": "AmericanDollar"
             },
             "EURO": {
-              "buy": "4450",
+              "buy": "4480",
               "sell": "4600",
               "id": "Euro"
             },
@@ -1815,8 +1815,8 @@
               "id": "BritishPound"
             },
             "Dolar Canadiense": {
-              "buy": "2520",
-              "sell": "2670",
+              "buy": "2600",
+              "sell": "2700",
               "id": "CanadianDollar"
             },
             "Nuevo Sol": {
@@ -1935,8 +1935,8 @@
           "id": "puntoDollarEnvigado",
           "data": {
             "Dólar Estadounidense": {
-              "buy": "3,520",
-              "sell": "3,700",
+              "buy": "3520",
+              "sell": "3700",
               "id": "AmericanDollar"
             },
             "Euro": {
@@ -1945,13 +1945,13 @@
               "id": "Euro"
             },
             "Libra": {
-              "buy": "4,700",
+              "buy": "4700",
               "sell": "5100",
               "id": "BritishPound"
             },
             "Dólar Canadiense": {
-              "buy": "2,500",
-              "sell": "2,670",
+              "buy": "2500",
+              "sell": "2670",
               "id": "CanadianDollar"
             },
             "Dólar Australiano": {
@@ -1981,12 +1981,12 @@
             },
             "Franco Suizo": {
               "buy": "4200",
-              "sell": "4,800",
+              "sell": "4800",
               "id": "SwissFranc"
             },
             "Nuevo Sol": {
-              "buy": "1,050",
-              "sell": "1,150",
+              "buy": "1050",
+              "sell": "1150",
               "id": "PeruveanNewSun"
             },
             "Yuan": {
