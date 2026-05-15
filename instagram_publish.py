@@ -21,6 +21,7 @@ BOGOTA_TZ = ZoneInfo("America/Bogota")
 DEFAULT_PORT = 8765
 DEFAULT_CONTAINER_POLL_SECONDS = 20
 DEFAULT_CONTAINER_TIMEOUT_SECONDS = 360
+DEFAULT_POST_PAUSE_SECONDS = 10
 DEFAULT_META_RETRY_ATTEMPTS = 3
 DEFAULT_META_RETRY_SLEEP_SECONDS = 5
 DEFAULT_META_CALL_COOLDOWN_SECONDS = 30
@@ -744,12 +745,15 @@ def publish_groups(groups, ig_user_id, token):
     for group in groups:
         prepared_groups.append(prepare_group_container(group, ig_user_id, token))
     results = []
-    for prepared_group in prepared_groups:
+    for index, prepared_group in enumerate(prepared_groups):
         group = prepared_group["group"]
         if not should_publish_group(group):
             print(f"Prepared {group['key']} carousel container {prepared_group['creation_id']} (skipping final publish)")
             continue
         results.append(publish_prepared_group(prepared_group, ig_user_id, token))
+        if index < len(prepared_groups) - 1:
+            print(f"Waiting {DEFAULT_POST_PAUSE_SECONDS}s before next post.")
+            time.sleep(DEFAULT_POST_PAUSE_SECONDS)
     return results
 
 
@@ -829,12 +833,15 @@ def run_serve_publish(args):
         for group in groups_to_publish:
             print(f"Preparing group {group['key']} with {len(group['posts'])} image(s).")
             prepared_groups.append(prepare_group_container(group, ig_user_id, token))
-        for prepared_group in prepared_groups:
+        for index, prepared_group in enumerate(prepared_groups):
             group = prepared_group["group"]
             print(f"Publishing group {group['key']} with {len(group['posts'])} image(s).")
             publish_prepared_group(prepared_group, ig_user_id, token)
             state["published_groups"].append(group["key"])
             save_publish_state(state_path, state)
+            if index < len(prepared_groups) - 1:
+                print(f"Waiting {DEFAULT_POST_PAUSE_SECONDS}s before next post.")
+                time.sleep(DEFAULT_POST_PAUSE_SECONDS)
         return 0
     finally:
         if tunnel and tunnel.poll() is None:
