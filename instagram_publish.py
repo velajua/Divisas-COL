@@ -23,6 +23,9 @@ DEFAULT_CONTAINER_POLL_SECONDS = 20
 DEFAULT_CONTAINER_TIMEOUT_SECONDS = 360
 DEFAULT_META_RETRY_ATTEMPTS = 3
 DEFAULT_META_RETRY_SLEEP_SECONDS = 5
+DEFAULT_META_CALL_COOLDOWN_SECONDS = 30
+DEFAULT_META_COOLDOWN_CALLS = 5
+DEFAULT_META_COOLDOWN_SECONDS = 180
 REQUIRED_ENV = {
     "INSTAGRAM_USER_ID": "Instagram professional account ID, usually instagram_business_account.id.",
     "META_PAGE_ACCESS_TOKEN": "Page access token with instagram_content_publish permission.",
@@ -35,6 +38,7 @@ LEGACY_ENV_LABELS = {
     "Token de la app": "META_APP_ACCESS_TOKEN",
     "Token de acceso": "META_APP_ACCESS_TOKEN",
 }
+META_CALL_COUNT = 0
 
 
 def load_dotenv(path):
@@ -339,6 +343,14 @@ def is_non_retryable_meta_error(error):
 
 
 def post_with_meta_retry(url, **kwargs):
+    global META_CALL_COUNT
+    META_CALL_COUNT += 1
+    time.sleep(DEFAULT_META_CALL_COOLDOWN_SECONDS)
+    if META_CALL_COUNT % DEFAULT_META_COOLDOWN_CALLS == 0:
+        print(
+            f"Cooling down before Meta call {META_CALL_COUNT}: sleeping {DEFAULT_META_COOLDOWN_SECONDS} seconds."
+        )
+        time.sleep(DEFAULT_META_COOLDOWN_SECONDS)
     last_response = None
     attempts = DEFAULT_META_RETRY_ATTEMPTS
     for attempt in range(1, attempts + 1):
