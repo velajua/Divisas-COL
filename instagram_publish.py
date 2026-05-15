@@ -735,15 +735,29 @@ def publish_prepared_group(prepared_group, ig_user_id, token):
     return result
 
 
+def should_publish_group(group):
+    return bool(group.get("single"))
+
+
 def publish_groups(groups, ig_user_id, token):
     prepared_groups = []
     for group in groups:
         prepared_groups.append(prepare_group_container(group, ig_user_id, token))
-    return [publish_prepared_group(group, ig_user_id, token) for group in prepared_groups]
+    results = []
+    for prepared_group in prepared_groups:
+        group = prepared_group["group"]
+        if not should_publish_group(group):
+            print(f"Prepared {group['key']} carousel container {prepared_group['creation_id']} (skipping final publish)")
+            continue
+        results.append(publish_prepared_group(prepared_group, ig_user_id, token))
+    return results
 
 
 def publish_group(group, ig_user_id, token):
     prepared_group = prepare_group_container(group, ig_user_id, token)
+    if not should_publish_group(group):
+        print(f"Prepared {group['key']} carousel container {prepared_group['creation_id']} (skipping final publish)")
+        return prepared_group
     return publish_prepared_group(prepared_group, ig_user_id, token)
 
 
