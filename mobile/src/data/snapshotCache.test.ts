@@ -3,6 +3,7 @@ import test from "node:test";
 
 import {
   getSnapshotDate,
+  sanitizeSnapshots,
   trimSnapshots,
   upsertSnapshot,
   type Snapshot,
@@ -48,4 +49,28 @@ test("trimSnapshots keeps the latest five dates", () => {
     "2026-05-03",
     "2026-05-02",
   ]);
+});
+
+test("sanitizeSnapshots keeps only dated snapshots with grouped city rates", () => {
+  const snapshots = [
+    {
+      date: "2026-05-14",
+      fetchedAt: "2026-05-14T12:00:00.000Z",
+      data: { grouped_by_city: { Bogota: {} } },
+    },
+    {
+      date: "2026-05-13",
+      fetchedAt: "2026-05-13T12:00:00.000Z",
+      data: { generated_at: "2026-05-13T12:00:00.000Z" },
+    },
+    {
+      date: "",
+      fetchedAt: "2026-05-12T12:00:00.000Z",
+      data: { grouped_by_city: { Cali: {} } },
+    },
+  ];
+
+  const result = sanitizeSnapshots(snapshots);
+
+  assert.deepEqual(result, [snapshots[0]]);
 });

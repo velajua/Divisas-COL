@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import type { Snapshot } from "../data/snapshotCache";
+import { sanitizeSnapshots, type Snapshot } from "../data/snapshotCache";
 
 const SNAPSHOTS_KEY = "divisascol:snapshots:v1";
 
@@ -10,7 +10,7 @@ export async function loadSnapshots(): Promise<Snapshot[]> {
 
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    return sanitizeSnapshots(parsed);
   } catch (error) {
     return [];
   }

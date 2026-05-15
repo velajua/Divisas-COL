@@ -1,4 +1,4 @@
-import type { ResultPayload } from "./snapshotCache";
+import { assertResultPayload, type ResultPayload } from "./snapshotCache";
 
 export const RESULT_JSON_URL = "https://divisascol.com/result.json";
 
@@ -18,5 +18,7 @@ export async function fetchResultJson(
     throw new Error(`Could not fetch result.json: ${response.status}`);
   }
 
-  return response.json() as Promise<ResultPayload>;
+  const data = await response.json();
+  assertResultPayload(data);
+  return data;
 }

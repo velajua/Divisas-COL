@@ -237,7 +237,37 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
                 instagram_publish.post_with_meta_retry("https://graph.facebook.com/test", data={})
 
         self.assertEqual(1, mock_post.call_count)
-        mock_sleep.assert_not_called()
+        mock_sleep.assert_called_once_with(instagram_publish.DEFAULT_META_CALL_COOLDOWN_SECONDS)
+
+    def test_every_tenth_meta_post_waits_before_request(self):
+        class FakeResponse:
+            ok = True
+            status_code = 200
+            text = "{}"
+
+            def json(self):
+                return {}
+
+            def raise_for_status(self):
+                return None
+
+        sleeps = []
+
+        def fake_sleep(seconds):
+            sleeps.append(seconds)
+
+        instagram_publish.META_CALL_COUNT = 9
+        with patch.object(instagram_publish.requests, "post", return_value=FakeResponse()) as mock_post, patch.object(
+            instagram_publish.time, "sleep", side_effect=fake_sleep
+        ):
+            instagram_publish.post_with_meta_retry("https://graph.facebook.com/test", data={})
+
+        self.assertEqual(1, mock_post.call_count)
+        self.assertEqual(
+            [instagram_publish.DEFAULT_META_CALL_COOLDOWN_SECONDS, instagram_publish.DEFAULT_META_COOLDOWN_SECONDS],
+            sleeps,
+        )
+        self.assertEqual(10, instagram_publish.META_CALL_COUNT)
 
     def test_transient_meta_error_retries_a_bounded_number_of_times(self):
         class FakeResponse:
@@ -266,7 +296,7 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
                 instagram_publish.post_with_meta_retry("https://graph.facebook.com/test", data={})
 
         self.assertEqual(3, mock_post.call_count)
-        self.assertEqual(2, mock_sleep.call_count)
+        self.assertEqual(3, mock_sleep.call_count)
 
 
 if __name__ == "__main__":
