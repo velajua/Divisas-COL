@@ -1,8 +1,8 @@
-# 💱 Divisas Bogotá
+# Divisas COL
 
 Live site: https://cedar-setup-376217.web.app / https://www.divisascol.com
 
-A lightweight data pipeline + static site that aggregates daily currency exchange data in Bogotá and serves it via Firebase Hosting.
+A lightweight data pipeline + static site that aggregates daily currency exchange data by country and city, then serves it via Firebase Hosting.
 
 ---
 
@@ -12,11 +12,11 @@ This project:
 
 - Scrapes exchange rates from multiple sources
 - Processes and normalizes the data
-- Generates a `result.json`
+- Generates a compact `result.json`
 - Serves a static frontend that displays:
   - Best buy/sell rates
   - Comparisons across exchange houses
-  - City-scoped insights
+  - Country and city-scoped insights
 
 Deployment is fully automated via GitHub Actions and Firebase Hosting.
 
@@ -42,9 +42,14 @@ Firebase Hosting
 .
 ├── html/
 │   ├── index.html
-│   ├── app.js
+│   ├── colombia/
+│   │   ├── index.html
+│   │   ├── bogota/
+│   │   └── assets/
+│   ├── aurum-script.js
 │   └── result.json
 ├── exchanges/
+│   └── colombia/
 ├── helpers/
 ├── config.yaml
 ├── main.py
@@ -59,8 +64,37 @@ Firebase Hosting
 1. Scrapers pull data  
 2. Data is cleaned and normalized  
 3. Sources are merged  
-4. Output → html/result.json  
-5. Frontend renders  
+4. Output → `html/result.json` with country-scoped rates under `countries`
+5. Frontend renders
+
+The public JSON intentionally avoids duplicate legacy keys. The canonical shape is:
+
+```json
+{
+  "ok": true,
+  "health_passed": 8,
+  "health_failed": 0,
+  "countries": {
+    "colombia": {
+      "Bogotá": {
+        "puntoDollar": [
+          {
+            "id": "PuntoDollar Unicentro",
+            "url": "https://example.com",
+            "rates": {
+              "AmericanDollar": {
+                "label": "Dólar Estadounidense",
+                "buy": "4000",
+                "sell": "4100"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
+```
 
 ---
 
@@ -111,7 +145,7 @@ instagram_cards/
 ```
 
 The generator creates city cards showing the best buy and sell places per
-currency. If the run date matches an entry in `html/entries.json`, it also
+currency. If the run date matches an entry in `html/colombia/entries.json`, it also
 adds a `newsletter.svg` card with the latest newsletter title and short
 description.
 

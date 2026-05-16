@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://divisascol.com/barranquilla/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://divisascol.com/bogota/</loc>
+    <loc>https://divisascol.com/colombia/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/cali/</loc>
+    <loc>https://divisascol.com/colombia/barranquilla/</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/cartagena/</loc>
+    <loc>https://divisascol.com/colombia/bogota/</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/medellin/</loc>
+    <loc>https://divisascol.com/colombia/cali/</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/newsletter.html</loc>
+    <loc>https://divisascol.com/colombia/cartagena/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/colombia/medellin/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/colombia/newsletter/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -41,77 +46,77 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/banrep-sin-recortes-y-peso-sin-alivio.html</loc>
+    <loc>https://divisascol.com/colombia/entries/banrep-sin-recortes-y-peso-sin-alivio.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/colpensiones-freno-judicial-y-dolar-en-alerta.html</loc>
+    <loc>https://divisascol.com/colombia/entries/colpensiones-freno-judicial-y-dolar-en-alerta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/compras-oficiales-vigilancia-fiscal-y-peso-en-alerta.html</loc>
+    <loc>https://divisascol.com/colombia/entries/compras-oficiales-vigilancia-fiscal-y-peso-en-alerta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/deficit-banrep-y-rebote-del-dolar.html</loc>
+    <loc>https://divisascol.com/colombia/entries/deficit-banrep-y-rebote-del-dolar.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/dolar-barato-riesgo-fiscal.html</loc>
+    <loc>https://divisascol.com/colombia/entries/dolar-barato-riesgo-fiscal.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/empleo-firme-austeridad-tardia-y-peso-bajo-vigilancia.html</loc>
+    <loc>https://divisascol.com/colombia/entries/empleo-firme-austeridad-tardia-y-peso-bajo-vigilancia.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/fmi-condicion-banrep-y-peso-sin-red.html</loc>
+    <loc>https://divisascol.com/colombia/entries/fmi-condicion-banrep-y-peso-sin-red.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/improvisacion-oficial-y-presion.html</loc>
+    <loc>https://divisascol.com/colombia/entries/improvisacion-oficial-y-presion.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/independencia-banrep-castigo-mercado-y-peso-fragil.html</loc>
+    <loc>https://divisascol.com/colombia/entries/independencia-banrep-castigo-mercado-y-peso-fragil.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/inflacion-compras-oficiales-y-peso-sin-piso.html</loc>
+    <loc>https://divisascol.com/colombia/entries/inflacion-compras-oficiales-y-peso-sin-piso.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/inflacion-tasas-presion-global.html</loc>
+    <loc>https://divisascol.com/colombia/entries/inflacion-tasas-presion-global.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/petro-banco-republica.html</loc>
+    <loc>https://divisascol.com/colombia/entries/petro-banco-republica.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/reforma-fiscal-y-presion.html</loc>
+    <loc>https://divisascol.com/colombia/entries/reforma-fiscal-y-presion.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/salario-minimo-tasas-peso.html</loc>
+    <loc>https://divisascol.com/colombia/entries/salario-minimo-tasas-peso.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/entries/subasta-record-prima-fiscal-y-peso.html</loc>
+    <loc>https://divisascol.com/colombia/entries/subasta-record-prima-fiscal-y-peso.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

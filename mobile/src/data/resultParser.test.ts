@@ -10,41 +10,39 @@ import {
 } from "./resultParser";
 
 const sampleResult = {
-  grouped_by_city: {
-    Bogota: {
-      casaUno: [
-        {
-          id: "sedeUno",
-          city: "Bogota",
-          exchange_house: "casaUno",
-          source_url: "https://example.com/uno",
-          data: {
-            "Dolar": { buy: "3600", sell: "3700", id: "AmericanDollar" },
-            "Euro": { buy: "4300", sell: "4450", id: "Euro" },
+  countries: {
+    colombia: {
+      Bogota: {
+        casaUno: [
+          {
+            id: "sedeUno",
+            url: "https://example.com/uno",
+            rates: {
+              AmericanDollar: { label: "Dolar", buy: "3600", sell: "3700" },
+              Euro: { label: "Euro", buy: "4300", sell: "4450" },
+            },
           },
-        },
-      ],
-      casaDos: [
-        {
-          id: "sedeDos",
-          city: "Bogota",
-          exchange_house: "casaDos",
-          source_url: "https://example.com/dos",
-          data: {
-            "Dolar": { buy: "3650", sell: "3680", id: "AmericanDollar" },
+        ],
+        casaDos: [
+          {
+            id: "sedeDos",
+            url: "https://example.com/dos",
+            rates: {
+              AmericanDollar: { label: "Dolar", buy: "3650", sell: "3680" },
+            },
           },
-        },
-      ],
-    },
-    Medellin: {
-      casaTres: [
-        {
-          id: "sedeTres",
-          data: {
-            "Dolar": { buy: "3500", sell: "3710", id: "AmericanDollar" },
+        ],
+      },
+      Medellin: {
+        casaTres: [
+          {
+            id: "sedeTres",
+            rates: {
+              AmericanDollar: { label: "Dolar", buy: "3500", sell: "3710" },
+            },
           },
-        },
-      ],
+        ],
+      },
     },
   },
 };

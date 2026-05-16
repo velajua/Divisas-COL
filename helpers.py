@@ -6,14 +6,25 @@ BQ_PROJECT = "cedar-setup-376217"
 BQ_TABLE = "divisas.bogota-divisas"
 
 CONF = EnvYAML("config.yaml")
+DEFAULT_COUNTRY = "colombia"
 
 
-def _resolve_fn(fn_name: str):
+def iter_scraper_configs(conf=None):
+    function_dicto = (conf or CONF).get("function_dicto", {}) or {}
+
+    for country, cities in function_dicto.items():
+        for city, city_scrapers in (cities or {}).items():
+            for url, spec in (city_scrapers or {}).items():
+                yield country, city, url, spec
+
+
+def _resolve_fn(fn_name: str, country: str = DEFAULT_COUNTRY):
     fn = globals().get(fn_name)
     if callable(fn):
         return fn
 
-    pkg = f"{__package__}.exchanges" if __package__ else "exchanges"
+    base_pkg = f"{__package__}.exchanges" if __package__ else "exchanges"
+    pkg = f"{base_pkg}.{country}"
 
     try:
         mod = importlib.import_module(f"{pkg}.{fn_name}")
@@ -121,6 +132,25 @@ def _group_by_city(data):
     return grouped
 
 
+def _group_by_country_city(data):
+    grouped = {}
+
+    for row in data:
+        if not isinstance(row, dict):
+            continue
+
+        country = row.get("country", DEFAULT_COUNTRY)
+        city = row.get("city", "UNKNOWN_CITY")
+        exchange_house = row.get("exchange_house", "UNKNOWN_EXCHANGE_HOUSE")
+
+        grouped.setdefault(country, {})
+        grouped[country].setdefault(city, {})
+        grouped[country][city].setdefault(exchange_house, [])
+        grouped[country][city][exchange_house].append(row)
+
+    return grouped
+
+
 def _build_comparison_data_by_city(data):
     comparison_by_city = {}
     grouped_by_city = _group_by_city(data)
@@ -135,3 +165,22 @@ def _build_comparison_data_by_city(data):
         comparison_by_city[city] = joined_currency(joined_currency_data)
 
     return comparison_by_city
+
+
+def _build_comparison_data_by_country_city(data):
+    comparison_by_country = {}
+    grouped_by_country = _group_by_country_city(data)
+
+    for country, cities in grouped_by_country.items():
+        comparison_by_country[country] = {}
+
+        for city, exchange_houses in cities.items():
+            city_rows = []
+
+            for rows in exchange_houses.values():
+                city_rows.extend(rows)
+
+            joined_currency_data = join_data(city_rows)
+            comparison_by_country[country][city] = joined_currency(joined_currency_data)
+
+    return comparison_by_country

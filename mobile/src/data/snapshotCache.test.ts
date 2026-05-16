@@ -51,12 +51,12 @@ test("trimSnapshots keeps the latest five dates", () => {
   ]);
 });
 
-test("sanitizeSnapshots keeps only dated snapshots with grouped city rates", () => {
+test("sanitizeSnapshots keeps only dated snapshots with country rates", () => {
   const snapshots = [
     {
       date: "2026-05-14",
       fetchedAt: "2026-05-14T12:00:00.000Z",
-      data: { grouped_by_city: { Bogota: {} } },
+      data: { countries: { colombia: { Bogota: {} } } },
     },
     {
       date: "2026-05-13",
@@ -66,7 +66,7 @@ test("sanitizeSnapshots keeps only dated snapshots with grouped city rates", () 
     {
       date: "",
       fetchedAt: "2026-05-12T12:00:00.000Z",
-      data: { grouped_by_city: { Cali: {} } },
+      data: { countries: { colombia: { Cali: {} } } },
     },
   ];
 

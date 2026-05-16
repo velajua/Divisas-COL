@@ -1,10 +1,15 @@
 const NEWSLETTER_CAPTURE_ENDPOINT = "https://script.google.com/macros/s/AKfycbwTK47Jy1wBSyfz6zw6Ds-cJuXBXIUFgge4xGlD5tw-8njLH6Yv9rZWc8HhRPtfB54K/exec";
 
 function getNewsletterPageContext() {
+  const pathParts = (window.location.pathname || "/").split("/").filter(Boolean);
+  const country = document.documentElement.dataset.country || pathParts[0] || "";
+  const city = document.documentElement.dataset.city || "";
+
   return {
     page: window.location.pathname || "/",
-    city: document.documentElement.dataset.city || "",
-    source: document.documentElement.dataset.city ? "city-floating-helper" : "newsletter-page",
+    country,
+    city,
+    source: city ? "city-floating-helper" : "newsletter-page",
   };
 }
 
@@ -105,6 +110,7 @@ async function submitNewsletterEmail(form) {
   const payload = {
     email,
     website: honeypot,
+    country: context.country,
     city: context.city,
     page: context.page,
     source: form.closest("[data-newsletter-capture]")?.dataset.newsletterCapture || context.source,

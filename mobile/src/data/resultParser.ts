@@ -1,13 +1,28 @@
 export type RawResult = {
+  countries?: Record<string, Record<string, Record<string, RawCompactLocation[]>>>;
+  grouped_by_country?: Record<string, Record<string, Record<string, RawLocation[]>>>;
   grouped_by_city?: Record<string, Record<string, RawLocation[]>>;
+};
+
+export type RawCompactLocation = {
+  id?: string;
+  url?: string;
+  rates?: Record<string, RawCompactCurrency>;
 };
 
 export type RawLocation = {
   id?: string;
+  country?: string;
   city?: string;
   exchange_house?: string;
   source_url?: string;
   data?: Record<string, RawCurrency>;
+};
+
+export type RawCompactCurrency = {
+  label?: string;
+  buy?: string | number | null;
+  sell?: string | number | null;
 };
 
 export type RawCurrency = {
@@ -63,27 +78,69 @@ export function formatDisplayName(value: string): string {
 
 export function flattenRates(result: RawResult): RateRow[] {
   const rows: RateRow[] = [];
+  const countries = result.countries || {};
 
-  Object.entries(result.grouped_by_city || {}).forEach(([cityName, houses]) => {
-    Object.entries(houses || {}).forEach(([houseName, locations]) => {
-      (locations || []).forEach((location) => {
-        Object.entries(location.data || {}).forEach(([currencyLabel, currency]) => {
-          rows.push({
-            city: location.city || cityName,
-            exchangeHouse: location.exchange_house || houseName,
-            locationId: location.id || houseName,
-            sourceUrl: location.source_url || "",
-            currencyLabel,
-            currencyId: currency.id || currencyLabel,
-            buy: normalizeNumber(currency.buy),
-            sell: normalizeNumber(currency.sell),
+  Object.entries(countries).forEach(([, cities]) => {
+    Object.entries(cities || {}).forEach(([cityName, houses]) => {
+      Object.entries(houses || {}).forEach(([houseName, locations]) => {
+        (locations || []).forEach((location) => {
+          Object.entries(location.rates || {}).forEach(([currencyId, currency]) => {
+            rows.push({
+              city: cityName,
+              exchangeHouse: houseName,
+              locationId: location.id || houseName,
+              sourceUrl: location.url || "",
+              currencyLabel: currency.label || currencyId,
+              currencyId,
+              buy: normalizeNumber(currency.buy),
+              sell: normalizeNumber(currency.sell),
+            });
           });
         });
       });
     });
   });
 
+  if (rows.length) return rows;
+
+  const groupedByCountry = result.grouped_by_country || {};
+
+  Object.entries(groupedByCountry).forEach(([, cities]) => {
+    Object.entries(cities || {}).forEach(([cityName, houses]) => {
+      appendLegacyGroupedRows(rows, cityName, houses);
+    });
+  });
+
+  if (rows.length) return rows;
+
+  Object.entries(result.grouped_by_city || {}).forEach(([cityName, houses]) => {
+    appendLegacyGroupedRows(rows, cityName, houses);
+  });
+
   return rows;
+}
+
+function appendLegacyGroupedRows(
+  rows: RateRow[],
+  cityName: string,
+  houses: Record<string, RawLocation[]>,
+): void {
+  Object.entries(houses || {}).forEach(([houseName, locations]) => {
+    (locations || []).forEach((location) => {
+      Object.entries(location.data || {}).forEach(([currencyLabel, currency]) => {
+        rows.push({
+          city: location.city || cityName,
+          exchangeHouse: location.exchange_house || houseName,
+          locationId: location.id || houseName,
+          sourceUrl: location.source_url || "",
+          currencyLabel,
+          currencyId: currency.id || currencyLabel,
+          buy: normalizeNumber(currency.buy),
+          sell: normalizeNumber(currency.sell),
+        });
+      });
+    });
+  });
 }
 
 export function getCities(rows: RateRow[]): string[] {

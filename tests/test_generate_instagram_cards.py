@@ -20,6 +20,36 @@ class PublicCardRenderingTests(unittest.TestCase):
 
         self.assertEqual("PuntoDollar Barranquilla", subject.display_place(item))
 
+    def test_country_city_groups_expands_compact_result_schema(self):
+        result = {
+            "countries": {
+                "colombia": {
+                    "Bogota": {
+                        "puntoDollar": [
+                            {
+                                "id": "PuntoDollar Unicentro",
+                                "url": "https://example.com",
+                                "rates": {
+                                    "AmericanDollar": {
+                                        "label": "Dolar",
+                                        "buy": "4000",
+                                        "sell": "4100",
+                                    }
+                                },
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+
+        grouped = subject.country_city_groups(result)
+        item = grouped["Bogota"]["puntoDollar"][0]
+
+        self.assertEqual("PuntoDollar Unicentro", item["id"])
+        self.assertEqual("https://example.com", item["source_url"])
+        self.assertEqual("AmericanDollar", item["data"]["Dolar"]["id"])
+
     def test_public_renderer_renders_svg_content_into_jpeg(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             repo_root = Path(temp_dir)

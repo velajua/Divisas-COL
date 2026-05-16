@@ -16,7 +16,7 @@ test("fetchResultJson sends refresh intent without browser-only cache options", 
     receivedInit = init;
     return {
       ok: true,
-      json: async () => ({ grouped_by_city: { Bogota: {} } }),
+      json: async () => ({ countries: { colombia: { Bogota: {} } } }),
     } as Response;
   });
 
@@ -26,15 +26,15 @@ test("fetchResultJson sends refresh intent without browser-only cache options", 
       "X-Divisas-Refresh-Intent": "user-visible",
     },
   });
-  assert.deepEqual(data, { grouped_by_city: { Bogota: {} } });
+  assert.deepEqual(data, { countries: { colombia: { Bogota: {} } } });
 });
 
-test("fetchResultJson rejects payloads without grouped city rates", async () => {
+test("fetchResultJson rejects payloads without country rates", async () => {
   await assert.rejects(
     fetchResultJson(RESULT_JSON_URL, async () => ({
       ok: true,
       json: async () => ({ generated_at: "2026-05-14T12:00:00Z" }),
     }) as Response),
-    /missing grouped city rates/i,
+    /missing country rates/i,
   );
 });

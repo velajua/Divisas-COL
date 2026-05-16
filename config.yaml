@@ -1,59 +1,61 @@
 function_dicto: {
-  "Bogotá": {
-    "https://www.puntodollar.com/tasa-de-cambio-en-sede-unicentro/": {
-        "fn": "puntoDollar",
-        "args": "Unicentro",
+  "colombia": {
+    "Bogotá": {
+        "https://www.puntodollar.com/tasa-de-cambio-en-sede-unicentro/": {
+            "fn": "puntoDollar",
+            "args": "Unicentro",
+        },
+        "https://www.puntodollar.com/tasa-de-cambio-salitre-plaza/": {
+            "fn": "puntoDollar",
+            "args": "Salitre",
+        },
+        "https://cambiosvancouver.com/tasa-de-cambio/": {
+            "fn": "cambiosVancouver",
+        },
+        "https://cambioskapital.com/": {
+            "fn": "cambiosKapital",
+        },
+        "https://www.bancounion.com/wps/portal/bancounion/web/productos-servicios/compra-venta-divisas": {
+            "fn": "bancounion",
+        },
+        "https://eurodolar.co/palatino/": {
+            "fn": "eurodolar",
+        },
+        "https://amerikancash.com/precio-de-divisas/tasas-el-retiro/": {
+            "fn": "amerikanCash",
+            "args": "Retiro",
+        },
+        "https://amerikancash.com/precio-de-divisas/tasas-calle-122/": {
+            "fn": "amerikanCash",
+            "args": "Calle122",
+        },
     },
-    "https://www.puntodollar.com/tasa-de-cambio-salitre-plaza/": {
-        "fn": "puntoDollar",
-        "args": "Salitre",
+    "Medellín": {
+        "https://www.puntodollar.com/tasa-de-cambio-envigado/": {
+            "fn": "puntoDollar",
+            "args": "Envigado",
+        },
+        "https://euroservicios.com.co/": {
+            "fn": "euroservicios",
+        },
     },
-    "https://cambiosvancouver.com/tasa-de-cambio/": {
-        "fn": "cambiosVancouver",
+    "Cali": {
+        "https://www.puntodollar.com/tasa-de-cambio-cali/": {
+            "fn": "puntoDollar",
+            "args": "Cali",
+        },
     },
-    "https://cambioskapital.com/": {
-        "fn": "cambiosKapital",
+    "Barranquilla": {
+        "https://www.puntodollar.com/tasa-de-cambio-en-barranquilla/": {
+            "fn": "puntoDollar",
+            "args": "Barranquilla",
+        },
     },
-    "https://www.bancounion.com/wps/portal/bancounion/web/productos-servicios/compra-venta-divisas": {
-        "fn": "bancounion",
-    },
-    "https://eurodolar.co/palatino/": {
-        "fn": "eurodolar",
-    },
-    "https://amerikancash.com/precio-de-divisas/tasas-el-retiro/": {
-        "fn": "amerikanCash",
-        "args": "Retiro",
-    },
-    "https://amerikancash.com/precio-de-divisas/tasas-calle-122/": {
-        "fn": "amerikanCash",
-        "args": "Calle122",
-    },
-  },
-  "Medellín": {
-    "https://www.puntodollar.com/tasa-de-cambio-envigado/": {
-        "fn": "puntoDollar",
-        "args": "Envigado",
-    },
-    "https://euroservicios.com.co/": {
-        "fn": "euroservicios",
-    },
-  },
-  "Cali": {
-    "https://www.puntodollar.com/tasa-de-cambio-cali/": {
-        "fn": "puntoDollar",
-        "args": "Cali",
-    },
-  },
-  "Barranquilla": {
-    "https://www.puntodollar.com/tasa-de-cambio-en-barranquilla/": {
-        "fn": "puntoDollar",
-        "args": "Barranquilla",
-    },
-  },
-  "Cartagena": {
-    "https://www.puntodollar.com/tasa-de-cambio-cartagena/": {
-        "fn": "puntoDollar",
-        "args": "Cartagena",
+    "Cartagena": {
+        "https://www.puntodollar.com/tasa-de-cambio-cartagena/": {
+            "fn": "puntoDollar",
+            "args": "Cartagena",
+        },
     },
   },
 }

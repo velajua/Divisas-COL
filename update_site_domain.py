@@ -7,11 +7,10 @@ HTML_DIR = ROOT / "html"
 DOMAIN_FILE = ROOT / "domain_name.txt"
 
 STATIC_PAGES = [
-    ("newsletter.html", "/newsletter.html", "weekly", "0.8"),
     ("about.html", "/about.html", "monthly", "0.7"),
     ("privacy.html", "/privacy.html", "monthly", "0.6"),
 ]
-DEFAULT_CITY_ROUTE = "/bogota/"
+DEFAULT_COUNTRY_ROUTE = "/colombia/"
 
 
 def read_base_url():
@@ -52,24 +51,42 @@ def update_html_url_tags(path, url):
     write_text_file(path, html)
 
 
-def city_routes():
+def city_routes(html_dir=HTML_DIR):
     routes = []
-    for path in sorted(HTML_DIR.iterdir()):
-        if not path.is_dir() or path.name == "entries":
+    for country_path in sorted(html_dir.iterdir()):
+        if not country_path.is_dir() or country_path.name in {"assets", "entries"}:
             continue
-        if (path / "index.html").exists():
-            routes.append((f"{path.name}/index.html", f"/{path.name}/", "daily", "1.0" if path.name == "bogota" else "0.9"))
+        if (country_path / "index.html").exists():
+            routes.append((f"{country_path.name}/index.html", f"/{country_path.name}/", "daily", "1.0"))
+
+        for city_path in sorted(country_path.iterdir()):
+            if not city_path.is_dir() or city_path.name in {"assets", "entries", "newsletter"}:
+                continue
+            if (city_path / "index.html").exists():
+                routes.append((f"{country_path.name}/{city_path.name}/index.html", f"/{country_path.name}/{city_path.name}/", "daily", "0.9"))
     return routes
 
 
-def entry_routes():
-    entries_dir = HTML_DIR / "entries"
-    if not entries_dir.exists():
-        return []
-    return [
-        (f"entries/{path.name}", f"/entries/{path.name}", "monthly", "0.7")
-        for path in sorted(entries_dir.glob("*.html"))
-    ]
+def static_routes(html_dir=HTML_DIR):
+    routes = []
+    for country_path in sorted(html_dir.iterdir()):
+        newsletter = country_path / "newsletter" / "index.html"
+        if country_path.is_dir() and newsletter.exists():
+            routes.append((f"{country_path.name}/newsletter/index.html", f"/{country_path.name}/newsletter/", "weekly", "0.8"))
+    return routes
+
+
+def entry_routes(html_dir=HTML_DIR):
+    routes = []
+    for country_path in sorted(html_dir.iterdir()):
+        entries_dir = country_path / "entries"
+        if not country_path.is_dir() or not entries_dir.exists():
+            continue
+        routes.extend(
+            (f"{country_path.name}/entries/{path.name}", f"/{country_path.name}/entries/{path.name}", "monthly", "0.7")
+            for path in sorted(entries_dir.glob("*.html"))
+        )
+    return routes
 
 
 def write_robots(base_url):
@@ -104,7 +121,7 @@ def write_sitemap(base_url, pages):
 
 def main():
     base_url = read_base_url()
-    pages = city_routes() + STATIC_PAGES + entry_routes()
+    pages = city_routes() + static_routes() + STATIC_PAGES + entry_routes()
 
     for filename, route, _, _ in pages:
         path = HTML_DIR / filename
@@ -117,7 +134,7 @@ def main():
 
     root_index = HTML_DIR / "index.html"
     if root_index.exists():
-        update_html_url_tags(root_index, page_url(base_url, DEFAULT_CITY_ROUTE))
+        update_html_url_tags(root_index, page_url(base_url, DEFAULT_COUNTRY_ROUTE))
 
     write_robots(base_url)
     write_sitemap(base_url, pages)

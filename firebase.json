@@ -20,7 +20,7 @@
     "redirects": [
       {
         "source": "/",
-        "destination": "/bogota/",
+        "destination": "/colombia/",
         "type": 301
       }
     ]
