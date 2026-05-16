@@ -236,8 +236,12 @@ python generate_voiceover.py --html input\entry.html --voice voice_samples\my_vo
 
 
 ---
+set VIRTUAL_ENV=C:\Users\juanv\Downloads\Divisas-COL\divisas_voiceover_xtts_clean\.venv
+set PATH=%VIRTUAL_ENV%\Scripts;%PATH%
+set PYTHONPATH=
+set PYTHONNOUSERSITE=1
 
 python generate_voiceover.py --html input/compras-oficiales-vigilancia-fiscal-y-peso-en-alerta.html --voice voice_samples/20000leguas_09_verne_128kb_clip_36.wav --out-dir output --script-only
-python generate_voiceover.py --html input/compras-oficiales-vigilancia-fiscal-y-peso-en-alerta.html --voice voice_samples/20000leguas_09_verne_128kb_clip_36.wav --out-dir output --format wav 
+python generate_voiceover.py --html input/entry.html --voice voice_samples/1.wav --out-dir output --format wav 
 
 ---
