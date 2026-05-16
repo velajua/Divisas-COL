@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 from envyaml import EnvYAML
+from helpers import iter_scraper_configs
 
 CONF_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.yaml")
 CONF = EnvYAML(CONF_PATH)
@@ -24,6 +25,7 @@ logging.basicConfig(
 class ScraperResult:
     name: str
     url: str
+    country: str
     city: str
     success: bool = False
     currency_count: int = 0
@@ -32,18 +34,18 @@ class ScraperResult:
     error: Optional[str] = None
 
 
-def _resolve_fn(fn_name: str):
+def _resolve_fn(fn_name: str, country: str):
     try:
-        mod = importlib.import_module(f"exchanges.{fn_name}")
+        mod = importlib.import_module(f"exchanges.{country}.{fn_name}")
     except ModuleNotFoundError as e:
         raise NotImplementedError(
-            f"Scraper module 'exchanges.{fn_name}' not found."
+            f"Scraper module 'exchanges.{country}.{fn_name}' not found."
         ) from e
 
     fn = getattr(mod, fn_name, None)
     if not callable(fn):
         raise NotImplementedError(
-            f"Found module 'exchanges.{fn_name}', but function '{fn_name}()' is missing."
+            f"Found module 'exchanges.{country}.{fn_name}', but function '{fn_name}()' is missing."
         )
     return fn
 
@@ -116,47 +118,46 @@ def _expected_currency_ids(fn_name: str) -> set:
 def run_health_check() -> list[ScraperResult]:
     results = []
 
-    for city, city_scrapers in CONF.get("function_dicto", {}).items():
-        for url, spec in city_scrapers.items():
-            fn_name = spec.get("fn")
-            args = spec.get("args")
-            result = ScraperResult(name=fn_name or "UNKNOWN", url=url, city=city)
+    for country, city, url, spec in iter_scraper_configs(CONF):
+        fn_name = spec.get("fn")
+        args = spec.get("args")
+        result = ScraperResult(name=fn_name or "UNKNOWN", url=url, country=country, city=city)
 
-            try:
-                if not fn_name:
-                    raise ValueError(f"Missing 'fn' for scraper config: city={city}, url={url}")
+        try:
+            if not fn_name:
+                raise ValueError(f"Missing 'fn' for scraper config: country={country}, city={city}, url={url}")
 
-                fn = _resolve_fn(fn_name)
-                total_data = _call(fn, url, [], args)
+            fn = _resolve_fn(fn_name, country)
+            total_data = _call(fn, url, [], args)
 
-                if not total_data:
-                    result.error = "No data returned"
-                    results.append(result)
-                    continue
+            if not total_data:
+                result.error = "No data returned"
+                results.append(result)
+                continue
 
-                entry = total_data[-1]
-                result.currency_count = len(entry.get("data", {}))
+            entry = total_data[-1]
+            result.currency_count = len(entry.get("data", {}))
 
-                scraped_ids = {
-                    d.get("id")
-                    for d in entry.get("data", {}).values()
-                    if isinstance(d, dict) and d.get("id")
-                }
+            scraped_ids = {
+                d.get("id")
+                for d in entry.get("data", {}).values()
+                if isinstance(d, dict) and d.get("id")
+            }
 
-                expected_ids = _expected_currency_ids(fn_name)
-                result.missing_currencies = sorted(expected_ids - scraped_ids)
-                result.invalid_values = _validate_values(entry)
+            expected_ids = _expected_currency_ids(fn_name)
+            result.missing_currencies = sorted(expected_ids - scraped_ids)
+            result.invalid_values = _validate_values(entry)
 
-                result.success = (
-                    result.currency_count > 0
-                    and len(result.missing_currencies) == 0
-                    and len(result.invalid_values) == 0
-                )
+            result.success = (
+                result.currency_count > 0
+                and len(result.missing_currencies) == 0
+                and len(result.invalid_values) == 0
+            )
 
-            except Exception as e:
-                result.error = f"{e}\n{traceback.format_exc()}"
+        except Exception as e:
+            result.error = f"{e}\n{traceback.format_exc()}"
 
-            results.append(result)
+        results.append(result)
 
     return results
 
@@ -173,7 +174,7 @@ def format_report(results: list[ScraperResult]) -> str:
         if not r.success:
             all_ok = False
 
-        lines.append(f"\n[{status}] {r.name} ({r.city} | {r.url})")
+        lines.append(f"\n[{status}] {r.name} ({r.country} | {r.city} | {r.url})")
 
         if r.success:
             lines.append(f"  Currencies scraped: {r.currency_count}")
@@ -246,7 +247,7 @@ def run_periodic_check(stop_event=None):
             failed = [r for r in results if not r.success]
             logging.error(
                 f"Periodic check attempt #{attempt} FAILED after {max_retries} retries. "
-                f"Failed scrapers: {[f'{r.city}:{r.name}' for r in failed]}"
+                f"Failed scrapers: {[f'{r.country}:{r.city}:{r.name}' for r in failed]}"
             )
 
         if log_each:

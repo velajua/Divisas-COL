@@ -164,7 +164,7 @@ def parse_spanish_date(date_text):
     return datetime(year, month, day)
 
 
-def build_entry(path):
+def build_entry(path, country="colombia"):
     html = path.read_text(encoding="utf-8")
 
     title = extract(r"<title>(.*?)</title>", html, path.stem)
@@ -190,17 +190,25 @@ def build_entry(path):
         "title": title,
         "summary": description,
         "hashtags": build_hashtags(title, description, html),
-        "url": f"entries/{path.name}",
+        "url": f"{country}/entries/{path.name}",
         "_sort_date": parse_spanish_date(date),
     }
 
 
-def generate_entries_json(entries_dir, output_file):
+def infer_country(entries_dir):
+    parent = entries_dir.parent
+    if entries_dir.name == "entries" and parent.name:
+        return parent.name
+    return "colombia"
+
+
+def generate_entries_json(entries_dir, output_file, country=None):
     entries = []
+    country = country or infer_country(entries_dir)
 
     if entries_dir.is_dir():
         for path in sorted(entries_dir.glob("*.html")):
-            entries.append(build_entry(path))
+            entries.append(build_entry(path, country=country))
 
     entries.sort(key=lambda entry: (entry["url"], entry["title"], entry["summary"]))
     entries.sort(key=lambda entry: entry["_sort_date"], reverse=True)
@@ -218,26 +226,31 @@ def generate_entries_json(entries_dir, output_file):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Generate html/entries.json from HTML files in html/entries."
+        description="Generate country-scoped entries.json from HTML files in html/<country>/entries."
     )
     parser.add_argument(
         "--entries-dir",
-        default="html/entries",
+        default="html/colombia/entries",
         type=Path,
         help="Directory containing entry HTML files.",
     )
     parser.add_argument(
         "--output",
-        default="html/entries.json",
+        default="html/colombia/entries.json",
         type=Path,
         help="Path to write the generated JSON file.",
+    )
+    parser.add_argument(
+        "--country",
+        default=None,
+        help="Country slug to prefix entry URLs. Defaults to the parent folder of entries-dir.",
     )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    count = generate_entries_json(args.entries_dir, args.output)
+    count = generate_entries_json(args.entries_dir, args.output, country=args.country)
     print(f"Generated {args.output} with {count} entries")
 
 

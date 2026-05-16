@@ -6,16 +6,26 @@ export type Snapshot = {
   data: ResultPayload;
 };
 
-export function hasGroupedCityRates(data: unknown): data is ResultPayload {
+export function hasCountryRates(data: unknown): data is ResultPayload {
   if (!data || typeof data !== "object" || Array.isArray(data)) return false;
+
+  const compactCountries = (data as { countries?: unknown }).countries;
+  if (compactCountries && typeof compactCountries === "object" && !Array.isArray(compactCountries)) {
+    return true;
+  }
+
+  const groupedByCountry = (data as { grouped_by_country?: unknown }).grouped_by_country;
+  if (groupedByCountry && typeof groupedByCountry === "object" && !Array.isArray(groupedByCountry)) {
+    return true;
+  }
 
   const groupedByCity = (data as { grouped_by_city?: unknown }).grouped_by_city;
   return Boolean(groupedByCity && typeof groupedByCity === "object" && !Array.isArray(groupedByCity));
 }
 
 export function assertResultPayload(data: unknown): asserts data is ResultPayload {
-  if (!hasGroupedCityRates(data)) {
-    throw new Error("Invalid result.json: missing grouped city rates.");
+  if (!hasCountryRates(data)) {
+    throw new Error("Invalid result.json: missing country rates.");
   }
 }
 
@@ -28,7 +38,7 @@ function isSnapshot(value: unknown): value is Snapshot {
       snapshot.fetchedAt &&
       typeof snapshot.date === "string" &&
       typeof snapshot.fetchedAt === "string" &&
-      hasGroupedCityRates(snapshot.data),
+      hasCountryRates(snapshot.data),
   );
 }
 

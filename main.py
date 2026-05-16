@@ -10,9 +10,11 @@ from helpers import (
     _call,
     _resolve_fn,
     _group_by_city,
+    _group_by_country_city,
     CONF,
     BQ_PROJECT,
     BQ_TABLE,
+    iter_scraper_configs,
 )
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -23,6 +25,7 @@ from health_check import run_health_check, format_report
 def _stable_row_key(row):
     data = row.get("data", {}) if isinstance(row, dict) else {}
     return (
+        str(row.get("country", "")),
         str(row.get("city", "")),
         str(row.get("exchange_house", "")),
         str(row.get("source_url", "")),
@@ -33,8 +36,41 @@ def _stable_row_key(row):
 
 def _write_json_file(path, payload):
     with open(path, "w", encoding="utf-8", newline="\r\n") as handle:
-        json.dump(payload, handle, ensure_ascii=False, indent=2)
+        json.dump(payload, handle, ensure_ascii=False, separators=(",", ":"))
         handle.write("\r\n")
+
+
+def _compact_location(row):
+    rates = {}
+    for currency_name, rate_data in (row.get("data") or {}).items():
+        currency_id = rate_data.get("id") or currency_name
+        rates[currency_id] = {
+            "label": currency_name,
+            "buy": rate_data.get("buy"),
+            "sell": rate_data.get("sell"),
+        }
+
+    return {
+        "id": row.get("id") or row.get("exchange_house"),
+        "url": row.get("source_url") or "",
+        "rates": rates,
+    }
+
+
+def _compact_countries(grouped_by_country):
+    countries = {}
+
+    for country, cities in grouped_by_country.items():
+        countries[country] = {}
+        for city, exchange_houses in cities.items():
+            countries[country][city] = {}
+            for exchange_house, rows in exchange_houses.items():
+                countries[country][city][exchange_house] = [
+                    _compact_location(row)
+                    for row in rows
+                ]
+
+    return countries
 
 
 def _get_mode(request=None, argv=None):
@@ -78,35 +114,38 @@ def _run_scrapers(write_to_bq=False):
 
     total_data = []
     current_city = None
+    current_country = None
     current_url = None
 
     try:
-        for city, city_scrapers in CONF["function_dicto"].items():
+        for country, city, url, spec in iter_scraper_configs(CONF):
+            current_country = country
             current_city = city
 
-            for url, spec in city_scrapers.items():
-                current_url = url
-                fn_name = spec.get("fn")
-                args = spec.get("args")
-                fn = _resolve_fn(fn_name)
+            current_url = url
+            fn_name = spec.get("fn")
+            args = spec.get("args")
+            fn = _resolve_fn(fn_name, country)
 
-                try:
-                    scraped_data = _call(fn, url, [], args)
+            try:
+                scraped_data = _call(fn, url, [], args)
 
-                    for row in scraped_data:
-                        if isinstance(row, dict):
-                            row["city"] = city
-                            row["exchange_house"] = fn_name
-                            row["source_url"] = url
+                for row in scraped_data:
+                    if isinstance(row, dict):
+                        row["country"] = country
+                        row["city"] = city
+                        row["exchange_house"] = fn_name
+                        row["source_url"] = url
 
-                    total_data.extend(scraped_data)
-                    print(f"finished: {city} - {url}")
+                total_data.extend(scraped_data)
+                print(f"finished: {country} - {city} - {url}")
 
-                except Exception as e:
-                    print(f"Error on {city} | {url} ({fn_name}): {e}")
+            except Exception as e:
+                print(f"Error on {country} | {city} | {url} ({fn_name}): {e}")
 
         total_data.sort(key=_stable_row_key)
         grouped_by_city = _group_by_city(total_data)
+        grouped_by_country = _group_by_country_city(total_data)
         comparison_data = _build_comparison_data_by_city(total_data)
 
         if write_to_bq:
@@ -129,13 +168,12 @@ def _run_scrapers(write_to_bq=False):
             "ok": True,
             "health_passed": total_passed,
             "health_failed": total_failed,
-            "comparison_data": comparison_data,
-            "grouped_by_city": grouped_by_city,
+            "countries": _compact_countries(grouped_by_country),
         }
 
     except Exception:
         print(traceback.format_exc())
-        print(f"Error in city={current_city}, url={current_url}")
+        print(f"Error in country={current_country}, city={current_city}, url={current_url}")
         return {
             "ok": False,
             "error": traceback.format_exc(),

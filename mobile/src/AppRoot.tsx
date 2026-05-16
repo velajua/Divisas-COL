@@ -30,7 +30,7 @@ import { loadSnapshots, saveSnapshots } from "./storage/snapshotStorage";
 type TabId = "today" | "history" | "rates" | "newsletter" | "info";
 type DropdownId = "city" | "currency" | null;
 
-const NEWSLETTER_URL = "https://www.divisascol.com/newsletter.html";
+const NEWSLETTER_URL = "https://www.divisascol.com/colombia/newsletter/";
 const SITE_URL = "https://divisascol.com";
 const DEFAULT_CURRENCY = "AmericanDollar";
 const FRONT_PAGE_CURRENCIES = ["AmericanDollar", "Euro"];

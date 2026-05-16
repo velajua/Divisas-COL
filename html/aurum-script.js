@@ -1,4 +1,5 @@
 const DEFAULT_CITY = "Bogotá";
+const INITIAL_COUNTRY = document.documentElement.dataset.country || "colombia";
 const INITIAL_CITY = document.documentElement.dataset.city || DEFAULT_CITY;
 
 const GOOGLE_RATES_ENDPOINT = null;
@@ -35,7 +36,6 @@ const CURRENCY_REFERENCE_CODE_MAP = {
 
 let selectedHeroCurrencies = [...DEFAULT_HERO_CURRENCIES];
 let currentCityRows = [];
-let currentComparisonMap = {};
 let currentReferenceRates = { updatedAt: null, byCurrency: {} };
 const referenceRateCache = new Map();
 
@@ -75,7 +75,8 @@ function slugifyCity(value) {
 
 function cityPagePath(city) {
   const slug = slugifyCity(city || DEFAULT_CITY);
-  return `/${slug || "bogota"}/`;
+  const country = slugifyCity(INITIAL_COUNTRY) || "colombia";
+  return `/${country}/${slug || "bogota"}/`;
 }
 
 function formatCop(value) {
@@ -153,7 +154,7 @@ function getNowLabel() {
 }
 
 async function loadResultData() {
-  const candidates = ["../result.json", "result.json", "/result.json"];
+  const candidates = ["../../result.json", "../result.json", "result.json", "/result.json"];
 
   for (const path of candidates) {
     try {
@@ -167,18 +168,49 @@ async function loadResultData() {
   throw new Error("No se pudo cargar el archivo de datos.");
 }
 
-function flattenGroupedByCity(groupedByCity) {
+function expandCompactLocation(country, city, houseGroupName, location) {
+  if (location?.data) {
+    return {
+      ...location,
+      city: location.city || city,
+      exchange_house: location.exchange_house || houseGroupName,
+      source_url: location.source_url || location.url || "",
+      country: location.country || country,
+    };
+  }
+
+  const data = {};
+  Object.entries(location?.rates || {}).forEach(([currencyId, rate]) => {
+    data[rate.label || currencyId] = {
+      buy: rate.buy,
+      sell: rate.sell,
+      id: currencyId,
+    };
+  });
+
+  return {
+    id: location?.id || houseGroupName,
+    data,
+    city,
+    exchange_house: houseGroupName,
+    source_url: location?.url || "",
+    country,
+  };
+}
+
+function flattenGroupedByCity(groupedByCity, country) {
   const rows = [];
 
   Object.entries(groupedByCity || {}).forEach(([cityName, houses]) => {
     Object.entries(houses || {}).forEach(([houseGroupName, locations]) => {
       (locations || []).forEach((location) => {
-        const locationId = location.id || houseGroupName;
-        const exchangeHouse = location.exchange_house || houseGroupName;
-        const sourceUrl = location.source_url || "#";
-        const city = normalizeCityName(location.city || cityName);
+        const expandedLocation = expandCompactLocation(country, cityName, houseGroupName, location);
+        const locationId = expandedLocation.id || houseGroupName;
+        const exchangeHouse = expandedLocation.exchange_house || houseGroupName;
+        const sourceUrl = expandedLocation.source_url || "#";
+        const city = normalizeCityName(expandedLocation.city || cityName);
 
-        Object.entries(location.data || {}).forEach(([currencyLabel, currencyData]) => {
+        Object.entries(expandedLocation.data || {}).forEach(([currencyLabel, currencyData]) => {
           const buy = normalizeNumber(currencyData.buy);
           const sell = normalizeNumber(currencyData.sell);
 
@@ -200,6 +232,17 @@ function flattenGroupedByCity(groupedByCity) {
   });
 
   return rows;
+}
+
+function countryGroupedByCity(data) {
+  const country = slugifyCity(INITIAL_COUNTRY) || "colombia";
+  const compactCountries = data?.countries || {};
+  if (compactCountries[INITIAL_COUNTRY] || compactCountries[country]) {
+    return compactCountries[INITIAL_COUNTRY] || compactCountries[country];
+  }
+
+  const groupedByCountry = data?.grouped_by_country || {};
+  return groupedByCountry[INITIAL_COUNTRY] || groupedByCountry[country] || data?.grouped_by_city || {};
 }
 
 function getAvailableCities(rows) {
@@ -253,38 +296,6 @@ function getBestSellRow(rows, currencyId) {
   const valid = rows.filter((row) => row.currencyId === currencyId && Number.isFinite(row.sell) && row.sell > 0);
   if (!valid.length) return null;
   return valid.reduce((best, row) => (row.sell < best.sell ? row : best), valid[0]);
-}
-
-function buildComparisonMap(rawComparisonData, city) {
-  const cityData = (rawComparisonData || {})[city] || [];
-  const map = {};
-
-  cityData.forEach((triple) => {
-    if (!Array.isArray(triple) || triple.length < 3) return;
-
-    const line1 = triple[0] || "";
-    const line2 = triple[1] || "";
-    const line3 = triple[2] || "";
-
-    const currencyMatch =
-      line1.match(/Value for buying ([A-Za-z]+)/) ||
-      line2.match(/Value for selling ([A-Za-z]+)/) ||
-      line3.match(/Difference for ([A-Za-z]+)/);
-
-    const diffMatch = line3.match(/Difference for [A-Za-z]+ in value is (-?\d+)/);
-
-    if (!currencyMatch) return;
-
-    const currencyId = currencyMatch[1];
-    map[currencyId] = {
-      buyLine: line1,
-      sellLine: line2,
-      diffLine: line3,
-      diffValue: diffMatch ? Number(diffMatch[1]) : null,
-    };
-  });
-
-  return map;
 }
 
 function renderHeroCounts(cityRows, referenceRates) {
@@ -698,12 +709,11 @@ async function renderCity(city, resetCurrencySelection) {
   }
 
   currentCityRows = getRowsByCity(city);
-  currentComparisonMap = buildComparisonMap(rawData?.comparison_data, city);
 
   fillHeroCurrencySelectors(currentCityRows, Boolean(resetCurrencySelection));
   await renderSelectedCurrencySections();
   renderExchangeGrid(currentCityRows);
-  renderCurrencyGrid(currentCityRows, currentComparisonMap);
+  renderCurrencyGrid(currentCityRows);
   renderTable(currentCityRows);
 }
 
@@ -724,7 +734,7 @@ async function init() {
     setLoadStatus("");
 
     rawData = await loadResultData();
-    flattenedRows = flattenGroupedByCity(rawData.grouped_by_city || {});
+    flattenedRows = flattenGroupedByCity(countryGroupedByCity(rawData), INITIAL_COUNTRY);
 
     const cities = getAvailableCities(flattenedRows);
     fillCitySelectors(cities);

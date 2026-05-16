@@ -737,7 +737,7 @@ def publish_prepared_group(prepared_group, ig_user_id, token):
 
 
 def should_publish_group(group):
-    return bool(group.get("single"))
+    return bool(group.get("posts"))
 
 
 def publish_groups(groups, ig_user_id, token):

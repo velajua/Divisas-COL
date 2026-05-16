@@ -68,7 +68,7 @@ def parse_args():
     parser = argparse.ArgumentParser(
         description="Generate daily Instagram SVG cards from html/result.json."
     )
-    parser.add_argument("--html-dir", default="html", help="Folder containing result.json and entries.json.")
+    parser.add_argument("--html-dir", default="html", help="Folder containing result.json and country-scoped entries.json.")
     parser.add_argument("--output-dir", default="instagram_cards", help="Root folder for dated card output.")
     parser.add_argument("--date", help="Run date in YYYY-MM-DD. Defaults to today in Bogota.")
     parser.add_argument("--max-rows", type=int, default=14, help="Currency rows per city card.")
@@ -212,6 +212,46 @@ def collect_city_rankings(grouped_by_city):
     return rankings
 
 
+def expand_compact_city_groups(city_groups):
+    expanded = {}
+    for city, groups in (city_groups or {}).items():
+        expanded[city] = {}
+        for exchange_name, exchange_items in (groups or {}).items():
+            expanded[city][exchange_name] = []
+            for item in exchange_items or []:
+                if "data" in item:
+                    expanded[city][exchange_name].append(item)
+                    continue
+
+                data = {}
+                for currency_id, rate_data in (item.get("rates") or {}).items():
+                    data[rate_data.get("label") or currency_id] = {
+                        "buy": rate_data.get("buy"),
+                        "sell": rate_data.get("sell"),
+                        "id": currency_id,
+                    }
+
+                expanded[city][exchange_name].append({
+                    "id": item.get("id") or exchange_name,
+                    "source_url": item.get("url") or "",
+                    "city": city,
+                    "exchange_house": exchange_name,
+                    "data": data,
+                })
+    return expanded
+
+
+def country_city_groups(result, country="colombia"):
+    compact_country = (result.get("countries", {}) or {}).get(country)
+    if compact_country:
+        return expand_compact_city_groups(compact_country)
+
+    return (
+        (result.get("grouped_by_country", {}) or {}).get(country)
+        or result.get("grouped_by_city", {})
+    )
+
+
 def currency_sort_key(row):
     try:
         return (CURRENCY_ORDER.index(row["id"]), row["name"])
@@ -329,8 +369,8 @@ def render_newsletter_description(entry, date_label, hashtags):
         [
             "",
             "Animo, que entender el mercado tambien ayuda a comprar mejor.",
-            "Lee la nota completa: divisascol.com",
-            f"{entry.get('url', 'newsletter.html')}",
+            "Lee la nota completa: divisascol.com/colombia/newsletter",
+            f"{entry.get('url', 'colombia/newsletter/')}",
         ]
     )
     return "\n".join(body) + hidden_hashtag_block(post_hashtags)
@@ -414,7 +454,7 @@ def render_city_card(city, rows, date_label, page, total_pages):
         sell_text, _ = wrapped_svg_text(760, y + 22, sell_place, 230, 15, 15, "#475569", 500)
         parts.append(sell_text)
 
-    parts.append(svg_text(72, 1256, f"Fuente: divisascol.com/{unidecode(city.lower())}", 24, 600, "#cbd5e1"))
+    parts.append(svg_text(72, 1256, f"Fuente: divisascol.com/colombia/{unidecode(city.lower())}", 24, 600, "#cbd5e1"))
     parts.append(svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"))
     parts.append("</svg>")
     return "\n".join(parts)
@@ -476,9 +516,9 @@ def render_newsletter_card(entry, date_label):
     cta_y = summary_y + line_count * 48 + 90
     parts.extend(
         [
-            f'<rect x="100" y="{cta_y}" width="790" height="92" rx="24" fill="#0f5132"/>',
-            svg_text(136, cta_y + 58, "Leer en divisascol.com/newsletter.html", 32, 800, "#ffffff"),
-            svg_text(100, 1088, entry.get("url", "newsletter.html"), 25, 600, "#475569"),
+            f'<rect x="120" y="{cta_y}" width="800" height="92" rx="24" fill="#0f5132"/>',
+            svg_text(136, cta_y + 58, "Leer en divisascol.com/colombia/newsletter", 32, 800, "#ffffff"),
+            svg_text(100, 1088, "divisas.col/" + entry.get("url", "colombia/newsletter/"), 25, 600, "#475569"),
             svg_text(72, 1256, "Opinion y contexto para moverse mejor con el dolar", 24, 600, "#cbd5e1"),
             svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"),
             "</svg>",
@@ -649,11 +689,11 @@ def main():
     day_dir.mkdir(parents=True, exist_ok=True)
 
     result = load_json(html_dir / "result.json")
-    entries_path = html_dir / "entries.json"
+    entries_path = html_dir / "colombia" / "entries.json"
     entries = load_json(entries_path) if entries_path.exists() else []
     hashtags = load_hashtag_template(repo_root)
 
-    rankings = collect_city_rankings(result.get("grouped_by_city", {}))
+    rankings = collect_city_rankings(country_city_groups(result, "colombia"))
     manifest = {
         "date": date_label,
         "source": relative_manifest_path(html_dir / "result.json", repo_root),

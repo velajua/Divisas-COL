@@ -27,7 +27,7 @@
 - Create: `mobile/src/data/resultParser.ts`
 - Test: `mobile/src/data/resultParser.test.ts`
 
-- [ ] Write failing tests for flattening `grouped_by_city` into rate rows and computing best buy/sell summaries.
+- [ ] Write failing tests for flattening compact `countries` payloads into rate rows and computing best buy/sell summaries.
 - [ ] Run `npm test` and confirm the tests fail because parser functions do not exist.
 - [ ] Implement `flattenRates`, `getCities`, `getCurrencies`, and `getBestRates`.
 - [ ] Run `npm test` and confirm parser tests pass.
