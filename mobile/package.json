@@ -16,7 +16,7 @@
     "build:ios": "eas build --platform ios --profile production",
     "submit:android": "eas submit --platform android --profile production",
     "submit:ios": "eas submit --platform ios --profile production",
-    "test": "tsx --test src/data/snapshotCache.test.ts src/data/resultParser.test.ts src/data/api.test.ts src/data/cityInference.test.ts",
+    "test": "tsx --test src/data/snapshotCache.test.ts src/data/resultParser.test.ts src/data/api.test.ts src/data/cityInference.test.ts src/data/adConfig.test.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "0.81.5",
+    "react-native-google-mobile-ads": "^16.3.3",
     "react-native-svg": "15.12.1",
     "react-native-web": "^0.21.2"
   },

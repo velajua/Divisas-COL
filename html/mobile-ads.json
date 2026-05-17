@@ -1,0 +1,11 @@
+{
+  "enabled": true,
+  "banner": {
+    "enabled": true,
+    "androidAdUnitId": "ca-app-pub-8147047207612128/5907396395"
+  },
+  "native": {
+    "enabled": true,
+    "androidAdUnitId": "ca-app-pub-8147047207612128/1066133253"
+  }
+}
