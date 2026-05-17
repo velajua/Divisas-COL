@@ -9,7 +9,13 @@ intended for iOS and Android app-store distribution.
 The app still uses the public website data file as its source:
 
 ```text
-https://www.divisascol.com/result.json
+https://divisascol.com/result.json
+```
+
+Mobile ad placement IDs are loaded remotely from:
+
+```text
+https://divisascol.com/mobile-ads.json
 ```
 
 ## App Sections
@@ -80,6 +86,17 @@ Run Android:
 ```cmd
 npm run android
 ```
+
+Build the Android production bundle:
+
+```cmd
+set ADMOB_ANDROID_APP_ID=ca-app-pub-0000000000000000~0000000000
+android-prod.bat
+```
+
+`ADMOB_ANDROID_APP_ID` is the Android app ID from AdMob. Banner and native ad
+unit IDs can be changed later by updating `html/mobile-ads.json` and deploying
+the website, so they do not require another app release.
 
 Run iOS on macOS:
 

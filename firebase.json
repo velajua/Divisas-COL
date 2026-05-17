@@ -15,6 +15,15 @@
             "value": "public, max-age=1800"
           }
         ]
+      },
+      {
+        "source": "/mobile-ads.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=300"
+          }
+        ]
       }
     ],
     "redirects": [

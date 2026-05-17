@@ -498,6 +498,29 @@ class CountryNewsletterTests(unittest.TestCase):
 
         self.assertEqual("google.com, pub-8147047207612128, DIRECT, f08c47fec0942fa0", ads_txt)
 
+    def test_app_ads_txt_contains_google_authorization(self):
+        app_ads_txt = (Path("html") / "app-ads.txt").read_text(encoding="utf-8").strip()
+
+        self.assertEqual("google.com, pub-8147047207612128, DIRECT, f08c47fec0942fa0", app_ads_txt)
+
+    def test_mobile_ads_config_contains_remote_ad_unit_ids(self):
+        mobile_ads = json.loads((Path("html") / "mobile-ads.json").read_text(encoding="utf-8"))
+
+        self.assertEqual(
+            {
+                "enabled": True,
+                "banner": {
+                    "enabled": True,
+                    "androidAdUnitId": "ca-app-pub-8147047207612128/5907396395",
+                },
+                "native": {
+                    "enabled": True,
+                    "androidAdUnitId": "ca-app-pub-8147047207612128/1066133253",
+                },
+            },
+            mobile_ads,
+        )
+
     def test_html_pages_include_adsense_loader_once(self):
         for path in (Path("html")).rglob("*.html"):
             page = path.read_text(encoding="utf-8")

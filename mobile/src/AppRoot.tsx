@@ -15,6 +15,8 @@ import {
 } from "react-native";
 import Svg, { Path, Rect } from "react-native-svg";
 
+import { MobileBannerAd, MobileNativeAd } from "./components/MobileAds";
+import { DEFAULT_MOBILE_ADS_CONFIG, fetchMobileAdsConfig, type MobileAdsConfig } from "./data/adConfig";
 import { fetchResultJson, RESULT_JSON_URL } from "./data/api";
 import { inferNearestCity } from "./data/cityInference";
 import {
@@ -279,6 +281,7 @@ export default function AppRoot() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [messageKey, setMessageKey] = useState<MessageKey>("loadingRates");
   const [openDropdown, setOpenDropdown] = useState<DropdownId>(null);
+  const [mobileAdsConfig, setMobileAdsConfig] = useState<MobileAdsConfig>(DEFAULT_MOBILE_ADS_CONFIG);
   const locationRequestedRef = useRef(false);
   const userCountryRef = useRef(false);
   const t = COPY[language];
@@ -391,9 +394,14 @@ export default function AppRoot() {
     let alive = true;
 
     async function load() {
-      const [saved, preferences] = await Promise.all([loadSnapshots(), loadPreferences()]);
+      const [saved, preferences, adsConfig] = await Promise.all([
+        loadSnapshots(),
+        loadPreferences(),
+        fetchMobileAdsConfig(),
+      ]);
       if (!alive) return;
 
+      setMobileAdsConfig(adsConfig);
       if (preferences.language) {
         setLanguage(preferences.language);
       }
@@ -456,6 +464,7 @@ export default function AppRoot() {
             </View>
           );
         })}
+        <MobileNativeAd placement={mobileAdsConfig.native} language={language} />
         <Text style={styles.muted}>{message}</Text>
       </>
     );
@@ -643,6 +652,7 @@ export default function AppRoot() {
       <ScrollView style={styles.content} contentContainerStyle={styles.contentInner}>
         {renderContent()}
       </ScrollView>
+      <MobileBannerAd placement={mobileAdsConfig.banner} />
       <View style={[styles.tabBar, Platform.OS === "android" && styles.androidTabBar]}>
         {tabs.map((tab) => (
           <Pressable
