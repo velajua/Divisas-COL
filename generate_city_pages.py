@@ -14,6 +14,12 @@ DEFAULT_CITY = "Bogotá"
 SITE_NAME = "Divisas COL"
 SITE_URL = "https://divisascol.com"
 SITE_LOGO = f"{SITE_URL}/assets/logo.svg"
+ADSENSE_CLIENT_ID = "ca-pub-8147047207612128"
+ADSENSE_ACCOUNT_META_TAG = f'<meta name="google-adsense-account" content="{ADSENSE_CLIENT_ID}">'
+ADSENSE_SCRIPT_TAG = (
+    f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_CLIENT_ID}"\n'
+    '     crossorigin="anonymous"></script>'
+)
 LOCALES = {
     "es": {"label": "Español", "html_lang": "es"},
     "en": {"label": "English", "html_lang": "en"},
@@ -349,6 +355,8 @@ def city_head(country, city, slug, copy, locale):
   <meta name="twitter:title" content="{copy["title"]}">
   <meta name="twitter:description" content="{copy["description"]}">
   <meta name="twitter:image" content="{site_social_image(country, locale)}">
+  {ADSENSE_ACCOUNT_META_TAG}
+  {ADSENSE_SCRIPT_TAG}
   {json_ld(structured_data)}
 """
 
@@ -765,6 +773,8 @@ def country_landing_html(country, cities, locale="es"):
   <meta property="og:description" content="{copy["description"]}">
   <meta property="og:url" content="{canonical}">
   <meta property="og:image" content="{site_social_image(country, locale)}">
+  {ADSENSE_ACCOUNT_META_TAG}
+  {ADSENSE_SCRIPT_TAG}
 </head>
 <body>
   <nav class="nav" id="navbar">
@@ -839,6 +849,8 @@ def redirect_html(title, route):
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="{canonical}">
   <meta http-equiv="refresh" content="0; url={route}">
+  {ADSENSE_ACCOUNT_META_TAG}
+  {ADSENSE_SCRIPT_TAG}
   <script>window.location.replace("{route}");</script>
 </head>
 <body>
@@ -878,6 +890,9 @@ def root_country_index_html(countries):
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="aurum-gold.css">
+  <meta property="og:url" content="{SITE_URL}/">
+  {ADSENSE_ACCOUNT_META_TAG}
+  {ADSENSE_SCRIPT_TAG}
 </head>
 <body>
   <nav class="nav" id="navbar">
@@ -982,6 +997,9 @@ def locale_index_html(locale, countries):
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../aurum-gold.css">
+  <meta property="og:url" content="{SITE_URL}/{locale}/">
+  {ADSENSE_ACCOUNT_META_TAG}
+  {ADSENSE_SCRIPT_TAG}
 </head>
 <body>
   <nav class="nav" id="navbar">
