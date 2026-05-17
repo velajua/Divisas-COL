@@ -2,14 +2,55 @@ const NEWSLETTER_CAPTURE_ENDPOINT = "https://script.google.com/macros/s/AKfycbwT
 
 function getNewsletterPageContext() {
   const pathParts = (window.location.pathname || "/").split("/").filter(Boolean);
-  const country = document.documentElement.dataset.country || pathParts[0] || "";
+  const locale = document.documentElement.dataset.locale || pathParts[0] || "es";
+  const country = document.documentElement.dataset.country || pathParts[1] || "";
   const city = document.documentElement.dataset.city || "";
 
   return {
+    locale,
     page: window.location.pathname || "/",
     country,
     city,
     source: city ? "city-floating-helper" : "newsletter-page",
+  };
+}
+
+function newsletterCopy() {
+  const locale = document.documentElement.dataset.locale || "es";
+  if (locale === "en") {
+    return {
+      ariaLabel: "Newsletter signup",
+      close: "Close",
+      kicker: "Currency alerts",
+      title: "Want to stay up to date?",
+      body: "Get rate updates and the newsletter.",
+      emailLabel: "Email",
+      honeypot: "Website",
+      submit: "Send",
+      consent: "You can unsubscribe anytime.",
+      invalidEmail: "Enter a valid email.",
+      success: "Done. We will let you know when there are updates.",
+      missingEndpoint: "Newsletter capture endpoint is not connected.",
+      saving: "Saving email...",
+      failure: "Could not save the email. Try again.",
+    };
+  }
+
+  return {
+    ariaLabel: "Suscripcion al newsletter",
+    close: "Cerrar",
+    kicker: "Alertas de divisas",
+    title: "¿Quieres estar al día?",
+    body: "Recibe novedades de tasas y el newsletter.",
+    emailLabel: "Correo electronico",
+    honeypot: "Sitio web",
+    submit: "Enviar",
+    consent: "Puedes darte de baja cuando quieras.",
+    invalidEmail: "Escribe un correo valido.",
+    success: "Listo. Te avisaremos cuando haya novedades.",
+    missingEndpoint: "Falta conectar el endpoint de captura.",
+    saving: "Guardando correo...",
+    failure: "No se pudo guardar el correo. Intenta de nuevo.",
   };
 }
 
@@ -38,27 +79,28 @@ function createFloatingNewsletterCapture() {
   if (!shouldForceNewsletterHelper() && localStorage.getItem(newsletterStorageKey("subscribed")) === "1") return null;
   if (!shouldForceNewsletterHelper() && wasNewsletterHelperDismissed()) return null;
 
+  const copy = newsletterCopy();
   const wrapper = document.createElement("aside");
   wrapper.className = "newsletter-helper";
   wrapper.setAttribute("data-newsletter-capture", "floating");
-  wrapper.setAttribute("aria-label", "Suscripcion al newsletter");
+  wrapper.setAttribute("aria-label", copy.ariaLabel);
   wrapper.innerHTML = `
-    <button class="newsletter-helper-close" type="button" aria-label="Cerrar">×</button>
-    <div class="newsletter-helper-kicker">Alertas de divisas</div>
-    <h2>¿Quieres estar al día?</h2>
-    <p>Recibe novedades de tasas y el newsletter.</p>
+    <button class="newsletter-helper-close" type="button" aria-label="${copy.close}">×</button>
+    <div class="newsletter-helper-kicker">${copy.kicker}</div>
+    <h2>${copy.title}</h2>
+    <p>${copy.body}</p>
     <form class="newsletter-form" data-newsletter-form>
-      <label class="sr-only" for="floatingNewsletterEmail">Correo electronico</label>
+      <label class="sr-only" for="floatingNewsletterEmail">${copy.emailLabel}</label>
       <label class="newsletter-hp" aria-hidden="true">
-        Sitio web
+        ${copy.honeypot}
         <input name="website" type="text" tabindex="-1" autocomplete="off">
       </label>
       <div class="newsletter-input-row">
         <input id="floatingNewsletterEmail" name="email" type="email" autocomplete="email" placeholder="tu@email.com" required>
-        <button type="submit">Enviar</button>
+        <button type="submit">${copy.submit}</button>
       </div>
       <div class="newsletter-consent">
-        Puedes darte de baja cuando quieras.
+        ${copy.consent}
       </div>
       <div class="newsletter-message" data-newsletter-message aria-live="polite"></div>
     </form>
@@ -84,25 +126,26 @@ function setNewsletterMessage(form, message, isError) {
 }
 
 async function submitNewsletterEmail(form) {
+  const copy = newsletterCopy();
   const emailInput = form.querySelector('input[name="email"]');
   const submitButton = form.querySelector('button[type="submit"]');
   const email = emailInput?.value.trim() || "";
   const honeypot = form.querySelector('input[name="website"]')?.value.trim() || "";
 
   if (!isValidEmail(email)) {
-    setNewsletterMessage(form, "Escribe un correo valido.", true);
+    setNewsletterMessage(form, copy.invalidEmail, true);
     emailInput?.focus();
     return;
   }
 
   if (honeypot) {
     form.reset();
-    setNewsletterMessage(form, "Listo. Te avisaremos cuando haya novedades.", false);
+    setNewsletterMessage(form, copy.success, false);
     return;
   }
 
   if (!NEWSLETTER_CAPTURE_ENDPOINT) {
-    setNewsletterMessage(form, "Falta conectar el endpoint de captura.", true);
+    setNewsletterMessage(form, copy.missingEndpoint, true);
     return;
   }
 
@@ -118,7 +161,7 @@ async function submitNewsletterEmail(form) {
   };
 
   submitButton.disabled = true;
-  setNewsletterMessage(form, "Guardando correo...", false);
+  setNewsletterMessage(form, copy.saving, false);
 
   try {
     await fetch(NEWSLETTER_CAPTURE_ENDPOINT, {
@@ -132,10 +175,10 @@ async function submitNewsletterEmail(form) {
 
     localStorage.setItem(newsletterStorageKey("subscribed"), "1");
     form.reset();
-    setNewsletterMessage(form, "Listo. Te avisaremos cuando haya novedades.", false);
+    setNewsletterMessage(form, copy.success, false);
   } catch (error) {
     console.error(error);
-    setNewsletterMessage(form, "No se pudo guardar el correo. Intenta de nuevo.", true);
+    setNewsletterMessage(form, copy.failure, true);
   } finally {
     submitButton.disabled = false;
   }

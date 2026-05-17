@@ -1,6 +1,52 @@
 const DEFAULT_CITY = "Bogotá";
+const INITIAL_LOCALE = document.documentElement.dataset.locale || "es";
 const INITIAL_COUNTRY = document.documentElement.dataset.country || "colombia";
 const INITIAL_CITY = document.documentElement.dataset.city || DEFAULT_CITY;
+const UI_COPY = {
+  es: {
+    unnamed: "Sin nombre",
+    loadDataError: "No se pudo cargar el archivo de datos.",
+    bestBuy: "Mejor compra",
+    lowestSell: "Menor venta",
+    marketRead: "Lectura del mercado",
+    spreadRead: "La diferencia entre la mejor compra y la menor venta reportadas es de",
+    buy: "compra",
+    viewSource: "Ver fuente",
+    open: "Abrir",
+    at: "en",
+    reference: "Referencia",
+    referenceAvailable: "Referencia disponible",
+    sameReference: "Igual a la referencia general al momento de carga.",
+    aboveReference: "COP por encima de la referencia general.",
+    belowReference: "COP por debajo de la referencia general.",
+    referenceFetchError: "No se pudo obtener la referencia general para",
+    noReferenceNow: "No hay referencia disponible ahora para",
+    noReferenceCurrency: "No hay referencia disponible para esta moneda.",
+    loadStatusError: "No se pudo cargar la información disponible en este momento.",
+  },
+  en: {
+    unnamed: "Unnamed",
+    loadDataError: "Could not load the data file.",
+    bestBuy: "Best buy",
+    lowestSell: "Lowest sell",
+    marketRead: "Market read",
+    spreadRead: "The spread between the reported best buy and lowest sell is",
+    buy: "buy",
+    viewSource: "View source",
+    open: "Open",
+    at: "at",
+    reference: "Reference",
+    referenceAvailable: "Reference available",
+    sameReference: "Equal to the general reference at load time.",
+    aboveReference: "COP above the general reference.",
+    belowReference: "COP below the general reference.",
+    referenceFetchError: "Could not fetch the general reference for",
+    noReferenceNow: "No reference is currently available for",
+    noReferenceCurrency: "No reference is available for this currency.",
+    loadStatusError: "Could not load the available information right now.",
+  },
+};
+const COPY = UI_COPY[INITIAL_LOCALE] || UI_COPY.es;
 
 const GOOGLE_RATES_ENDPOINT = null;
 
@@ -42,6 +88,7 @@ const referenceRateCache = new Map();
 const citySelector = document.getElementById("citySelector");
 const mobileCitySelector = document.getElementById("mobileCitySelector");
 const heroCitySelector = document.getElementById("heroCitySelector");
+const languageSelector = document.getElementById("languageSelector");
 const heroPriceCityEl = document.getElementById("heroPriceCity");
 const heroExchangeHouseCountEl = document.getElementById("heroExchangeHouseCount");
 const heroCurrencyCountEl = document.getElementById("heroCurrencyCount");
@@ -76,7 +123,8 @@ function slugifyCity(value) {
 function cityPagePath(city) {
   const slug = slugifyCity(city || DEFAULT_CITY);
   const country = slugifyCity(INITIAL_COUNTRY) || "colombia";
-  return `/${country}/${slug || "bogota"}/`;
+  const locale = slugifyCity(INITIAL_LOCALE) || "es";
+  return `/${locale}/${country}/${slug || "bogota"}/`;
 }
 
 function formatCop(value) {
@@ -92,7 +140,7 @@ function formatSignedCop(value) {
 }
 
 function prettyHouseName(value) {
-  if (!value) return "Sin nombre";
+  if (!value) return COPY.unnamed;
 
   const map = {
     puntoDollar: "Punto Dollar",
@@ -154,7 +202,7 @@ function getNowLabel() {
 }
 
 async function loadResultData() {
-  const candidates = ["../../result.json", "../result.json", "result.json", "/result.json"];
+  const candidates = ["/result.json"];
 
   for (const path of candidates) {
     try {
@@ -165,7 +213,7 @@ async function loadResultData() {
     } catch (err) {}
   }
 
-  throw new Error("No se pudo cargar el archivo de datos.");
+  throw new Error(COPY.loadDataError);
 }
 
 function expandCompactLocation(country, city, houseGroupName, location) {
@@ -320,7 +368,7 @@ function setRateLink(linkEl, metaEl, row, labelPrefix) {
 
   linkEl.textContent = `${formatCop(row.buy)} COP`;
   linkEl.href = row.sourceUrl || "#";
-  metaEl.innerHTML = `${labelPrefix} en <a href="${row.sourceUrl || "#"}" target="_blank" rel="noopener noreferrer">${row.locationPretty}</a>`;
+  metaEl.innerHTML = `${labelPrefix} ${COPY.at} <a href="${row.sourceUrl || "#"}" target="_blank" rel="noopener noreferrer">${row.locationPretty}</a>`;
 }
 
 function buildReferenceComparisonText(referenceRate, bestBuyRow) {
@@ -331,14 +379,14 @@ function buildReferenceComparisonText(referenceRate, bestBuyRow) {
   const diff = bestBuyRow.buy - referenceRate;
 
   if (diff === 0) {
-    return "Igual a la referencia general al momento de carga.";
+    return COPY.sameReference;
   }
 
   if (diff > 0) {
-    return `${formatSignedCop(diff)} COP por encima de la referencia general.`;
+    return `${formatSignedCop(diff)} ${COPY.aboveReference}`;
   }
 
-  return `${formatSignedCop(Math.abs(diff))} COP por debajo de la referencia general.`;
+  return `${formatSignedCop(Math.abs(diff))} ${COPY.belowReference}`;
 }
 
 function getCurrencyOptions(cityRows) {
@@ -468,7 +516,7 @@ async function fetchReferenceRate(currencyId, currencyLabel) {
   const response = await fetch(sourceUrl, { cache: "no-store" });
 
   if (!response.ok) {
-    throw new Error(`No se pudo obtener la referencia general para ${referenceCode}. Status ${response.status}`);
+    throw new Error(`${COPY.referenceFetchError} ${referenceCode}. Status ${response.status}`);
   }
 
   const data = await response.json();
@@ -524,16 +572,16 @@ function renderHeroRateCard({ cityRows, currencyId, referenceData, rateEl, metaE
   if (Number.isFinite(referenceRate)) {
     rateEl.textContent = `${formatCop(referenceRate)} COP`;
     metaEl.innerHTML = referenceData?.sourceUrl
-      ? `<a href="${referenceData.sourceUrl}" target="_blank" rel="noopener noreferrer">Referencia ${referenceCode}/COP</a>`
-      : "Referencia disponible";
+      ? `<a href="${referenceData.sourceUrl}" target="_blank" rel="noopener noreferrer">${COPY.reference} ${referenceCode}/COP</a>`
+      : COPY.referenceAvailable;
   } else {
     rateEl.textContent = "—";
     metaEl.textContent = referenceCode
-      ? `No hay referencia disponible ahora para ${referenceCode}/COP.`
-      : "No hay referencia disponible para esta moneda.";
+      ? `${COPY.noReferenceNow} ${referenceCode}/COP.`
+      : COPY.noReferenceCurrency;
   }
 
-  setRateLink(bestBuyLinkEl, bestBuyMetaEl, bestBuy, "Mejor compra");
+  setRateLink(bestBuyLinkEl, bestBuyMetaEl, bestBuy, COPY.bestBuy);
 
   const compareText = buildReferenceComparisonText(referenceRate, bestBuy);
 
@@ -583,9 +631,9 @@ function renderSummary(cityRows) {
     cards.push(`
       <article class="summary-card">
         <h3>${displayName}</h3>
-        <div class="currency-line"><strong>Mejor compra</strong><br>${bestBuy ? `<a href="${bestBuy.sourceUrl}" target="_blank" rel="noopener noreferrer">${bestBuy.exchangeHousePretty}</a> · ${formatCop(bestBuy.buy)} COP` : "—"}</div>
-        <div class="currency-line"><strong>Menor venta</strong><br>${bestSell ? `<a href="${bestSell.sourceUrl}" target="_blank" rel="noopener noreferrer">${bestSell.exchangeHousePretty}</a> · ${formatCop(bestSell.sell)} COP` : "—"}</div>
-        ${bestBuy && bestSell ? `<div class="currency-line"><strong>Lectura del mercado</strong><br>La diferencia entre la mejor compra y la menor venta reportadas es de ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}
+        <div class="currency-line"><strong>${COPY.bestBuy}</strong><br>${bestBuy ? `<a href="${bestBuy.sourceUrl}" target="_blank" rel="noopener noreferrer">${bestBuy.exchangeHousePretty}</a> · ${formatCop(bestBuy.buy)} COP` : "—"}</div>
+        <div class="currency-line"><strong>${COPY.lowestSell}</strong><br>${bestSell ? `<a href="${bestSell.sourceUrl}" target="_blank" rel="noopener noreferrer">${bestSell.exchangeHousePretty}</a> · ${formatCop(bestSell.sell)} COP` : "—"}</div>
+        ${bestBuy && bestSell ? `<div class="currency-line"><strong>${COPY.marketRead}</strong><br>${COPY.spreadRead} ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}
       </article>
     `);
   });
@@ -623,7 +671,7 @@ function renderExchangeGrid(cityRows) {
 
     const ratePillsHtml = filteredCurrencyRows.map((item) => `
       <div class="rate-pill">
-        <div class="label">${item.currencyLabel} compra</div>
+        <div class="label">${item.currencyLabel} ${COPY.buy}</div>
         <div class="value">${item.bestBuy ? `${formatCop(item.bestBuy.buy)} COP` : "—"}</div>
       </div>
     `).join("");
@@ -637,7 +685,7 @@ function renderExchangeGrid(cityRows) {
               ? `<div class="exchange-subtitle">${row.locationPretty}</div>`
               : ""}
           </div>
-          <a href="${row.sourceUrl}" target="_blank" class="exchange-link">Ver fuente</a>
+          <a href="${row.sourceUrl}" target="_blank" class="exchange-link">${COPY.viewSource}</a>
         </div>
 
         <div class="exchange-rates">
@@ -664,9 +712,9 @@ function renderCurrencyGrid(cityRows) {
     return `
       <article class="currency-card">
         <h3>${displayName}</h3>
-        <div class="currency-line"><strong>Mejor compra</strong><br>${bestBuy ? `<a href="${bestBuy.sourceUrl}" target="_blank" rel="noopener noreferrer">${prettyHouseName(bestBuy.locationId)}</a> · ${formatCop(bestBuy.buy)} COP` : "—"}</div>
-        <div class="currency-line"><strong>Menor venta</strong><br>${bestSell ? `<a href="${bestSell.sourceUrl}" target="_blank" rel="noopener noreferrer">${prettyHouseName(bestSell.locationId)}</a> · ${formatCop(bestSell.sell)} COP` : "—"}</div>
-        ${bestBuy && bestSell ? `<div class="currency-line"><strong>Lectura del mercado</strong><br>La diferencia entre la mejor compra y la menor venta reportadas es de ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}
+        <div class="currency-line"><strong>${COPY.bestBuy}</strong><br>${bestBuy ? `<a href="${bestBuy.sourceUrl}" target="_blank" rel="noopener noreferrer">${prettyHouseName(bestBuy.locationId)}</a> · ${formatCop(bestBuy.buy)} COP` : "—"}</div>
+        <div class="currency-line"><strong>${COPY.lowestSell}</strong><br>${bestSell ? `<a href="${bestSell.sourceUrl}" target="_blank" rel="noopener noreferrer">${prettyHouseName(bestSell.locationId)}</a> · ${formatCop(bestSell.sell)} COP` : "—"}</div>
+        ${bestBuy && bestSell ? `<div class="currency-line"><strong>${COPY.marketRead}</strong><br>${COPY.spreadRead} ${formatCop(bestSell.sell - bestBuy.buy)} COP.</div>` : ""}
       </article>
     `;
   });
@@ -685,7 +733,7 @@ function renderTable(cityRows) {
       <td>${row.currencyLabel}</td>
       <td>${Number.isFinite(row.buy) ? `${formatCop(row.buy)} COP` : "—"}</td>
       <td>${Number.isFinite(row.sell) ? `${formatCop(row.sell)} COP` : "—"}</td>
-      <td><a href="${row.sourceUrl}" target="_blank" rel="noopener noreferrer">Abrir</a></td>
+      <td><a href="${row.sourceUrl}" target="_blank" rel="noopener noreferrer">${COPY.open}</a></td>
     </tr>
   `);
 
@@ -759,6 +807,14 @@ async function init() {
       });
     }
 
+    if (languageSelector) {
+      languageSelector.addEventListener("change", () => {
+        if (languageSelector.value) {
+          window.location.href = languageSelector.value;
+        }
+      });
+    }
+
     if (heroCurrencySelector1) {
       heroCurrencySelector1.addEventListener("change", async () => {
         selectedHeroCurrencies[0] = heroCurrencySelector1.value;
@@ -774,7 +830,7 @@ async function init() {
     }
   } catch (err) {
     console.error(err);
-    setLoadStatus("No se pudo cargar la información disponible en este momento.", true);
+    setLoadStatus(COPY.loadStatusError, true);
   }
 }
 

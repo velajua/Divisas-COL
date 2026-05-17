@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en" data-locale="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Divisas COL</title>
-  <meta name="description" content="Selecciona país e idioma para consultar ciudades y casas de cambio disponibles en Divisas COL.">
+  <title>Divisas COL | Choose country</title>
+  <meta name="description" content="Choose the country to view exchange houses and city-level exchange rates.">
   <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://divisascol.com/">
+  <link rel="canonical" href="https://divisascol.com/en/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="aurum-gold.css">
+  <link rel="stylesheet" href="../aurum-gold.css">
 </head>
 <body>
   <nav class="nav" id="navbar">
     <div class="container">
       <div class="nav-inner">
-        <a href="/" class="logo">Divisas <span>COL</span></a>
+        <a href="/en/" class="logo">Divisas <span>COL</span></a>
         <ul class="nav-links">
-          <li><a href="#paises">Países</a></li>
-          <li><a href="/es/about.html">Acerca de</a></li>
-          <li><a href="/es/privacy.html">Privacidad</a></li>
+          <li><a href="/en/about.html">About</a></li>
+          <li><a href="/en/privacy.html">Privacy</a></li>
         </ul>
       </div>
     </div>
@@ -32,22 +31,22 @@
     <section class="hero" id="inicio">
       <div class="container">
         <div class="hero-content">
-          <div class="hero-badge"><span class="dot"></span> Selección de país</div>
-          <h1 class="hero-title">Elige un país</h1>
-          <p class="hero-desc">Consulta las ciudades y casas de cambio disponibles por país.</p>
+          <div class="hero-badge"><span class="dot"></span> Country selection</div>
+          <h1 class="hero-title">Choose a country</h1>
+          <p class="hero-desc">We will send you to the country homepage for this language.</p>
         </div>
       </div>
     </section>
     <section class="services" id="paises">
       <div class="container">
         <div class="section-header">
-          <div class="section-label">Cobertura actual</div>
-          <h2 class="section-title">Países disponibles</h2>
+          <div class="section-label">Current coverage</div>
+          <h2 class="section-title">Available countries</h2>
         </div>
         <div class="country-city-grid">
       <article class="country-city-card">
-        <h2><a href="/es/colombia/">Colombia</a></h2>
-        <p>5 ciudades con datos disponibles.</p>
+        <h2><a href="/en/colombia/">Colombia</a></h2>
+        <p>5 cities with available data.</p>
       </article>
         </div>
       </div>
@@ -55,12 +54,8 @@
   </main>
   <script>
     (function () {
+      const locale = "en";
       const defaultCountry = "colombia";
-      const supportedLocales = ["es", "en"];
-      const languages = navigator.languages || [navigator.language || "es"];
-      const locale = languages
-        .map((language) => String(language || "").slice(0, 2).toLowerCase())
-        .find((language) => supportedLocales.includes(language)) || "es";
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
       const country = timeZone.includes("Bogota") ? "colombia" : defaultCountry;
       window.location.replace(`/${locale}/${country}/`);

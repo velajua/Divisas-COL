@@ -410,6 +410,27 @@ section { padding: 96px 0; }
   font-size: 18px;
 }
 
+.nav-language-selector-wrap {
+  align-items: center;
+}
+
+.nav-language-selector {
+  min-width: 76px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--gold-light);
+}
+
+.nav-language-selector-wrap::after {
+  width: 6px;
+  height: 6px;
+  right: 0;
+  border-width: 1.5px;
+}
+
 .hero-desc,
 .section-desc,
 .footer-text {

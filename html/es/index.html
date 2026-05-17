@@ -1,27 +1,26 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-locale="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Divisas COL</title>
-  <meta name="description" content="Selecciona país e idioma para consultar ciudades y casas de cambio disponibles en Divisas COL.">
+  <title>Divisas COL | Elige país</title>
+  <meta name="description" content="Elige el país para consultar casas de cambio y tasas por ciudad.">
   <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://divisascol.com/">
+  <link rel="canonical" href="https://divisascol.com/es/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/assets/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="aurum-gold.css">
+  <link rel="stylesheet" href="../aurum-gold.css">
 </head>
 <body>
   <nav class="nav" id="navbar">
     <div class="container">
       <div class="nav-inner">
-        <a href="/" class="logo">Divisas <span>COL</span></a>
+        <a href="/es/" class="logo">Divisas <span>COL</span></a>
         <ul class="nav-links">
-          <li><a href="#paises">Países</a></li>
           <li><a href="/es/about.html">Acerca de</a></li>
           <li><a href="/es/privacy.html">Privacidad</a></li>
         </ul>
@@ -34,7 +33,7 @@
         <div class="hero-content">
           <div class="hero-badge"><span class="dot"></span> Selección de país</div>
           <h1 class="hero-title">Elige un país</h1>
-          <p class="hero-desc">Consulta las ciudades y casas de cambio disponibles por país.</p>
+          <p class="hero-desc">Te llevamos al inicio del país para este idioma.</p>
         </div>
       </div>
     </section>
@@ -55,12 +54,8 @@
   </main>
   <script>
     (function () {
+      const locale = "es";
       const defaultCountry = "colombia";
-      const supportedLocales = ["es", "en"];
-      const languages = navigator.languages || [navigator.language || "es"];
-      const locale = languages
-        .map((language) => String(language || "").slice(0, 2).toLowerCase())
-        .find((language) => supportedLocales.includes(language)) || "es";
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
       const country = timeZone.includes("Bogota") ? "colombia" : defaultCountry;
       window.location.replace(`/${locale}/${country}/`);

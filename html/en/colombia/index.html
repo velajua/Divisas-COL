@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-locale="en" data-country="colombia">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency exchange houses in Colombia | Divisas COL</title>
+  <meta name="description" content="Browse Colombian cities where Divisas COL compares exchange rates and exchange houses by city.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0f0e0c">
+  <link rel="canonical" href="https://divisascol.com/en/colombia/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/assets/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Libre+Franklin:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../aurum-gold.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Divisas COL">
+  <meta property="og:title" content="Currency exchange houses in Colombia | Divisas COL">
+  <meta property="og:description" content="Browse Colombian cities where Divisas COL compares exchange rates and exchange houses by city.">
+  <meta property="og:url" content="https://divisascol.com/en/colombia/">
+  <meta property="og:image" content="https://divisascol.com/en/colombia/assets/social-card.png">
+</head>
+<body>
+  <nav class="nav" id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <a href="newsletter/" class="back-to-top" style="padding:8px 14px;">Newsletter</a>
+          <a href="/en/colombia/" class="logo">Divisas <span>COL</span></a>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#ciudades">Cities</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+          <li><span class="hero-city-select-wrap">
+              <label for="languageSelector" class="sr-only">Select language</label>
+              <select id="languageSelector" class="hero-city-selector gold" aria-label="Select language">
+                <option value="/es/colombia/">Español</option>
+                <option value="/en/colombia/" selected>English</option>
+              </select>
+            </span></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="country-page">
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-badge"><span class="dot"></span> Currencies in Colombia</div>
+          <h1 class="hero-title">
+            Exchange houses in
+            <span class="hero-city-select-wrap">
+              <label for="countrySelector" class="sr-only">Select country</label>
+              <select id="countrySelector" class="hero-city-selector gold" aria-label="Select country">
+                <option value="/en/colombia/" selected>Colombia</option>
+              </select>
+            </span>
+          </h1>
+          <p class="hero-desc">Divisas COL organizes rates published by exchange houses in Colombia so you can compare foreign currencies against the Colombian peso by city.</p>
+        </div>
+      </div>
+    </section>
+    <section class="services" id="ciudades">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label">Current coverage</div>
+          <h2 class="section-title">Exchange houses by city</h2>
+          <p class="section-desc">Cities with available data and exchange houses or branches included in the comparison.</p>
+        </div>
+        <div class="country-city-grid">
+      <article class="country-city-card">
+        <h2><a href="/en/colombia/barranquilla/">Barranquilla</a></h2>
+        <p>1 exchange houses or branches with available data.</p>
+        <ul>
+          <li>puntoDollarBarranquilla</li>
+        </ul>
+      </article>
+      <article class="country-city-card">
+        <h2><a href="/en/colombia/bogota/">Bogotá</a></h2>
+        <p>6 exchange houses or branches with available data.</p>
+        <ul>
+          <li>amerikanCashCalle122</li>
+          <li>bancounion</li>
+          <li>cambiosKapital</li>
+          <li>cambiosVancouver</li>
+          <li>eurodolar</li>
+          <li>puntoDollarUnicentro</li>
+        </ul>
+      </article>
+      <article class="country-city-card">
+        <h2><a href="/en/colombia/cali/">Cali</a></h2>
+        <p>1 exchange houses or branches with available data.</p>
+        <ul>
+          <li>puntoDollarCali</li>
+        </ul>
+      </article>
+      <article class="country-city-card">
+        <h2><a href="/en/colombia/cartagena/">Cartagena</a></h2>
+        <p>1 exchange houses or branches with available data.</p>
+        <ul>
+          <li>puntoDollarCartagena</li>
+        </ul>
+      </article>
+      <article class="country-city-card">
+        <h2><a href="/en/colombia/medellin/">Medellín</a></h2>
+        <p>2 exchange houses or branches with available data.</p>
+        <ul>
+          <li>euroservicios</li>
+          <li>puntoDollarEnvigado</li>
+        </ul>
+      </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <div class="logo footer-logo">Divisas <span>COL</span></div>
+        <p class="footer-text">Exchange-house comparison for Colombia with market context, city-level rates, and branch-level detail.</p>
+      </div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; justify-content:flex-end;">
+        <a href="../about.html" class="back-to-top">About</a>
+        <a href="../privacy.html" class="back-to-top">Privacy</a>
+      </div>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      const selector = document.getElementById("countrySelector");
+      if (!selector) return;
+      const locale = document.documentElement.dataset.locale || "es";
+
+      const escapeHtml = (value) => String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+      fetch("/countries.json", { cache: "no-store" })
+        .then((response) => response.ok ? response.json() : [])
+        .then((countries) => {
+          if (!Array.isArray(countries) || !countries.length) return;
+
+          const current = selector.value;
+          selector.innerHTML = countries
+            .map((country) => {
+              const url = country.slug ? `/${locale}/${country.slug}/` : country.url;
+              const selected = url === current ? " selected" : "";
+              return `<option value="${escapeHtml(url)}"${selected}>${escapeHtml(country.name || country.slug)}</option>`;
+            })
+            .join("");
+          selector.value = current;
+        })
+        .catch(() => {});
+
+      selector.addEventListener("change", () => {
+        if (selector.value) {
+          window.location.href = selector.value;
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      const selector = document.getElementById("languageSelector");
+      if (!selector) return;
+      const country = document.documentElement.dataset.country || "colombia";
+
+      const escapeHtml = (value) => String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+      fetch("/translations.json", { cache: "no-store" })
+        .then((response) => response.ok ? response.json() : null)
+        .then((translations) => {
+          const languages = translations?.languages;
+          if (!Array.isArray(languages) || !languages.length) return;
+
+          const current = selector.value;
+          selector.innerHTML = languages
+            .map((language) => {
+              const url = `/${language.code}/${country}/`;
+              const selected = url === current ? " selected" : "";
+              return `<option value="${escapeHtml(url)}"${selected}>${escapeHtml(language.label || language.code)}</option>`;
+            })
+            .join("");
+          selector.value = current;
+        })
+        .catch(() => {});
+
+      selector.addEventListener("change", () => {
+        if (selector.value) {
+          window.location.href = selector.value;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
