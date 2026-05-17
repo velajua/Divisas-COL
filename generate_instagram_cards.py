@@ -454,7 +454,7 @@ def render_city_card(city, rows, date_label, page, total_pages):
         sell_text, _ = wrapped_svg_text(760, y + 22, sell_place, 230, 15, 15, "#475569", 500)
         parts.append(sell_text)
 
-    parts.append(svg_text(72, 1256, f"Fuente: divisascol.com/colombia/{unidecode(city.lower())}", 24, 600, "#cbd5e1"))
+    parts.append(svg_text(72, 1256, f"Fuente: divisascol.com/es/colombia/{unidecode(city.lower())}", 24, 600, "#cbd5e1"))
     parts.append(svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"))
     parts.append("</svg>")
     return "\n".join(parts)
@@ -518,7 +518,7 @@ def render_newsletter_card(entry, date_label):
         [
             f'<rect x="100" y="{cta_y}" width="885" height="92" rx="24" fill="#0f5132"/>',
             svg_text(136, cta_y + 58, "Leer en divisascol.com/es/colombia/newsletter", 32, 800, "#ffffff"),
-            svg_text(100, 1088, "divisas.col/" + entry.get("url", "colombia/newsletter/"), 25, 600, "#475569"),
+            svg_text(100, 1088, "divisas.col/" + entry.get("url", "es/colombia/newsletter/"), 25, 600, "#475569"),
             svg_text(72, 1256, "Opinion y contexto para moverse mejor con el dolar", 24, 600, "#cbd5e1"),
             svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"),
             "</svg>",

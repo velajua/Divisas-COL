@@ -5,8 +5,9 @@ import re
 import shutil
 import subprocess
 import sys
-import time
+import queue
 import threading
+import time
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urljoin
@@ -27,6 +28,7 @@ DEFAULT_META_RETRY_SLEEP_SECONDS = 5
 DEFAULT_META_CALL_COOLDOWN_SECONDS = 30
 DEFAULT_META_COOLDOWN_CALLS = 5
 DEFAULT_META_COOLDOWN_SECONDS = 180
+DEFAULT_TUNNEL_TIMEOUT_SECONDS = 10
 REQUIRED_ENV = {
     "INSTAGRAM_USER_ID": "Instagram professional account ID, usually instagram_business_account.id.",
     "META_PAGE_ACCESS_TOKEN": "Page access token with instagram_content_publish permission.",
@@ -591,29 +593,58 @@ def run_http_server(directory, port):
 
 
 def wait_for_tunnel_url(process, timeout_seconds=90):
+    line_queue = queue.Queue()
+
+    def reader():
+        try:
+            while True:
+                line = process.stdout.readline()
+                if not line:
+                    break
+                line_queue.put(line)
+        finally:
+            line_queue.put(None)
+
+    threading.Thread(target=reader, daemon=True).start()
     deadline = time.time() + timeout_seconds
     while time.time() < deadline:
-        line = process.stdout.readline()
-        if line:
-            print(line.rstrip())
-            url = extract_tunnel_url(line)
-            if url:
-                return url
-        elif process.poll() is not None:
+        try:
+            line = line_queue.get(timeout=0.2)
+        except queue.Empty:
+            if process.poll() is not None:
+                break
+            continue
+        if line is None:
             break
-        else:
-            time.sleep(0.2)
+        print(line.rstrip())
+        url = extract_tunnel_url(line)
+        if url:
+            return url
     raise RuntimeError("Tunnel did not print a public URL.")
 
 
-def extract_tunnel_url(line):
-    match = re.search(r"https://[a-zA-Z0-9.-]+\.(?:trycloudflare\.com|loca\.lt)", line)
-    return match.group(0) if match else None
+def terminate_process(process, timeout_seconds=5):
+    if not process or process.poll() is not None:
+        return
+    process.terminate()
+    try:
+        process.wait(timeout=timeout_seconds)
+    except subprocess.TimeoutExpired:
+        process.kill()
+        process.wait(timeout=timeout_seconds)
+
+
+def tunnel_binary(root, name):
+    bundled = root / "cf_exe" / name
+    return str(bundled) if bundled.exists() else name
 
 
 def cloudflared_path(root):
-    bundled = root / "cf_exe" / "cloudflared.exe"
-    return str(bundled) if bundled.exists() else "cloudflared"
+    return tunnel_binary(root, "cloudflared.exe")
+
+
+def ngrok_path(root):
+    return tunnel_binary(root, "ngrok.exe")
 
 
 def tunnel_command(root, port):
@@ -624,6 +655,76 @@ def tunnel_command(root, port):
         f"http://127.0.0.1:{port}",
         "--no-autoupdate",
     ]
+
+
+def ngrok_command(root, port, auth_token):
+    command = [
+        ngrok_path(root),
+        "http",
+        str(port),
+        "--log=stdout",
+        "--log-format=logfmt",
+    ]
+    if auth_token:
+        command.extend(["--authtoken", auth_token])
+    return command
+
+
+def start_tunnel(root, port, timeout_seconds=90):
+    tunnel = subprocess.Popen(
+        tunnel_command(root, port),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        cwd=str(root),
+    )
+    try:
+        public_url = wait_for_tunnel_url(tunnel, timeout_seconds=timeout_seconds)
+    except Exception:
+        terminate_process(tunnel)
+        raise
+    return tunnel, public_url
+
+
+def start_ngrok_tunnel(root, port, timeout_seconds=90):
+    auth_token = os.environ.get("NGROK_AUTH")
+    if not auth_token:
+        raise RuntimeError("NGROK_AUTH is missing from .env.")
+    tunnel = subprocess.Popen(
+        ngrok_command(root, port, auth_token),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        text=True,
+        cwd=str(root),
+    )
+    try:
+        public_url = wait_for_tunnel_url(tunnel, timeout_seconds=timeout_seconds)
+    except Exception:
+        terminate_process(tunnel)
+        raise
+    return tunnel, public_url
+
+
+def start_tunnel_with_retry(root, port, timeout_seconds=90, attempts=2):
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        tunnel = None
+        try:
+            tunnel, public_url = start_tunnel(root, port, timeout_seconds=timeout_seconds)
+            return tunnel, public_url
+        except Exception as exc:
+            last_error = exc
+            print(f"Tunnel start attempt {attempt} failed: {exc}")
+            if attempt >= attempts:
+                break
+            print("Retrying tunnel startup after terminating the failed process.")
+    print("Cloudflare tunnel failed; trying ngrok.")
+    return start_ngrok_tunnel(root, port, timeout_seconds=timeout_seconds)
+
+
+def extract_tunnel_url(line):
+    match = re.search(r"https://[a-zA-Z0-9.-]+\.(?:trycloudflare\.com|loca\.lt|ngrok(?:-free)?\.app|ngrok\.io)", line)
+    return match.group(0) if match else None
 
 
 def serve(args):
@@ -644,14 +745,7 @@ def serve(args):
             print("Local-only mode. Meta cannot fetch localhost; use this only to inspect files.")
             while True:
                 time.sleep(3600)
-        tunnel = subprocess.Popen(
-            tunnel_command(root, args.port),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            cwd=str(root),
-        )
-        public_url = wait_for_tunnel_url(tunnel)
+        tunnel, public_url = start_tunnel_with_retry(root, args.port, timeout_seconds=DEFAULT_TUNNEL_TIMEOUT_SECONDS)
         manifest_path = public_dir / "publish-manifest.json"
         if manifest_path.exists():
             manifest = load_manifest(manifest_path)
@@ -673,7 +767,7 @@ def serve(args):
         print("Stopping temporary server.")
     finally:
         if tunnel and tunnel.poll() is None:
-            tunnel.terminate()
+            terminate_process(tunnel)
         server.shutdown()
     return 0
 
@@ -693,6 +787,7 @@ def update_manifest_urls(manifest_path, public_url):
 def wait_for_public_image(image_url, timeout_seconds=120):
     deadline = time.time() + timeout_seconds
     last_error = None
+    print(f"Checking public image URL: {image_url}")
     while time.time() < deadline:
         try:
             response = requests.get(image_url, timeout=15)
@@ -711,16 +806,19 @@ def prepare_group_container(group, ig_user_id, token):
     posts = group["posts"]
     if group["single"]:
         post = posts[0]
+        print(f"Creating single-image container for {group['key']}")
         creation_id = create_container(ig_user_id, token, post["image_url"], group.get("caption", ""))
         print(f"Created {group['key']} image container {creation_id}")
         return {"group": group, "creation_id": creation_id, "kind": "media"}
 
     child_ids = []
     for post in posts:
+        print(f"Creating carousel item for {group['key']}: {Path(post.get('public_path') or post.get('image_url') or 'post').name}")
         child_id = create_carousel_item_container(ig_user_id, token, post["image_url"])
         child_ids.append(child_id)
         print(f"Created {group['key']} carousel item {child_id}")
         wait_for_container_finished(child_id, token)
+    print(f"Creating carousel container for {group['key']}")
     carousel_id = create_carousel_container(ig_user_id, token, child_ids, group.get("caption", ""))
     if not carousel_id or carousel_id == "0":
         raise RuntimeError(f"Meta returned invalid carousel container ID: {carousel_id}")
@@ -731,6 +829,7 @@ def prepare_group_container(group, ig_user_id, token):
 
 def publish_prepared_group(prepared_group, ig_user_id, token):
     group = prepared_group["group"]
+    print(f"Publishing prepared {group['key']} {prepared_group['kind']} container {prepared_group['creation_id']}")
     result = publish_container(ig_user_id, token, prepared_group["creation_id"])
     print(f"Published {group['key']} {prepared_group['kind']} {result.get('id', '(no id returned)')}")
     return result
@@ -795,14 +894,7 @@ def run_serve_publish(args):
     print(f"Serving {public_dir.relative_to(root).as_posix()} at http://127.0.0.1:{DEFAULT_PORT}")
     tunnel = None
     try:
-        tunnel = subprocess.Popen(
-            tunnel_command(root, DEFAULT_PORT),
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            cwd=str(root),
-        )
-        public_url = wait_for_tunnel_url(tunnel)
+        tunnel, public_url = start_tunnel_with_retry(root, DEFAULT_PORT, timeout_seconds=DEFAULT_TUNNEL_TIMEOUT_SECONDS)
         manifest = update_manifest_urls(manifest_path, public_url)
         print(f"Updated manifest image URLs: {manifest_path.relative_to(root).as_posix()}")
         print(f"Public base URL: {public_url}")
@@ -845,7 +937,7 @@ def run_serve_publish(args):
         return 0
     finally:
         if tunnel and tunnel.poll() is None:
-            tunnel.terminate()
+            terminate_process(tunnel)
         server.shutdown()
 
 
