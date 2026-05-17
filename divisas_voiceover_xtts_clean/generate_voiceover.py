@@ -6,9 +6,9 @@ CURRENT_DIR = Path(__file__).resolve().parent
 SRC_DIR = CURRENT_DIR / "src"
 sys.path.insert(0, str(SRC_DIR))
 
-from extract_article import extract_article, save_article_json
-from build_script import build_voiceover_script, split_script_into_chunks, save_text
-from audio_merge import merge_wavs, export_mp3
+from src.extract_article import extract_article, save_article_json
+from src.build_script import build_voiceover_script, split_script_into_chunks, save_text
+from src.audio_merge import merge_wavs, export_mp3
 
 
 def split_line_to_limit(line: str, max_chars: int) -> list[str]:
@@ -127,9 +127,9 @@ def main() -> None:
         return
 
     print("Loading XTTS model. First run may download model files.")
-    from tts_xtts import XTTSVoiceover
+    from src.tts_xtts import XTTSVoiceover
     engine = XTTSVoiceover(use_gpu=args.gpu)
-    
+
     wav_files = []
 
     for index, chunk in enumerate(chunks, start=1):

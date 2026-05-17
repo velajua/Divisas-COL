@@ -516,8 +516,8 @@ def render_newsletter_card(entry, date_label):
     cta_y = summary_y + line_count * 48 + 90
     parts.extend(
         [
-            f'<rect x="120" y="{cta_y}" width="800" height="92" rx="24" fill="#0f5132"/>',
-            svg_text(136, cta_y + 58, "Leer en divisascol.com/colombia/newsletter", 32, 800, "#ffffff"),
+            f'<rect x="100" y="{cta_y}" width="885" height="92" rx="24" fill="#0f5132"/>',
+            svg_text(136, cta_y + 58, "Leer en divisascol.com/es/colombia/newsletter", 32, 800, "#ffffff"),
             svg_text(100, 1088, "divisas.col/" + entry.get("url", "colombia/newsletter/"), 25, 600, "#475569"),
             svg_text(72, 1256, "Opinion y contexto para moverse mejor con el dolar", 24, 600, "#cbd5e1"),
             svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"),
@@ -689,7 +689,7 @@ def main():
     day_dir.mkdir(parents=True, exist_ok=True)
 
     result = load_json(html_dir / "result.json")
-    entries_path = html_dir / "colombia" / "entries.json"
+    entries_path = html_dir / "es" / "colombia" / "entries.json"
     entries = load_json(entries_path) if entries_path.exists() else []
     hashtags = load_hashtag_template(repo_root)
 
