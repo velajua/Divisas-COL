@@ -34,3 +34,4 @@ mobile/node_modules/
 **/.venv/
 **/*.wav
 cf_exe/
+**/*.aab

@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 pushd "%~dp0"
 
 for %%I in ("%~dp0..") do set "REPO_ROOT=%%~fI"
@@ -10,7 +10,8 @@ if errorlevel 1 call git config --global --add safe.directory "%SAFE_DIR%" || go
 
 if exist ".env" (
   for /f "usebackq tokens=1,* delims==" %%A in (".env") do (
-    if not "%%A"=="" if not "%%A:~0,1%"=="#" if not defined %%A set "%%A=%%B"
+    set "ENV_KEY=%%A"
+    if not "!ENV_KEY!"=="" if not "!ENV_KEY:~0,1!"=="#" if not defined !ENV_KEY! set "!ENV_KEY!=%%B"
   )
 )
 

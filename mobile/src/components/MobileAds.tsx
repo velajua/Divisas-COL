@@ -3,13 +3,16 @@ import { Image, Platform, Pressable, StyleSheet, Text, View } from "react-native
 
 import type { LanguageCode } from "../data/settings";
 import type { MobileAdPlacementConfig } from "../data/adConfig";
+import { loadGoogleMobileAdsForPlatform } from "./googleMobileAdsLoader";
 
 type GoogleMobileAdsModule = typeof import("react-native-google-mobile-ads");
 type LoadedNativeAd = Awaited<ReturnType<GoogleMobileAdsModule["NativeAd"]["createForAdRequest"]>>;
 
 function loadGoogleMobileAds(): GoogleMobileAdsModule | null {
-  if (Platform.OS !== "android") return null;
-  return require("react-native-google-mobile-ads") as GoogleMobileAdsModule;
+  return loadGoogleMobileAdsForPlatform(
+    Platform.OS,
+    () => require("react-native-google-mobile-ads") as GoogleMobileAdsModule,
+  );
 }
 
 export function MobileBannerAd({ placement }: { placement: MobileAdPlacementConfig }) {
