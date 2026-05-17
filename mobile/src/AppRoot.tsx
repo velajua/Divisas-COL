@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Linking,
+  NativeModules,
   Platform,
   Pressable,
   SafeAreaView,
@@ -21,31 +22,138 @@ import {
   formatDisplayName,
   getBestRates,
   getCities,
+  getCountries,
   getCurrencies,
   type RateRow,
 } from "./data/resultParser";
+import { buildNewsletterUrl, normalizeLanguage, pickDefaultCountry, type LanguageCode } from "./data/settings";
 import { getSnapshotDate, type Snapshot, upsertSnapshot } from "./data/snapshotCache";
-import { loadSnapshots, saveSnapshots } from "./storage/snapshotStorage";
+import { loadPreferences, loadSnapshots, savePreferences, saveSnapshots } from "./storage/snapshotStorage";
 
 type TabId = "today" | "history" | "rates" | "newsletter" | "info";
-type DropdownId = "city" | "currency" | null;
+type DropdownId = "city" | "currency" | "country" | "language" | null;
+type MessageKey = "loadingRates" | "updated" | "offline" | "loadFailed";
 
-const NEWSLETTER_URL = "https://www.divisascol.com/colombia/newsletter/";
 const SITE_URL = "https://divisascol.com";
 const DEFAULT_CURRENCY = "AmericanDollar";
 const FRONT_PAGE_CURRENCIES = ["AmericanDollar", "Euro"];
 
-const TABS: Array<{ id: TabId; label: string }> = [
-  { id: "today", label: "Inicio" },
-  { id: "history", label: "Historial" },
-  { id: "rates", label: "Tasas" },
-  { id: "newsletter", label: "Newsletter" },
-  { id: "info", label: "Datos" },
-];
+const COPY = {
+  es: {
+    tabs: {
+      today: "Inicio",
+      history: "Historial",
+      rates: "Tasas",
+      newsletter: "Newsletter",
+      info: "Datos",
+    },
+    subtitle: "Tasas guardadas para consultar sin conexión",
+    loadingRates: "Cargando tasas...",
+    loadingSaved: "Cargando tasas guardadas...",
+    select: "Seleccionar",
+    noData: "Sin datos",
+    updated: "Información actualizada.",
+    offline: "Sin conexión. Mostrando datos guardados.",
+    loadFailed: "No pudimos cargar las tasas. Revisa la conexión y vuelve a abrir la app.",
+    locationError: "No se pudo inferir la ubicación inicial",
+    ratesEmptyTitle: "Sin tasas cargadas",
+    todayTitle: (place: string) => `Tasas en ${place}`,
+    bestBuy: "Mejor compra",
+    bestSell: "Menor venta",
+    savedCuts: "Cortes guardados",
+    historyTitle: "Volver en el tiempo",
+    noHistoryTitle: "Sin historial",
+    noHistoryBody: "Abre la app con internet en distintos días para guardar hasta cinco cortes.",
+    updatedAt: "Actualizado",
+    explore: "Explorar",
+    cityCurrencyTitle: "Ciudades y monedas",
+    city: "Ciudad",
+    country: "País",
+    currency: "Moneda",
+    language: "Idioma",
+    buy: "Compra",
+    sell: "Venta",
+    web: "Web",
+    newsletterTitle: "Newsletter",
+    newsletterBody: "El newsletter vive en la web de Divisas COL. Ábrelo allí para leer entradas o suscribirte.",
+    openNewsletter: "Abrir newsletter",
+    data: "Datos",
+    appStatus: "Estado de la app",
+    site: "Sitio",
+    savedDays: "Días guardados",
+    selectedDate: "Fecha seleccionada",
+    selectedCountry: "País seleccionado",
+    selectedLanguage: "Idioma seleccionado",
+    lastUpdate: "Última actualización",
+    privacy: "Privacidad: la ubicación solo se usa en este dispositivo para escoger el país y la ciudad iniciales. No la guardamos ni la enviamos a Divisas COL.",
+    requestData: "Solicitando...",
+    refreshData: "Actualizar datos",
+    spanish: "Español",
+    english: "Inglés",
+  },
+  en: {
+    tabs: {
+      today: "Home",
+      history: "History",
+      rates: "Rates",
+      newsletter: "Newsletter",
+      info: "Data",
+    },
+    subtitle: "Saved exchange rates for offline lookup",
+    loadingRates: "Loading rates...",
+    loadingSaved: "Loading saved rates...",
+    select: "Select",
+    noData: "No data",
+    updated: "Information updated.",
+    offline: "Offline. Showing saved data.",
+    loadFailed: "We could not load rates. Check your connection and reopen the app.",
+    locationError: "Could not infer the initial location",
+    ratesEmptyTitle: "No rates loaded",
+    todayTitle: (place: string) => `Rates in ${place}`,
+    bestBuy: "Best buy",
+    bestSell: "Lowest sell",
+    savedCuts: "Saved snapshots",
+    historyTitle: "Go back in time",
+    noHistoryTitle: "No history",
+    noHistoryBody: "Open the app with internet on different days to save up to five snapshots.",
+    updatedAt: "Updated",
+    explore: "Explore",
+    cityCurrencyTitle: "Cities and currencies",
+    city: "City",
+    country: "Country",
+    currency: "Currency",
+    language: "Language",
+    buy: "Buy",
+    sell: "Sell",
+    web: "Web",
+    newsletterTitle: "Newsletter",
+    newsletterBody: "The Divisas COL newsletter lives on the web. Open it there to read posts or subscribe.",
+    openNewsletter: "Open newsletter",
+    data: "Data",
+    appStatus: "App status",
+    site: "Site",
+    savedDays: "Saved days",
+    selectedDate: "Selected date",
+    selectedCountry: "Selected country",
+    selectedLanguage: "Selected language",
+    lastUpdate: "Last update",
+    privacy: "Privacy: location is only used on this device to choose the initial country and nearest city. We do not store it or send it to Divisas COL.",
+    requestData: "Requesting...",
+    refreshData: "Refresh data",
+    spanish: "Spanish",
+    english: "English",
+  },
+};
 
-function formatCop(value: number | null | undefined): string {
+function getDeviceLanguage(): LanguageCode {
+  const settings = NativeModules.SettingsManager?.settings;
+  const locale = settings?.AppleLocale || settings?.AppleLanguages?.[0] || NativeModules.I18nManager?.localeIdentifier;
+  return normalizeLanguage(locale);
+}
+
+function formatCop(value: number | null | undefined, language: LanguageCode): string {
   if (typeof value !== "number" || !Number.isFinite(value)) return "-";
-  return `${value.toLocaleString("es-CO")} COP`;
+  return `${value.toLocaleString(language === "en" ? "en-US" : "es-CO")} COP`;
 }
 
 function pickDefaultCity(rows: RateRow[]): string {
@@ -92,13 +200,25 @@ function EmptyState({ title, body }: { title: string; body: string }) {
   );
 }
 
-function RateCard({ label, row, valueType }: { label: string; row: RateRow | null; valueType: "buy" | "sell" }) {
+function RateCard({
+  label,
+  row,
+  valueType,
+  language,
+  noDataLabel,
+}: {
+  label: string;
+  row: RateRow | null;
+  valueType: "buy" | "sell";
+  language: LanguageCode;
+  noDataLabel: string;
+}) {
   return (
     <View style={styles.rateCard}>
       <Text style={styles.cardLabel}>{label}</Text>
-      <Text style={styles.rateValue}>{formatCop(row?.[valueType])}</Text>
+      <Text style={styles.rateValue}>{formatCop(row?.[valueType], language)}</Text>
       <Text style={styles.cardMeta}>
-        {row ? `${formatDisplayName(row.exchangeHouse)} / ${formatDisplayName(row.locationId)}` : "Sin datos"}
+        {row ? `${formatDisplayName(row.exchangeHouse)} / ${formatDisplayName(row.locationId)}` : noDataLabel}
       </Text>
     </View>
   );
@@ -111,6 +231,7 @@ function Dropdown({
   open,
   onToggle,
   onSelect,
+  placeholder,
 }: {
   label: string;
   value: string;
@@ -118,12 +239,13 @@ function Dropdown({
   open: boolean;
   onToggle: () => void;
   onSelect: (value: string) => void;
+  placeholder: string;
 }) {
   return (
     <View style={styles.dropdownBlock}>
       <Text style={styles.groupLabel}>{label}</Text>
       <Pressable onPress={onToggle} style={styles.dropdownButton}>
-        <Text style={styles.dropdownValue}>{value || "Seleccionar"}</Text>
+        <Text style={styles.dropdownValue}>{value || placeholder}</Text>
         <Text style={styles.dropdownChevron}>{open ? "^" : "v"}</Text>
       </Pressable>
       {open ? (
@@ -147,45 +269,88 @@ function Dropdown({
 
 export default function AppRoot() {
   const [activeTab, setActiveTab] = useState<TabId>("today");
+  const [language, setLanguage] = useState<LanguageCode>(getDeviceLanguage);
   const [snapshots, setSnapshots] = useState<Snapshot[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>("");
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [selectedCurrency, setSelectedCurrency] = useState<string>(DEFAULT_CURRENCY);
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [message, setMessage] = useState("Cargando tasas...");
+  const [messageKey, setMessageKey] = useState<MessageKey>("loadingRates");
   const [openDropdown, setOpenDropdown] = useState<DropdownId>(null);
   const locationRequestedRef = useRef(false);
+  const userCountryRef = useRef(false);
+  const t = COPY[language];
+  const message = t[messageKey];
+  const tabs = useMemo<Array<{ id: TabId; label: string }>>(() => [
+    { id: "today", label: t.tabs.today },
+    { id: "history", label: t.tabs.history },
+    { id: "rates", label: t.tabs.rates },
+    { id: "newsletter", label: t.tabs.newsletter },
+    { id: "info", label: t.tabs.info },
+  ], [t]);
 
   const selectedSnapshot = useMemo(
     () => snapshots.find((snapshot) => snapshot.date === selectedDate) || snapshots[0] || null,
     [selectedDate, snapshots],
   );
-  const rows = useMemo(() => selectedSnapshot ? flattenRates(selectedSnapshot.data) : [], [selectedSnapshot]);
+  const allRows = useMemo(() => selectedSnapshot ? flattenRates(selectedSnapshot.data) : [], [selectedSnapshot]);
+  const countries = useMemo(() => getCountries(allRows), [allRows]);
+  const rows = useMemo(
+    () => allRows.filter((row) => !selectedCountry || row.country === selectedCountry),
+    [allRows, selectedCountry],
+  );
   const cities = useMemo(() => getCities(rows), [rows]);
-  const currencies = useMemo(() => getCurrencies(rows), [rows]);
-  const selectedCurrencyLabel = currencies.find((item) => item.id === selectedCurrency)?.label || "Dolar";
+  const currencies = useMemo(() => getCurrencies(rows, language), [language, rows]);
+  const selectedCountryLabel = countries.find((item) => item.id === selectedCountry)?.label || formatDisplayName(selectedCountry || "colombia");
+  const selectedCurrencyLabel = currencies.find((item) => item.id === selectedCurrency)?.label || "Dollar";
+  const newsletterUrl = buildNewsletterUrl(SITE_URL, language, selectedCountry);
+  const languageOptions = useMemo(() => [
+    { id: "es", label: t.spanish },
+    { id: "en", label: t.english },
+  ], [t]);
 
-  async function applyLocationCity(rowsForLocation: RateRow[]) {
+  async function applyLocationDefaults(rowsForLocation: RateRow[], preferredCountry?: string) {
     if (locationRequestedRef.current || !rowsForLocation.length) return;
     locationRequestedRef.current = true;
 
+    let countryForCity = preferredCountry || selectedCountry;
+
     try {
       const permission = await Location.requestForegroundPermissionsAsync();
-      if (permission.status !== "granted") return;
+      if (permission.status !== "granted") {
+        if (!countryForCity) {
+          setSelectedCountry(pickDefaultCountry(getCountries(rowsForLocation), null));
+        }
+        return;
+      }
 
       const position = await Location.getCurrentPositionAsync({});
+      const geocoded = await Location.reverseGeocodeAsync(position.coords);
+      const detectedCountry = geocoded[0]?.isoCountryCode || geocoded[0]?.country;
+      const nextCountry = preferredCountry || pickDefaultCountry(getCountries(rowsForLocation), detectedCountry);
+
+      countryForCity = nextCountry;
+      if (!userCountryRef.current) {
+        setSelectedCountry(nextCountry);
+      }
+
+      const rowsInCountry = rowsForLocation.filter((row) => row.country === countryForCity);
       const inferredCity = inferNearestCity(
         {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         },
-        getCities(rowsForLocation),
+        getCities(rowsInCountry.length ? rowsInCountry : rowsForLocation),
       );
 
       setSelectedCity(inferredCity);
     } catch (error) {
-      console.error("No se pudo inferir la ciudad inicial", error);
+      console.error(t.locationError, error);
+      if (!countryForCity) {
+        setSelectedCountry(pickDefaultCountry(getCountries(rowsForLocation), null));
+      }
     }
   }
 
@@ -207,14 +372,14 @@ export default function AppRoot() {
       await saveSnapshots(nextSnapshots);
       setSnapshots(nextSnapshots);
       setSelectedDate(snapshot.date);
-      setMessage("Información actualizada.");
-      await applyLocationCity(flattenRates(snapshot.data));
+      setMessageKey("updated");
+      await applyLocationDefaults(flattenRates(snapshot.data), selectedCountry);
     } catch (error) {
       console.error("Failed to refresh result.json", error);
       if (existingSnapshots.length) {
-        setMessage("Sin conexión. Mostrando datos guardados.");
+        setMessageKey("offline");
       } else {
-        setMessage("No pudimos cargar las tasas. Revisa la conexión y vuelve a abrir la app.");
+        setMessageKey("loadFailed");
       }
     } finally {
       setIsRefreshing(false);
@@ -226,13 +391,20 @@ export default function AppRoot() {
     let alive = true;
 
     async function load() {
-      const saved = await loadSnapshots();
+      const [saved, preferences] = await Promise.all([loadSnapshots(), loadPreferences()]);
       if (!alive) return;
 
+      if (preferences.language) {
+        setLanguage(preferences.language);
+      }
+      if (preferences.country) {
+        userCountryRef.current = true;
+        setSelectedCountry(preferences.country);
+      }
       setSnapshots(saved);
       setSelectedDate(saved[0]?.date || "");
       if (saved[0]) {
-        await applyLocationCity(flattenRates(saved[0].data));
+        await applyLocationDefaults(flattenRates(saved[0].data), preferences.country);
       }
       await refreshRates(saved);
     }
@@ -256,14 +428,20 @@ export default function AppRoot() {
     }
   }, [cities, currencies, rows, selectedCity, selectedCurrency]);
 
+  useEffect(() => {
+    if (!allRows.length || selectedCountry) return;
+
+    setSelectedCountry(pickDefaultCountry(countries, null));
+  }, [allRows, countries, selectedCountry]);
+
   function renderToday() {
     if (!selectedSnapshot) {
-      return <EmptyState title="Sin tasas cargadas" body={message} />;
+      return <EmptyState title={t.ratesEmptyTitle} body={message} />;
     }
 
     return (
       <>
-        <SectionTitle eyebrow={selectedSnapshot.date} title={`Tasas en ${selectedCity || "Colombia"}`} />
+        <SectionTitle eyebrow={selectedSnapshot.date} title={t.todayTitle(selectedCity || selectedCountryLabel)} />
         {FRONT_PAGE_CURRENCIES.map((currencyId) => {
           const label = currencies.find((currency) => currency.id === currencyId)?.label || currencyId;
           const rates = getBestRates(rows, selectedCity, currencyId);
@@ -272,8 +450,8 @@ export default function AppRoot() {
             <View key={currencyId} style={styles.currencyBlock}>
               <Text style={styles.currencyTitle}>{label}</Text>
               <View style={styles.cardRow}>
-                <RateCard label="Mejor compra" row={rates.bestBuy} valueType="buy" />
-                <RateCard label="Menor venta" row={rates.bestSell} valueType="sell" />
+                <RateCard label={t.bestBuy} row={rates.bestBuy} valueType="buy" language={language} noDataLabel={t.noData} />
+                <RateCard label={t.bestSell} row={rates.bestSell} valueType="sell" language={language} noDataLabel={t.noData} />
               </View>
             </View>
           );
@@ -285,12 +463,12 @@ export default function AppRoot() {
 
   function renderHistory() {
     if (!snapshots.length) {
-      return <EmptyState title="Sin historial" body="Abre la app con internet en distintos días para guardar hasta cinco cortes." />;
+      return <EmptyState title={t.noHistoryTitle} body={t.noHistoryBody} />;
     }
 
     return (
       <>
-        <SectionTitle eyebrow="Cortes guardados" title="Volver en el tiempo" />
+        <SectionTitle eyebrow={t.savedCuts} title={t.historyTitle} />
         <View style={styles.stack}>
           {snapshots.map((snapshot) => (
             <Pressable
@@ -302,7 +480,7 @@ export default function AppRoot() {
               style={[styles.historyItem, snapshot.date === selectedDate && styles.historyItemSelected]}
             >
               <Text style={styles.historyDate}>{snapshot.date}</Text>
-              <Text style={styles.muted}>Actualizado {new Date(snapshot.fetchedAt).toLocaleString("es-CO")}</Text>
+              <Text style={styles.muted}>{t.updatedAt} {new Date(snapshot.fetchedAt).toLocaleString(language === "en" ? "en-US" : "es-CO")}</Text>
             </Pressable>
           ))}
         </View>
@@ -312,7 +490,7 @@ export default function AppRoot() {
 
   function renderRates() {
     if (!rows.length) {
-      return <EmptyState title="Sin tasas disponibles" body={message} />;
+      return <EmptyState title={t.ratesEmptyTitle} body={message} />;
     }
 
     const visibleRows = rows
@@ -321,10 +499,10 @@ export default function AppRoot() {
 
     return (
       <>
-        <SectionTitle eyebrow="Explorar" title="Ciudades y monedas" />
+        <SectionTitle eyebrow={t.explore} title={t.cityCurrencyTitle} />
         <View style={styles.filterPanel}>
           <Dropdown
-            label="Ciudad"
+            label={t.city}
             value={selectedCity}
             options={cities.map((city) => ({ id: city, label: city }))}
             open={openDropdown === "city"}
@@ -333,9 +511,10 @@ export default function AppRoot() {
               setSelectedCity(city);
               setOpenDropdown(null);
             }}
+            placeholder={t.select}
           />
           <Dropdown
-            label="Moneda"
+            label={t.currency}
             value={selectedCurrencyLabel}
             options={currencies}
             open={openDropdown === "currency"}
@@ -344,6 +523,7 @@ export default function AppRoot() {
               setSelectedCurrency(currency);
               setOpenDropdown(null);
             }}
+            placeholder={t.select}
           />
         </View>
         <View style={styles.table}>
@@ -354,8 +534,8 @@ export default function AppRoot() {
                 <Text style={styles.muted}>{formatDisplayName(row.locationId)}</Text>
               </View>
               <View style={styles.rateRowValues}>
-                <Text style={styles.rowValue}>Compra {formatCop(row.buy)}</Text>
-                <Text style={styles.rowValue}>Venta {formatCop(row.sell)}</Text>
+                <Text style={styles.rowValue}>{t.buy} {formatCop(row.buy, language)}</Text>
+                <Text style={styles.rowValue}>{t.sell} {formatCop(row.sell, language)}</Text>
               </View>
             </View>
           ))}
@@ -367,13 +547,11 @@ export default function AppRoot() {
   function renderNewsletter() {
     return (
       <>
-        <SectionTitle eyebrow="Web" title="Newsletter" />
+        <SectionTitle eyebrow={t.web} title={t.newsletterTitle} />
         <View style={styles.panel}>
-          <Text style={styles.bodyText}>
-            El newsletter vive en la web de Divisas COL. Ábrelo allí para leer entradas o suscribirte.
-          </Text>
-          <Pressable style={styles.primaryButton} onPress={() => Linking.openURL(NEWSLETTER_URL)}>
-            <Text style={styles.primaryButtonText}>Abrir newsletter</Text>
+          <Text style={styles.bodyText}>{t.newsletterBody}</Text>
+          <Pressable style={styles.primaryButton} onPress={() => Linking.openURL(newsletterUrl)}>
+            <Text style={styles.primaryButtonText}>{t.openNewsletter}</Text>
           </Pressable>
         </View>
       </>
@@ -383,22 +561,50 @@ export default function AppRoot() {
   function renderInfo() {
     return (
       <>
-        <SectionTitle eyebrow="Datos" title="Estado de la app" />
+        <SectionTitle eyebrow={t.data} title={t.appStatus} />
         <View style={styles.panel}>
-          <Text style={styles.infoLine}>Sitio: {SITE_URL}</Text>
-          <Text style={styles.infoLine}>Días guardados: {snapshots.length} / 5</Text>
-          <Text style={styles.infoLine}>Fecha seleccionada: {selectedSnapshot?.date || "-"}</Text>
-          <Text style={styles.infoLine}>Última actualización: {selectedSnapshot ? new Date(selectedSnapshot.fetchedAt).toLocaleString("es-CO") : "-"}</Text>
-          <Text style={styles.infoLine}>
-            Privacidad: la ubicación solo se usa en este dispositivo para escoger la ciudad inicial más cercana. No la
-            guardamos ni la enviamos a Divisas COL.
-          </Text>
+          <Dropdown
+            label={t.language}
+            value={languageOptions.find((option) => option.id === language)?.label || ""}
+            options={languageOptions}
+            open={openDropdown === "language"}
+            onToggle={() => setOpenDropdown(openDropdown === "language" ? null : "language")}
+            onSelect={(nextLanguage) => {
+              const normalized = normalizeLanguage(nextLanguage);
+              setLanguage(normalized);
+              setOpenDropdown(null);
+              savePreferences({ language: normalized, country: selectedCountry });
+            }}
+            placeholder={t.select}
+          />
+          <Dropdown
+            label={t.country}
+            value={selectedCountryLabel}
+            options={countries}
+            open={openDropdown === "country"}
+            onToggle={() => setOpenDropdown(openDropdown === "country" ? null : "country")}
+            onSelect={(country) => {
+              userCountryRef.current = true;
+              setSelectedCountry(country);
+              setSelectedCity("");
+              setOpenDropdown(null);
+              savePreferences({ language, country });
+            }}
+            placeholder={t.select}
+          />
+          <Text style={styles.infoLine}>{t.site}: {SITE_URL}</Text>
+          <Text style={styles.infoLine}>{t.savedDays}: {snapshots.length} / 5</Text>
+          <Text style={styles.infoLine}>{t.selectedDate}: {selectedSnapshot?.date || "-"}</Text>
+          <Text style={styles.infoLine}>{t.selectedCountry}: {selectedCountryLabel}</Text>
+          <Text style={styles.infoLine}>{t.selectedLanguage}: {languageOptions.find((option) => option.id === language)?.label}</Text>
+          <Text style={styles.infoLine}>{t.lastUpdate}: {selectedSnapshot ? new Date(selectedSnapshot.fetchedAt).toLocaleString(language === "en" ? "en-US" : "es-CO") : "-"}</Text>
+          <Text style={styles.infoLine}>{t.privacy}</Text>
           <Text style={styles.muted}>{message}</Text>
           <Pressable
             style={[styles.primaryButton, isRefreshing && styles.pressedButton]}
             onPress={() => refreshRates(snapshots)}
           >
-            <Text style={styles.primaryButtonText}>{isRefreshing ? "Solicitando..." : "Actualizar datos"}</Text>
+            <Text style={styles.primaryButtonText}>{isRefreshing ? t.requestData : t.refreshData}</Text>
           </Pressable>
         </View>
       </>
@@ -410,7 +616,7 @@ export default function AppRoot() {
       return (
         <View style={styles.loading}>
           <ActivityIndicator color="#c9a227" />
-          <Text style={styles.muted}>Cargando tasas guardadas...</Text>
+          <Text style={styles.muted}>{t.loadingSaved}</Text>
         </View>
       );
     }
@@ -430,7 +636,7 @@ export default function AppRoot() {
           <LogoMark size={46} />
           <View style={styles.brandTextBlock}>
             <Text style={styles.brand}>Divisas COL</Text>
-            <Text style={styles.subtitle}>Tasas guardadas para consultar sin conexión</Text>
+            <Text style={styles.subtitle}>{t.subtitle}</Text>
           </View>
         </View>
       </View>
@@ -438,7 +644,7 @@ export default function AppRoot() {
         {renderContent()}
       </ScrollView>
       <View style={[styles.tabBar, Platform.OS === "android" && styles.androidTabBar]}>
-        {TABS.map((tab) => (
+        {tabs.map((tab) => (
           <Pressable
             key={tab.id}
             onPress={() => setActiveTab(tab.id)}

@@ -130,6 +130,70 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
 
         self.assertEqual("https://abc-def.trycloudflare.com", instagram_publish.extract_tunnel_url(line))
 
+    def test_start_tunnel_with_retry_falls_back_to_ngrok_after_cloudflare_failures(self):
+        class FakeStdout:
+            def __init__(self, lines):
+                self._lines = list(lines)
+
+            def readline(self):
+                return self._lines.pop(0) if self._lines else ""
+
+        class FakeProcess:
+            def __init__(self, lines):
+                self.stdout = FakeStdout(lines)
+                self.terminated = False
+                self.killed = False
+                self.wait_calls = 0
+                self._exited = False
+
+            def poll(self):
+                return 1 if self._exited else None
+
+            def terminate(self):
+                self.terminated = True
+
+            def wait(self, timeout=None):
+                self.wait_calls += 1
+                if self.wait_calls == 1 and self.terminated and not self.killed:
+                    raise instagram_publish.subprocess.TimeoutExpired(cmd="cloudflared", timeout=timeout)
+                self._exited = True
+
+            def kill(self):
+                self.killed = True
+
+        processes = [
+            FakeProcess(["starting tunnel\n", ""]),
+            FakeProcess(["starting tunnel\n", ""]),
+            FakeProcess(["\n", "https://abc-def.ngrok-free.app\n"]),
+        ]
+        popen_calls = []
+        sleeps = []
+
+        def fake_popen(*args, **kwargs):
+            popen_calls.append((args, kwargs))
+            return processes[len(popen_calls) - 1]
+
+        def fake_sleep(seconds):
+            sleeps.append(seconds)
+
+        original_ngrok_auth = instagram_publish.os.environ.get("NGROK_AUTH")
+        instagram_publish.os.environ["NGROK_AUTH"] = "test-ngrok-token"
+        with patch.object(instagram_publish.subprocess, "Popen", side_effect=fake_popen), patch.object(
+            instagram_publish.time, "sleep", side_effect=fake_sleep
+        ):
+            tunnel, public_url = instagram_publish.start_tunnel_with_retry(Path("C:/repo"), 8080, timeout_seconds=1)
+        if original_ngrok_auth is None:
+            del instagram_publish.os.environ["NGROK_AUTH"]
+        else:
+            instagram_publish.os.environ["NGROK_AUTH"] = original_ngrok_auth
+
+        self.assertEqual("https://abc-def.ngrok-free.app", public_url)
+        self.assertIs(processes[2], tunnel)
+        self.assertTrue(processes[0].terminated)
+        self.assertTrue(processes[1].terminated)
+        self.assertFalse(processes[2].terminated)
+        self.assertEqual(3, len(popen_calls))
+
     def test_sanitizes_caption_to_instagram_hashtag_limit(self):
         caption = "Body " + " ".join(f"#tag{i}" for i in range(35))
 
