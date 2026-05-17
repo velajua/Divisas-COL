@@ -79,6 +79,32 @@ const CURRENCY_REFERENCE_CODE_MAP = {
   SwedishKrona: "SEK",
   DanishKrone: "DKK"
 };
+const CURRENCY_NAME_TRANSLATIONS = {
+  en: {
+    AmericanDollar: "US dollar",
+    Euro: "Euro",
+    PoundSterling: "Pound sterling",
+    CanadianDollar: "Canadian dollar",
+    AustralianDollar: "Australian dollar",
+    SwissFranc: "Swiss franc",
+    JapaneseYen: "Japanese yen",
+    MexicanPeso: "Mexican peso",
+    BrazilianReal: "Brazilian real",
+    ArgentinePeso: "Argentine peso",
+    ChileanPeso: "Chilean peso",
+    PeruvianSol: "Peruvian sol",
+    NewZealandDollar: "New Zealand dollar",
+    SingaporeDollar: "Singapore dollar",
+    HongKongDollar: "Hong Kong dollar",
+    ChineseYuan: "Chinese yuan",
+    ChineseRenminbi: "Chinese renminbi",
+    Renminbi: "Renminbi",
+    KoreanWon: "Korean won",
+    NorwegianKrone: "Norwegian krone",
+    SwedishKrona: "Swedish krona",
+    DanishKrone: "Danish krone"
+  }
+};
 
 let selectedHeroCurrencies = [...DEFAULT_HERO_CURRENCIES];
 let currentCityRows = [];
@@ -246,6 +272,11 @@ function expandCompactLocation(country, city, houseGroupName, location) {
   };
 }
 
+function translateCurrencyLabel(currencyId, currencyLabel) {
+  const names = CURRENCY_NAME_TRANSLATIONS[INITIAL_LOCALE] || {};
+  return names[currencyId] || currencyLabel || currencyId;
+}
+
 function flattenGroupedByCity(groupedByCity, country) {
   const rows = [];
 
@@ -269,7 +300,7 @@ function flattenGroupedByCity(groupedByCity, country) {
             locationId,
             locationPretty: prettyHouseName(locationId),
             sourceUrl,
-            currencyLabel,
+            currencyLabel: translateCurrencyLabel(currencyData.id || currencyLabel, currencyLabel),
             currencyId: currencyData.id || currencyLabel,
             buy,
             sell,

@@ -38,6 +38,10 @@ def is_indexable(head):
     return 'name="robots" content="noindex' not in head.lower()
 
 
+def html_lang_ok(text):
+    return bool(re.search(r'<html\b[^>]*\blang="(?:es|en)"', text, flags=re.IGNORECASE))
+
+
 def json_ld_ok(head):
     marker = "application/ld+json"
     if marker not in head:
@@ -68,8 +72,8 @@ def main():
         missing = [tag for tag in required if tag.lower() not in lowered]
         if not text.lstrip().lower().startswith("<!doctype html>"):
             missing.append("<!DOCTYPE html>")
-        if '<html lang="es"' not in text.lower():
-            missing.append('html lang="es"')
+        if not html_lang_ok(text):
+            missing.append('html lang="es|en"')
         if is_indexable(head) and "<h1" not in text.lower():
             missing.append("<h1>")
         if "application/ld+json" in required and not json_ld_ok(head):

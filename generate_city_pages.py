@@ -730,6 +730,42 @@ def country_landing_html(country, cities, locale="es"):
         if locale == "en"
         else "Ciudades con datos disponibles y casas o sedes incluidas en el comparador."
     )
+    image_alt = (
+        f"{SITE_NAME}: exchange-house coverage in {copy['name']}"
+        if locale == "en"
+        else f"{SITE_NAME}: cobertura de casas de cambio en {copy['name']}"
+    )
+    structured_data = [
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "@id": f"{SITE_URL}/#organization",
+            "name": SITE_NAME,
+            "url": SITE_URL,
+            "logo": SITE_LOGO,
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": f"{SITE_URL}/#website",
+            "name": SITE_NAME,
+            "alternateName": ["Divisas Colombia", "DivisasCol"],
+            "url": SITE_URL,
+            "publisher": {"@id": f"{SITE_URL}/#organization"},
+            "inLanguage": html_lang,
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            "@id": f"{canonical}#webpage",
+            "url": canonical,
+            "name": copy["title"],
+            "description": copy["description"],
+            "isPartOf": {"@id": f"{SITE_URL}/#website"},
+            "about": {"@type": "Country", "name": copy["name"]},
+            "inLanguage": html_lang,
+        },
+    ]
     city_cards = []
 
     for city, groups in sorted(cities.items(), key=lambda item: item[0]):
@@ -773,8 +809,14 @@ def country_landing_html(country, cities, locale="es"):
   <meta property="og:description" content="{copy["description"]}">
   <meta property="og:url" content="{canonical}">
   <meta property="og:image" content="{site_social_image(country, locale)}">
+  <meta property="og:image:alt" content="{image_alt}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{copy["title"]}">
+  <meta name="twitter:description" content="{copy["description"]}">
+  <meta name="twitter:image" content="{site_social_image(country, locale)}">
   {ADSENSE_ACCOUNT_META_TAG}
   {ADSENSE_SCRIPT_TAG}
+  {json_ld(structured_data)}
 </head>
 <body>
   <nav class="nav" id="navbar">

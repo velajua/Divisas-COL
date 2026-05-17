@@ -98,7 +98,6 @@ def static_routes(html_dir=HTML_DIR):
         for filename, changefreq, priority in [
             ("about.html", "monthly", "0.7"),
             ("privacy.html", "monthly", "0.6"),
-            ("404.html", "monthly", "0.3"),
         ]:
             if (html_dir / locale / filename).exists():
                 routes.append((f"{locale}/{filename}", f"/{locale}/{filename}", changefreq, priority))

@@ -7,6 +7,7 @@ import generate_city_pages
 import generate_entries_json
 import helpers
 import main
+import seo_audit
 import update_site_domain
 
 
@@ -132,6 +133,11 @@ class CountryPageGenerationTests(unittest.TestCase):
             self.assertIn(ADSENSE_ACCOUNT_META, en_index)
             self.assertIn(ADSENSE_ACCOUNT_META, country_index)
             self.assertIn(ADSENSE_ACCOUNT_META, city_index)
+            self.assertIn('name="twitter:card"', country_index)
+            self.assertIn('name="twitter:title"', country_index)
+            self.assertIn('name="twitter:description"', country_index)
+            self.assertIn('name="twitter:image"', country_index)
+            self.assertTrue(seo_audit.json_ld_ok(seo_audit.head_of(country_index)))
             self.assertIn('const defaultCountry = "colombia";', root_index)
             self.assertIn("window.location.replace(`/${locale}/${country}/`)", root_index)
             self.assertIn('const locale = "es";', es_index)
@@ -318,6 +324,11 @@ class CountryPageGenerationTests(unittest.TestCase):
 
 
 class CountryDomainMetadataTests(unittest.TestCase):
+    def test_seo_audit_accepts_supported_html_languages(self):
+        self.assertTrue(seo_audit.html_lang_ok('<!DOCTYPE html><html lang="es"><head></head>'))
+        self.assertTrue(seo_audit.html_lang_ok('<!DOCTYPE html><html lang="en"><head></head>'))
+        self.assertFalse(seo_audit.html_lang_ok("<!DOCTYPE html><html><head></head>"))
+
     def test_city_routes_are_nested_under_country(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             html_dir = Path(temp_dir) / "html"
@@ -362,6 +373,19 @@ class CountryDomainMetadataTests(unittest.TestCase):
             self.assertIn(("es/about.html", "/es/about.html", "monthly", "0.7"), static_pages)
             self.assertIn(("en/about.html", "/en/about.html", "monthly", "0.7"), static_pages)
             self.assertNotIn(("colombia/index.html", "/colombia/", "daily", "1.0"), routes)
+
+    def test_static_routes_exclude_404_pages_from_sitemap(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            html_dir = Path(temp_dir) / "html"
+            (html_dir / "es").mkdir(parents=True)
+            (html_dir / "en").mkdir(parents=True)
+            (html_dir / "es" / "404.html").write_text("<html></html>", encoding="utf-8")
+            (html_dir / "en" / "404.html").write_text("<html></html>", encoding="utf-8")
+
+            static_pages = update_site_domain.static_routes(html_dir)
+
+            self.assertNotIn(("es/404.html", "/es/404.html", "monthly", "0.3"), static_pages)
+            self.assertNotIn(("en/404.html", "/en/404.html", "monthly", "0.3"), static_pages)
 
 
 class CountryEntriesTests(unittest.TestCase):
@@ -493,6 +517,18 @@ class CountryNewsletterTests(unittest.TestCase):
         self.assertFalse((Path("html") / "privacy.html").exists())
         self.assertFalse((Path("html") / "404.html").exists())
 
+    def test_404_newsletter_links_are_absolute_and_locale_scoped(self):
+        expectations = {
+            "es": "/es/colombia/newsletter/",
+            "en": "/en/colombia/newsletter/",
+        }
+        for locale, newsletter_href in expectations.items():
+            page = (Path("html") / locale / "404.html").read_text(encoding="utf-8")
+
+            self.assertIn(f'href="{newsletter_href}"', page)
+            self.assertNotIn('href="./es/colombia/newsletter/"', page)
+            self.assertNotIn('href="./index.html"', page)
+
     def test_static_about_and_privacy_home_links_use_language_bootstrap(self):
         for locale in ("es", "en"):
             for filename in ("about.html", "privacy.html"):
@@ -532,6 +568,65 @@ class CountryNewsletterTests(unittest.TestCase):
         self.assertNotIn("Colombia", about)
         self.assertNotIn("/colombia/assets/", about)
         self.assertIn("por país, ciudad, moneda y sede", about)
+
+    def test_english_about_page_does_not_keep_spanish_ui_copy(self):
+        about = (Path("html") / "en" / "about.html").read_text(encoding="utf-8")
+        spanish_fragments = [
+            "Una forma rápida",
+            "tasas de cambio",
+            "reúne tasas",
+            "casas de cambio",
+            "qué valores",
+            "Los datos vienen",
+            "El sitio no reemplaza",
+            "Ver privacidad",
+            "Cómo funciona",
+            "Qué puedes encontrar",
+            "Comparación simple",
+            "Fuentes abiertas",
+            "Actualización frecuente",
+            "Comparador informativo",
+        ]
+
+        for fragment in spanish_fragments:
+            self.assertNotIn(fragment, about)
+
+        self.assertIn("A fast way to review", about)
+        self.assertIn("How it works", about)
+
+    def test_english_privacy_page_does_not_keep_spanish_ui_copy(self):
+        privacy = (Path("html") / "en" / "privacy.html").read_text(encoding="utf-8")
+        spanish_fragments = [
+            "es una página informativa",
+            "Si decides suscribirte",
+            "guardaremos el correo",
+            "Como ocurre",
+            "páginas visitadas",
+            "Algunos enlaces",
+            "Transparencia",
+            "Puntos clave",
+            "Sin cuentas de usuario",
+            "Datos técnicos",
+            "Sitios externos",
+            "Publicidad y cookies",
+            "Comparador informativo",
+            "comparador de tasas",
+        ]
+
+        for fragment in spanish_fragments:
+            self.assertNotIn(fragment, privacy)
+
+        self.assertIn("Divisas COL is an informational website", privacy)
+        self.assertIn("Transparency", privacy)
+
+    def test_english_currency_names_use_central_translation_map(self):
+        script = (Path("html") / "aurum-script.js").read_text(encoding="utf-8")
+
+        self.assertIn("const CURRENCY_NAME_TRANSLATIONS", script)
+        self.assertIn('AmericanDollar: "US dollar"', script)
+        self.assertIn('Euro: "Euro"', script)
+        self.assertIn("function translateCurrencyLabel", script)
+        self.assertIn("translateCurrencyLabel(currencyData.id || currencyLabel, currencyLabel)", script)
 
     def test_generated_english_city_pages_do_not_keep_spanish_ui_copy(self):
         spanish_fragments = [

@@ -71,11 +71,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://divisascol.com/en/404.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://divisascol.com/es/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -84,11 +79,6 @@
     <loc>https://divisascol.com/es/privacy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://divisascol.com/es/404.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://divisascol.com/en/colombia/newsletter/</loc>
