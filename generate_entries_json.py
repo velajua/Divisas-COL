@@ -58,6 +58,8 @@ MONTHS = {
     "dic": 12,
 }
 
+LOCALE_CODES = {"es", "en"}
+
 
 def strip_accents(text):
     normalized = unicodedata.normalize("NFKD", text)
@@ -164,7 +166,7 @@ def parse_spanish_date(date_text):
     return datetime(year, month, day)
 
 
-def build_entry(path, country="colombia"):
+def build_entry(path, country="colombia", locale=None):
     html = path.read_text(encoding="utf-8")
 
     title = extract(r"<title>(.*?)</title>", html, path.stem)
@@ -185,30 +187,41 @@ def build_entry(path, country="colombia"):
 
     title = clean_html(title).replace(" | Divisas COL", "").strip()
 
+    prefix = f"{locale}/{country}" if locale else country
+
     return {
         "date": date,
         "title": title,
         "summary": description,
         "hashtags": build_hashtags(title, description, html),
-        "url": f"{country}/entries/{path.name}",
+        "url": f"{prefix}/entries/{path.name}",
         "_sort_date": parse_spanish_date(date),
     }
 
 
-def infer_country(entries_dir):
+def infer_scope(entries_dir):
     parent = entries_dir.parent
     if entries_dir.name == "entries" and parent.name:
-        return parent.name
-    return "colombia"
+        grandparent = parent.parent
+        if grandparent.name in LOCALE_CODES:
+            return grandparent.name, parent.name
+        return None, parent.name
+    return None, "colombia"
 
 
-def generate_entries_json(entries_dir, output_file, country=None):
+def infer_country(entries_dir):
+    return infer_scope(entries_dir)[1]
+
+
+def generate_entries_json(entries_dir, output_file, country=None, locale=None):
     entries = []
-    country = country or infer_country(entries_dir)
+    inferred_locale, inferred_country = infer_scope(entries_dir)
+    country = country or inferred_country
+    locale = locale if locale is not None else inferred_locale
 
     if entries_dir.is_dir():
         for path in sorted(entries_dir.glob("*.html")):
-            entries.append(build_entry(path, country=country))
+            entries.append(build_entry(path, country=country, locale=locale))
 
     entries.sort(key=lambda entry: (entry["url"], entry["title"], entry["summary"]))
     entries.sort(key=lambda entry: entry["_sort_date"], reverse=True)
@@ -226,17 +239,17 @@ def generate_entries_json(entries_dir, output_file, country=None):
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Generate country-scoped entries.json from HTML files in html/<country>/entries."
+        description="Generate locale/country-scoped entries.json from HTML files in html/<locale>/<country>/entries."
     )
     parser.add_argument(
         "--entries-dir",
-        default="html/colombia/entries",
+        default="html/es/colombia/entries",
         type=Path,
         help="Directory containing entry HTML files.",
     )
     parser.add_argument(
         "--output",
-        default="html/colombia/entries.json",
+        default="html/es/colombia/entries.json",
         type=Path,
         help="Path to write the generated JSON file.",
     )
@@ -245,12 +258,17 @@ def parse_args():
         default=None,
         help="Country slug to prefix entry URLs. Defaults to the parent folder of entries-dir.",
     )
+    parser.add_argument(
+        "--locale",
+        default=None,
+        help="Optional locale slug to prefix entry URLs, for html/<locale>/<country>/entries.",
+    )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    count = generate_entries_json(args.entries_dir, args.output, country=args.country)
+    count = generate_entries_json(args.entries_dir, args.output, country=args.country, locale=args.locale)
     print(f"Generated {args.output} with {count} entries")
 
 

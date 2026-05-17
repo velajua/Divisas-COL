@@ -1,0 +1,21 @@
+{
+  "languages": [
+    {
+      "code": "es",
+      "label": "Español"
+    },
+    {
+      "code": "en",
+      "label": "English"
+    }
+  ],
+  "countryDefaults": {
+    "colombia": "es"
+  },
+  "countries": {
+    "colombia": {
+      "es": "Colombia",
+      "en": "Colombia"
+    }
+  }
+}
