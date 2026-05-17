@@ -10,6 +10,10 @@ import main
 import update_site_domain
 
 
+ADSENSE_SCRIPT = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8147047207612128"
+ADSENSE_ACCOUNT_META = '<meta name="google-adsense-account" content="ca-pub-8147047207612128">'
+
+
 class CountryConfigTests(unittest.TestCase):
     def test_iter_scraper_configs_reads_country_city_url_specs(self):
         conf = {
@@ -118,6 +122,16 @@ class CountryPageGenerationTests(unittest.TestCase):
             city_index = (html_dir / "es" / "colombia" / "bogota" / "index.html").read_text(encoding="utf-8")
 
             self.assertIn("navigator.languages", root_index)
+            self.assertIn(ADSENSE_SCRIPT, root_index)
+            self.assertIn(ADSENSE_SCRIPT, es_index)
+            self.assertIn(ADSENSE_SCRIPT, en_index)
+            self.assertIn(ADSENSE_SCRIPT, country_index)
+            self.assertIn(ADSENSE_SCRIPT, city_index)
+            self.assertIn(ADSENSE_ACCOUNT_META, root_index)
+            self.assertIn(ADSENSE_ACCOUNT_META, es_index)
+            self.assertIn(ADSENSE_ACCOUNT_META, en_index)
+            self.assertIn(ADSENSE_ACCOUNT_META, country_index)
+            self.assertIn(ADSENSE_ACCOUNT_META, city_index)
             self.assertIn('const defaultCountry = "colombia";', root_index)
             self.assertIn("window.location.replace(`/${locale}/${country}/`)", root_index)
             self.assertIn('const locale = "es";', es_index)
@@ -455,6 +469,19 @@ class CompactResultTests(unittest.TestCase):
 
 
 class CountryNewsletterTests(unittest.TestCase):
+    def test_ads_txt_contains_google_authorization(self):
+        ads_txt = (Path("html") / "ads.txt").read_text(encoding="utf-8").strip()
+
+        self.assertEqual("google.com, pub-8147047207612128, DIRECT, f08c47fec0942fa0", ads_txt)
+
+    def test_html_pages_include_adsense_loader_once(self):
+        for path in (Path("html")).rglob("*.html"):
+            page = path.read_text(encoding="utf-8")
+
+            self.assertEqual(1, page.count(ADSENSE_SCRIPT), path.as_posix())
+            self.assertIn('crossorigin="anonymous"', page, path.as_posix())
+            self.assertEqual(1, page.count(ADSENSE_ACCOUNT_META), path.as_posix())
+
     def test_static_pages_are_language_scoped(self):
         self.assertTrue((Path("html") / "es" / "about.html").exists())
         self.assertTrue((Path("html") / "en" / "about.html").exists())
