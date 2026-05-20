@@ -15,3 +15,4 @@ Last run: 2026-05-20 10:20:24,66 America/Bogota
 - Committed and pushed to origin/fixes: 46b40980 (local changes incl. 2026-04-28 deletes) and 8dd5b768 (2026-05-20 publish-manifest URL updates).
 - Attempted to merge origin/main into fixes but hit a conflict in html/result.json; merge was aborted and left for manual resolution.
 - Updated existing PR #55 title/body to reflect 2026-05-20 cards + reel workflow scaffolding.
+- Follow-up: committed and pushed a09cd7f8 to include tracked file update for %%P%%.
