@@ -233,6 +233,85 @@ Use this most of the time:
 python generate_voiceover.py --html input\entry.html --voice voice_samples\my_voice.wav --out-dir output --format mp3
 ```
 
+---
+
+## 11. Marketing reel maker workflow
+
+This folder can also run a file-based reel workflow for daily forex and LATAM purchasing-power content.
+
+The workflow is:
+
+```text
+reel template
+  -> editable reel.json structure
+  -> script.txt for voiceover
+  -> subtitles.srt
+  -> image prompts + placeholder scene images
+  -> optional cleaned voiceover
+  -> final vertical MP4
+```
+
+Create a new reel project:
+
+```bat
+python reel_maker.py new --template daily_fx --slug peso-watch-2026-05-19
+```
+
+Generated files:
+
+```text
+reels\projects\peso-watch-2026-05-19\reel.json
+reels\projects\peso-watch-2026-05-19\script.txt
+reels\projects\peso-watch-2026-05-19\subtitles.srt
+reels\projects\peso-watch-2026-05-19\images\
+reels\projects\peso-watch-2026-05-19\prompts\
+reels\history.json
+```
+
+Edit `reel.json` and `script.txt` with the hook, data point, cut timing, subtitles, visual prompts, and CTA you want. The history file tracks previous reels and render status.
+
+If you provide your own voiceover, place it here:
+
+```text
+reels\projects\peso-watch-2026-05-19\voiceover.wav
+```
+
+Clean the voiceover for reel background audio:
+
+```bat
+python reel_maker.py clean-audio --project peso-watch-2026-05-19
+```
+
+Regenerate subtitles after editing scene subtitles or durations:
+
+```bat
+python reel_maker.py subtitles --project peso-watch-2026-05-19
+```
+
+Render the final vertical reel:
+
+```bat
+python reel_maker.py render --project peso-watch-2026-05-19
+```
+
+The final file is:
+
+```text
+reels\projects\peso-watch-2026-05-19\final.mp4
+```
+
+List previous reel projects:
+
+```bat
+python reel_maker.py list
+```
+
+If you want to use the existing XTTS flow instead of recording the voice manually, use the generated `script.txt` as input:
+
+```bat
+python generate_voiceover.py --txt reels\projects\peso-watch-2026-05-19\script.txt --voice voice_samples\my_voice.wav --out-dir reels\projects\peso-watch-2026-05-19 --format wav
+```
+
 
 
 ---

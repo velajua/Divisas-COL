@@ -1,0 +1,10 @@
+
+Last run: mié 20/05/2026  8:17:54,16 America/Bogota
+
+- ACL preflight ran; icacls .git and icacls .git\index showed no orphan DENY ACE.
+- Note: every command printed a PowerShell profile execution-policy warning; git ops still worked.
+- Working tree on fixes is dirty with unrelated/risky changes (not clearly site-content artifacts):
+  - Modified: divisas_voiceover_xtts_clean/README.md; html/result.json; instagram_cards/2026-05-19/public/publish-manifest.json
+  - Deleted: instagram_cards/2026-04-28/* (many files)
+  - Untracked: divisas_voiceover_xtts_clean/reel_maker.py; divisas_voiceover_xtts_clean/src/reel_workflow.py; tests/test_reel_workflow.py; docs/superpowers/plans/2026-05-19-reel-maker-workflow.md; instagram_cards/2026-05-20/; instagram_cards/2026-05-19/public/publish-state.json; and an empty file named 1.
+- Decision: stopped without fetching/merging/committing/pushing or PR updates; needs manual cleanup to avoid overwriting user work.
