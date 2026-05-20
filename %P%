@@ -8,3 +8,10 @@ Last run: mié 20/05/2026  8:17:54,16 America/Bogota
   - Deleted: instagram_cards/2026-04-28/* (many files)
   - Untracked: divisas_voiceover_xtts_clean/reel_maker.py; divisas_voiceover_xtts_clean/src/reel_workflow.py; tests/test_reel_workflow.py; docs/superpowers/plans/2026-05-19-reel-maker-workflow.md; instagram_cards/2026-05-20/; instagram_cards/2026-05-19/public/publish-state.json; and an empty file named 1.
 - Decision: stopped without fetching/merging/committing/pushing or PR updates; needs manual cleanup to avoid overwriting user work.
+
+Last run: 2026-05-20 10:20:24,66 America/Bogota
+
+- Policy update: allow committing deletions under instagram_cards/ when the folder date is >= 21 days old (3 weeks) relative to run date.
+- Committed and pushed to origin/fixes: 46b40980 (local changes incl. 2026-04-28 deletes) and 8dd5b768 (2026-05-20 publish-manifest URL updates).
+- Attempted to merge origin/main into fixes but hit a conflict in html/result.json; merge was aborted and left for manual resolution.
+- Updated existing PR #55 title/body to reflect 2026-05-20 cards + reel workflow scaffolding.
