@@ -85,6 +85,12 @@ Start Expo:
 npm start
 ```
 
+Start Expo without loading the AdMob native module:
+
+```cmd
+npm run start:testing
+```
+
 Run Android:
 
 ```cmd

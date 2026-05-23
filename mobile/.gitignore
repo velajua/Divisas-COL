@@ -1,5 +1,7 @@
 .expo/
 android/
+android-sdk/
+local-signing/
 node_modules/
 npm-debug.log*
 yarn-debug.log*

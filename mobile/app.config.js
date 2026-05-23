@@ -24,6 +24,10 @@ function loadDotEnv(filePath) {
 
 loadDotEnv(path.join(__dirname, ".env"));
 
+if (process.env.TESTING_EXPO === "1" && process.env.EXPO_PUBLIC_TESTING_EXPO === undefined) {
+  process.env.EXPO_PUBLIC_TESTING_EXPO = "1";
+}
+
 const androidAppId = process.env.ADMOB_ANDROID_APP_ID || sampleAndroidAppId;
 const iosAppId = process.env.ADMOB_IOS_APP_ID || sampleIosAppId;
 
