@@ -28,7 +28,7 @@ import {
   getCurrencies,
   type RateRow,
 } from "./data/resultParser";
-import { buildNewsletterUrl, normalizeLanguage, pickDefaultCountry, type LanguageCode } from "./data/settings";
+import { buildNewsletterUrl, buildPrivacyPolicyUrl, normalizeLanguage, pickDefaultCountry, type LanguageCode } from "./data/settings";
 import { getSnapshotDate, type Snapshot, upsertSnapshot } from "./data/snapshotCache";
 import { loadPreferences, loadSnapshots, savePreferences, saveSnapshots } from "./storage/snapshotStorage";
 
@@ -87,7 +87,9 @@ const COPY = {
     selectedCountry: "País seleccionado",
     selectedLanguage: "Idioma seleccionado",
     lastUpdate: "Última actualización",
-    privacy: "Privacidad: la ubicación solo se usa en este dispositivo para escoger el país y la ciudad iniciales. No la guardamos ni la enviamos a Divisas COL.",
+    privacyTitle: "Privacidad y anuncios",
+    privacy: "La ubicación solo se usa en este dispositivo para escoger el país y la ciudad iniciales. Divisas COL no la guarda. La app muestra anuncios con Google AdMob, que puede procesar identificadores del dispositivo o publicidad según sus políticas.",
+    seePolicies: "Ver políticas",
     requestData: "Solicitando...",
     refreshData: "Actualizar datos",
     spanish: "Español",
@@ -139,7 +141,9 @@ const COPY = {
     selectedCountry: "Selected country",
     selectedLanguage: "Selected language",
     lastUpdate: "Last update",
-    privacy: "Privacy: location is only used on this device to choose the initial country and nearest city. We do not store it or send it to Divisas COL.",
+    privacyTitle: "Privacy and ads",
+    privacy: "Location is only used on this device to choose the initial country and nearest city. Divisas COL does not store it. The app shows ads with Google AdMob, which may process device or advertising identifiers under its policies.",
+    seePolicies: "See policies",
     requestData: "Requesting...",
     refreshData: "Refresh data",
     spanish: "Spanish",
@@ -309,6 +313,7 @@ export default function AppRoot() {
   const selectedCountryLabel = countries.find((item) => item.id === selectedCountry)?.label || formatDisplayName(selectedCountry || "colombia");
   const selectedCurrencyLabel = currencies.find((item) => item.id === selectedCurrency)?.label || "Dollar";
   const newsletterUrl = buildNewsletterUrl(SITE_URL, language, selectedCountry);
+  const privacyPolicyUrl = buildPrivacyPolicyUrl(SITE_URL, language);
   const languageOptions = useMemo(() => [
     { id: "es", label: t.spanish },
     { id: "en", label: t.english },
@@ -607,7 +612,13 @@ export default function AppRoot() {
           <Text style={styles.infoLine}>{t.selectedCountry}: {selectedCountryLabel}</Text>
           <Text style={styles.infoLine}>{t.selectedLanguage}: {languageOptions.find((option) => option.id === language)?.label}</Text>
           <Text style={styles.infoLine}>{t.lastUpdate}: {selectedSnapshot ? new Date(selectedSnapshot.fetchedAt).toLocaleString(language === "en" ? "en-US" : "es-CO") : "-"}</Text>
-          <Text style={styles.infoLine}>{t.privacy}</Text>
+          <View style={styles.policyBox}>
+            <Text style={styles.policyTitle}>{t.privacyTitle}</Text>
+            <Text style={styles.infoLine}>{t.privacy}</Text>
+            <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL(privacyPolicyUrl)}>
+              <Text style={styles.secondaryButtonText}>{t.seePolicies}</Text>
+            </Pressable>
+          </View>
           <Text style={styles.muted}>{message}</Text>
           <Pressable
             style={[styles.primaryButton, isRefreshing && styles.pressedButton]}
@@ -785,6 +796,21 @@ const styles = StyleSheet.create({
   pressedButton: {
     opacity: 0.72,
   },
+  secondaryButton: {
+    alignItems: "center",
+    alignSelf: "flex-start",
+    borderColor: "#17130d",
+    borderRadius: 8,
+    borderWidth: 1,
+    marginTop: 8,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  secondaryButtonText: {
+    color: "#17130d",
+    fontSize: 14,
+    fontWeight: "700",
+  },
   muted: {
     color: "#6d6254",
     fontSize: 13,
@@ -932,6 +958,18 @@ const styles = StyleSheet.create({
     color: "#2c261f",
     fontSize: 14,
     marginBottom: 8,
+  },
+  policyBox: {
+    borderTopColor: "#eadcc3",
+    borderTopWidth: 1,
+    marginTop: 8,
+    paddingTop: 12,
+  },
+  policyTitle: {
+    color: "#17130d",
+    fontSize: 15,
+    fontWeight: "800",
+    marginBottom: 6,
   },
   loading: {
     alignItems: "center",

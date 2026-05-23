@@ -40,3 +40,8 @@ export function buildNewsletterUrl(baseUrl: string, language: LanguageCode, coun
   const normalizedCountry = normalizeCountryId(country) || "colombia";
   return `${normalizedBase}/${language}/${normalizedCountry}/newsletter/`;
 }
+
+export function buildPrivacyPolicyUrl(baseUrl: string, language: LanguageCode): string {
+  const normalizedBase = baseUrl.replace(/\/+$/, "");
+  return `${normalizedBase}/${language}/privacy.html`;
+}
