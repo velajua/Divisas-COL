@@ -28,7 +28,8 @@ node_modules/
 .dataconnect
 __pycache__
 AGENTS.md
-%CODEX_HOME%/
+%*/
+%*
 mobile/.expo/ 
 mobile/node_modules/
 **/.venv/

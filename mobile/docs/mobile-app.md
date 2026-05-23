@@ -98,16 +98,35 @@ AdMob:
 npx eas build --platform android --profile preview
 ```
 
-Build the Android production bundle:
+Build the Android production bundle locally:
 
 ```cmd
 set ADMOB_ANDROID_APP_ID=ca-app-pub-0000000000000000~0000000000
-android-prod.bat
+set DIVISAS_UPLOAD_STORE_FILE=C:\path\to\upload-keystore.jks
+set DIVISAS_UPLOAD_STORE_PASSWORD=your-keystore-password
+set DIVISAS_UPLOAD_KEY_ALIAS=your-key-alias
+set DIVISAS_UPLOAD_KEY_PASSWORD=your-key-password
+android-local-aab.bat
 ```
 
 `ADMOB_ANDROID_APP_ID` is the Android app ID from AdMob. Banner and native ad
 unit IDs can be changed later by updating `html/mobile-ads.json` and deploying
 the website, so they do not require another app release.
+
+`android-local-aab.bat` does not use Expo or EAS cloud builds and does not
+require an Expo login. It runs tests, type-checking, `expo-doctor`, generates a
+fresh Android project with `npx expo prebuild --platform android --clean`,
+patches the generated Gradle release signing block to read the `DIVISAS_UPLOAD_*`
+environment variables, then runs `gradlew.bat bundleRelease`. The generated AAB
+is written to:
+
+```text
+mobile\android\app\build\outputs\bundle\release\app-release.aab
+```
+
+The generated `mobile\android` directory is ignored by git. App configuration
+should stay in `app.json` and `app.config.js`; the local builder regenerates the
+Android project so native config does not drift.
 
 Run iOS on macOS:
 

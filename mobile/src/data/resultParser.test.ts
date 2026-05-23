@@ -9,7 +9,7 @@ import {
   getCountries,
   getCurrencies,
 } from "./resultParser";
-import { buildNewsletterUrl, pickDefaultCountry } from "./settings";
+import { buildNewsletterUrl, buildPrivacyPolicyUrl, pickDefaultCountry } from "./settings";
 
 const sampleResult = {
   countries: {
@@ -107,6 +107,17 @@ test("buildNewsletterUrl uses selected language and country", () => {
   assert.equal(
     buildNewsletterUrl("https://divisascol.com/", "es", ""),
     "https://divisascol.com/es/colombia/newsletter/",
+  );
+});
+
+test("buildPrivacyPolicyUrl uses the selected language", () => {
+  assert.equal(
+    buildPrivacyPolicyUrl("https://divisascol.com", "en"),
+    "https://divisascol.com/en/privacy.html",
+  );
+  assert.equal(
+    buildPrivacyPolicyUrl("https://divisascol.com/", "es"),
+    "https://divisascol.com/es/privacy.html",
   );
 });
 

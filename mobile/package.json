@@ -12,11 +12,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:android": "eas build --platform android --profile production",
+    "build:android": "android-local-aab.bat",
+    "build:android:eas": "eas build --platform android --profile production",
     "build:ios": "eas build --platform ios --profile production",
     "submit:android": "eas submit --platform android --profile production",
     "submit:ios": "eas submit --platform ios --profile production",
-    "test": "tsx --test src/data/snapshotCache.test.ts src/data/resultParser.test.ts src/data/api.test.ts src/data/cityInference.test.ts src/data/adConfig.test.ts src/components/MobileAds.test.ts",
+    "test": "tsx --test src/data/snapshotCache.test.ts src/data/resultParser.test.ts src/data/api.test.ts src/data/cityInference.test.ts src/data/adConfig.test.ts src/components/MobileAds.test.ts scripts/configureAndroidReleaseSigning.test.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
