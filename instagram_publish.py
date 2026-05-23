@@ -452,7 +452,17 @@ def wait_for_container_finished(
     last_status = None
     current_poll_seconds = poll_seconds
     while time.time() < deadline:
-        status = media_container_status(container_id, token)
+        try:
+            status = media_container_status(container_id, token)
+        except requests.HTTPError as exc:
+            error = meta_error_payload(exc.response) if exc.response is not None else None
+            if error and error.get("code") == 100 and error.get("error_subcode") == 33:
+                print(
+                    f"Container {container_id} status check returned authorization error; "
+                    "continuing to publish."
+                )
+                return
+            raise
         last_status = status
         code = status.get("status_code")
         if code == "FINISHED":
@@ -784,9 +794,11 @@ def update_manifest_urls(manifest_path, public_url):
     return manifest
 
 
-def wait_for_public_image(image_url, timeout_seconds=120):
+def wait_for_public_image(image_url, timeout_seconds=300):
     deadline = time.time() + timeout_seconds
     last_error = None
+    delay_seconds = 3
+    max_delay_seconds = 15
     print(f"Checking public image URL: {image_url}")
     while time.time() < deadline:
         try:
@@ -796,9 +808,15 @@ def wait_for_public_image(image_url, timeout_seconds=120):
                 print(f"Verified public image URL: {image_url} ({content_type}, {len(response.content)} bytes)")
                 return
             last_error = f"HTTP {response.status_code} {content_type} {response.text[:120]!r}"
+            print(f"Public image URL not ready yet; retrying: {last_error}")
         except requests.RequestException as exc:
             last_error = str(exc)
-        time.sleep(3)
+            print(f"Public image URL request failed; retrying: {last_error}")
+        sleep_for = min(delay_seconds, max(0, deadline - time.time()))
+        if sleep_for <= 0:
+            break
+        time.sleep(sleep_for)
+        delay_seconds = min(delay_seconds * 2, max_delay_seconds)
     raise RuntimeError(f"Public image URL never became image/*: {image_url}. Last error: {last_error}")
 
 
@@ -882,6 +900,14 @@ def prioritize_newsletter(groups):
     return newsletter + others
 
 
+def start_tunnel_for_publish(root, port, provider, timeout_seconds):
+    if provider == "ngrok":
+        return start_ngrok_tunnel(root, port, timeout_seconds=timeout_seconds)
+    if provider == "cloudflare":
+        return start_tunnel(root, port, timeout_seconds=timeout_seconds)
+    return start_tunnel_with_retry(root, port, timeout_seconds=timeout_seconds)
+
+
 def run_serve_publish(args):
     root = repo_root()
     load_dotenv(root / ".env")
@@ -894,7 +920,12 @@ def run_serve_publish(args):
     print(f"Serving {public_dir.relative_to(root).as_posix()} at http://127.0.0.1:{DEFAULT_PORT}")
     tunnel = None
     try:
-        tunnel, public_url = start_tunnel_with_retry(root, DEFAULT_PORT, timeout_seconds=DEFAULT_TUNNEL_TIMEOUT_SECONDS)
+        tunnel, public_url = start_tunnel_for_publish(
+            root,
+            DEFAULT_PORT,
+            args.tunnel_provider,
+            timeout_seconds=DEFAULT_TUNNEL_TIMEOUT_SECONDS,
+        )
         manifest = update_manifest_urls(manifest_path, public_url)
         print(f"Updated manifest image URLs: {manifest_path.relative_to(root).as_posix()}")
         print(f"Public base URL: {public_url}")
@@ -1140,6 +1171,12 @@ def parse_args(argv=None):
         "--group",
         action="append",
         help="Only publish the named group key. Can be repeated, for example --group medellin.",
+    )
+    parser.add_argument(
+        "--tunnel-provider",
+        choices=["auto", "cloudflare", "ngrok"],
+        default="auto",
+        help="Choose the tunnel provider used to expose the local image server.",
     )
     return parser.parse_args(argv)
 
