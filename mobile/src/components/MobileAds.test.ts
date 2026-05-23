@@ -12,3 +12,31 @@ test("loadGoogleMobileAdsForPlatform returns null when Android native module is 
 
   assert.equal(ads, null);
 });
+
+test("loadGoogleMobileAdsForPlatform skips loading AdMob when TESTING_EXPO is enabled", () => {
+  let loaded = false;
+
+  const ads = loadGoogleMobileAdsForPlatform("android", () => {
+    loaded = true;
+    throw new Error("AdMob should not load during Expo testing.");
+  }, {
+    TESTING_EXPO: "1",
+  });
+
+  assert.equal(ads, null);
+  assert.equal(loaded, false);
+});
+
+test("loadGoogleMobileAdsForPlatform skips loading AdMob when EXPO_PUBLIC_TESTING_EXPO is enabled", () => {
+  let loaded = false;
+
+  const ads = loadGoogleMobileAdsForPlatform("android", () => {
+    loaded = true;
+    throw new Error("AdMob should not load during Expo testing.");
+  }, {
+    EXPO_PUBLIC_TESTING_EXPO: "1",
+  });
+
+  assert.equal(ads, null);
+  assert.equal(loaded, false);
+});
