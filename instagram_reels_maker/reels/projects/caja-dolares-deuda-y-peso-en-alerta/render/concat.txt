@@ -1,0 +1,13 @@
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/001_hook.png'
+duration 5.741
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/002_caja.png'
+duration 5.688
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/003_deuda.png'
+duration 10.797
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/004_banrep.png'
+duration 7.459
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/005_fiscal.png'
+duration 8.291
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/006_cta.png'
+duration 6.190
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/caja-dolares-deuda-y-peso-en-alerta/images/006_cta.png'

@@ -1,0 +1,89 @@
+{
+  "slug": "caja-dolares-deuda-y-peso-en-alerta",
+  "title": "Caja en dolares, deuda externa y peso en alerta",
+  "status": "rendered",
+  "template": "article_reel",
+  "source_article": {
+    "path": "../../../html/es/colombia/entries/caja-dolares-deuda-y-peso-en-alerta.html",
+    "canonical_url": "https://divisascol.com/es/colombia/entries/caja-dolares-deuda-y-peso-en-alerta.html",
+    "published_date": "2026-05-25"
+  },
+  "niche": "analisis cambiario Colombia",
+  "format": "editorial_news_reel",
+  "created_at": "2026-05-25T13:52:18+00:00",
+  "target_duration_seconds": 44.17,
+  "voiceover": {
+    "mode": "provided_or_xtts",
+    "file": "voiceover.wav",
+    "clean_file": "voiceover_clean.wav",
+    "script_file": "script.txt",
+    "notes": "No voice sample is included in the folder yet. Generate voiceover.wav with generate_voiceover.py --txt once a reference WAV is available."
+  },
+  "caption_file": "caption.txt",
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 5.741,
+      "subtitle": "Caja en dolares, deuda externa y un peso otra vez en alerta.",
+      "voiceover_text": "Caja en dolares, deuda externa y un peso otra vez en alerta.",
+      "visual_prompt": "Vertical 9:16 editorial finance news card for Colombia. Dark premium background, USD/COP ticker, Colombian peso bills, official dollar reserve theme. Headline text: Caja en dolares. Peso en alerta. No party logos, no fake brands.",
+      "image": "images/001_hook.png",
+      "prompt_file": "prompts/001_hook.txt"
+    },
+    {
+      "id": "caja",
+      "duration_seconds": 5.688,
+      "subtitle": "Hacienda dice que compra dolares para fortalecer caja, no para intervenir la tasa.",
+      "voiceover_text": "Hacienda dice que compra dolares para fortalecer caja, no para intervenir la tasa.",
+      "visual_prompt": "Vertical 9:16 financial explainer card. Ministry-style building silhouette, dollar reserve vault, small USD demand arrow, sober LATAM editorial design. Headline: El Gobierno dice que no interviene.",
+      "image": "images/002_caja.png",
+      "prompt_file": "prompts/002_caja.txt"
+    },
+    {
+      "id": "deuda",
+      "duration_seconds": 10.797,
+      "subtitle": "Pero la deuda externa ya pesa: doscientos cuarenta y seis mil ochocientos un millones de dolares, el cincuenta y tres coma ocho por ciento del PIB.",
+      "voiceover_text": "Pero la deuda externa ya pesa: doscientos cuarenta y seis mil ochocientos un millones de dolares, el cincuenta y tres coma ocho por ciento del PIB.",
+      "visual_prompt": "Vertical 9:16 data card with debt gauge, USD 246.801M, 53.8 percent of GDP, Colombia risk premium tone, clean chart style, no fake logos.",
+      "image": "images/003_deuda.png",
+      "prompt_file": "prompts/003_deuda.txt"
+    },
+    {
+      "id": "banrep",
+      "duration_seconds": 7.459,
+      "subtitle": "Y BanRep sigue viendo inflacion incomoda, con tasas altas y poco espacio para cantar victoria.",
+      "voiceover_text": "Y BanRep sigue viendo inflacion incomoda, con tasas altas y poco espacio para cantar victoria.",
+      "visual_prompt": "Vertical 9:16 central bank analysis card. Inflation gauge near 5.6 percent, policy rate 11.25 percent, restrained gold accents, serious news graphic.",
+      "image": "images/004_banrep.png",
+      "prompt_file": "prompts/004_banrep.txt"
+    },
+    {
+      "id": "fiscal",
+      "duration_seconds": 8.291,
+      "subtitle": "El problema de fondo es fiscal: gasto alto, inversion rezagada y menos credibilidad para defender el peso.",
+      "voiceover_text": "El problema de fondo es fiscal: gasto alto, inversion rezagada y menos credibilidad para defender el peso.",
+      "visual_prompt": "Vertical 9:16 fiscal risk editorial card. Budget papers, falling peso line, muted Colombian colors, high contrast, analytical not sensational. Headline: El problema es fiscal.",
+      "image": "images/005_fiscal.png",
+      "prompt_file": "prompts/005_fiscal.txt"
+    },
+    {
+      "id": "cta",
+      "duration_seconds": 6.19,
+      "subtitle": "Esta semana la pregunta no es solo si sube el dolar. Es si el mercado pide mas cobertura.",
+      "voiceover_text": "Esta semana la pregunta no es solo si sube el dolar. Es si el mercado pide mas cobertura.",
+      "visual_prompt": "Vertical 9:16 closing question card. USD/COP board, comment prompt, Divisas COL editorial tone. Text: Cobertura o calma? Te leo.",
+      "image": "images/006_cta.png",
+      "prompt_file": "prompts/006_cta.txt"
+    }
+  ],
+  "cta": "Esta semana: cobertura o calma?",
+  "outputs": {
+    "final_video": "final.mp4"
+  },
+  "review_notes": [
+    "Draft is designed as a 44-second editorial reel aligned to the generated XTTS voiceover.",
+    "Visual PNGs are draft review cards, not final AI art.",
+    "Voiceover audio still needs a reference voice WAV before XTTS generation."
+  ],
+  "rendered_at": "2026-05-25T14:07:14+00:00"
+}

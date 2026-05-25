@@ -345,13 +345,20 @@ def is_non_retryable_meta_error(error):
     return "request limit reached" in message or "application request limit reached" in message
 
 
+def log_wait(message):
+    print(f"[wait] {message}")
+
+
 def post_with_meta_retry(url, **kwargs):
     global META_CALL_COUNT
     META_CALL_COUNT += 1
-    time.sleep(DEFAULT_META_CALL_COOLDOWN_SECONDS)
+    log_wait(
+        f"Meta request cooldown before call {META_CALL_COUNT}: sleeping {DEFAULT_META_COOLDOWN_SECONDS}s."
+    )
+    time.sleep(DEFAULT_META_COOLDOWN_SECONDS)
     if META_CALL_COUNT % DEFAULT_META_COOLDOWN_CALLS == 0:
-        print(
-            f"Cooling down before Meta call {META_CALL_COUNT}: sleeping {DEFAULT_META_COOLDOWN_SECONDS} seconds."
+        log_wait(
+            f"Meta extra cooldown after {META_CALL_COUNT} calls: sleeping {DEFAULT_META_COOLDOWN_SECONDS}s."
         )
         time.sleep(DEFAULT_META_COOLDOWN_SECONDS)
     last_response = None
@@ -365,6 +372,9 @@ def post_with_meta_retry(url, **kwargs):
         if is_non_retryable_meta_error(error):
             response.raise_for_status()
         if attempt < attempts:
+            log_wait(
+                f"Meta request attempt {attempt} failed; sleeping {DEFAULT_META_RETRY_SLEEP_SECONDS}s before retry."
+            )
             time.sleep(DEFAULT_META_RETRY_SLEEP_SECONDS)
     if last_response is not None:
         last_response.raise_for_status()
@@ -470,6 +480,11 @@ def wait_for_container_finished(
             return
         if code == "ERROR":
             raise RuntimeError(f"Container {container_id} failed: {status}")
+        remaining = max(0, int(deadline - time.time()))
+        log_wait(
+            f"Container {container_id} still processing (status={code!r}); "
+            f"sleeping {current_poll_seconds}s before polling again. About {remaining}s left."
+        )
         time.sleep(current_poll_seconds)
         current_poll_seconds = min(current_poll_seconds + poll_seconds, 60)
     raise RuntimeError(f"Container {container_id} did not finish. Last status: {last_status}")
@@ -630,6 +645,8 @@ def wait_for_tunnel_url(process, timeout_seconds=90):
         url = extract_tunnel_url(line)
         if url:
             return url
+        remaining = max(0, int(deadline - time.time()))
+        log_wait(f"Waiting for tunnel URL in startup logs. About {remaining}s left.")
     raise RuntimeError("Tunnel did not print a public URL.")
 
 
@@ -815,6 +832,11 @@ def wait_for_public_image(image_url, timeout_seconds=300):
         sleep_for = min(delay_seconds, max(0, deadline - time.time()))
         if sleep_for <= 0:
             break
+        remaining = max(0, int(deadline - time.time()))
+        log_wait(
+            f"Public image URL not ready yet; sleeping {sleep_for}s before retrying. "
+            f"About {remaining}s left."
+        )
         time.sleep(sleep_for)
         delay_seconds = min(delay_seconds * 2, max_delay_seconds)
     raise RuntimeError(f"Public image URL never became image/*: {image_url}. Last error: {last_error}")
@@ -933,6 +955,7 @@ def run_serve_publish(args):
         posts = manifest.get("posts", [])
         if not posts:
             raise RuntimeError(f"No posts in {manifest_path}")
+        log_wait("Waiting for the first public image to become reachable over the tunnel.")
         wait_for_public_image(posts[0]["image_url"])
         groups = split_oversized_groups(group_posts_for_instagram(posts))
         state_path = public_dir / "publish-state.json"
@@ -963,7 +986,9 @@ def run_serve_publish(args):
             state["published_groups"].append(group["key"])
             save_publish_state(state_path, state)
             if index < len(prepared_groups) - 1:
-                print(f"Waiting {DEFAULT_POST_PAUSE_SECONDS}s before next post.")
+                log_wait(
+                    f"Waiting {DEFAULT_POST_PAUSE_SECONDS}s before next post so Meta doesn't see back-to-back publishes."
+                )
                 time.sleep(DEFAULT_POST_PAUSE_SECONDS)
         return 0
     finally:

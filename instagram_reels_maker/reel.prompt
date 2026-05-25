@@ -1,0 +1,86 @@
+Create an Instagram Reel project from this HTML article entry:
+
+<PASTE_HTML_ENTRY_PATH_OR_CONTENT_HERE>
+
+Use the existing instagram_reels_maker workflow and produce a complete reviewable draft like:
+instagram_reels_maker\reels\projects\caja-dolares-deuda-y-peso-en-alerta\drafts\final.mp4
+
+Design and workflow requirements:
+
+1. Create a project folder under:
+instagram_reels_maker\reels\projects\<article-slug>
+
+2. Extract the story into a short Spanish reel script:
+- 6 scenes max.
+- Direct, news/editorial tone.
+- Written for voiceover.
+- Keep it around 40-50 seconds.
+- Use plain ASCII text where possible.
+- Avoid filler and intro fluff.
+
+3. Generate/use the current TTS voiceover only to determine subtitle timings.
+- The TTS audio is only a timing reference.
+- Do not include any voiceover or audio track in the final draft.
+- The final review MP4 must be silent.
+- The human voiceover will be provided later as a separate file.
+- After that voiceover exists, make the final final reel with:
+  python reel_maker.py finalize-audio --video instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4 --voice <path-to-voiceover.wav> --out instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4
+
+4. Subtitles:
+- Must match exactly what the voice/script says.
+- Use phrase-level subtitle timing from the TTS.
+- Put subtitles in the bottom dark lane.
+- Keep subtitles readable, not huge.
+- Do not cover headline overlays or key visuals.
+
+5. Visual style:
+- Do not use simple code-generated cards as the main visuals.
+- Generate realistic editorial/news-style images for each scene.
+- Images should look like real-life finance/news photography, not obvious AI fantasy art.
+- Use credible scenes: desks, reports, Colombian pesos, U.S. dollars, laptops with blurred charts, Bogota/government/office context.
+- Avoid giant symbols, glowing gauges, floating money, surreal dashboards, fake UI, and AI-looking concept art.
+- Preserve a darker, uncluttered bottom area for subtitles.
+
+6. Headline overlays:
+- Add exact headline text locally, not through image generation.
+- Use bold editorial headline blocks near the top/upper-middle.
+- Keep the style consistent:
+  - red source tag: “DIVISAS COL | COLOMBIA”
+  - black translucent headline box
+  - white main headline
+  - yellow/gold secondary line
+- Headlines should summarize each scene, not repeat the subtitle word-for-word.
+
+7. Timed data overlays:
+- Add key numbers and important concepts as timed overlay callouts.
+- These should appear when the script reaches that point.
+- Examples:
+  - dollar amount
+  - debt percentage of GDP
+  - inflation/tasas altas
+  - fiscal risk
+  - market coverage
+- Keep data overlays above the subtitle lane.
+- Use bold, compact black boxes with white/gold text.
+
+8. Output files:
+- Save all project files: script, captions, reel metadata, generated images, raw images, subtitle files, render files, preview frames.
+- Put the review MP4 at:
+instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4
+- Do not create final_final.mp4 until a real voiceover file is provided.
+
+9. Final render:
+- 1080x1920 vertical MP4.
+- About 40-50 seconds.
+- Silent: no audio stream.
+- Burned-in subtitles and timed data overlays.
+- Verify with ffprobe that the output has video only and no audio.
+- Extract a few preview frames around important data moments and inspect that overlays/subtitles do not collide.
+
+10. Final final audio pass, only after the human voiceover is provided:
+- Run finalize-audio against the silent draft and the supplied voiceover.
+- This pass must clean the voiceover, remove any existing draft audio, and write:
+instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4
+- Verify with ffprobe that final_final.mp4 has one video stream and one audio stream.
+
+Use the caja-dolares-deuda-y-peso-en-alerta project as the visual/style reference.

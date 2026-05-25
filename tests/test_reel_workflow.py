@@ -1,14 +1,22 @@
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
 
-from divisas_voiceover_xtts_clean.src.reel_workflow import (
+REPO_ROOT = Path(__file__).resolve().parents[1]
+REEL_SRC = REPO_ROOT / "instagram_reels_maker" / "src"
+sys.path.insert(0, str(REEL_SRC))
+
+import reel_workflow
+from reel_workflow import (
     ReelWorkflowError,
     build_clean_audio_command,
+    build_finalize_audio_command,
     build_render_command,
     create_reel_project,
+    finalize_audio,
     generate_subtitles,
     list_reel_projects,
 )
@@ -95,6 +103,50 @@ def test_build_render_command_uses_concat_subtitles_audio_and_output(tmp_path: P
     assert str(audio_file) in command
     assert str(output_file) == command[-1]
     assert any("subtitles=" in part for part in command)
+
+
+def test_build_finalize_audio_command_replaces_video_audio(tmp_path: Path):
+    video_file = tmp_path / "draft.mp4"
+    clean_audio_file = tmp_path / "voiceover_clean.wav"
+    output_file = tmp_path / "final_final.mp4"
+
+    command = build_finalize_audio_command(
+        video_file=video_file,
+        audio_file=clean_audio_file,
+        output_file=output_file,
+    )
+
+    assert command[:4] == ["ffmpeg", "-y", "-i", str(video_file)]
+    assert str(clean_audio_file) in command
+    assert "-map" in command
+    assert "0:v:0" in command
+    assert "1:a:0" in command
+    assert "-shortest" in command
+    assert str(output_file) == command[-1]
+
+
+def test_finalize_audio_cleans_voiceover_then_writes_final_reel(tmp_path: Path, monkeypatch):
+    draft_video = tmp_path / "draft.mp4"
+    voiceover = tmp_path / "voiceover.wav"
+    output_video = tmp_path / "final_final.mp4"
+    draft_video.write_bytes(b"video")
+    voiceover.write_bytes(b"voice")
+    commands = []
+
+    def fake_run(command, check):
+        commands.append(command)
+
+    monkeypatch.setattr(reel_workflow.subprocess, "run", fake_run)
+
+    clean_audio_path = finalize_audio(
+        video_file=draft_video,
+        voiceover_file=voiceover,
+        output_file=output_video,
+    )
+
+    assert clean_audio_path == tmp_path / "voiceover_clean.wav"
+    assert commands[0] == build_clean_audio_command(voiceover, clean_audio_path)
+    assert commands[1] == build_finalize_audio_command(draft_video, clean_audio_path, output_video)
 
 
 def test_list_reel_projects_reads_history(tmp_path: Path):
