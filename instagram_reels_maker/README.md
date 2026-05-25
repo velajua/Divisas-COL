@@ -247,8 +247,9 @@ reel template
   -> script.txt for voiceover
   -> subtitles.srt
   -> image prompts + placeholder scene images
-  -> optional cleaned voiceover
-  -> final vertical MP4
+  -> silent review draft
+  -> later supplied voiceover
+  -> cleaned voiceover + final final MP4
 ```
 
 Create a new reel project:
@@ -270,7 +271,7 @@ reels\history.json
 
 Edit `reel.json` and `script.txt` with the hook, data point, cut timing, subtitles, visual prompts, and CTA you want. The history file tracks previous reels and render status.
 
-If you provide your own voiceover, place it here:
+If you provide your own voiceover during the project workflow, place it here:
 
 ```text
 reels\projects\peso-watch-2026-05-19\voiceover.wav
@@ -298,6 +299,29 @@ The final file is:
 
 ```text
 reels\projects\peso-watch-2026-05-19\final.mp4
+```
+
+### Silent draft plus later voiceover workflow
+
+For review drafts made outside the project renderer, keep the draft MP4 silent. When the voiceover is ready, point the standalone finalizer at the silent draft and the separate voiceover file:
+
+```bat
+python reel_maker.py finalize-audio --video reels\projects\peso-watch-2026-05-19\drafts\final.mp4 --voice reels\projects\peso-watch-2026-05-19\voiceover.wav --out reels\projects\peso-watch-2026-05-19\drafts\final_final.mp4
+```
+
+This command:
+
+```text
+1. cleans the supplied voiceover with the same reel audio filter chain
+2. writes voiceover_clean.wav next to the voiceover by default
+3. removes any audio from the draft video
+4. writes the final final MP4 with the cleaned voiceover as the only audio track
+```
+
+Use `--clean-out` if you want the cleaned WAV somewhere else:
+
+```bat
+python reel_maker.py finalize-audio --video path\to\draft.mp4 --voice path\to\voiceover.wav --clean-out path\to\voiceover_clean.wav --out path\to\final_final.mp4
 ```
 
 List previous reel projects:

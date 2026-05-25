@@ -1,0 +1,76 @@
+{
+  "slug": "oxford-economics-elecciones-2026-espriella-cepeda",
+  "title": "Oxford Economics mide el riesgo electoral de Colombia",
+  "status": "rendered",
+  "template": "article_reel",
+  "source_article": {
+    "url": "https://www.infobae.com/colombia/2026/02/23/asi-estaria-la-economia-colombiana-si-en-las-elecciones-de-2026-ganan-abelardo-de-la-espriella-o-ivan-cepeda-segun-oxford-economics/",
+    "publisher": "Infobae Colombia",
+    "published_date": "2026-02-23"
+  },
+  "niche": "analisis macro Colombia",
+  "format": "editorial_news_reel",
+  "created_at": "2026-05-25",
+  "target_duration_seconds": 59.97,
+  "voiceover": {
+    "mode": "xtts_timing_reference_only",
+    "file": "voiceover.wav",
+    "clean_file": "voiceover_clean.wav",
+    "script_file": "script.txt",
+    "include_audio_in_draft": false
+  },
+  "caption_file": "caption.txt",
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 8.711,
+      "voiceover_text": "Oxford Economics puso numeros al riesgo electoral de Colombia: De la Espriella o Cepeda no moverian igual la economia.",
+      "image": "images/001_hook.png",
+      "raw_image": "images/raw_001_hook.png",
+      "headline": ["RIESGO ELECTORAL", "OXFORD PONE NUMEROS"]
+    },
+    {
+      "id": "base",
+      "duration_seconds": 9.725,
+      "voiceover_text": "En su escenario base, el PIB creceria tres coma cinco por ciento en 2026, apoyado por consumo y salario minimo.",
+      "image": "images/002_base.png",
+      "raw_image": "images/raw_002_base.png",
+      "headline": ["ESCENARIO BASE", "PIB 3,5%"]
+    },
+    {
+      "id": "continuidad",
+      "duration_seconds": 9.543,
+      "voiceover_text": "Pero si el proximo gobierno mantiene la linea de Petro, Oxford ve mas presion: menor inversion, menos petroleo y mas inflacion.",
+      "image": "images/003_continuidad.png",
+      "raw_image": "images/raw_003_continuidad.png",
+      "headline": ["SI HAY CONTINUIDAD", "MAS PRESION"]
+    },
+    {
+      "id": "inflacion_tasas",
+      "duration_seconds": 8.85,
+      "voiceover_text": "El consumo podria crecer cuatro coma ocho por ciento, pero la inflacion subiria a seis coma tres y la tasa a diez coma cinco por ciento.",
+      "image": "images/004_inflacion_tasas.png",
+      "raw_image": "images/raw_004_inflacion_tasas.png",
+      "headline": ["CONSUMO VS PRECIOS", "INFLACION 6,3%"]
+    },
+    {
+      "id": "bonos",
+      "duration_seconds": 10.941,
+      "voiceover_text": "En bonos, el contraste es duro: con un giro ortodoxo, diez anos cerca de nueve coma cinco; con continuidad, hasta doce coma cinco.",
+      "image": "images/005_bonos.png",
+      "raw_image": "images/raw_005_bonos.png",
+      "headline": ["BONOS A 10 ANOS", "9,5% VS 12,5%"]
+    },
+    {
+      "id": "fiscal",
+      "duration_seconds": 12.108,
+      "voiceover_text": "La alerta fiscal sigue: deficit de siete coma uno por ciento y deuda cerca de sesenta y cuatro por ciento del PIB. El mercado va a votar con cobertura.",
+      "image": "images/006_fiscal.png",
+      "raw_image": "images/raw_006_fiscal.png",
+      "headline": ["ALERTA FISCAL", "DEUDA 64% DEL PIB"]
+    }
+  ],
+  "outputs": {
+    "draft_video": "drafts/final.mp4"
+  }
+}

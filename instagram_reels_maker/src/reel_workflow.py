@@ -206,6 +206,35 @@ def build_clean_audio_command(input_audio: str | Path, output_audio: str | Path)
     return ["ffmpeg", "-y", "-i", str(input_audio), "-af", filters, str(output_audio)]
 
 
+def build_finalize_audio_command(
+    video_file: str | Path,
+    audio_file: str | Path,
+    output_file: str | Path,
+) -> list[str]:
+    return [
+        "ffmpeg",
+        "-y",
+        "-i",
+        str(video_file),
+        "-i",
+        str(audio_file),
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+        "-c:v",
+        "copy",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "192k",
+        "-shortest",
+        "-movflags",
+        "+faststart",
+        str(output_file),
+    ]
+
+
 def clean_audio(root: str | Path, slug: str) -> Path:
     project_dir = get_project_dir(root, slug)
     reel_data = read_json(project_dir / "reel.json")
@@ -217,6 +246,31 @@ def clean_audio(root: str | Path, slug: str) -> Path:
 
     subprocess.run(build_clean_audio_command(input_audio, output_audio), check=True)
     return output_audio
+
+
+def finalize_audio(
+    video_file: str | Path,
+    voiceover_file: str | Path,
+    output_file: str | Path,
+    clean_audio_file: str | Path | None = None,
+) -> Path:
+    video_path = Path(video_file)
+    voiceover_path = Path(voiceover_file)
+    output_path = Path(output_file)
+    clean_path = Path(clean_audio_file) if clean_audio_file is not None else voiceover_path.with_name(
+        f"{voiceover_path.stem}_clean.wav"
+    )
+
+    if not video_path.exists():
+        raise ReelWorkflowError(f"Draft video file not found: {video_path}")
+    if not voiceover_path.exists():
+        raise ReelWorkflowError(f"Voiceover file not found: {voiceover_path}")
+
+    clean_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(build_clean_audio_command(voiceover_path, clean_path), check=True)
+    subprocess.run(build_finalize_audio_command(video_path, clean_path, output_path), check=True)
+    return clean_path
 
 
 def build_render_command(

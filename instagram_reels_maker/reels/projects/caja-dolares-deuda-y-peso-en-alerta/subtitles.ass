@@ -1,0 +1,53 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: ReelSub,Arial,46,&H00FFFFFF,&H000000FF,&H00000000,&H00000000,0,0,0,0,100,100,0,0,1,4,0,2,90,90,260,1
+Style: DataKicker,Arial,30,&H00FFFFFF,&H000000FF,&H002216C9,&HAA000000,1,0,0,0,100,100,0,0,3,14,0,7,70,70,0,1
+Style: DataBig,Arial,72,&H00FFFFFF,&H000000FF,&H00000000,&HAA000000,1,0,0,0,100,100,0,0,3,18,0,7,70,70,0,1
+Style: DataGold,Arial,58,&H009CE7FF,&H000000FF,&H00000000,&HAA000000,1,0,0,0,100,100,0,0,3,16,0,7,70,70,0,1
+Style: DataSmall,Arial,34,&H00FFFFFF,&H000000FF,&H00000000,&HAA000000,0,0,0,0,100,100,0,0,3,12,0,7,70,70,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.25,0:00:05.55,DataKicker,,0,0,0,,{\an7\pos(70,540)\fad(150,150)}FOCO DEL REEL
+Dialogue: 2,0:00:00.55,0:00:05.55,DataGold,,0,0,0,,{\an7\pos(70,598)\fad(150,150)}dolar + deuda + peso
+Dialogue: 2,0:00:05.95,0:00:11.20,DataKicker,,0,0,0,,{\an7\pos(70,610)\fad(150,150)}LECTURA OFICIAL
+Dialogue: 2,0:00:06.25,0:00:11.20,DataGold,,0,0,0,,{\an7\pos(70,668)\fad(150,150)}caja, no intervencion
+Dialogue: 2,0:00:11.55,0:00:13.55,DataKicker,,0,0,0,,{\an7\pos(70,820)\fad(120,120)}PUNTO DE PRESION
+Dialogue: 2,0:00:13.60,0:00:16.20,DataBig,,0,0,0,,{\an7\pos(70,820)\fad(120,120)}US$246.801 M
+Dialogue: 2,0:00:13.82,0:00:16.20,DataSmall,,0,0,0,,{\an7\pos(70,910)\fad(120,120)}deuda externa total
+Dialogue: 2,0:00:16.20,0:00:22.15,DataBig,,0,0,0,,{\an7\pos(70,820)\fad(120,120)}53,8% DEL PIB
+Dialogue: 2,0:00:16.45,0:00:22.15,DataSmall,,0,0,0,,{\an7\pos(70,910)\fad(120,120)}tamano relativo de la deuda
+Dialogue: 2,0:00:22.25,0:00:25.00,DataKicker,,0,0,0,,{\an7\pos(70,740)\fad(120,120)}BANREP
+Dialogue: 2,0:00:22.45,0:00:25.00,DataGold,,0,0,0,,{\an7\pos(70,798)\fad(120,120)}inflacion incomoda
+Dialogue: 2,0:00:25.00,0:00:29.60,DataGold,,0,0,0,,{\an7\pos(70,798)\fad(120,120)}tasas altas
+Dialogue: 2,0:00:25.25,0:00:29.60,DataSmall,,0,0,0,,{\an7\pos(70,872)\fad(120,120)}poco espacio para cantar victoria
+Dialogue: 2,0:00:29.70,0:00:32.50,DataKicker,,0,0,0,,{\an7\pos(70,720)\fad(120,120)}NUDO DE FONDO
+Dialogue: 2,0:00:29.90,0:00:32.50,DataGold,,0,0,0,,{\an7\pos(70,778)\fad(120,120)}riesgo fiscal
+Dialogue: 2,0:00:32.55,0:00:35.50,DataGold,,0,0,0,,{\an7\pos(70,760)\fad(120,120)}gasto alto
+Dialogue: 2,0:00:32.80,0:00:35.50,DataSmall,,0,0,0,,{\an7\pos(70,834)\fad(120,120)}inversion rezagada
+Dialogue: 2,0:00:35.50,0:00:37.95,DataGold,,0,0,0,,{\an7\pos(70,760)\fad(120,120)}credibilidad
+Dialogue: 2,0:00:35.75,0:00:37.95,DataSmall,,0,0,0,,{\an7\pos(70,834)\fad(120,120)}menos defensa del peso
+Dialogue: 2,0:00:38.00,0:00:40.90,DataKicker,,0,0,0,,{\an7\pos(70,745)\fad(120,120)}PREGUNTA DE MERCADO
+Dialogue: 2,0:00:38.25,0:00:40.90,DataGold,,0,0,0,,{\an7\pos(70,803)\fad(120,120)}sube el dolar?
+Dialogue: 2,0:00:40.90,0:00:44.10,DataBig,,0,0,0,,{\an7\pos(70,780)\fad(120,120)}MAS COBERTURA
+Dialogue: 0,0:00:00.00,0:00:02.70,ReelSub,,0,0,0,,Caja en dolares, deuda externa
+Dialogue: 0,0:00:02.70,0:00:05.74,ReelSub,,0,0,0,,y un peso otra vez en alerta.
+Dialogue: 0,0:00:05.74,0:00:08.65,ReelSub,,0,0,0,,Hacienda dice que compra dolares
+Dialogue: 0,0:00:08.65,0:00:11.42,ReelSub,,0,0,0,,para fortalecer caja,\Nno para intervenir la tasa.
+Dialogue: 0,0:00:11.42,0:00:13.60,ReelSub,,0,0,0,,Pero la deuda externa ya pesa:
+Dialogue: 0,0:00:13.60,0:00:16.20,ReelSub,,0,0,0,,doscientos cuarenta y seis mil\Nochocientos un millones de dolares,
+Dialogue: 0,0:00:16.20,0:00:19.00,ReelSub,,0,0,0,,el cincuenta y tres coma ocho\Npor ciento
+Dialogue: 0,0:00:19.00,0:00:22.22,ReelSub,,0,0,0,,del PIB.
+Dialogue: 0,0:00:22.22,0:00:25.00,ReelSub,,0,0,0,,Y BanRep sigue viendo\Ninflacion incomoda,
+Dialogue: 0,0:00:25.00,0:00:29.68,ReelSub,,0,0,0,,con tasas altas y poco espacio\Npara cantar victoria.
+Dialogue: 0,0:00:29.68,0:00:32.55,ReelSub,,0,0,0,,El problema de fondo es fiscal:
+Dialogue: 0,0:00:32.55,0:00:35.50,ReelSub,,0,0,0,,gasto alto, inversion rezagada
+Dialogue: 0,0:00:35.50,0:00:37.97,ReelSub,,0,0,0,,y menos credibilidad\Npara defender el peso.
+Dialogue: 0,0:00:37.97,0:00:40.90,ReelSub,,0,0,0,,Esta semana la pregunta no es solo\Nsi sube el dolar.
+Dialogue: 0,0:00:40.90,0:00:44.16,ReelSub,,0,0,0,,Es si el mercado pide\Nmas cobertura.

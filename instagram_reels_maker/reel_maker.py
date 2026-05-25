@@ -10,6 +10,7 @@ sys.path.insert(0, str(SRC_DIR))
 from reel_workflow import (  # noqa: E402
     clean_audio,
     create_reel_project,
+    finalize_audio,
     list_reel_projects,
     regenerate_subtitles,
     render_reel,
@@ -40,6 +41,15 @@ def main() -> None:
     render_parser.add_argument("--project", required=True)
     render_parser.add_argument("--raw-audio", action="store_true", help="Use raw voiceover instead of clean audio.")
 
+    finalize_parser = subparsers.add_parser(
+        "finalize-audio",
+        help="Clean a standalone voiceover and add it to a silent draft reel.",
+    )
+    finalize_parser.add_argument("--video", required=True, help="Silent draft reel MP4.")
+    finalize_parser.add_argument("--voice", required=True, help="Voiceover WAV or audio file to clean.")
+    finalize_parser.add_argument("--out", required=True, help="Final MP4 with cleaned voiceover audio.")
+    finalize_parser.add_argument("--clean-out", help="Optional path for the cleaned voiceover WAV.")
+
     subparsers.add_parser("list", help="List reel projects from history.")
 
     args = parser.parse_args()
@@ -62,6 +72,15 @@ def main() -> None:
     elif args.command == "render":
         output_path = render_reel(root=root, slug=args.project, use_clean_audio=not args.raw_audio)
         print(f"Saved reel: {output_path}")
+    elif args.command == "finalize-audio":
+        clean_path = finalize_audio(
+            video_file=args.video,
+            voiceover_file=args.voice,
+            output_file=args.out,
+            clean_audio_file=args.clean_out,
+        )
+        print(f"Saved clean audio: {clean_path}")
+        print(f"Saved final reel: {Path(args.out)}")
     elif args.command == "list":
         for project in list_reel_projects(root):
             print(f"{project['slug']}\t{project['status']}\t{project['title']}")
