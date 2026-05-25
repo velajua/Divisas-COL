@@ -91,6 +91,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/caja-dolares-deuda-y-peso-en-alerta.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/en/colombia/entries/deuda-cara-tasas-altas-y-peso-sin-colchon.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -107,6 +112,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/es/colombia/entries/banrep-sin-recortes-y-peso-sin-alivio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/caja-dolares-deuda-y-peso-en-alerta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
