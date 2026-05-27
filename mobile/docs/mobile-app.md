@@ -97,42 +97,43 @@ Run Android:
 npm run android
 ```
 
-Build an Android APK for device testing, including native modules such as
-AdMob:
+Build an Android APK for device testing through EAS:
 
 ```cmd
 npx eas build --platform android --profile preview
 ```
 
-Build the Android production bundle locally:
+Build the Android production APK and AAB locally:
 
 ```cmd
-set ADMOB_ANDROID_APP_ID=ca-app-pub-0000000000000000~0000000000
-set DIVISAS_UPLOAD_STORE_FILE=C:\path\to\upload-keystore.jks
-set DIVISAS_UPLOAD_STORE_PASSWORD=your-keystore-password
-set DIVISAS_UPLOAD_KEY_ALIAS=your-key-alias
-set DIVISAS_UPLOAD_KEY_PASSWORD=your-key-password
-android-local-aab.bat
+npm run build:android
 ```
 
 `ADMOB_ANDROID_APP_ID` is the Android app ID from AdMob. Banner and native ad
 unit IDs can be changed later by updating `html/mobile-ads.json` and deploying
 the website, so they do not require another app release.
 
-`android-local-aab.bat` does not use Expo or EAS cloud builds and does not
-require an Expo login. It runs tests, type-checking, `expo-doctor`, generates a
-fresh Android project with `npx expo prebuild --platform android --clean`,
-patches the generated Gradle release signing block to read the `DIVISAS_UPLOAD_*`
-environment variables, then runs `gradlew.bat bundleRelease`. The generated AAB
-is written to:
+`android-local-release.bat` does not use Expo or EAS cloud builds and does not
+require an Expo login. It loads `.env`, creates `local-signing\release-signing.env`
+and `local-signing\divisas-upload-key.jks` on the first run, then reuses those
+same signing values on later runs. Back up both files before uploading to Google
+Play; future app updates must be signed with the same upload key.
+
+The script runs install, tests, type-checking, `npm audit --omit=dev --audit-level=high`,
+and advisory `expo-doctor`, generates a fresh Android project with
+`npx expo prebuild --platform android --clean`, patches the generated Gradle
+release signing block, then runs `gradlew.bat assembleRelease bundleRelease`.
+It overwrites the stable output files:
 
 ```text
-mobile\android\app\build\outputs\bundle\release\app-release.aab
+mobile\dist\divisas-col-release.apk
+mobile\dist\divisas-col-release.aab
 ```
 
-The generated `mobile\android` directory is ignored by git. App configuration
-should stay in `app.json` and `app.config.js`; the local builder regenerates the
-Android project so native config does not drift.
+The generated `mobile\android`, `mobile\dist`, and `mobile\local-signing`
+directories are ignored by git. App configuration should stay in `app.json` and
+`app.config.js`; the local builder regenerates the Android project so native
+config does not drift.
 
 Run iOS on macOS:
 

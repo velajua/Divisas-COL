@@ -41,6 +41,12 @@ export function buildNewsletterUrl(baseUrl: string, language: LanguageCode, coun
   return `${normalizedBase}/${language}/${normalizedCountry}/newsletter/`;
 }
 
+export function buildCountrySiteUrl(baseUrl: string, language: LanguageCode, country: string): string {
+  const normalizedBase = baseUrl.replace(/\/+$/, "");
+  const normalizedCountry = normalizeCountryId(country) || "colombia";
+  return `${normalizedBase}/${language}/${normalizedCountry}/`;
+}
+
 export function buildPrivacyPolicyUrl(baseUrl: string, language: LanguageCode): string {
   const normalizedBase = baseUrl.replace(/\/+$/, "");
   return `${normalizedBase}/${language}/privacy.html`;
