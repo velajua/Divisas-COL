@@ -18,6 +18,7 @@ import Svg, { Path, Rect } from "react-native-svg";
 import { MobileBannerAd, MobileNativeAd } from "./components/MobileAds";
 import { DEFAULT_MOBILE_ADS_CONFIG, fetchMobileAdsConfig, type MobileAdsConfig } from "./data/adConfig";
 import { fetchResultJson, RESULT_JSON_URL } from "./data/api";
+import { getHeaderSubtitle, type MessageKey } from "./data/appStatus";
 import { inferNearestCity } from "./data/cityInference";
 import {
   flattenRates,
@@ -28,13 +29,19 @@ import {
   getCurrencies,
   type RateRow,
 } from "./data/resultParser";
-import { buildNewsletterUrl, buildPrivacyPolicyUrl, normalizeLanguage, pickDefaultCountry, type LanguageCode } from "./data/settings";
+import {
+  buildCountrySiteUrl,
+  buildNewsletterUrl,
+  buildPrivacyPolicyUrl,
+  normalizeLanguage,
+  pickDefaultCountry,
+  type LanguageCode,
+} from "./data/settings";
 import { getSnapshotDate, type Snapshot, upsertSnapshot } from "./data/snapshotCache";
 import { loadPreferences, loadSnapshots, savePreferences, saveSnapshots } from "./storage/snapshotStorage";
 
 type TabId = "today" | "history" | "rates" | "newsletter" | "info";
 type DropdownId = "city" | "currency" | "country" | "language" | null;
-type MessageKey = "loadingRates" | "updated" | "offline" | "loadFailed";
 
 const SITE_URL = "https://divisascol.com";
 const DEFAULT_CURRENCY = "AmericanDollar";
@@ -49,7 +56,10 @@ const COPY = {
       newsletter: "Newsletter",
       info: "Datos",
     },
-    subtitle: "Tasas guardadas para consultar sin conexión",
+    loadingSubtitle: "Consultando las tasas más recientes",
+    onlineSubtitle: "Tasas actualizadas desde Divisas COL",
+    offlineSubtitle: "Tasas guardadas sin conexión",
+    unavailableSubtitle: "Conéctate para cargar las tasas",
     loadingRates: "Cargando tasas...",
     loadingSaved: "Cargando tasas guardadas...",
     select: "Seleccionar",
@@ -76,6 +86,8 @@ const COPY = {
     buy: "Compra",
     sell: "Venta",
     web: "Web",
+    open: "Abrir",
+    openSite: "Abrir sitio",
     newsletterTitle: "Newsletter",
     newsletterBody: "El newsletter vive en la web de Divisas COL. Ábrelo allí para leer entradas o suscribirte.",
     openNewsletter: "Abrir newsletter",
@@ -103,7 +115,10 @@ const COPY = {
       newsletter: "Newsletter",
       info: "Data",
     },
-    subtitle: "Saved exchange rates for offline lookup",
+    loadingSubtitle: "Checking latest exchange rates",
+    onlineSubtitle: "Latest exchange rates from Divisas COL",
+    offlineSubtitle: "Saved offline exchange rates",
+    unavailableSubtitle: "Connect to load exchange rates",
     loadingRates: "Loading rates...",
     loadingSaved: "Loading saved rates...",
     select: "Select",
@@ -130,6 +145,8 @@ const COPY = {
     buy: "Buy",
     sell: "Sell",
     web: "Web",
+    open: "Open",
+    openSite: "Open site",
     newsletterTitle: "Newsletter",
     newsletterBody: "The Divisas COL newsletter lives on the web. Open it there to read posts or subscribe.",
     openNewsletter: "Open newsletter",
@@ -212,20 +229,31 @@ function RateCard({
   valueType,
   language,
   noDataLabel,
+  openLabel,
 }: {
   label: string;
   row: RateRow | null;
   valueType: "buy" | "sell";
   language: LanguageCode;
   noDataLabel: string;
+  openLabel: string;
 }) {
   return (
     <View style={styles.rateCard}>
-      <Text style={styles.cardLabel}>{label}</Text>
-      <Text style={styles.rateValue}>{formatCop(row?.[valueType], language)}</Text>
-      <Text style={styles.cardMeta}>
-        {row ? `${formatDisplayName(row.exchangeHouse)} / ${formatDisplayName(row.locationId)}` : noDataLabel}
-      </Text>
+      <View style={styles.rateCardContent}>
+        <View style={styles.rateCardText}>
+          <Text style={styles.cardLabel}>{label}</Text>
+          <Text style={styles.rateValue}>{formatCop(row?.[valueType], language)}</Text>
+          <Text style={styles.cardMeta}>
+            {row ? `${formatDisplayName(row.exchangeHouse)} / ${formatDisplayName(row.locationId)}` : noDataLabel}
+          </Text>
+        </View>
+        {row?.sourceUrl ? (
+          <Pressable style={styles.inlineButton} onPress={() => Linking.openURL(row.sourceUrl)}>
+            <Text style={styles.inlineButtonText}>{openLabel}</Text>
+          </Pressable>
+        ) : null}
+      </View>
     </View>
   );
 }
@@ -290,6 +318,7 @@ export default function AppRoot() {
   const userCountryRef = useRef(false);
   const t = COPY[language];
   const message = t[messageKey];
+  const headerSubtitle = getHeaderSubtitle(messageKey, t);
   const tabs = useMemo<Array<{ id: TabId; label: string }>>(() => [
     { id: "today", label: t.tabs.today },
     { id: "history", label: t.tabs.history },
@@ -312,6 +341,7 @@ export default function AppRoot() {
   const currencies = useMemo(() => getCurrencies(rows, language), [language, rows]);
   const selectedCountryLabel = countries.find((item) => item.id === selectedCountry)?.label || formatDisplayName(selectedCountry || "colombia");
   const selectedCurrencyLabel = currencies.find((item) => item.id === selectedCurrency)?.label || "Dollar";
+  const countrySiteUrl = buildCountrySiteUrl(SITE_URL, language, selectedCountry);
   const newsletterUrl = buildNewsletterUrl(SITE_URL, language, selectedCountry);
   const privacyPolicyUrl = buildPrivacyPolicyUrl(SITE_URL, language);
   const languageOptions = useMemo(() => [
@@ -399,14 +429,18 @@ export default function AppRoot() {
     let alive = true;
 
     async function load() {
-      const [saved, preferences, adsConfig] = await Promise.all([
+      void fetchMobileAdsConfig().then((adsConfig) => {
+        if (alive) {
+          setMobileAdsConfig(adsConfig);
+        }
+      });
+
+      const [saved, preferences] = await Promise.all([
         loadSnapshots(),
         loadPreferences(),
-        fetchMobileAdsConfig(),
       ]);
       if (!alive) return;
 
-      setMobileAdsConfig(adsConfig);
       if (preferences.language) {
         setLanguage(preferences.language);
       }
@@ -463,8 +497,22 @@ export default function AppRoot() {
             <View key={currencyId} style={styles.currencyBlock}>
               <Text style={styles.currencyTitle}>{label}</Text>
               <View style={styles.cardRow}>
-                <RateCard label={t.bestBuy} row={rates.bestBuy} valueType="buy" language={language} noDataLabel={t.noData} />
-                <RateCard label={t.bestSell} row={rates.bestSell} valueType="sell" language={language} noDataLabel={t.noData} />
+                <RateCard
+                  label={t.bestBuy}
+                  row={rates.bestBuy}
+                  valueType="buy"
+                  language={language}
+                  noDataLabel={t.noData}
+                  openLabel={t.open}
+                />
+                <RateCard
+                  label={t.bestSell}
+                  row={rates.bestSell}
+                  valueType="sell"
+                  language={language}
+                  noDataLabel={t.noData}
+                  openLabel={t.open}
+                />
               </View>
             </View>
           );
@@ -543,14 +591,21 @@ export default function AppRoot() {
         <View style={styles.table}>
           {visibleRows.map((row) => (
             <View key={`${row.locationId}-${row.currencyLabel}-${row.buy}-${row.sell}`} style={styles.rateRow}>
-              <View style={styles.rateRowMain}>
-                <Text style={styles.rowTitle}>{formatDisplayName(row.exchangeHouse)}</Text>
-                <Text style={styles.muted}>{formatDisplayName(row.locationId)}</Text>
+              <View style={styles.rateRowContent}>
+                <View style={styles.rateRowMain}>
+                  <Text style={styles.rowTitle}>{formatDisplayName(row.exchangeHouse)}</Text>
+                  <Text style={styles.muted}>{formatDisplayName(row.locationId)}</Text>
+                </View>
+                <View style={styles.rateRowValues}>
+                  <Text style={styles.rowValue}>{t.buy} {formatCop(row.buy, language)}</Text>
+                  <Text style={styles.rowValue}>{t.sell} {formatCop(row.sell, language)}</Text>
+                </View>
               </View>
-              <View style={styles.rateRowValues}>
-                <Text style={styles.rowValue}>{t.buy} {formatCop(row.buy, language)}</Text>
-                <Text style={styles.rowValue}>{t.sell} {formatCop(row.sell, language)}</Text>
-              </View>
+              {row.sourceUrl ? (
+                <Pressable style={styles.inlineButton} onPress={() => Linking.openURL(row.sourceUrl)}>
+                  <Text style={styles.inlineButtonText}>{t.open}</Text>
+                </Pressable>
+              ) : null}
             </View>
           ))}
         </View>
@@ -607,7 +662,10 @@ export default function AppRoot() {
             placeholder={t.select}
           />
           <Text style={styles.infoLine}>{t.site}: {SITE_URL}</Text>
-          <Text style={styles.infoLine}>{t.savedDays}: {snapshots.length} / 5</Text>
+          <Pressable style={styles.secondaryButton} onPress={() => Linking.openURL(countrySiteUrl)}>
+            <Text style={styles.secondaryButtonText}>{t.openSite}</Text>
+          </Pressable>
+          <Text style={styles.spacedInfoLine}>{t.savedDays}: {snapshots.length} / 5</Text>
           <Text style={styles.infoLine}>{t.selectedDate}: {selectedSnapshot?.date || "-"}</Text>
           <Text style={styles.infoLine}>{t.selectedCountry}: {selectedCountryLabel}</Text>
           <Text style={styles.infoLine}>{t.selectedLanguage}: {languageOptions.find((option) => option.id === language)?.label}</Text>
@@ -651,15 +709,15 @@ export default function AppRoot() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="dark" />
-      <View style={styles.header}>
+      <Pressable style={styles.header} onPress={() => Linking.openURL(SITE_URL)}>
         <View style={styles.brandRow}>
           <LogoMark size={46} />
           <View style={styles.brandTextBlock}>
             <Text style={styles.brand}>Divisas COL</Text>
-            <Text style={styles.subtitle}>{t.subtitle}</Text>
+            <Text style={styles.subtitle}>{headerSubtitle}</Text>
           </View>
         </View>
-      </View>
+      </Pressable>
       <ScrollView style={styles.content} contentContainerStyle={styles.contentInner}>
         {renderContent()}
       </ScrollView>
@@ -764,6 +822,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 16,
   },
+  rateCardContent: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 12,
+  },
+  rateCardText: {
+    flex: 1,
+    minWidth: 0,
+  },
   cardLabel: {
     color: "#7a6230",
     fontSize: 12,
@@ -810,6 +877,21 @@ const styles = StyleSheet.create({
     color: "#17130d",
     fontSize: 14,
     fontWeight: "700",
+  },
+  inlineButton: {
+    alignItems: "center",
+    alignSelf: "center",
+    borderColor: "#17130d",
+    borderRadius: 8,
+    borderWidth: 1,
+    minWidth: 72,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  inlineButtonText: {
+    color: "#17130d",
+    fontSize: 13,
+    fontWeight: "800",
   },
   muted: {
     color: "#6d6254",
@@ -859,15 +941,22 @@ const styles = StyleSheet.create({
     marginTop: 14,
   },
   rateRow: {
+    alignItems: "center",
     backgroundColor: "#fffaf1",
     borderColor: "#e4d6bb",
     borderRadius: 8,
     borderWidth: 1,
+    flexDirection: "row",
     gap: 10,
     padding: 14,
   },
   rateRowMain: {
     gap: 3,
+  },
+  rateRowContent: {
+    flex: 1,
+    gap: 10,
+    minWidth: 0,
   },
   rowTitle: {
     color: "#17130d",
@@ -958,6 +1047,12 @@ const styles = StyleSheet.create({
     color: "#2c261f",
     fontSize: 14,
     marginBottom: 8,
+  },
+  spacedInfoLine: {
+    color: "#2c261f",
+    fontSize: 14,
+    marginBottom: 8,
+    marginTop: 18,
   },
   policyBox: {
     borderTopColor: "#eadcc3",

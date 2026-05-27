@@ -1,0 +1,142 @@
+[
+  {
+    "index": 1,
+    "text": "Caja en dolares, deuda externa",
+    "target_duration": 2.7,
+    "source_duration": 3.200667,
+    "tempo": 1.1854322222222222,
+    "actual_duration": 2.7,
+    "delta": 0.0
+  },
+  {
+    "index": 2,
+    "text": "y un peso otra vez en alerta.",
+    "target_duration": 3.0409999999999995,
+    "source_duration": 2.454,
+    "tempo": 0.8069713909898062,
+    "actual_duration": 3.041,
+    "delta": 4.440892098500626e-16
+  },
+  {
+    "index": 3,
+    "text": "Hacienda dice que compra dolares",
+    "target_duration": 2.9090000000000007,
+    "source_duration": 2.176667,
+    "tempo": 0.7482526641457544,
+    "actual_duration": 2.909,
+    "delta": -8.881784197001252e-16
+  },
+  {
+    "index": 4,
+    "text": "para fortalecer caja, no para intervenir la tasa.",
+    "target_duration": 2.779,
+    "source_duration": 3.424667,
+    "tempo": 1.2323378913278158,
+    "actual_duration": 2.779,
+    "delta": 0.0
+  },
+  {
+    "index": 5,
+    "text": "Pero la deuda externa ya pesa:",
+    "target_duration": 2.1709999999999994,
+    "source_duration": 2.080667,
+    "tempo": 0.9583910640257949,
+    "actual_duration": 2.171,
+    "delta": 4.440892098500626e-16
+  },
+  {
+    "index": 6,
+    "text": "doscientos cuarenta y seis mil ochocientos un millones de dolares,",
+    "target_duration": 2.5999999999999996,
+    "source_duration": 4.822,
+    "tempo": 1.854615384615385,
+    "actual_duration": 2.6,
+    "delta": 4.440892098500626e-16
+  },
+  {
+    "index": 7,
+    "text": "el cincuenta y tres coma ocho por ciento",
+    "target_duration": 2.8000000000000007,
+    "source_duration": 3.243333,
+    "tempo": 1.158333214285714,
+    "actual_duration": 2.8,
+    "delta": -8.881784197001252e-16
+  },
+  {
+    "index": 8,
+    "text": "del PIB.",
+    "target_duration": 3.225999999999999,
+    "source_duration": 1.622,
+    "tempo": 0.5027898326100436,
+    "actual_duration": 3.226,
+    "delta": 8.881784197001252e-16
+  },
+  {
+    "index": 9,
+    "text": "Y BanRep sigue viendo inflacion incomoda,",
+    "target_duration": 2.774000000000001,
+    "source_duration": 3.755333,
+    "tempo": 1.3537609949531357,
+    "actual_duration": 2.774,
+    "delta": -8.881784197001252e-16
+  },
+  {
+    "index": 10,
+    "text": "con tasas altas y poco espacio para cantar victoria.",
+    "target_duration": 4.684999999999999,
+    "source_duration": 3.424667,
+    "tempo": 0.7309854855923161,
+    "actual_duration": 4.685,
+    "delta": 8.881784197001252e-16
+  },
+  {
+    "index": 11,
+    "text": "El problema de fondo es fiscal:",
+    "target_duration": 2.8649999999999984,
+    "source_duration": 2.080667,
+    "tempo": 0.7262363001745205,
+    "actual_duration": 2.865,
+    "delta": 1.7763568394002505e-15
+  },
+  {
+    "index": 12,
+    "text": "gasto alto, inversion rezagada",
+    "target_duration": 2.950000000000003,
+    "source_duration": 3.574,
+    "tempo": 1.2115254237288124,
+    "actual_duration": 2.95,
+    "delta": -2.6645352591003757e-15
+  },
+  {
+    "index": 13,
+    "text": "y menos credibilidad para defender el peso.",
+    "target_duration": 2.475999999999999,
+    "source_duration": 3.286,
+    "tempo": 1.3271405492730215,
+    "actual_duration": 2.476,
+    "delta": 8.881784197001252e-16
+  },
+  {
+    "index": 14,
+    "text": "Esta semana la pregunta no es solo si sube el dolar.",
+    "target_duration": 2.9239999999999995,
+    "source_duration": 2.923333,
+    "tempo": 0.9997718878248976,
+    "actual_duration": 2.924,
+    "delta": 4.440892098500626e-16
+  },
+  {
+    "index": 15,
+    "text": "Es si el mercado pide mas cobertura.",
+    "target_duration": 3.2659999999999982,
+    "source_duration": 2.496667,
+    "tempo": 0.7644418248622172,
+    "actual_duration": 3.266,
+    "delta": 1.7763568394002505e-15
+  },
+  {
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\tts_srt_line_sample\\voiceover_timed_to_srt.wav",
+    "target_duration": 44.166,
+    "actual_duration": 44.166
+  }
+]

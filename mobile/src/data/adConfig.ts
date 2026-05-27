@@ -1,4 +1,7 @@
+import { fetchWithTimeout } from "./fetchTimeout";
+
 export const MOBILE_ADS_CONFIG_URL = "https://divisascol.com/mobile-ads.json";
+const MOBILE_ADS_CONFIG_TIMEOUT_MS = 2500;
 
 type FetchLike = (url: string, init?: RequestInit) => Promise<Response>;
 
@@ -68,13 +71,19 @@ export function normalizeMobileAdsConfig(value: unknown): MobileAdsConfig {
 export async function fetchMobileAdsConfig(
   url = MOBILE_ADS_CONFIG_URL,
   fetchImpl: FetchLike = fetch,
+  timeoutMs = MOBILE_ADS_CONFIG_TIMEOUT_MS,
 ): Promise<MobileAdsConfig> {
   try {
-    const response = await fetchImpl(url, {
-      headers: {
-        "X-Divisas-Refresh-Intent": "background",
+    const response = await fetchWithTimeout(
+      fetchImpl,
+      url,
+      {
+        headers: {
+          "X-Divisas-Refresh-Intent": "background",
+        },
       },
-    });
+      timeoutMs,
+    );
 
     if (!response.ok) {
       return DEFAULT_MOBILE_ADS_CONFIG;

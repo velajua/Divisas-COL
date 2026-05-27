@@ -63,3 +63,15 @@ test("fetchMobileAdsConfig falls back to disabled ads when the remote config can
 
   assert.deepEqual(config, DEFAULT_MOBILE_ADS_CONFIG);
 });
+
+test("fetchMobileAdsConfig times out slow remote config requests", async () => {
+  const startedAt = Date.now();
+  const config = await fetchMobileAdsConfig(
+    MOBILE_ADS_CONFIG_URL,
+    async () => new Promise<Response>(() => {}),
+    10,
+  );
+
+  assert.deepEqual(config, DEFAULT_MOBILE_ADS_CONFIG);
+  assert.ok(Date.now() - startedAt < 250);
+});
