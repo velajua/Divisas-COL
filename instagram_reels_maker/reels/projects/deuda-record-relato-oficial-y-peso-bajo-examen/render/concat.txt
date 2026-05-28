@@ -1,0 +1,13 @@
+file '../images/001_hook.png'
+duration 5.600
+file '../images/002_tes.png'
+duration 6.800
+file '../images/003_relato.png'
+duration 7.400
+file '../images/004_prima.png'
+duration 9.200
+file '../images/005_dolar.png'
+duration 9.600
+file '../images/006_cta.png'
+duration 10.300
+file '../images/006_cta.png'
