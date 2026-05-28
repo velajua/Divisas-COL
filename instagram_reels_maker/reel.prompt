@@ -18,12 +18,14 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Use plain ASCII text where possible.
 - Avoid filler and intro fluff.
 
-3. Generate/use the current TTS voiceover only to determine subtitle timings.
-- The TTS audio is only a timing reference.
-- Do not include any voiceover or audio track in the final draft.
-- The final review MP4 must be silent.
-- The human voiceover will be provided later as a separate file.
-- After that voiceover exists, make the final final reel with:
+3. Build the visual draft first, then make timed TTS from the final subtitles.
+- The first review MP4 must be silent.
+- Do not include any voiceover or audio track in drafts\final.mp4.
+- Once subtitles are final, generate the timed TTS preview from the subtitle cues:
+  python reel_maker.py timed-tts-final --project <article-slug> --voice voice_samples\voice.wav
+- The timed TTS command must create:
+  instagram_reels_maker\reels\projects\<article-slug>\drafts\final_timed_tts.mp4
+- If a human voiceover is provided later, make the human final final reel with:
   python reel_maker.py finalize-audio --video instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4 --voice <path-to-voiceover.wav> --out instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4
 
 4. Subtitles:
@@ -67,7 +69,9 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Save all project files: script, captions, reel metadata, generated images, raw images, subtitle files, render files, preview frames.
 - Put the review MP4 at:
 instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4
-- Do not create final_final.mp4 until a real voiceover file is provided.
+- Put the timed TTS preview MP4 at:
+instagram_reels_maker\reels\projects\<article-slug>\drafts\final_timed_tts.mp4
+- Do not create final_final.mp4 until a real human voiceover file is provided.
 
 9. Final render:
 - 1080x1920 vertical MP4.
@@ -77,7 +81,14 @@ instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4
 - Verify with ffprobe that the output has video only and no audio.
 - Extract a few preview frames around important data moments and inspect that overlays/subtitles do not collide.
 
-10. Final final audio pass, only after the human voiceover is provided:
+10. Timed TTS preview pass:
+- Run timed-tts-final after drafts\final.mp4 and the subtitle file are final.
+- The command reads subtitles.srt when present, otherwise subtitles.ass ReelSub events.
+- It generates one short XTTS line per subtitle cue, stretches/pads/trims each line to match the cue, inserts gaps as silence, cleans the result, and writes final_timed_tts.mp4.
+- If the silent draft is slightly shorter than the timed audio, the command pads the last video frame so the voiceover is not cut.
+- Verify with ffprobe that final_timed_tts.mp4 has one video stream and one audio stream.
+
+11. Final final audio pass, only after the human voiceover is provided:
 - Run finalize-audio against the silent draft and the supplied voiceover.
 - This pass must clean the voiceover, remove any existing draft audio, and write:
 instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4

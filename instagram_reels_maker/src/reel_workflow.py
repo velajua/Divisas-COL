@@ -1,6 +1,8 @@
 import json
+import re
 import struct
 import subprocess
+import sys
 import zlib
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -19,6 +21,25 @@ class ReelProject:
     reel_json: Path
     script_path: Path
     subtitles_path: Path
+
+
+@dataclass(frozen=True)
+class SubtitleCue:
+    index: int
+    start: float
+    end: float
+    text: str
+
+
+@dataclass(frozen=True)
+class TimedTTSResult:
+    voice_lines: Path
+    raw_voiceover: Path
+    timed_voiceover: Path
+    clean_voiceover: Path
+    output_video: Path
+    timing_report: Path
+    target_duration: float
 
 
 DAILY_FX_SCENES = [
@@ -206,6 +227,48 @@ def build_clean_audio_command(input_audio: str | Path, output_audio: str | Path)
     return ["ffmpeg", "-y", "-i", str(input_audio), "-af", filters, str(output_audio)]
 
 
+def build_timed_chunk_command(
+    source_audio: str | Path,
+    output_audio: str | Path,
+    tempo: float,
+    target_duration: float,
+    sample_rate: int = 24000,
+) -> list[str]:
+    filters = (
+        f"{build_atempo_filter(tempo)},"
+        f"apad,"
+        f"atrim=start=0:end={target_duration:.6f},"
+        "asetpts=N/SR/TB"
+    )
+    return [
+        "ffmpeg",
+        "-y",
+        "-i",
+        str(source_audio),
+        "-af",
+        filters,
+        "-ar",
+        str(sample_rate),
+        "-ac",
+        "1",
+        str(output_audio),
+    ]
+
+
+def build_silence_command(output_audio: str | Path, duration: float, sample_rate: int = 24000) -> list[str]:
+    return [
+        "ffmpeg",
+        "-y",
+        "-f",
+        "lavfi",
+        "-i",
+        f"anullsrc=r={sample_rate}:cl=mono",
+        "-t",
+        f"{duration:.6f}",
+        str(output_audio),
+    ]
+
+
 def build_finalize_audio_command(
     video_file: str | Path,
     audio_file: str | Path,
@@ -233,6 +296,53 @@ def build_finalize_audio_command(
         "+faststart",
         str(output_file),
     ]
+
+
+def build_exact_timed_finalize_audio_command(
+    video_file: str | Path,
+    audio_file: str | Path,
+    output_file: str | Path,
+    target_duration: float,
+    video_duration: float,
+) -> list[str]:
+    base = [
+        "ffmpeg",
+        "-y",
+        "-i",
+        str(video_file),
+        "-i",
+        str(audio_file),
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+    ]
+    duration_args = ["-t", f"{target_duration:.6f}"]
+    audio_args = ["-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", str(output_file)]
+
+    if video_duration < target_duration:
+        pad_duration = target_duration - video_duration
+        return (
+            base
+            + [
+                "-vf",
+                f"tpad=stop_mode=clone:stop_duration={pad_duration:.6f}",
+            ]
+            + duration_args
+            + [
+                "-c:v",
+                "libx264",
+                "-preset",
+                "veryfast",
+                "-crf",
+                "18",
+                "-pix_fmt",
+                "yuv420p",
+            ]
+            + audio_args
+        )
+
+    return base + duration_args + ["-c:v", "copy"] + audio_args
 
 
 def clean_audio(root: str | Path, slug: str) -> Path:
@@ -271,6 +381,90 @@ def finalize_audio(
     subprocess.run(build_clean_audio_command(voiceover_path, clean_path), check=True)
     subprocess.run(build_finalize_audio_command(video_path, clean_path, output_path), check=True)
     return clean_path
+
+
+def generate_timed_tts_final(
+    root: str | Path,
+    slug: str,
+    voice_wav: str | Path,
+    draft_video: str | Path | None = None,
+    output_video: str | Path | None = None,
+    sample_dir_name: str = "tts_timed_sample",
+) -> TimedTTSResult:
+    root = Path(root)
+    project_dir = get_project_dir(root, slug)
+    voice_path = Path(voice_wav)
+    draft_path = Path(draft_video) if draft_video is not None else project_dir / "drafts" / "final.mp4"
+    output_path = Path(output_video) if output_video is not None else project_dir / "drafts" / "final_timed_tts.mp4"
+
+    if not draft_path.exists():
+        raise ReelWorkflowError(f"Draft video file not found: {draft_path}")
+    if not voice_path.exists():
+        raise ReelWorkflowError(f"Voice WAV file not found: {voice_path}")
+
+    cues = load_subtitle_cues(project_dir)
+    sample_dir = project_dir / sample_dir_name
+    chunks_dir = sample_dir / "chunks"
+    timed_dir = sample_dir / "timed_chunks"
+    voice_lines = project_dir / "tts_timed_voice_lines.txt"
+    raw_voiceover = sample_dir / "voiceover.wav"
+    timed_voiceover = sample_dir / "voiceover_timed_to_subtitles.wav"
+    clean_voiceover = sample_dir / "voiceover_timed_to_subtitles_clean.wav"
+    timing_report = sample_dir / "timing_report.json"
+
+    sample_dir.mkdir(parents=True, exist_ok=True)
+    timed_dir.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    voice_lines.write_text("\n".join(cue.text for cue in cues) + "\n", encoding="utf-8")
+
+    generator = Path(__file__).resolve().parents[1] / "generate_voiceover.py"
+    subprocess.run(
+        [
+            sys.executable,
+            str(generator),
+            "--txt",
+            str(voice_lines),
+            "--voice",
+            str(voice_path),
+            "--out-dir",
+            str(sample_dir),
+            "--format",
+            "wav",
+            "--silence-ms",
+            "0",
+        ],
+        check=True,
+    )
+
+    target_duration = write_timed_voiceover_from_chunks(
+        cues=cues,
+        chunks_dir=chunks_dir,
+        timed_dir=timed_dir,
+        output_wav=timed_voiceover,
+        report_path=timing_report,
+    )
+    subprocess.run(build_clean_audio_command(timed_voiceover, clean_voiceover), check=True)
+    video_duration = ffprobe_duration(draft_path)
+    subprocess.run(
+        build_exact_timed_finalize_audio_command(
+            video_file=draft_path,
+            audio_file=clean_voiceover,
+            output_file=output_path,
+            target_duration=target_duration,
+            video_duration=video_duration,
+        ),
+        check=True,
+    )
+
+    return TimedTTSResult(
+        voice_lines=voice_lines,
+        raw_voiceover=raw_voiceover,
+        timed_voiceover=timed_voiceover,
+        clean_voiceover=clean_voiceover,
+        output_video=output_path,
+        timing_report=timing_report,
+        target_duration=target_duration,
+    )
 
 
 def build_render_command(
@@ -350,6 +544,167 @@ def render_reel(root: str | Path, slug: str, use_clean_audio: bool = True) -> Pa
     write_json(reel_path, reel_data)
     update_history(root, slug=slug, title=reel_data["title"], status="rendered")
     return output_file
+
+
+def load_subtitle_cues(project_dir: str | Path) -> list[SubtitleCue]:
+    project_path = Path(project_dir)
+    srt_path = project_path / "subtitles.srt"
+    ass_path = project_path / "subtitles.ass"
+
+    if srt_path.exists():
+        cues = parse_srt_cues(srt_path)
+    elif ass_path.exists():
+        cues = parse_ass_reel_sub_cues(ass_path)
+    else:
+        raise ReelWorkflowError(f"No subtitles.srt or subtitles.ass found in {project_path}")
+
+    if not cues:
+        raise ReelWorkflowError(f"No subtitle voice cues found in {project_path}")
+    return cues
+
+
+def parse_srt_cues(path: str | Path) -> list[SubtitleCue]:
+    text = Path(path).read_text(encoding="utf-8").strip()
+    if not text:
+        return []
+
+    cues = []
+    blocks = re.split(r"\r?\n\r?\n", text)
+    for block in blocks:
+        lines = [line.strip() for line in block.splitlines() if line.strip()]
+        if len(lines) < 3 or "-->" not in lines[1]:
+            continue
+        start_raw, end_raw = [part.strip() for part in lines[1].split("-->", 1)]
+        cues.append(
+            SubtitleCue(
+                index=len(cues) + 1,
+                start=parse_srt_time(start_raw),
+                end=parse_srt_time(end_raw),
+                text=" ".join(lines[2:]).strip(),
+            )
+        )
+    return cues
+
+
+def parse_ass_reel_sub_cues(path: str | Path) -> list[SubtitleCue]:
+    cues = []
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        if not line.startswith("Dialogue:"):
+            continue
+        fields = line.removeprefix("Dialogue:").strip().split(",", 9)
+        if len(fields) != 10 or fields[3].strip() != "ReelSub":
+            continue
+        cues.append(
+            SubtitleCue(
+                index=len(cues) + 1,
+                start=parse_ass_time(fields[1].strip()),
+                end=parse_ass_time(fields[2].strip()),
+                text=clean_ass_text(fields[9]),
+            )
+        )
+    return cues
+
+
+def write_timed_voiceover_from_chunks(
+    cues: list[SubtitleCue],
+    chunks_dir: str | Path,
+    timed_dir: str | Path,
+    output_wav: str | Path,
+    report_path: str | Path,
+) -> float:
+    chunks_path = Path(chunks_dir)
+    timed_path = Path(timed_dir)
+    output_path = Path(output_wav)
+    report = []
+    concat_file = timed_path / "concat.txt"
+    cursor = 0.0
+    segment_number = 1
+
+    timed_path.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with concat_file.open("w", encoding="utf-8") as concat:
+        for cue in cues:
+            if cue.end <= cue.start:
+                raise ReelWorkflowError(f"Subtitle cue {cue.index} must have a positive duration.")
+            if cue.start > cursor:
+                gap_duration = cue.start - cursor
+                gap_path = timed_path / f"segment_{segment_number:03d}_silence.wav"
+                subprocess.run(build_silence_command(gap_path, gap_duration), check=True)
+                concat.write(f"file '{escape_concat_path(gap_path)}'\n")
+                report.append(
+                    {
+                        "type": "silence",
+                        "start": cursor,
+                        "end": cue.start,
+                        "target_duration": gap_duration,
+                        "actual_duration": ffprobe_duration(gap_path),
+                    }
+                )
+                segment_number += 1
+
+            source = chunks_path / f"chunk_{cue.index:03d}.wav"
+            target = timed_path / f"segment_{segment_number:03d}_chunk_{cue.index:03d}.wav"
+            if not source.exists():
+                raise ReelWorkflowError(f"Generated TTS chunk not found: {source}")
+            target_duration = cue.end - cue.start
+            source_duration = ffprobe_duration(source)
+            tempo = source_duration / target_duration
+            subprocess.run(
+                build_timed_chunk_command(
+                    source_audio=source,
+                    output_audio=target,
+                    tempo=tempo,
+                    target_duration=target_duration,
+                ),
+                check=True,
+            )
+            actual_duration = ffprobe_duration(target)
+            concat.write(f"file '{escape_concat_path(target)}'\n")
+            report.append(
+                {
+                    "type": "voice",
+                    "index": cue.index,
+                    "text": cue.text,
+                    "start": cue.start,
+                    "end": cue.end,
+                    "target_duration": target_duration,
+                    "source_duration": source_duration,
+                    "tempo": tempo,
+                    "actual_duration": actual_duration,
+                    "delta": actual_duration - target_duration,
+                }
+            )
+            cursor = cue.end
+            segment_number += 1
+
+    subprocess.run(
+        [
+            "ffmpeg",
+            "-y",
+            "-f",
+            "concat",
+            "-safe",
+            "0",
+            "-i",
+            str(concat_file),
+            "-c",
+            "copy",
+            str(output_path),
+        ],
+        check=True,
+    )
+    target_duration = cues[-1].end
+    report.append(
+        {
+            "type": "output",
+            "output": str(output_path),
+            "target_duration": target_duration,
+            "actual_duration": ffprobe_duration(output_path),
+        }
+    )
+    Path(report_path).write_text(json.dumps(report, indent=2), encoding="utf-8")
+    return target_duration
 
 
 def list_reel_projects(root: str | Path) -> list[dict[str, str]]:
@@ -432,6 +787,54 @@ def format_srt_time(seconds: float) -> str:
     secs = milliseconds // 1000
     millis = milliseconds % 1000
     return f"{hours:02d}:{minutes:02d}:{secs:02d},{millis:03d}"
+
+
+def parse_srt_time(value: str) -> float:
+    hours, minutes, rest = value.split(":")
+    seconds, millis = rest.split(",")
+    return int(hours) * 3600 + int(minutes) * 60 + int(seconds) + int(millis) / 1000
+
+
+def parse_ass_time(value: str) -> float:
+    hours, minutes, rest = value.split(":")
+    seconds, centis = rest.split(".")
+    return int(hours) * 3600 + int(minutes) * 60 + int(seconds) + int(centis) / 100
+
+
+def clean_ass_text(value: str) -> str:
+    value = re.sub(r"\{[^}]*\}", "", value)
+    return value.replace(r"\N", " ").strip()
+
+
+def build_atempo_filter(factor: float) -> str:
+    parts = []
+    while factor > 2.0:
+        parts.append("atempo=2.0")
+        factor /= 2.0
+    while factor < 0.5:
+        parts.append("atempo=0.5")
+        factor /= 0.5
+    parts.append(f"atempo={factor:.8f}")
+    return ",".join(parts)
+
+
+def ffprobe_duration(path: str | Path) -> float:
+    result = subprocess.run(
+        [
+            "ffprobe",
+            "-v",
+            "error",
+            "-show_entries",
+            "format=duration",
+            "-of",
+            "default=noprint_wrappers=1:nokey=1",
+            str(path),
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return float(result.stdout.strip())
 
 
 def write_placeholder_png(path: Path, title: str, subtitle: str, seed: int) -> None:

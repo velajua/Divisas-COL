@@ -1,0 +1,199 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "text": "Oxford Economics puso numeros al riesgo electoral de Colombia:",
+    "start": 0.0,
+    "end": 4.25,
+    "target_duration": 4.25,
+    "source_duration": 4.587333,
+    "tempo": 1.0793724705882353,
+    "actual_duration": 4.25,
+    "delta": 0.0
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "text": "De la Espriella o Cepeda no moverian igual la economia.",
+    "start": 4.25,
+    "end": 8.17,
+    "target_duration": 3.92,
+    "source_duration": 3.894,
+    "tempo": 0.9933673469387756,
+    "actual_duration": 3.92,
+    "delta": 0.0
+  },
+  {
+    "type": "silence",
+    "start": 8.17,
+    "end": 8.71,
+    "target_duration": 0.5400000000000009,
+    "actual_duration": 0.54
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "text": "En su escenario base, el PIB creceria tres coma cinco por ciento",
+    "start": 8.71,
+    "end": 12.6,
+    "target_duration": 3.889999999999999,
+    "source_duration": 5.014,
+    "tempo": 1.288946015424165,
+    "actual_duration": 3.89,
+    "delta": 1.3322676295501878e-15
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "text": "en 2026, apoyado por consumo y salario minimo.",
+    "start": 12.6,
+    "end": 17.36,
+    "target_duration": 4.76,
+    "source_duration": 3.894,
+    "tempo": 0.8180672268907564,
+    "actual_duration": 4.76,
+    "delta": 0.0
+  },
+  {
+    "type": "silence",
+    "start": 17.36,
+    "end": 17.9,
+    "target_duration": 0.5399999999999991,
+    "actual_duration": 0.54
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "text": "Pero si el proximo gobierno mantiene la linea de Petro,",
+    "start": 17.9,
+    "end": 22.45,
+    "target_duration": 4.550000000000001,
+    "source_duration": 3.286,
+    "tempo": 0.722197802197802,
+    "actual_duration": 4.55,
+    "delta": -8.881784197001252e-16
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "text": "Oxford ve mas presion: menor inversion, menos petroleo y mas inflacion.",
+    "start": 22.45,
+    "end": 26.36,
+    "target_duration": 3.91,
+    "source_duration": 6.496667,
+    "tempo": 1.661551662404092,
+    "actual_duration": 3.91,
+    "delta": 0.0
+  },
+  {
+    "type": "silence",
+    "start": 26.36,
+    "end": 26.9,
+    "target_duration": 0.5399999999999991,
+    "actual_duration": 0.54
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "text": "El consumo podria crecer cuatro coma ocho por ciento,",
+    "start": 26.9,
+    "end": 30.7,
+    "target_duration": 3.8000000000000007,
+    "source_duration": 3.382,
+    "tempo": 0.8899999999999999,
+    "actual_duration": 3.8,
+    "delta": -8.881784197001252e-16
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "text": "pero la inflacion subiria a seis coma tres y la tasa a diez coma cinco por ciento.",
+    "start": 30.7,
+    "end": 34.67,
+    "target_duration": 3.9700000000000024,
+    "source_duration": 6.304667,
+    "tempo": 1.58807732997481,
+    "actual_duration": 3.97,
+    "delta": -2.220446049250313e-15
+  },
+  {
+    "type": "silence",
+    "start": 34.67,
+    "end": 35.21,
+    "target_duration": 0.5399999999999991,
+    "actual_duration": 0.54
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "text": "En bonos, el contraste es duro: con un giro ortodoxo,",
+    "start": 35.21,
+    "end": 39.9,
+    "target_duration": 4.689999999999998,
+    "source_duration": 4.363333,
+    "tempo": 0.9303481876332627,
+    "actual_duration": 4.69,
+    "delta": 2.6645352591003757e-15
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "text": "diez anos cerca de nueve coma cinco; con continuidad, hasta doce coma cinco.",
+    "start": 39.9,
+    "end": 45.07,
+    "target_duration": 5.170000000000002,
+    "source_duration": 5.984667,
+    "tempo": 1.1575758220502896,
+    "actual_duration": 5.17,
+    "delta": -1.7763568394002505e-15
+  },
+  {
+    "type": "silence",
+    "start": 45.07,
+    "end": 45.61,
+    "target_duration": 0.5399999999999991,
+    "actual_duration": 0.54
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "text": "La alerta fiscal sigue: deficit de siete coma uno por ciento",
+    "start": 45.61,
+    "end": 50.9,
+    "target_duration": 5.289999999999999,
+    "source_duration": 4.822,
+    "tempo": 0.9115311909262761,
+    "actual_duration": 5.29,
+    "delta": 8.881784197001252e-16
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "text": "y deuda cerca de sesenta y cuatro por ciento del PIB.",
+    "start": 50.9,
+    "end": 57.72,
+    "target_duration": 6.82,
+    "source_duration": 4.779333,
+    "tempo": 0.7007819648093842,
+    "actual_duration": 6.82,
+    "delta": 0.0
+  },
+  {
+    "type": "voice",
+    "index": 13,
+    "text": "El mercado va a votar con cobertura.",
+    "start": 57.72,
+    "end": 59.85,
+    "target_duration": 2.1300000000000026,
+    "source_duration": 2.358,
+    "tempo": 1.1070422535211255,
+    "actual_duration": 2.13,
+    "delta": -2.6645352591003757e-15
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-economics-elecciones-2026-espriella-cepeda\\tts_ass_line_sample\\voiceover_timed_to_ass.wav",
+    "target_duration": 59.85,
+    "actual_duration": 59.85
+  }
+]

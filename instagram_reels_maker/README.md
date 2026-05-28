@@ -248,8 +248,10 @@ reel template
   -> subtitles.srt
   -> image prompts + placeholder scene images
   -> silent review draft
-  -> later supplied voiceover
-  -> cleaned voiceover + final final MP4
+  -> timed XTTS lines from final subtitles
+  -> cleaned timed TTS + final preview MP4
+  -> optional later supplied human voiceover
+  -> cleaned human voiceover + final final MP4
 ```
 
 Create a new reel project:
@@ -303,7 +305,40 @@ reels\projects\peso-watch-2026-05-19\final.mp4
 
 ### Silent draft plus later voiceover workflow
 
-For review drafts made outside the project renderer, keep the draft MP4 silent. When the voiceover is ready, point the standalone finalizer at the silent draft and the separate voiceover file:
+For review drafts made outside the project renderer, keep the draft MP4 silent. After the subtitle timing is final, the automated preview path can generate short XTTS voice lines from the subtitle cues, stretch each line to its cue duration, insert subtitle gaps as silence, clean the timed WAV, and mux it into the silent draft. If the silent draft is a few frames shorter than the subtitle-timed audio, the command pads the last video frame so the final preview preserves the full timed voiceover:
+
+```bat
+python reel_maker.py timed-tts-final --project peso-watch-2026-05-19 --voice voice_samples\my_voice.wav
+```
+
+Defaults:
+
+```text
+subtitle source: reels\projects\<slug>\subtitles.srt
+ASS fallback:    reels\projects\<slug>\subtitles.ass, using only ReelSub events
+silent draft:    reels\projects\<slug>\drafts\final.mp4
+sample folder:   reels\projects\<slug>\tts_timed_sample\
+final preview:   reels\projects\<slug>\drafts\final_timed_tts.mp4
+```
+
+Generated timed TTS files:
+
+```text
+reels\projects\<slug>\tts_timed_voice_lines.txt
+reels\projects\<slug>\tts_timed_sample\voiceover.wav
+reels\projects\<slug>\tts_timed_sample\voiceover_timed_to_subtitles.wav
+reels\projects\<slug>\tts_timed_sample\voiceover_timed_to_subtitles_clean.wav
+reels\projects\<slug>\tts_timed_sample\timing_report.json
+reels\projects\<slug>\drafts\final_timed_tts.mp4
+```
+
+Use `--video`, `--out`, or `--sample-dir-name` to override the default paths:
+
+```bat
+python reel_maker.py timed-tts-final --project peso-watch-2026-05-19 --voice voice_samples\my_voice.wav --video reels\projects\peso-watch-2026-05-19\drafts\final.mp4 --out reels\projects\peso-watch-2026-05-19\drafts\final_timed_tts.mp4
+```
+
+This preview voice is still synthetic. If a human voiceover is ready, point the standalone finalizer at the silent draft and the separate voiceover file:
 
 ```bat
 python reel_maker.py finalize-audio --video reels\projects\peso-watch-2026-05-19\drafts\final.mp4 --voice reels\projects\peso-watch-2026-05-19\voiceover.wav --out reels\projects\peso-watch-2026-05-19\drafts\final_final.mp4
