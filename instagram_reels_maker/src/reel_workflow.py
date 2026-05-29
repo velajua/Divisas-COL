@@ -1,9 +1,12 @@
 import json
+import importlib.util
 import re
 import shutil
 import struct
 import subprocess
 import sys
+import time
+import unicodedata
 import zlib
 import asyncio
 from dataclasses import dataclass
@@ -23,6 +26,40 @@ DEFAULT_AUDIO_FIRST_SCENE_GAP_SECONDS = 0.12
 DEFAULT_EDGE_TTS_VOICE_POOL = ["es-MX-DaliaNeural", "es-ES-AlvaroNeural"]
 MAX_AUDIO_FIRST_LINE_CHARS = 75
 MAX_AUDIO_FIRST_LINE_WORDS = 9
+DEFAULT_REEL_PUBLISH_PORT = 8765
+REEL_PUBLISH_HASHTAGS = [
+    "#DivisasCOL",
+    "#DolarColombia",
+    "#PesoColombiano",
+    "#USDCOP",
+    "#Dolar",
+    "#Colombia",
+    "#EconomiaColombiana",
+    "#MercadoCambiario",
+    "#FinanzasPersonales",
+    "#FinanzasColombia",
+    "#NoticiasEconomicas",
+    "#AnalisisEconomico",
+    "#DolarHoy",
+    "#ReelsColombia",
+]
+HASHTAG_STOPWORDS = {
+    "para",
+    "pero",
+    "como",
+    "esta",
+    "este",
+    "estos",
+    "estas",
+    "sobre",
+    "entre",
+    "cuando",
+    "donde",
+    "desde",
+    "porque",
+    "solo",
+    "bajo",
+}
 
 
 @dataclass(frozen=True)
@@ -70,6 +107,18 @@ class AudioFirstResult:
     subtitles_path: Path
     timing_report: Path
     target_duration: float
+
+
+@dataclass(frozen=True)
+class ReelPublishResult:
+    manifest_path: Path
+    state_path: Path
+    caption_path: Path
+    publish_script_path: Path
+    video_path: Path
+    video_url: str
+    published_id: str | None = None
+    creation_id: str | None = None
 
 
 DAILY_FX_SCENES = [
@@ -1025,6 +1074,12 @@ def cleanup_stale_reel_artifacts(project_dir: str | Path) -> list[str]:
         "voiceover_script.txt",
         "subtitles.ass",
         "render/subtitle_filter.txt",
+        "render/clips.txt",
+        "render/concat.txt",
+        "render/video_only.mp4",
+        "render/render_cards.py",
+        "render/overlay_headlines.py",
+        "drafts/final.mp4",
         "drafts/final_timed_tts.mp4",
         "drafts/final_timed_tts_exact.mp4",
     ]
@@ -1212,6 +1267,286 @@ def render_reel(root: str | Path, slug: str, use_clean_audio: bool = True) -> Pa
     write_json(reel_path, reel_data)
     update_history(root, slug=slug, title=reel_data["title"], status="rendered")
     return output_file
+
+
+def prepare_reel_publish(
+    root: str | Path,
+    slug: str,
+    base_url: str | None = None,
+) -> ReelPublishResult:
+    project_dir = get_project_dir(root, slug)
+    reel_path = project_dir / "reel.json"
+    reel_data = read_json(reel_path)
+    video_path = project_dir / reel_data.get("outputs", {}).get("audio_first_video", "final/final_audio_first.mp4")
+    if not video_path.exists():
+        raise ReelWorkflowError(
+            f"Final audio-first reel not found: {video_path}. Run audio-first-final before publishing."
+        )
+
+    caption = build_reel_publish_caption(reel_data)
+    caption_path = project_dir / "caption.txt"
+    write_text_lf(caption_path, caption + "\n")
+
+    final_dir = project_dir / "final"
+    manifest_path = final_dir / "publish-manifest.json"
+    state_path = final_dir / "publish-state.json"
+    publish_script_path = final_dir / "publish-script.txt"
+    video_url = build_public_file_url(base_url, video_path.name)
+    manifest = {
+        "project": slug,
+        "title": reel_data.get("title", slug),
+        "media_type": "REELS",
+        "source_reel": str(reel_path.relative_to(Path(root))).replace("\\", "/"),
+        "public_path": str(video_path.relative_to(Path(root))).replace("\\", "/"),
+        "video_url": video_url,
+        "caption": caption,
+        "prepared_at": utc_now(),
+    }
+    write_json(manifest_path, manifest)
+    write_text_lf(
+        publish_script_path,
+        "\n".join(
+            [
+                f"Project: {slug}",
+                f"Video: {video_path}",
+                f"Manifest: {manifest_path}",
+                "",
+                "Publish command:",
+                f"python reel_maker.py publish-reel --project {slug}",
+                "",
+                "Caption:",
+                caption,
+                "",
+            ]
+        ),
+    )
+
+    reel_data.setdefault("outputs", {})
+    reel_data["outputs"]["publish_manifest"] = str(manifest_path.relative_to(project_dir)).replace("\\", "/")
+    reel_data["outputs"]["publish_script"] = str(publish_script_path.relative_to(project_dir)).replace("\\", "/")
+    reel_data["outputs"]["publish_caption"] = "caption.txt"
+    write_json(reel_path, reel_data)
+
+    return ReelPublishResult(
+        manifest_path=manifest_path,
+        state_path=state_path,
+        caption_path=caption_path,
+        publish_script_path=publish_script_path,
+        video_path=video_path,
+        video_url=video_url,
+    )
+
+
+def publish_reel(
+    root: str | Path,
+    slug: str,
+    tunnel_provider: str = "auto",
+    reset_state: bool = False,
+    dry_run: bool = False,
+) -> ReelPublishResult:
+    workflow_root = Path(root).resolve()
+    repo_root = workflow_root.parent
+    publish_module = load_instagram_publish_module(workflow_root)
+    publish_module.load_dotenv(repo_root / ".env")
+    prepared = prepare_reel_publish(workflow_root, slug)
+
+    if dry_run:
+        return prepared
+    if not publish_module.validate_config():
+        raise ReelWorkflowError("Missing Instagram publishing configuration.")
+
+    if reset_state and prepared.state_path.exists():
+        prepared.state_path.unlink()
+    state = read_reel_publish_state(prepared.state_path)
+    if state.get("published_id") and not reset_state:
+        return ReelPublishResult(
+            manifest_path=prepared.manifest_path,
+            state_path=prepared.state_path,
+            caption_path=prepared.caption_path,
+            publish_script_path=prepared.publish_script_path,
+            video_path=prepared.video_path,
+            video_url=state.get("video_url", prepared.video_url),
+            published_id=state.get("published_id"),
+            creation_id=state.get("creation_id"),
+        )
+
+    final_dir = prepared.video_path.parent
+    server = publish_module.run_http_server(final_dir, DEFAULT_REEL_PUBLISH_PORT)
+    tunnel = None
+    try:
+        tunnel, public_url = publish_module.start_tunnel_for_publish(
+            repo_root,
+            DEFAULT_REEL_PUBLISH_PORT,
+            tunnel_provider,
+            timeout_seconds=publish_module.DEFAULT_TUNNEL_TIMEOUT_SECONDS,
+        )
+        video_url = build_public_file_url(public_url, prepared.video_path.name)
+        manifest = read_json(prepared.manifest_path)
+        manifest["video_url"] = video_url
+        manifest["public_base_url"] = public_url
+        manifest["prepared_at"] = utc_now()
+        write_json(prepared.manifest_path, manifest)
+
+        wait_for_public_video(publish_module, video_url)
+        creation_id = create_reel_container(
+            publish_module=publish_module,
+            ig_user_id=publish_module.os.environ["INSTAGRAM_USER_ID"],
+            token=publish_module.os.environ["META_PAGE_ACCESS_TOKEN"],
+            video_url=video_url,
+            caption=manifest["caption"],
+        )
+        publish_module.wait_for_container_finished(creation_id, publish_module.os.environ["META_PAGE_ACCESS_TOKEN"])
+        publish_result = publish_module.publish_container(
+            publish_module.os.environ["INSTAGRAM_USER_ID"],
+            publish_module.os.environ["META_PAGE_ACCESS_TOKEN"],
+            creation_id,
+        )
+        published_id = str(publish_result.get("id", ""))
+        write_json(
+            prepared.state_path,
+            {
+                "project": slug,
+                "published_id": published_id,
+                "creation_id": creation_id,
+                "video_url": video_url,
+                "published_at": utc_now(),
+            },
+        )
+        return ReelPublishResult(
+            manifest_path=prepared.manifest_path,
+            state_path=prepared.state_path,
+            caption_path=prepared.caption_path,
+            publish_script_path=prepared.publish_script_path,
+            video_path=prepared.video_path,
+            video_url=video_url,
+            published_id=published_id,
+            creation_id=creation_id,
+        )
+    finally:
+        if tunnel and tunnel.poll() is None:
+            publish_module.terminate_process(tunnel)
+        server.shutdown()
+
+
+def build_reel_publish_caption(reel_data: dict[str, Any]) -> str:
+    title = str(reel_data.get("title") or reel_data.get("slug") or "Reel Divisas COL").strip()
+    lines = flatten_voiceover_lines(reel_data.get("scenes", []))
+    spoken = summarize_voiceover_for_caption(lines)
+    body = (
+        f"{title}\n\n"
+        f"{spoken}\n\n"
+        "Análisis rápido de Divisas COL para leer mejor el dólar, el peso colombiano "
+        "y las señales que está mirando el mercado.\n\n"
+        "Guárdalo y compártelo con alguien que siga el dólar en Colombia.\n"
+        "Fuente: divisascol.com\n\n"
+        ".\n.\n.\n.\n.\n.\n\n"
+    )
+    return body + " ".join(build_reel_hashtags(reel_data))
+
+
+def build_reel_hashtags(reel_data: dict[str, Any], max_hashtags: int = 30) -> list[str]:
+    hashtags = list(REEL_PUBLISH_HASHTAGS)
+    text_parts = [str(reel_data.get("title") or ""), str(reel_data.get("slug") or "").replace("-", " ")]
+    words = re.findall(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ0-9]+", " ".join(text_parts))
+    for word in words:
+        normalized = normalize_hashtag_word(word)
+        if len(normalized) < 4 or normalized.lower() in HASHTAG_STOPWORDS or any(char.isdigit() for char in normalized):
+            continue
+        hashtag = f"#{normalized}"
+        if hashtag not in hashtags:
+            hashtags.append(hashtag)
+        if len(hashtags) >= max_hashtags:
+            break
+    return hashtags[:max_hashtags]
+
+
+def summarize_voiceover_for_caption(lines: list[str], max_chars: int = 420) -> str:
+    summary_lines: list[str] = []
+    for line in lines:
+        candidate = " ".join([*summary_lines, line])
+        if len(candidate) > max_chars:
+            break
+        summary_lines.append(line)
+    if summary_lines:
+        return " ".join(summary_lines)
+    fallback = " ".join(lines)
+    if len(fallback) <= max_chars:
+        return fallback
+    fallback = fallback[: max_chars - 3].rsplit(" ", 1)[0].rstrip()
+    return f"{fallback}..."
+
+
+def normalize_hashtag_word(value: str) -> str:
+    text = unicodedata.normalize("NFKD", value)
+    text = "".join(char for char in text if not unicodedata.combining(char))
+    text = re.sub(r"[^A-Za-z0-9]", "", text)
+    return text[:1].upper() + text[1:] if text else ""
+
+
+def build_public_file_url(base_url: str | None, filename: str) -> str:
+    if not base_url:
+        return ""
+    return f"{base_url.rstrip('/')}/{filename}"
+
+
+def load_instagram_publish_module(workflow_root: str | Path) -> Any:
+    module_path = Path(workflow_root).resolve().parent / "instagram_publish.py"
+    if not module_path.exists():
+        raise ReelWorkflowError(f"Instagram publish helper not found: {module_path}")
+    spec = importlib.util.spec_from_file_location("instagram_publish", module_path)
+    if spec is None or spec.loader is None:
+        raise ReelWorkflowError(f"Could not load Instagram publish helper: {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def wait_for_public_video(publish_module: Any, video_url: str, timeout_seconds: int = 300) -> None:
+    deadline = time.time() + timeout_seconds
+    last_error = None
+    while time.time() < deadline:
+        try:
+            response = publish_module.requests.get(video_url, headers={"Range": "bytes=0-1023"}, timeout=15)
+            content_type = response.headers.get("content-type", "").lower()
+            if response.ok and (content_type.startswith("video/") or content_type == "application/octet-stream"):
+                return
+            last_error = f"HTTP {response.status_code} {content_type}"
+        except publish_module.requests.RequestException as exc:
+            last_error = str(exc)
+        time.sleep(3)
+    raise ReelWorkflowError(f"Public reel URL never became reachable as video: {video_url}. Last error: {last_error}")
+
+
+def create_reel_container(
+    publish_module: Any,
+    ig_user_id: str,
+    token: str,
+    video_url: str,
+    caption: str,
+) -> str:
+    response = publish_module.post_with_meta_retry(
+        publish_module.graph_url(f"{ig_user_id}/media"),
+        data={
+            "media_type": "REELS",
+            "video_url": video_url,
+            "caption": publish_module.sanitize_caption(caption),
+            "share_to_feed": "true",
+            "access_token": token,
+        },
+        timeout=60,
+    )
+    response.raise_for_status()
+    return response.json()["id"]
+
+
+def read_reel_publish_state(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        return {}
+    try:
+        state = read_json(path)
+    except (json.JSONDecodeError, OSError):
+        return {}
+    return state if isinstance(state, dict) else {}
 
 
 def load_subtitle_cues(project_dir: str | Path) -> list[SubtitleCue]:

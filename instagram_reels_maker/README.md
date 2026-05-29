@@ -380,10 +380,28 @@ Use `--out` or `--sample-dir-name` to override the default output paths. `--vide
 python reel_maker.py audio-first-final --project peso-watch-2026-05-19 --out reels\projects\peso-watch-2026-05-19\final\final_audio_first.mp4
 ```
 
-This preview voice is still synthetic. If a human voiceover is ready, point the standalone finalizer at the silent draft and the separate voiceover file:
+### Publish an audio-first reel
+
+Publish the final audio-first MP4 as an Instagram Reel:
 
 ```bat
-python reel_maker.py finalize-audio --video reels\projects\peso-watch-2026-05-19\drafts\final.mp4 --voice reels\projects\peso-watch-2026-05-19\voiceover.wav --out reels\projects\peso-watch-2026-05-19\drafts\final_final.mp4
+python reel_maker.py publish-reel --project peso-watch-2026-05-19
+```
+
+The command mirrors the Instagram cards publish workflow: it writes a publish caption with finance hashtags to `caption.txt`, writes `final\publish-manifest.json`, writes `final\publish-script.txt`, serves the `final\` folder through a temporary tunnel, creates a Meta Graph `media_type=REELS` container from the public MP4 URL, waits for Meta processing, publishes it, and records `final\publish-state.json`.
+
+Use `--dry-run` to prepare the caption, script, and manifest without calling Meta:
+
+```bat
+python reel_maker.py publish-reel --project peso-watch-2026-05-19 --dry-run
+```
+
+If a reel was already published and you intentionally need to publish it again, pass `--reset-state`.
+
+If a human voiceover is ready, point the standalone finalizer at the current final reel and the separate voiceover file:
+
+```bat
+python reel_maker.py finalize-audio --video reels\projects\peso-watch-2026-05-19\final\final_audio_first.mp4 --voice reels\projects\peso-watch-2026-05-19\voiceover.wav --out reels\projects\peso-watch-2026-05-19\final\final_human_voice.mp4
 ```
 
 This command:
@@ -391,14 +409,14 @@ This command:
 ```text
 1. cleans the supplied voiceover with the same reel audio filter chain
 2. writes voiceover_clean.wav next to the voiceover by default
-3. removes any audio from the draft video
-4. writes the final final MP4 with the cleaned voiceover as the only audio track
+3. removes any audio from the source video
+4. writes the human-voice final MP4 with the cleaned voiceover as the only audio track
 ```
 
 Use `--clean-out` if you want the cleaned WAV somewhere else:
 
 ```bat
-python reel_maker.py finalize-audio --video path\to\draft.mp4 --voice path\to\voiceover.wav --clean-out path\to\voiceover_clean.wav --out path\to\final_final.mp4
+python reel_maker.py finalize-audio --video path\to\final_audio_first.mp4 --voice path\to\voiceover.wav --clean-out path\to\voiceover_clean.wav --out path\to\final_human_voice.mp4
 ```
 
 List previous reel projects:

@@ -2,8 +2,8 @@ Create an Instagram Reel project from this HTML article entry:
 
 <PASTE_HTML_ENTRY_PATH_OR_CONTENT_HERE>
 
-Use the existing instagram_reels_maker workflow and produce a complete reviewable draft like:
-instagram_reels_maker\reels\projects\caja-dolares-deuda-y-peso-en-alerta\drafts\final.mp4
+Use the existing instagram_reels_maker workflow and produce a complete audio-first final reel like:
+instagram_reels_maker\reels\projects\caja-dolares-deuda-y-peso-en-alerta\final\final_audio_first.mp4
 
 Design and workflow requirements:
 
@@ -34,8 +34,8 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Trim leading and trailing silence from generated neural chunks before measuring them.
 - Do not mux audio onto an old subtitle-first render.
 - Do not stretch voice lines to match old visual or subtitle durations.
-- If a human voiceover is provided later, make the human final final reel with:
-  python reel_maker.py finalize-audio --video instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4 --voice <path-to-voiceover.wav> --out instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4
+- If a human voiceover is provided later, make the human final reel with:
+  python reel_maker.py finalize-audio --video instagram_reels_maker\reels\projects\<article-slug>\final\final_audio_first.mp4 --voice <path-to-voiceover.wav> --out instagram_reels_maker\reels\projects\<article-slug>\final\final_human_voice.mp4
 
 4. Subtitles:
 - Must match exactly what the voice/script says.
@@ -76,17 +76,15 @@ instagram_reels_maker\reels\projects\<article-slug>
 
 8. Output files:
 - Save all source-like project files: script, captions, reel metadata, generated images, raw images, subtitle files, render files, and review notes.
-- Put the review MP4 at:
-instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4
-- Put the audio-first TTS preview MP4 at:
+- Put the audio-first final MP4 at:
 instagram_reels_maker\reels\projects\<article-slug>\final\final_audio_first.mp4
-- Do not create final_final.mp4 until a real human voiceover file is provided.
+- Do not create draft-derived final files. The final folder is the publishable output location.
+- If a real human voiceover file is provided, write the human version under the final folder.
 
 9. Final render:
 - 1080x1920 vertical MP4.
 - About 40-50 seconds.
-- drafts\final.mp4 remains silent for visual review.
-- final\final_audio_first.mp4 has the measured audio-first voiceover.
+- final\final_audio_first.mp4 has the measured audio-first voiceover and is the publish candidate.
 - Burned-in subtitles and timed data overlays must follow measured audio timing.
 - Verify with ffprobe that final_audio_first.mp4 has one video stream and one audio stream.
 - Extract a few preview frames around important data moments and inspect that overlays/subtitles do not collide.
@@ -98,10 +96,20 @@ instagram_reels_maker\reels\projects\<article-slug>\final\final_audio_first.mp4
 - It writes render\audio_first_concat.txt from measured scene durations and rebuilds final_audio_first.mp4 from that manifest.
 - It must not use the old subtitle-first render as the timing source.
 
-11. Final final audio pass, only after the human voiceover is provided:
-- Run finalize-audio against the silent draft and the supplied voiceover.
-- This pass must clean the voiceover, remove any existing draft audio, and write:
-instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4
-- Verify with ffprobe that final_final.mp4 has one video stream and one audio stream.
+11. Publish pass:
+- Publish only after final_audio_first.mp4 has been reviewed and verified.
+- Run:
+  python reel_maker.py publish-reel --project <article-slug>
+- This command writes or refreshes caption.txt with a concise Spanish description and relevant hashtags.
+- It also writes final\publish-manifest.json, final\publish-script.txt, and final\publish-state.json.
+- Without `--dry-run`, the command serves final_audio_first.mp4 through the configured tunnel, creates a Meta Graph `media_type=REELS` container, waits for processing, and publishes it.
+- If you only need to generate the caption and manifest without posting, run:
+  python reel_maker.py publish-reel --project <article-slug> --dry-run
+
+12. Human audio pass, only after a human voiceover is provided:
+- Run finalize-audio against the current final reel and the supplied voiceover.
+- This pass must clean the voiceover, remove any existing source audio, and write:
+instagram_reels_maker\reels\projects\<article-slug>\final\final_human_voice.mp4
+- Verify with ffprobe that final_human_voice.mp4 has one video stream and one audio stream.
 
 Use the caja-dolares-deuda-y-peso-en-alerta project as the visual/style reference.

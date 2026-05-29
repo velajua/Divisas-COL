@@ -14,6 +14,7 @@ from reel_workflow import (  # noqa: E402
     generate_audio_first_final,
     generate_timed_tts_final,
     list_reel_projects,
+    publish_reel,
     regenerate_subtitles,
     render_reel,
 )
@@ -105,6 +106,28 @@ def main() -> None:
         help="Project subfolder for generated short-line voice chunks and timing report.",
     )
 
+    publish_parser = subparsers.add_parser(
+        "publish-reel",
+        help="Publish a final audio-first reel to Instagram Reels.",
+    )
+    publish_parser.add_argument("--project", required=True, help="Reel project slug.")
+    publish_parser.add_argument(
+        "--tunnel-provider",
+        choices=["auto", "cloudflare", "ngrok"],
+        default="auto",
+        help="Tunnel provider used to expose the final MP4 to Meta.",
+    )
+    publish_parser.add_argument(
+        "--reset-state",
+        action="store_true",
+        help="Ignore final\\publish-state.json and publish again.",
+    )
+    publish_parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Prepare caption, publish script, and manifest without calling Meta.",
+    )
+
     subparsers.add_parser("list", help="List reel projects from history.")
 
     args = parser.parse_args()
@@ -170,6 +193,22 @@ def main() -> None:
         print(f"Saved subtitles: {result.subtitles_path}")
         print(f"Saved timing report: {result.timing_report}")
         print(f"Saved final reel: {result.output_video}")
+    elif args.command == "publish-reel":
+        result = publish_reel(
+            root=root,
+            slug=args.project,
+            tunnel_provider=args.tunnel_provider,
+            reset_state=args.reset_state,
+            dry_run=args.dry_run,
+        )
+        print(f"Saved publish manifest: {result.manifest_path}")
+        print(f"Saved publish script: {result.publish_script_path}")
+        print(f"Saved publish caption: {result.caption_path}")
+        print(f"Reel video: {result.video_path}")
+        if result.video_url:
+            print(f"Public video URL: {result.video_url}")
+        if result.published_id:
+            print(f"Published Instagram reel: {result.published_id}")
     elif args.command == "list":
         for project in list_reel_projects(root):
             print(f"{project['slug']}\t{project['status']}\t{project['title']}")

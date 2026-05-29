@@ -1,3 +1,11 @@
+Project: caja-dolares-deuda-y-peso-en-alerta
+Video: C:\Users\juanv\Downloads\Divisas-COL\instagram_reels_maker\reels\projects\caja-dolares-deuda-y-peso-en-alerta\final\final_audio_first.mp4
+Manifest: C:\Users\juanv\Downloads\Divisas-COL\instagram_reels_maker\reels\projects\caja-dolares-deuda-y-peso-en-alerta\final\publish-manifest.json
+
+Publish command:
+python reel_maker.py publish-reel --project caja-dolares-deuda-y-peso-en-alerta
+
+Caption:
 Caja en dolares, deuda externa y peso en alerta
 
 Caja en dolares. Deuda externa. Peso otra vez en alerta. Hacienda dice: compra dolares para fortalecer caja. No para mover la tasa. Pero la deuda externa ya pesa. Doscientos cuarenta y seis mil ochocientos un millones de dolares. Cincuenta y tres coma ocho del PIB. BanRep ve inflacion incomoda. Tasas altas. Poco espacio para cantar victoria. El problema de fondo es fiscal. Gasto alto. Inversion rezagada.

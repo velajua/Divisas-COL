@@ -164,7 +164,10 @@
   "outputs": {
     "draft_video": "drafts/final.mp4",
     "audio_first_video": "final/final_audio_first.mp4",
-    "audio_first_render_manifest": "render/audio_first_concat.txt"
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
   },
   "review_notes": [
     "Audio-first workflow: short TTS lines are generated before final timing.",

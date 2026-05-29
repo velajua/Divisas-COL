@@ -32,6 +32,8 @@ from reel_workflow import (
     generate_subtitles,
     list_reel_projects,
     load_subtitle_cues,
+    prepare_reel_publish,
+    publish_reel,
     validate_short_voiceover_lines,
 )
 
@@ -563,6 +565,155 @@ def test_generate_audio_first_final_updates_reel_metadata_subtitles_and_rebuilds
     assert result.output_video == project_dir / "final" / "final_audio_first.mp4"
 
 
+def test_prepare_reel_publish_writes_manifest_caption_and_script(tmp_path: Path):
+    root = tmp_path / "maker"
+    project_dir = root / "reels" / "projects" / "peso-watch"
+    final_video = project_dir / "final" / "final_audio_first.mp4"
+    final_video.parent.mkdir(parents=True)
+    final_video.write_bytes(b"video")
+    (project_dir / "reel.json").write_text(
+        json.dumps(
+            {
+                "slug": "peso-watch",
+                "title": "Peso bajo examen",
+                "outputs": {"audio_first_video": "final/final_audio_first.mp4"},
+                "scenes": [
+                    {"voiceover_lines": ["El peso queda bajo examen."], "subtitle": "Peso bajo examen"},
+                    {"voiceover_lines": ["El mercado mira la deuda."], "subtitle": "Mercado y deuda"},
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    result = prepare_reel_publish(root=root, slug="peso-watch", base_url="https://example.com/reels")
+
+    manifest = json.loads(result.manifest_path.read_text(encoding="utf-8"))
+    caption = result.caption_path.read_text(encoding="utf-8")
+    publish_script = result.publish_script_path.read_text(encoding="utf-8")
+    reel_json = json.loads((project_dir / "reel.json").read_text(encoding="utf-8"))
+    assert manifest["media_type"] == "REELS"
+    assert manifest["public_path"] == "reels/projects/peso-watch/final/final_audio_first.mp4"
+    assert manifest["video_url"] == "https://example.com/reels/final_audio_first.mp4"
+    assert "Peso bajo examen" in caption
+    assert "#DivisasCOL" in caption
+    assert "#DolarColombia" in caption
+    assert "python reel_maker.py publish-reel --project peso-watch" in publish_script
+    assert reel_json["outputs"]["publish_manifest"] == "final/publish-manifest.json"
+    assert reel_json["outputs"]["publish_script"] == "final/publish-script.txt"
+
+
+def test_publish_reel_uses_meta_reels_container_and_state(tmp_path: Path, monkeypatch):
+    root = tmp_path / "instagram_reels_maker"
+    project_dir = root / "reels" / "projects" / "peso-watch"
+    final_video = project_dir / "final" / "final_audio_first.mp4"
+    final_video.parent.mkdir(parents=True)
+    final_video.write_bytes(b"video")
+    (project_dir / "reel.json").write_text(
+        json.dumps(
+            {
+                "slug": "peso-watch",
+                "title": "Peso Watch",
+                "outputs": {"audio_first_video": "final/final_audio_first.mp4"},
+                "scenes": [{"voiceover_lines": ["El dólar no se mueve solo."]}],
+            }
+        ),
+        encoding="utf-8",
+    )
+    calls = []
+
+    class FakeResponse:
+        ok = True
+        headers = {"content-type": "video/mp4"}
+
+        def raise_for_status(self):
+            return None
+
+        def json(self):
+            return {"id": "creation-1"}
+
+    class FakeRequests:
+        class RequestException(Exception):
+            pass
+
+        @staticmethod
+        def get(url, headers=None, timeout=15):
+            calls.append(("get", url, headers, timeout))
+            return FakeResponse()
+
+    class FakeTunnel:
+        def poll(self):
+            return None
+
+    class FakeServer:
+        def shutdown(self):
+            calls.append(("shutdown",))
+
+    class FakePublishModule:
+        DEFAULT_TUNNEL_TIMEOUT_SECONDS = 10
+        requests = FakeRequests
+        os = type("FakeOS", (), {"environ": {"INSTAGRAM_USER_ID": "ig-1", "META_PAGE_ACCESS_TOKEN": "token"}})
+
+        @staticmethod
+        def load_dotenv(path):
+            calls.append(("dotenv", path))
+
+        @staticmethod
+        def validate_config():
+            return True
+
+        @staticmethod
+        def run_http_server(public_dir, port):
+            calls.append(("serve", public_dir, port))
+            return FakeServer()
+
+        @staticmethod
+        def start_tunnel_for_publish(repo_root, port, provider, timeout_seconds):
+            calls.append(("tunnel", repo_root, port, provider, timeout_seconds))
+            return FakeTunnel(), "https://public.example"
+
+        @staticmethod
+        def graph_url(path):
+            return f"https://graph.example/{path}"
+
+        @staticmethod
+        def sanitize_caption(caption):
+            return caption
+
+        @staticmethod
+        def post_with_meta_retry(url, data, timeout):
+            calls.append(("container", url, data, timeout))
+            return FakeResponse()
+
+        @staticmethod
+        def wait_for_container_finished(container_id, token):
+            calls.append(("wait", container_id, token))
+
+        @staticmethod
+        def publish_container(ig_user_id, token, creation_id):
+            calls.append(("publish", ig_user_id, token, creation_id))
+            return {"id": "published-1"}
+
+        @staticmethod
+        def terminate_process(tunnel):
+            calls.append(("terminate", tunnel))
+
+    monkeypatch.setattr(reel_workflow, "load_instagram_publish_module", lambda workflow_root: FakePublishModule)
+
+    result = publish_reel(root=root, slug="peso-watch", tunnel_provider="cloudflare")
+
+    state = json.loads((project_dir / "final" / "publish-state.json").read_text(encoding="utf-8"))
+    manifest = json.loads((project_dir / "final" / "publish-manifest.json").read_text(encoding="utf-8"))
+    container_call = next(call for call in calls if call[0] == "container")
+    assert container_call[2]["media_type"] == "REELS"
+    assert container_call[2]["video_url"] == "https://public.example/final_audio_first.mp4"
+    assert container_call[2]["share_to_feed"] == "true"
+    assert state["published_id"] == "published-1"
+    assert state["creation_id"] == "creation-1"
+    assert manifest["video_url"] == "https://public.example/final_audio_first.mp4"
+    assert result.published_id == "published-1"
+
+
 def test_cleanup_stale_reel_artifacts_preserves_source_assets(tmp_path: Path):
     project_dir = tmp_path / "project"
     for path in [
@@ -581,6 +732,11 @@ def test_cleanup_stale_reel_artifacts_preserves_source_assets(tmp_path: Path):
         project_dir / "drafts" / "final_timed_tts.mp4",
         project_dir / "drafts" / "preview_10s.png",
         project_dir / "render" / "clips" / "clip_001.mp4",
+        project_dir / "render" / "clips.txt",
+        project_dir / "render" / "concat.txt",
+        project_dir / "render" / "video_only.mp4",
+        project_dir / "render" / "render_cards.py",
+        project_dir / "render" / "overlay_headlines.py",
         project_dir / "render" / "subtitle_filter.txt",
         project_dir / "render" / "preview_08s.png",
         project_dir / "srt_voice_lines.txt",
@@ -597,7 +753,7 @@ def test_cleanup_stale_reel_artifacts_preserves_source_assets(tmp_path: Path):
     assert (project_dir / "review_notes.md").exists()
     assert (project_dir / "images" / "001_hook.png").exists()
     assert (project_dir / "prompts" / "001_hook.txt").exists()
-    assert (project_dir / "drafts" / "final.mp4").exists()
+    assert not (project_dir / "drafts" / "final.mp4").exists()
     assert not (project_dir / "tts_timed_sample").exists()
     assert not (project_dir / "tts_ass_line_sample").exists()
     assert not (project_dir / "tts_srt_line_sample").exists()
@@ -605,6 +761,11 @@ def test_cleanup_stale_reel_artifacts_preserves_source_assets(tmp_path: Path):
     assert not (project_dir / "drafts" / "final_timed_tts.mp4").exists()
     assert not (project_dir / "drafts" / "preview_10s.png").exists()
     assert not (project_dir / "render" / "clips").exists()
+    assert not (project_dir / "render" / "clips.txt").exists()
+    assert not (project_dir / "render" / "concat.txt").exists()
+    assert not (project_dir / "render" / "video_only.mp4").exists()
+    assert not (project_dir / "render" / "render_cards.py").exists()
+    assert not (project_dir / "render" / "overlay_headlines.py").exists()
     assert not (project_dir / "render" / "subtitle_filter.txt").exists()
     assert not (project_dir / "render" / "preview_08s.png").exists()
     assert not (project_dir / "subtitles.ass").exists()

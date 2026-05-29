@@ -1,3 +1,11 @@
+Project: oxford-economics-elecciones-2026-espriella-cepeda
+Video: C:\Users\juanv\Downloads\Divisas-COL\instagram_reels_maker\reels\projects\oxford-economics-elecciones-2026-espriella-cepeda\final\final_audio_first.mp4
+Manifest: C:\Users\juanv\Downloads\Divisas-COL\instagram_reels_maker\reels\projects\oxford-economics-elecciones-2026-espriella-cepeda\final\publish-manifest.json
+
+Publish command:
+python reel_maker.py publish-reel --project oxford-economics-elecciones-2026-espriella-cepeda
+
+Caption:
 Oxford Economics mide el riesgo electoral de Colombia
 
 Oxford puso numeros al riesgo electoral. De la Espriella o Cepeda no moverian igual la economia. El escenario base marca PIB de tres cinco. Consumo y salario minimo sostienen la proyeccion. Con continuidad politica, Oxford ve mas presion. Menor inversion. Menos petroleo. Mas inflacion. El consumo podria crecer cuatro coma ocho. Pero la inflacion sube a seis coma tres. Tasa en diez coma cinco. En bonos,
