@@ -1,9 +1,11 @@
 import json
 import re
+import shutil
 import struct
 import subprocess
 import sys
 import zlib
+import asyncio
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -12,6 +14,15 @@ from typing import Any
 
 class ReelWorkflowError(RuntimeError):
     pass
+
+
+AUDIO_FIRST_WORKFLOW_VERSION = "audio_first_short_line_v1"
+DEFAULT_AUDIO_FIRST_LINE_GAP_SECONDS = 0.06
+DEFAULT_AUDIO_FIRST_CONTINUATION_GAP_SECONDS = 0.02
+DEFAULT_AUDIO_FIRST_SCENE_GAP_SECONDS = 0.12
+DEFAULT_EDGE_TTS_VOICE_POOL = ["es-MX-DaliaNeural", "es-ES-AlvaroNeural"]
+MAX_AUDIO_FIRST_LINE_CHARS = 75
+MAX_AUDIO_FIRST_LINE_WORDS = 9
 
 
 @dataclass(frozen=True)
@@ -42,11 +53,31 @@ class TimedTTSResult:
     target_duration: float
 
 
+@dataclass(frozen=True)
+class AudioFirstTimeline:
+    cues: list[SubtitleCue]
+    target_duration: float
+    voiceover: Path
+    timing_report: Path
+
+
+@dataclass(frozen=True)
+class AudioFirstResult:
+    voice_lines: Path
+    raw_voiceover: Path
+    clean_voiceover: Path
+    output_video: Path
+    subtitles_path: Path
+    timing_report: Path
+    target_duration: float
+
+
 DAILY_FX_SCENES = [
     {
         "id": "hook",
         "duration_seconds": 3.5,
         "subtitle": "El dólar no se mueve solo.",
+        "voiceover_lines": ["El dólar no se mueve solo."],
         "voiceover_text": "El dólar no se mueve solo.",
         "visual_prompt": (
             "vertical 9:16 finance news graphic, Colombian peso and US dollar exchange board, "
@@ -57,6 +88,7 @@ DAILY_FX_SCENES = [
         "id": "data",
         "duration_seconds": 4.5,
         "subtitle": "Cuando el Gobierno gasta más, la moneda paga la factura.",
+        "voiceover_lines": ["Cuando el Gobierno gasta más,", "la moneda paga la factura."],
         "voiceover_text": "Cuando el Gobierno gasta más, la moneda paga la factura.",
         "visual_prompt": (
             "vertical 9:16 chart graphic showing USD COP pressure, fiscal deficit headline, "
@@ -67,6 +99,7 @@ DAILY_FX_SCENES = [
         "id": "comparison",
         "duration_seconds": 4.0,
         "subtitle": "La pregunta real: ¿cuánto compra tu salario hoy?",
+        "voiceover_lines": ["La pregunta real:", "¿cuánto compra tu salario hoy?"],
         "voiceover_text": "La pregunta real: cuánto compra tu salario hoy.",
         "visual_prompt": (
             "vertical 9:16 grocery basket and Colombian peso comparison, purchasing power theme, "
@@ -77,6 +110,7 @@ DAILY_FX_SCENES = [
         "id": "interpretation",
         "duration_seconds": 5.0,
         "subtitle": "El mercado castiga el relato cuando no ve disciplina.",
+        "voiceover_lines": ["El mercado castiga el relato", "cuando no ve disciplina."],
         "voiceover_text": "El mercado castiga el relato cuando no ve disciplina.",
         "visual_prompt": (
             "vertical 9:16 split scene of congress spending debate and falling currency chart, "
@@ -87,6 +121,7 @@ DAILY_FX_SCENES = [
         "id": "cta",
         "duration_seconds": 3.5,
         "subtitle": "¿Dólar arriba o abajo esta semana?",
+        "voiceover_lines": ["Dólar arriba o abajo esta semana.", "Te leo."],
         "voiceover_text": "Dólar arriba o abajo esta semana. Te leo.",
         "visual_prompt": (
             "vertical 9:16 final question screen, USD COP ticker, comment prompt, modern financial "
@@ -139,7 +174,7 @@ def create_reel_project(
         scene_data["prompt_file"] = f"prompts/{prompt_name}"
         scenes.append(scene_data)
 
-        (prompts_dir / prompt_name).write_text(scene["visual_prompt"], encoding="utf-8")
+        write_text_lf(prompts_dir / prompt_name, scene["visual_prompt"])
         write_placeholder_png(
             images_dir / image_name,
             title=scene_id.upper(),
@@ -151,14 +186,19 @@ def create_reel_project(
         "slug": slug,
         "title": title or template_data["title"],
         "status": "draft",
+        "workflow_version": AUDIO_FIRST_WORKFLOW_VERSION,
         "template": template,
         "niche": template_data["niche"],
         "format": template_data["format"],
         "created_at": utc_now(),
         "voiceover": {
-            "mode": "provided_or_xtts",
-            "file": "voiceover.wav",
-            "clean_file": "voiceover_clean.wav",
+            "mode": "audio_first_short_lines",
+            "file": "audio_first/voiceover_natural.wav",
+            "clean_file": "audio_first/voiceover_natural_clean.wav",
+            "script_file": "script.txt",
+            "voice_lines_file": "audio_first_voice_lines.txt",
+            "line_gap_seconds": DEFAULT_AUDIO_FIRST_LINE_GAP_SECONDS,
+            "scene_gap_seconds": DEFAULT_AUDIO_FIRST_SCENE_GAP_SECONDS,
         },
         "scenes": scenes,
         "cta": template_data["cta"],
@@ -170,8 +210,8 @@ def create_reel_project(
     subtitles_path = project_dir / "subtitles.srt"
 
     write_json(reel_json, reel_data)
-    script_path.write_text(build_script_from_scenes(scenes), encoding="utf-8")
-    subtitles_path.write_text(generate_subtitles(scenes), encoding="utf-8")
+    write_text_lf(script_path, build_script_from_scenes(scenes))
+    write_text_lf(subtitles_path, generate_subtitles(scenes))
     update_history(root, slug=slug, title=reel_data["title"], status="draft")
 
     return ReelProject(
@@ -184,7 +224,13 @@ def create_reel_project(
 
 
 def build_script_from_scenes(scenes: list[dict[str, Any]]) -> str:
-    lines = [scene.get("voiceover_text", "").strip() for scene in scenes]
+    lines = []
+    for scene in scenes:
+        voiceover_lines = scene.get("voiceover_lines")
+        if voiceover_lines:
+            lines.extend(str(line).strip() for line in voiceover_lines)
+        else:
+            lines.append(scene.get("voiceover_text", "").strip())
     return "\n".join(line for line in lines if line)
 
 
@@ -206,11 +252,24 @@ def generate_subtitles(scenes: list[dict[str, Any]]) -> str:
     return "\n".join(blocks).strip() + "\n"
 
 
+def generate_subtitles_from_cues(cues: list[SubtitleCue]) -> str:
+    blocks = []
+    for index, cue in enumerate(cues, start=1):
+        blocks.append(
+            f"{index}\n{format_srt_time(cue.start)} --> {format_srt_time(cue.end)}\n{cue.text}\n"
+        )
+    return "\n".join(blocks).strip() + "\n"
+
+
+def ends_complete_sentence(text: str) -> bool:
+    return text.rstrip().endswith((".", "!", "?", "…"))
+
+
 def regenerate_subtitles(root: str | Path, slug: str) -> Path:
     project_dir = get_project_dir(root, slug)
     reel_data = read_json(project_dir / "reel.json")
     subtitles_path = project_dir / "subtitles.srt"
-    subtitles_path.write_text(generate_subtitles(reel_data["scenes"]), encoding="utf-8")
+    write_text_lf(subtitles_path, generate_subtitles(reel_data["scenes"]))
     return subtitles_path
 
 
@@ -224,7 +283,47 @@ def build_clean_audio_command(input_audio: str | Path, output_audio: str | Path)
             "loudnorm=I=-16:TP=-1.5:LRA=11",
         ]
     )
-    return ["ffmpeg", "-y", "-i", str(input_audio), "-af", filters, str(output_audio)]
+    return [
+        "ffmpeg",
+        "-y",
+        "-i",
+        str(input_audio),
+        "-af",
+        filters,
+        "-ar",
+        "48000",
+        "-ac",
+        "1",
+        str(output_audio),
+    ]
+
+
+def build_trim_silence_command(
+    input_audio: str | Path,
+    output_audio: str | Path,
+    sample_rate: int = 24000,
+    noise_threshold: str = "-45dB",
+    min_silence_duration: float = 0.03,
+) -> list[str]:
+    filters = (
+        f"silenceremove=start_periods=1:start_duration={min_silence_duration:.3f}:"
+        f"start_threshold={noise_threshold}:stop_periods=-1:"
+        f"stop_duration={min_silence_duration:.3f}:stop_threshold={noise_threshold},"
+        "asetpts=N/SR/TB"
+    )
+    return [
+        "ffmpeg",
+        "-y",
+        "-i",
+        str(input_audio),
+        "-af",
+        filters,
+        "-ar",
+        str(sample_rate),
+        "-ac",
+        "1",
+        str(output_audio),
+    ]
 
 
 def build_timed_chunk_command(
@@ -265,6 +364,22 @@ def build_silence_command(output_audio: str | Path, duration: float, sample_rate
         f"anullsrc=r={sample_rate}:cl=mono",
         "-t",
         f"{duration:.6f}",
+        str(output_audio),
+    ]
+
+
+def build_concat_audio_command(concat_file: str | Path, output_audio: str | Path) -> list[str]:
+    return [
+        "ffmpeg",
+        "-y",
+        "-f",
+        "concat",
+        "-safe",
+        "0",
+        "-i",
+        str(concat_file),
+        "-c",
+        "copy",
         str(output_audio),
     ]
 
@@ -383,6 +498,558 @@ def finalize_audio(
     return clean_path
 
 
+def validate_short_voiceover_lines(scenes: list[dict[str, Any]]) -> None:
+    for scene_index, scene in enumerate(scenes, start=1):
+        lines = scene.get("voiceover_lines")
+        scene_id = scene.get("id", scene_index)
+        if not isinstance(lines, list) or not lines:
+            raise ReelWorkflowError(f"Scene {scene_id} must define non-empty voiceover_lines.")
+
+        for line_index, line in enumerate(lines, start=1):
+            text = str(line).strip()
+            if not text:
+                raise ReelWorkflowError(f"Scene {scene_id} voiceover line {line_index} is empty.")
+            if len(text) > MAX_AUDIO_FIRST_LINE_CHARS:
+                raise ReelWorkflowError(
+                    f"Scene {scene_id} voiceover line {line_index} must be "
+                    f"{MAX_AUDIO_FIRST_LINE_CHARS} characters or fewer."
+                )
+
+            word_count = len(re.findall(r"\b[\wáéíóúÁÉÍÓÚñÑ]+\b", text))
+            if word_count > MAX_AUDIO_FIRST_LINE_WORDS:
+                raise ReelWorkflowError(
+                    f"Scene {scene_id} voiceover line {line_index} must be "
+                    f"{MAX_AUDIO_FIRST_LINE_WORDS} words or fewer."
+                )
+
+
+def flatten_voiceover_lines(scenes: list[dict[str, Any]]) -> list[str]:
+    lines = []
+    for scene in scenes:
+        lines.extend(str(line).strip() for line in scene.get("voiceover_lines", []) if str(line).strip())
+    return lines
+
+
+def generate_tts_chunks(
+    backend: str,
+    voice_lines: str | Path,
+    sample_dir: str | Path,
+    voice_wav: str | Path | None = None,
+    voice_name: str | None = None,
+    voice_pool: list[str] | None = None,
+    sapi_rate: int = 0,
+) -> None:
+    backend_name = backend.lower().replace("_", "-")
+    voice_lines_path = Path(voice_lines)
+    sample_path = Path(sample_dir)
+    chunks_dir = sample_path / "chunks"
+
+    if backend_name in {"windows-sapi", "sapi"}:
+        lines = [line.strip() for line in voice_lines_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        generate_windows_sapi_chunks(lines, chunks_dir, voice_name=voice_name, rate=sapi_rate)
+        return
+
+    if backend_name in {"edge-tts", "edge"}:
+        lines = [line.strip() for line in voice_lines_path.read_text(encoding="utf-8").splitlines() if line.strip()]
+        generate_edge_tts_chunks(lines, chunks_dir, voice_pool=voice_pool)
+        return
+
+    if backend_name != "xtts":
+        raise ReelWorkflowError(f"Unknown TTS backend: {backend}")
+    if voice_wav is None:
+        raise ReelWorkflowError("XTTS audio-first generation requires --voice.")
+
+    voice_path = Path(voice_wav)
+    if not voice_path.exists():
+        raise ReelWorkflowError(f"Voice WAV file not found: {voice_path}")
+
+    generator = Path(__file__).resolve().parents[1] / "generate_voiceover.py"
+    subprocess.run(
+        [
+            sys.executable,
+            str(generator),
+            "--txt",
+            str(voice_lines_path),
+            "--voice",
+            str(voice_path),
+            "--out-dir",
+            str(sample_path),
+            "--format",
+            "wav",
+            "--silence-ms",
+            "0",
+        ],
+        check=True,
+    )
+
+
+async def save_edge_tts_mp3(text: str, voice_name: str, output_path: Path) -> None:
+    try:
+        import edge_tts  # type: ignore[import-not-found]
+    except ImportError as exc:
+        raise ReelWorkflowError(
+            "Edge neural TTS requires edge-tts. Install instagram_reels_maker requirements first."
+        ) from exc
+
+    communicate = edge_tts.Communicate(text, voice_name)
+    await communicate.save(str(output_path))
+
+
+def generate_edge_tts_chunks(
+    lines: list[str],
+    chunks_dir: str | Path,
+    voice_pool: list[str] | None = None,
+    sample_rate: int = 24000,
+) -> None:
+    if not lines:
+        raise ReelWorkflowError("No voiceover lines found for Edge TTS generation.")
+
+    voices = [voice.strip() for voice in (voice_pool or DEFAULT_EDGE_TTS_VOICE_POOL) if voice.strip()]
+    if not voices:
+        raise ReelWorkflowError("Edge TTS voice pool must include at least one voice.")
+
+    chunks_path = Path(chunks_dir)
+    chunks_path.mkdir(parents=True, exist_ok=True)
+    assignments = []
+
+    sentence_index = 0
+    for index, line in enumerate(lines, start=1):
+        voice_name = voices[sentence_index % len(voices)]
+        mp3_path = chunks_path / f"chunk_{index:03d}_edge.mp3"
+        raw_wav_path = chunks_path / f"chunk_{index:03d}_raw.wav"
+        output_path = chunks_path / f"chunk_{index:03d}.wav"
+        asyncio.run(save_edge_tts_mp3(line, voice_name, mp3_path))
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-y",
+                "-i",
+                str(mp3_path),
+                "-ar",
+                str(sample_rate),
+                "-ac",
+                "1",
+                str(raw_wav_path),
+            ],
+            check=True,
+        )
+        subprocess.run(build_trim_silence_command(raw_wav_path, output_path, sample_rate=sample_rate), check=True)
+        mp3_path.unlink(missing_ok=True)
+        raw_wav_path.unlink(missing_ok=True)
+        assignments.append(
+            {
+                "index": index,
+                "sentence_index": sentence_index + 1,
+                "text": line,
+                "voice": voice_name,
+                "source": str(output_path),
+            }
+        )
+        if ends_complete_sentence(line):
+            sentence_index += 1
+
+    write_text_lf(chunks_path / "voice_assignments.json", json.dumps(assignments, ensure_ascii=False, indent=2) + "\n")
+
+
+def generate_windows_sapi_chunks(
+    lines: list[str],
+    chunks_dir: str | Path,
+    voice_name: str | None = None,
+    rate: int = 0,
+    volume: int = 100,
+    sample_rate: int = 24000,
+) -> None:
+    if not lines:
+        raise ReelWorkflowError("No voiceover lines found for Windows SAPI generation.")
+
+    try:
+        import win32com.client  # type: ignore[import-not-found]
+    except ImportError as exc:
+        raise ReelWorkflowError(
+            "Windows SAPI TTS requires pywin32. Install instagram_reels_maker requirements first."
+        ) from exc
+
+    chunks_path = Path(chunks_dir)
+    chunks_path.mkdir(parents=True, exist_ok=True)
+    voice = win32com.client.Dispatch("SAPI.SpVoice")
+    selected_voice = select_windows_sapi_voice(voice, voice_name)
+    if selected_voice is not None:
+        voice.Voice = selected_voice
+    voice.Rate = rate
+    voice.Volume = volume
+
+    for index, line in enumerate(lines, start=1):
+        raw_path = chunks_path / f"chunk_{index:03d}_sapi.wav"
+        output_path = chunks_path / f"chunk_{index:03d}.wav"
+        stream = win32com.client.Dispatch("SAPI.SpFileStream")
+        stream.Open(str(raw_path), 3, False)
+        try:
+            voice.AudioOutputStream = stream
+            voice.Speak(line)
+        finally:
+            stream.Close()
+
+        subprocess.run(
+            [
+                "ffmpeg",
+                "-y",
+                "-i",
+                str(raw_path),
+                "-ar",
+                str(sample_rate),
+                "-ac",
+                "1",
+                str(output_path),
+            ],
+            check=True,
+        )
+        raw_path.unlink(missing_ok=True)
+
+
+def select_windows_sapi_voice(voice: Any, voice_name: str | None = None) -> Any | None:
+    tokens = list(voice.GetVoices())
+    if not tokens:
+        return None
+
+    if voice_name:
+        wanted = voice_name.lower()
+        for token in tokens:
+            if wanted in token.GetDescription().lower():
+                return token
+        raise ReelWorkflowError(f"Windows SAPI voice not found: {voice_name}")
+
+    return max(tokens, key=score_windows_sapi_voice)
+
+
+def score_windows_sapi_voice(token: Any) -> int:
+    description = token.GetDescription().lower()
+    score = 0
+
+    if any(marker in description for marker in ("spanish", "espanol", "español", "es-")):
+        score += 100
+    if any(marker in description for marker in ("natural", "neural", "online")):
+        score += 50
+    if "helena" in description:
+        score += 30
+    if "sabina" in description:
+        score += 25
+    if "pablo" in description:
+        score += 20
+    if "desktop" in description:
+        score -= 5
+
+    return score
+
+
+def build_audio_first_voiceover(
+    scenes: list[dict[str, Any]],
+    chunks_dir: str | Path,
+    output_wav: str | Path,
+    report_path: str | Path,
+    line_gap_seconds: float = DEFAULT_AUDIO_FIRST_LINE_GAP_SECONDS,
+    continuation_gap_seconds: float = DEFAULT_AUDIO_FIRST_CONTINUATION_GAP_SECONDS,
+    scene_gap_seconds: float = DEFAULT_AUDIO_FIRST_SCENE_GAP_SECONDS,
+) -> AudioFirstTimeline:
+    validate_short_voiceover_lines(scenes)
+
+    chunks_path = Path(chunks_dir)
+    output_path = Path(output_wav)
+    report_file = Path(report_path)
+    segments_dir = output_path.parent / "segments"
+    concat_file = segments_dir / "concat.txt"
+    cues = []
+    report = []
+    cursor = 0.0
+    chunk_index = 1
+    segment_index = 1
+
+    segments_dir.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with concat_file.open("w", encoding="utf-8") as concat:
+        for scene_index, scene in enumerate(scenes):
+            scene_start = cursor
+            scene_lines = [str(line).strip() for line in scene["voiceover_lines"] if str(line).strip()]
+
+            for line_index, line in enumerate(scene_lines):
+                source = chunks_path / f"chunk_{chunk_index:03d}.wav"
+                if not source.exists():
+                    raise ReelWorkflowError(f"Generated TTS chunk not found: {source}")
+
+                duration = ffprobe_duration(source)
+                if duration <= 0:
+                    raise ReelWorkflowError(f"Generated TTS chunk has no duration: {source}")
+
+                start = round(cursor, 6)
+                end = round(cursor + duration, 6)
+                concat.write(f"file '{escape_concat_path(source)}'\n")
+                cues.append(SubtitleCue(index=len(cues) + 1, start=start, end=end, text=line))
+                report.append(
+                    {
+                        "type": "voice",
+                        "index": chunk_index,
+                        "scene_id": scene.get("id", scene_index + 1),
+                        "text": line,
+                        "start": start,
+                        "end": end,
+                        "duration": duration,
+                        "source": str(source),
+                    }
+                )
+                cursor = end
+                chunk_index += 1
+                segment_index += 1
+
+                if line_index < len(scene_lines) - 1:
+                    gap_seconds = line_gap_seconds if ends_complete_sentence(line) else continuation_gap_seconds
+                    gap_scope = "line" if ends_complete_sentence(line) else "continuation"
+                    gap_path = segments_dir / f"segment_{segment_index:03d}_silence.wav"
+                    subprocess.run(build_silence_command(gap_path, gap_seconds), check=True)
+                    concat.write(f"file '{escape_concat_path(gap_path)}'\n")
+                    report.append(
+                        {
+                            "type": "silence",
+                            "scope": gap_scope,
+                            "start": cursor,
+                            "end": round(cursor + gap_seconds, 6),
+                            "target_duration": gap_seconds,
+                            "source": str(gap_path),
+                        }
+                    )
+                    cursor = round(cursor + gap_seconds, 6)
+                    segment_index += 1
+
+            if scene_index < len(scenes) - 1:
+                gap_path = segments_dir / f"segment_{segment_index:03d}_silence.wav"
+                subprocess.run(build_silence_command(gap_path, scene_gap_seconds), check=True)
+                concat.write(f"file '{escape_concat_path(gap_path)}'\n")
+                report.append(
+                    {
+                        "type": "silence",
+                        "scope": "scene",
+                        "start": cursor,
+                        "end": round(cursor + scene_gap_seconds, 6),
+                        "target_duration": scene_gap_seconds,
+                        "source": str(gap_path),
+                    }
+                )
+                cursor = round(cursor + scene_gap_seconds, 6)
+                segment_index += 1
+
+            scene["start_seconds"] = round(scene_start, 6)
+            scene["end_seconds"] = round(cursor, 6)
+            scene["duration_seconds"] = round(cursor - scene_start, 6)
+            scene["subtitle"] = " ".join(scene_lines)
+
+    subprocess.run(build_concat_audio_command(concat_file, output_path), check=True)
+    measured_duration = ffprobe_duration(output_path)
+    target_duration = round(measured_duration, 6)
+    report.append(
+        {
+            "type": "output",
+            "output": str(output_path),
+            "target_duration": target_duration,
+            "actual_duration": measured_duration,
+        }
+    )
+    write_text_lf(report_file, json.dumps(report, ensure_ascii=False, indent=2) + "\n")
+
+    return AudioFirstTimeline(
+        cues=cues,
+        target_duration=target_duration,
+        voiceover=output_path,
+        timing_report=report_file,
+    )
+
+
+def generate_audio_first_final(
+    root: str | Path,
+    slug: str,
+    voice_wav: str | Path | None = None,
+    draft_video: str | Path | None = None,
+    output_video: str | Path | None = None,
+    sample_dir_name: str = "audio_first",
+    tts_backend: str = "windows-sapi",
+    voice_name: str | None = None,
+    voice_pool: list[str] | None = None,
+    sapi_rate: int = 0,
+) -> AudioFirstResult:
+    root = Path(root)
+    project_dir = get_project_dir(root, slug)
+    reel_path = project_dir / "reel.json"
+    reel_data = read_json(reel_path)
+    scenes = reel_data["scenes"]
+    validate_short_voiceover_lines(scenes)
+
+    output_path = Path(output_video) if output_video is not None else project_dir / "final" / "final_audio_first.mp4"
+    sample_dir = project_dir / sample_dir_name
+    chunks_dir = sample_dir / "chunks"
+    voice_lines = project_dir / "audio_first_voice_lines.txt"
+    raw_voiceover = sample_dir / "voiceover_natural.wav"
+    clean_voiceover = sample_dir / "voiceover_natural_clean.wav"
+    timing_report = sample_dir / "timing_report.json"
+    subtitles_path = project_dir / "subtitles.srt"
+
+    sample_dir.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    write_text_lf(voice_lines, "\n".join(flatten_voiceover_lines(scenes)) + "\n")
+    generate_tts_chunks(
+        backend=tts_backend,
+        voice_lines=voice_lines,
+        sample_dir=sample_dir,
+        voice_wav=voice_wav,
+        voice_name=voice_name,
+        voice_pool=voice_pool,
+        sapi_rate=sapi_rate,
+    )
+
+    timeline = build_audio_first_voiceover(
+        scenes=scenes,
+        chunks_dir=chunks_dir,
+        output_wav=raw_voiceover,
+        report_path=timing_report,
+    )
+    cleanup_audio_first_text_intermediates(sample_dir)
+    write_text_lf(subtitles_path, generate_subtitles_from_cues(timeline.cues))
+    subprocess.run(build_clean_audio_command(raw_voiceover, clean_voiceover), check=True)
+    build_audio_first_render(
+        project_dir=project_dir,
+        scenes=scenes,
+        subtitles_path=subtitles_path,
+        clean_voiceover=clean_voiceover,
+        output_video=output_path,
+    )
+
+    reel_data["workflow_version"] = AUDIO_FIRST_WORKFLOW_VERSION
+    reel_data["status"] = "rendered"
+    reel_data["target_duration_seconds"] = timeline.target_duration
+    reel_data["voiceover"] = {
+        **reel_data.get("voiceover", {}),
+        "mode": "audio_first_short_lines",
+        "file": f"{sample_dir_name}/voiceover_natural.wav",
+        "clean_file": f"{sample_dir_name}/voiceover_natural_clean.wav",
+        "script_file": "script.txt",
+        "voice_lines_file": "audio_first_voice_lines.txt",
+        "timing_report": f"{sample_dir_name}/timing_report.json",
+        "tts_backend": tts_backend,
+        "voice_name": voice_name,
+        "voice_pool": voice_pool if voice_pool is not None else DEFAULT_EDGE_TTS_VOICE_POOL if tts_backend.lower().replace("_", "-") in {"edge-tts", "edge"} else None,
+        "line_gap_seconds": DEFAULT_AUDIO_FIRST_LINE_GAP_SECONDS,
+        "continuation_gap_seconds": DEFAULT_AUDIO_FIRST_CONTINUATION_GAP_SECONDS,
+        "scene_gap_seconds": DEFAULT_AUDIO_FIRST_SCENE_GAP_SECONDS,
+    }
+    reel_data.setdefault("outputs", {})
+    reel_data["outputs"]["audio_first_video"] = str(output_path.relative_to(project_dir)).replace("\\", "/")
+    reel_data["outputs"]["audio_first_render_manifest"] = "render/audio_first_concat.txt"
+    if draft_video is not None:
+        reel_data["outputs"]["legacy_draft_video"] = str(Path(draft_video).relative_to(project_dir)).replace("\\", "/")
+    reel_data["rendered_at"] = utc_now()
+    write_json(reel_path, reel_data)
+    update_history(root, slug=slug, title=reel_data["title"], status="rendered")
+
+    return AudioFirstResult(
+        voice_lines=voice_lines,
+        raw_voiceover=raw_voiceover,
+        clean_voiceover=clean_voiceover,
+        output_video=output_path,
+        subtitles_path=subtitles_path,
+        timing_report=timing_report,
+        target_duration=timeline.target_duration,
+    )
+
+
+def build_audio_first_render(
+    project_dir: str | Path,
+    scenes: list[dict[str, Any]],
+    subtitles_path: str | Path,
+    clean_voiceover: str | Path,
+    output_video: str | Path,
+) -> Path:
+    project_path = Path(project_dir)
+    subtitles_file = Path(subtitles_path)
+    audio_file = Path(clean_voiceover)
+    output_path = Path(output_video)
+    concat_file = project_path / "render" / "audio_first_concat.txt"
+
+    if not audio_file.exists():
+        raise ReelWorkflowError(f"Clean voiceover file not found: {audio_file}")
+    if not subtitles_file.exists():
+        raise ReelWorkflowError(f"Subtitles file not found: {subtitles_file}")
+
+    write_concat_file(project_path, scenes, concat_file)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(
+        build_render_command(
+            concat_file=concat_file,
+            subtitles_file=subtitles_file,
+            audio_file=audio_file,
+            output_file=output_path,
+        ),
+        check=True,
+    )
+    return output_path
+
+
+def cleanup_audio_first_text_intermediates(sample_dir: str | Path) -> list[str]:
+    sample_path = Path(sample_dir)
+    removed = []
+    for path in [sample_path / "voiceover_script.txt", sample_path / "segments" / "concat.txt"]:
+        if path.exists():
+            path.unlink()
+            removed.append(str(path.relative_to(sample_path)).replace("\\", "/"))
+
+    chunks_dir = sample_path / "chunks"
+    if chunks_dir.exists():
+        for path in chunks_dir.glob("chunk_*.txt"):
+            path.unlink()
+            removed.append(str(path.relative_to(sample_path)).replace("\\", "/"))
+
+    return removed
+
+
+def cleanup_stale_reel_artifacts(project_dir: str | Path) -> list[str]:
+    project_path = Path(project_dir)
+    removed = []
+
+    stale_dirs = [
+        "tts_timed_sample",
+        "tts_ass_line_sample",
+        "tts_srt_line_sample",
+        "chunks",
+        "render/clips",
+    ]
+    stale_files = [
+        "srt_voice_lines.txt",
+        "ass_voice_lines.txt",
+        "tts_timed_voice_lines.txt",
+        "voiceover_script.txt",
+        "subtitles.ass",
+        "render/subtitle_filter.txt",
+        "drafts/final_timed_tts.mp4",
+        "drafts/final_timed_tts_exact.mp4",
+    ]
+
+    for directory in stale_dirs:
+        path = project_path / directory
+        if path.exists():
+            shutil.rmtree(path)
+            removed.append(directory)
+
+    for pattern in ["drafts/preview_*.png", "render/preview_*.png"]:
+        for path in project_path.glob(pattern):
+            if path.is_file():
+                path.unlink()
+                removed.append(str(path.relative_to(project_path)).replace("\\", "/"))
+
+    for filename in stale_files:
+        path = project_path / filename
+        if path.exists():
+            path.unlink()
+            removed.append(filename)
+
+    return removed
+
+
 def generate_timed_tts_final(
     root: str | Path,
     slug: str,
@@ -415,7 +1082,7 @@ def generate_timed_tts_final(
     sample_dir.mkdir(parents=True, exist_ok=True)
     timed_dir.mkdir(parents=True, exist_ok=True)
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    voice_lines.write_text("\n".join(cue.text for cue in cues) + "\n", encoding="utf-8")
+    write_text_lf(voice_lines, "\n".join(cue.text for cue in cues) + "\n")
 
     generator = Path(__file__).resolve().parents[1] / "generate_voiceover.py"
     subprocess.run(
@@ -475,11 +1142,12 @@ def build_render_command(
 ) -> list[str]:
     subtitle_filter = escape_subtitle_filter_path(subtitles_file)
     vf = (
+        "fps=30,"
         "scale=1080:1920:force_original_aspect_ratio=increase,"
         "crop=1080:1920,"
-        f"subtitles='{subtitle_filter}':force_style='FontName=Arial,FontSize=64,"
-        "PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=4,"
-        "Alignment=2,MarginV=170'"
+        f"subtitles='{subtitle_filter}':force_style='FontName=Arial,FontSize=12,"
+        "PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=1.5,"
+        "Alignment=2,MarginV=80'"
     )
     return [
         "ffmpeg",
@@ -703,7 +1371,7 @@ def write_timed_voiceover_from_chunks(
             "actual_duration": ffprobe_duration(output_path),
         }
     )
-    Path(report_path).write_text(json.dumps(report, indent=2), encoding="utf-8")
+    write_text_lf(Path(report_path), json.dumps(report, indent=2))
     return target_duration
 
 
@@ -738,7 +1406,7 @@ def write_concat_file(project_dir: Path, scenes: list[dict[str, Any]], output_pa
         lines.append(f"file '{escape_concat_path(last_image)}'")
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    write_text_lf(output_path, "\n".join(lines) + "\n")
 
 
 def update_history(root: Path, slug: str, title: str, status: str) -> None:
@@ -866,7 +1534,7 @@ def write_placeholder_png(path: Path, title: str, subtitle: str, seed: int) -> N
     path.write_bytes(png_bytes)
 
     text_path = path.with_suffix(".txt")
-    text_path.write_text(f"{title}\n{subtitle}\n", encoding="utf-8")
+    write_text_lf(text_path, f"{title}\n{subtitle}\n")
 
 
 def make_png(width: int, height: int, raw_rows: bytes) -> bytes:
@@ -903,7 +1571,13 @@ def read_json(path: Path) -> dict[str, Any]:
 
 def write_json(path: Path, data: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_text_lf(path, json.dumps(data, ensure_ascii=False, indent=2) + "\n")
+
+
+def write_text_lf(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="\n") as handle:
+        handle.write(text)
 
 
 def utc_now() -> str:

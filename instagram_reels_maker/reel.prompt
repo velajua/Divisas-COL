@@ -17,20 +17,29 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Keep it around 40-50 seconds.
 - Use plain ASCII text where possible.
 - Avoid filler and intro fluff.
+- Store every spoken phrase as short `voiceover_lines` in `reel.json`.
+- Each line should be about 4-9 spoken words and under 75 characters.
 
-3. Build the visual draft first, then make timed TTS from the final subtitles.
-- The first review MP4 must be silent.
-- Do not include any voiceover or audio track in drafts\final.mp4.
-- Once subtitles are final, generate the timed TTS preview from the subtitle cues:
-  python reel_maker.py timed-tts-final --project <article-slug> --voice voice_samples\voice.wav
-- The timed TTS command must create:
-  instagram_reels_maker\reels\projects\<article-slug>\drafts\final_timed_tts.mp4
+3. Build images and overlays, then make audio-first TTS.
+- Generate Edge neural TTS from the short `voiceover_lines` by default, rotating Dalia and Alvaro by complete sentence inside each reel, then derive scene durations, subtitle timing, overlay timing, and final video length from measured audio:
+  python reel_maker.py audio-first-final --project <article-slug>
+- Default voices are `es-MX-DaliaNeural` and `es-ES-AlvaroNeural`.
+- If a short line does not end with `.`, `!`, `?`, or `...`, treat it as a continuation: keep the same voice for the next line and use the tighter continuation gap.
+- Default pauses are short for fluency: 0.06 seconds between complete lines, 0.02 seconds between continuation lines, and 0.12 seconds between scenes.
+- Use XTTS only when voice cloning is required:
+  python reel_maker.py audio-first-final --project <article-slug> --tts-backend xtts --voice voice_samples\voice.wav
+- The audio-first command must create:
+  instagram_reels_maker\reels\projects\<article-slug>\final\final_audio_first.mp4
+- The audio-first command must rebuild the final MP4 from measured scene durations, images, measured subtitles, overlays, and clean audio.
+- Trim leading and trailing silence from generated neural chunks before measuring them.
+- Do not mux audio onto an old subtitle-first render.
+- Do not stretch voice lines to match old visual or subtitle durations.
 - If a human voiceover is provided later, make the human final final reel with:
   python reel_maker.py finalize-audio --video instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4 --voice <path-to-voiceover.wav> --out instagram_reels_maker\reels\projects\<article-slug>\drafts\final_final.mp4
 
 4. Subtitles:
 - Must match exactly what the voice/script says.
-- Use phrase-level subtitle timing from the TTS.
+- Use phrase-level subtitle timing measured from the generated TTS chunks.
 - Put subtitles in the bottom dark lane.
 - Keep subtitles readable, not huge.
 - Do not cover headline overlays or key visuals.
@@ -55,7 +64,7 @@ instagram_reels_maker\reels\projects\<article-slug>
 
 7. Timed data overlays:
 - Add key numbers and important concepts as timed overlay callouts.
-- These should appear when the script reaches that point.
+- These should appear when the measured audio reaches that point.
 - Examples:
   - dollar amount
   - debt percentage of GDP
@@ -66,27 +75,28 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Use bold, compact black boxes with white/gold text.
 
 8. Output files:
-- Save all project files: script, captions, reel metadata, generated images, raw images, subtitle files, render files, preview frames.
+- Save all source-like project files: script, captions, reel metadata, generated images, raw images, subtitle files, render files, and review notes.
 - Put the review MP4 at:
 instagram_reels_maker\reels\projects\<article-slug>\drafts\final.mp4
-- Put the timed TTS preview MP4 at:
-instagram_reels_maker\reels\projects\<article-slug>\drafts\final_timed_tts.mp4
+- Put the audio-first TTS preview MP4 at:
+instagram_reels_maker\reels\projects\<article-slug>\final\final_audio_first.mp4
 - Do not create final_final.mp4 until a real human voiceover file is provided.
 
 9. Final render:
 - 1080x1920 vertical MP4.
 - About 40-50 seconds.
-- Silent: no audio stream.
-- Burned-in subtitles and timed data overlays.
-- Verify with ffprobe that the output has video only and no audio.
+- drafts\final.mp4 remains silent for visual review.
+- final\final_audio_first.mp4 has the measured audio-first voiceover.
+- Burned-in subtitles and timed data overlays must follow measured audio timing.
+- Verify with ffprobe that final_audio_first.mp4 has one video stream and one audio stream.
 - Extract a few preview frames around important data moments and inspect that overlays/subtitles do not collide.
 
-10. Timed TTS preview pass:
-- Run timed-tts-final after drafts\final.mp4 and the subtitle file are final.
-- The command reads subtitles.srt when present, otherwise subtitles.ass ReelSub events.
-- It generates one short XTTS line per subtitle cue, stretches/pads/trims each line to match the cue, inserts gaps as silence, cleans the result, and writes final_timed_tts.mp4.
-- If the silent draft is slightly shorter than the timed audio, the command pads the last video frame so the voiceover is not cut.
-- Verify with ffprobe that final_timed_tts.mp4 has one video stream and one audio stream.
+10. Audio-first preview pass:
+- Run audio-first-final after images, overlays, and `voiceover_lines` are final.
+- The command writes audio_first_voice_lines.txt, natural voice chunks, voiceover_natural.wav, voiceover_natural_clean.wav, subtitles.srt, timing_report.json, and final_audio_first.mp4.
+- It measures every generated chunk with ffprobe and uses those timings as the source of truth.
+- It writes render\audio_first_concat.txt from measured scene durations and rebuilds final_audio_first.mp4 from that manifest.
+- It must not use the old subtitle-first render as the timing source.
 
 11. Final final audio pass, only after the human voiceover is provided:
 - Run finalize-audio against the silent draft and the supplied voiceover.

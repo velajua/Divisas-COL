@@ -1,0 +1,13 @@
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/001_hook.png'
+duration 2.551
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/002_tes.png'
+duration 4.249
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/003_relato.png'
+duration 3.799
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/004_prima.png'
+duration 3.856
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/005_dolar.png'
+duration 4.269
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/006_cta.png'
+duration 5.049
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/deuda-record-relato-oficial-y-peso-bajo-examen/images/006_cta.png'

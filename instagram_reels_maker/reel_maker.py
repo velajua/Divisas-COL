@@ -11,6 +11,7 @@ from reel_workflow import (  # noqa: E402
     clean_audio,
     create_reel_project,
     finalize_audio,
+    generate_audio_first_final,
     generate_timed_tts_final,
     list_reel_projects,
     regenerate_subtitles,
@@ -71,6 +72,39 @@ def main() -> None:
         help="Project subfolder for generated voice lines, chunks, timed WAVs, and timing report.",
     )
 
+    audio_first_parser = subparsers.add_parser(
+        "audio-first-final",
+        help="Generate short-line TTS first, derive timeline from natural audio, and rebuild the final reel.",
+    )
+    audio_first_parser.add_argument("--project", required=True, help="Reel project slug.")
+    audio_first_parser.add_argument(
+        "--tts-backend",
+        default="edge-tts",
+        choices=["edge-tts", "windows-sapi", "xtts"],
+        help="TTS backend for short voice lines. Edge TTS uses neural Microsoft voices.",
+    )
+    audio_first_parser.add_argument("--voice", help="Reference voice WAV file. Required only for --tts-backend xtts.")
+    audio_first_parser.add_argument("--voice-name", help="Windows SAPI voice name, for example Microsoft Sabina.")
+    audio_first_parser.add_argument(
+        "--voice-pool",
+        default="es-MX-DaliaNeural,es-ES-AlvaroNeural",
+        help="Comma-separated Edge TTS voices rotated by complete sentence inside each reel.",
+    )
+    audio_first_parser.add_argument("--sapi-rate", type=int, default=0, help="Windows SAPI speech rate from -10 to 10.")
+    audio_first_parser.add_argument(
+        "--video",
+        help="Legacy silent draft path to record in metadata. Audio-first rendering rebuilds from images.",
+    )
+    audio_first_parser.add_argument(
+        "--out",
+        help="Final MP4 with audio-first TTS. Defaults to the project's final\\final_audio_first.mp4.",
+    )
+    audio_first_parser.add_argument(
+        "--sample-dir-name",
+        default="audio_first",
+        help="Project subfolder for generated short-line voice chunks and timing report.",
+    )
+
     subparsers.add_parser("list", help="List reel projects from history.")
 
     args = parser.parse_args()
@@ -115,6 +149,25 @@ def main() -> None:
         print(f"Saved raw TTS voiceover: {result.raw_voiceover}")
         print(f"Saved timed TTS voiceover: {result.timed_voiceover}")
         print(f"Saved clean timed TTS: {result.clean_voiceover}")
+        print(f"Saved timing report: {result.timing_report}")
+        print(f"Saved final reel: {result.output_video}")
+    elif args.command == "audio-first-final":
+        result = generate_audio_first_final(
+            root=root,
+            slug=args.project,
+            voice_wav=args.voice,
+            draft_video=args.video,
+            output_video=args.out,
+            sample_dir_name=args.sample_dir_name,
+            tts_backend=args.tts_backend,
+            voice_name=args.voice_name,
+            voice_pool=[voice.strip() for voice in args.voice_pool.split(",") if voice.strip()],
+            sapi_rate=args.sapi_rate,
+        )
+        print(f"Saved voice lines: {result.voice_lines}")
+        print(f"Saved natural TTS voiceover: {result.raw_voiceover}")
+        print(f"Saved clean voiceover: {result.clean_voiceover}")
+        print(f"Saved subtitles: {result.subtitles_path}")
         print(f"Saved timing report: {result.timing_report}")
         print(f"Saved final reel: {result.output_video}")
     elif args.command == "list":
