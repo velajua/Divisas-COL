@@ -112,4 +112,4 @@ instagram_reels_maker\reels\projects\<article-slug>\final\final_audio_first.mp4
 instagram_reels_maker\reels\projects\<article-slug>\final\final_human_voice.mp4
 - Verify with ffprobe that final_human_voice.mp4 has one video stream and one audio stream.
 
-Use the caja-dolares-deuda-y-peso-en-alerta project as the visual/style reference.
+Use the caja-dolares-deuda-y-peso-en-alerta project as the visual/style reference. But make sure the images are different.
