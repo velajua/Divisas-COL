@@ -1,0 +1,342 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "scene_id": "hook",
+    "text": "Deuda record en TES.",
+    "start": 0.0,
+    "end": 1.338,
+    "duration": 1.338,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_001.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 1.338,
+    "end": 1.398,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_002_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "scene_id": "hook",
+    "text": "Peso bajo examen.",
+    "start": 1.398,
+    "end": 2.43125,
+    "duration": 1.03325,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_002.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 2.43125,
+    "end": 2.55125,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_004_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "scene_id": "tes",
+    "text": "En cinco meses,",
+    "start": 2.55125,
+    "end": 3.543458,
+    "duration": 0.992208,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_003.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 3.543458,
+    "end": 3.563458,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_006_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "scene_id": "tes",
+    "text": "la oferta interna supero",
+    "start": 3.563458,
+    "end": 5.035791,
+    "duration": 1.472333,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_004.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 5.035791,
+    "end": 5.055791,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_008_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "scene_id": "tes",
+    "text": "sesenta billones de pesos.",
+    "start": 5.055791,
+    "end": 6.680249,
+    "duration": 1.624458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_005.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 6.680249,
+    "end": 6.800249,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_010_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "scene_id": "tasas",
+    "text": "No es solo colocar deuda.",
+    "start": 6.800249,
+    "end": 8.152999,
+    "duration": 1.35275,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_006.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 8.152999,
+    "end": 8.212999,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_012_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "scene_id": "tasas",
+    "text": "Es pagar tasas",
+    "start": 8.212999,
+    "end": 9.346291,
+    "duration": 1.133292,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_007.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 9.346291,
+    "end": 9.366291,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_014_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "scene_id": "tasas",
+    "text": "en zona de estres.",
+    "start": 9.366291,
+    "end": 10.478874,
+    "duration": 1.112583,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_008.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 10.478874,
+    "end": 10.598874,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_016_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "scene_id": "relato",
+    "text": "Hacienda habla de estabilidad.",
+    "start": 10.598874,
+    "end": 11.913249,
+    "duration": 1.314375,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_009.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 11.913249,
+    "end": 11.973249,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_018_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "scene_id": "relato",
+    "text": "El mercado mira",
+    "start": 11.973249,
+    "end": 12.929041,
+    "duration": 0.955792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_010.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 12.929041,
+    "end": 12.949041,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_020_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "scene_id": "relato",
+    "text": "el costo de financiarse.",
+    "start": 12.949041,
+    "end": 14.334958,
+    "duration": 1.385917,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_011.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 14.334958,
+    "end": 14.454958,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_022_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "scene_id": "prima",
+    "text": "Regla fiscal suspendida.",
+    "start": 14.454958,
+    "end": 15.87225,
+    "duration": 1.417292,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_012.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 15.87225,
+    "end": 15.93225,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_024_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 13,
+    "scene_id": "prima",
+    "text": "Poco ajuste creible.",
+    "start": 15.93225,
+    "end": 17.169,
+    "duration": 1.23675,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_013.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 17.169,
+    "end": 17.229,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_026_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 14,
+    "scene_id": "prima",
+    "text": "La prima de riesgo se queda.",
+    "start": 17.229,
+    "end": 18.604125,
+    "duration": 1.375125,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_014.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 18.604125,
+    "end": 18.724125,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_028_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 15,
+    "scene_id": "cta",
+    "text": "El dolar puede ceder.",
+    "start": 18.724125,
+    "end": 19.983542,
+    "duration": 1.259417,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_015.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 19.983542,
+    "end": 20.043542,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_030_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 16,
+    "scene_id": "cta",
+    "text": "Pero el mercado mira",
+    "start": 20.043542,
+    "end": 21.02125,
+    "duration": 0.977708,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_016.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 21.02125,
+    "end": 21.04125,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_032_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 17,
+    "scene_id": "cta",
+    "text": "tres mil ochocientos.",
+    "start": 21.04125,
+    "end": 22.187,
+    "duration": 1.14575,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_017.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 22.187,
+    "end": 22.247,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_034_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 18,
+    "scene_id": "cta",
+    "text": "La deuda no discute.",
+    "start": 22.247,
+    "end": 23.446792,
+    "duration": 1.199792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_018.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 23.446792,
+    "end": 23.506792,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\segments\\segment_036_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 19,
+    "scene_id": "cta",
+    "text": "Cobra.",
+    "start": 23.506792,
+    "end": 23.773375,
+    "duration": 0.266583,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\chunks\\chunk_019.wav"
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\deuda-record-relato-oficial-y-peso-bajo-examen\\audio_first\\voiceover_natural.wav",
+    "target_duration": 23.773375,
+    "actual_duration": 23.773375
+  }
+]

@@ -1,0 +1,378 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "scene_id": "hook",
+    "text": "Caja en dolares.",
+    "start": 0.0,
+    "end": 0.986542,
+    "duration": 0.986542,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_001.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 0.986542,
+    "end": 1.046542,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_002_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "scene_id": "hook",
+    "text": "Deuda externa.",
+    "start": 1.046542,
+    "end": 1.862875,
+    "duration": 0.816333,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_002.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 1.862875,
+    "end": 1.922875,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_004_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "scene_id": "hook",
+    "text": "Peso otra vez en alerta.",
+    "start": 1.922875,
+    "end": 3.297417,
+    "duration": 1.374542,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_003.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 3.297417,
+    "end": 3.417417,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_006_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "scene_id": "caja",
+    "text": "Hacienda dice: compra dolares",
+    "start": 3.417417,
+    "end": 5.052834,
+    "duration": 1.635417,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_004.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 5.052834,
+    "end": 5.072834,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_008_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "scene_id": "caja",
+    "text": "para fortalecer caja.",
+    "start": 5.072834,
+    "end": 6.220959,
+    "duration": 1.148125,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_005.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 6.220959,
+    "end": 6.280959,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_010_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "scene_id": "caja",
+    "text": "No para mover la tasa.",
+    "start": 6.280959,
+    "end": 7.556876,
+    "duration": 1.275917,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_006.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 7.556876,
+    "end": 7.676876,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_012_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "scene_id": "deuda",
+    "text": "Pero la deuda externa ya pesa.",
+    "start": 7.676876,
+    "end": 9.267751,
+    "duration": 1.590875,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_007.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 9.267751,
+    "end": 9.327751,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_014_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "scene_id": "deuda",
+    "text": "Doscientos cuarenta y seis mil",
+    "start": 9.327751,
+    "end": 10.882793,
+    "duration": 1.555042,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_008.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 10.882793,
+    "end": 10.902793,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_016_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "scene_id": "deuda",
+    "text": "ochocientos un millones de dolares.",
+    "start": 10.902793,
+    "end": 12.91771,
+    "duration": 2.014917,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_009.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 12.91771,
+    "end": 12.97771,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_018_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "scene_id": "deuda",
+    "text": "Cincuenta y tres coma ocho del PIB.",
+    "start": 12.97771,
+    "end": 14.884668,
+    "duration": 1.906958,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_010.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 14.884668,
+    "end": 15.004668,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_020_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "scene_id": "banrep",
+    "text": "BanRep ve inflacion incomoda.",
+    "start": 15.004668,
+    "end": 16.851835,
+    "duration": 1.847167,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_011.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 16.851835,
+    "end": 16.911835,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_022_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "scene_id": "banrep",
+    "text": "Tasas altas.",
+    "start": 16.911835,
+    "end": 17.678002,
+    "duration": 0.766167,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_012.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 17.678002,
+    "end": 17.738002,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_024_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 13,
+    "scene_id": "banrep",
+    "text": "Poco espacio para cantar victoria.",
+    "start": 17.738002,
+    "end": 19.52546,
+    "duration": 1.787458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_013.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 19.52546,
+    "end": 19.64546,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_026_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 14,
+    "scene_id": "fiscal",
+    "text": "El problema de fondo es fiscal.",
+    "start": 19.64546,
+    "end": 21.215502,
+    "duration": 1.570042,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_014.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 21.215502,
+    "end": 21.275502,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_028_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 15,
+    "scene_id": "fiscal",
+    "text": "Gasto alto.",
+    "start": 21.275502,
+    "end": 22.222252,
+    "duration": 0.94675,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_015.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 22.222252,
+    "end": 22.282252,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_030_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 16,
+    "scene_id": "fiscal",
+    "text": "Inversion rezagada.",
+    "start": 22.282252,
+    "end": 23.409252,
+    "duration": 1.127,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_016.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 23.409252,
+    "end": 23.469252,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_032_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 17,
+    "scene_id": "fiscal",
+    "text": "Menos credibilidad para defender el peso.",
+    "start": 23.469252,
+    "end": 25.644669,
+    "duration": 2.175417,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_017.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 25.644669,
+    "end": 25.764669,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_034_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 18,
+    "scene_id": "cta",
+    "text": "La pregunta no es solo",
+    "start": 25.764669,
+    "end": 26.991419,
+    "duration": 1.22675,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_018.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 26.991419,
+    "end": 27.011419,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_036_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 19,
+    "scene_id": "cta",
+    "text": "si sube el dolar.",
+    "start": 27.011419,
+    "end": 27.967502,
+    "duration": 0.956083,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_019.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 27.967502,
+    "end": 28.027502,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_038_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 20,
+    "scene_id": "cta",
+    "text": "Es si el mercado",
+    "start": 28.027502,
+    "end": 28.940294,
+    "duration": 0.912792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_020.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 28.940294,
+    "end": 28.960294,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\segments\\segment_040_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 21,
+    "scene_id": "cta",
+    "text": "pide mas cobertura.",
+    "start": 28.960294,
+    "end": 30.126752,
+    "duration": 1.166458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\chunks\\chunk_021.wav"
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\caja-dolares-deuda-y-peso-en-alerta\\audio_first\\voiceover_natural.wav",
+    "target_duration": 30.12675,
+    "actual_duration": 30.12675
+  }
+]

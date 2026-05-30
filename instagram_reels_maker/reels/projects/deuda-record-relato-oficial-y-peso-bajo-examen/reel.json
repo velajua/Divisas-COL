@@ -1,0 +1,179 @@
+{
+  "slug": "deuda-record-relato-oficial-y-peso-bajo-examen",
+  "title": "Deuda record, relato oficial y peso bajo examen",
+  "status": "rendered",
+  "template": "article_reel",
+  "source_article": {
+    "path": "../../../html/es/colombia/entries/deuda-record-relato-oficial-y-peso-bajo-examen.html",
+    "canonical_url": "https://divisascol.com/es/colombia/entries/deuda-record-relato-oficial-y-peso-bajo-examen.html",
+    "published_date": "2026-05-28"
+  },
+  "niche": "analisis cambiario Colombia",
+  "format": "editorial_news_reel",
+  "created_at": "2026-05-28T00:00:00+00:00",
+  "target_duration_seconds": 23.773375,
+  "voiceover": {
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
+    "script_file": "script.txt",
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "timing_report": "audio_first/timing_report.json",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "include_audio_in_draft": false,
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02
+  },
+  "caption_file": "caption.txt",
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 2.55125,
+      "subtitle": "Deuda record en TES. Peso bajo examen.",
+      "voiceover_text": "Deuda record en TES. Peso bajo examen.",
+      "visual_prompt": "Photorealistic vertical editorial finance news image: Bogota financial desk, Colombian peso bills, US dollars, laptop with blurred bond yield charts, TES documents, dark lower third.",
+      "image": "images/001_hook.png",
+      "raw_image": "images/raw_001_hook.png",
+      "prompt_file": "prompts/001_hook.txt",
+      "headline": [
+        "DEUDA RECORD",
+        "PESO BAJO EXAMEN"
+      ],
+      "voiceover_lines": [
+        "Deuda record en TES.",
+        "Peso bajo examen."
+      ],
+      "start_seconds": 0.0,
+      "end_seconds": 2.55125
+    },
+    {
+      "id": "tes",
+      "duration_seconds": 4.248999,
+      "subtitle": "En cinco meses, la oferta interna supero sesenta billones de pesos.",
+      "voiceover_text": "En cinco meses, la oferta interna supero sesenta billones de pesos.",
+      "visual_prompt": "Photorealistic vertical image: government bond documents, Colombian pesos, tablet with blurred rising yield curve near stress levels, serious analyst desk.",
+      "image": "images/002_tes.png",
+      "raw_image": "images/raw_002_tes.png",
+      "prompt_file": "prompts/002_tes.txt",
+      "headline": [
+        "TES EN RECORD",
+        "MAS DE $60 BILLONES"
+      ],
+      "voiceover_lines": [
+        "En cinco meses,",
+        "la oferta interna supero",
+        "sesenta billones de pesos."
+      ],
+      "start_seconds": 2.55125,
+      "end_seconds": 6.800249
+    },
+    {
+      "id": "tasas",
+      "duration_seconds": 3.798625,
+      "subtitle": "No es solo colocar deuda. Es pagar tasas en zona de estres.",
+      "voiceover_text": "No es solo colocar deuda. Es pagar tasas en zona de estres.",
+      "visual_prompt": "Photorealistic vertical image: official debt portfolio charts, calculators, pesos and dollars, government finance briefing mood, market stress.",
+      "image": "images/003_relato.png",
+      "raw_image": "images/raw_003_relato.png",
+      "prompt_file": "prompts/003_relato.txt",
+      "headline": [
+        "NO ES SOLO DEUDA",
+        "ES EL PRECIO"
+      ],
+      "voiceover_lines": [
+        "No es solo colocar deuda.",
+        "Es pagar tasas",
+        "en zona de estres."
+      ],
+      "start_seconds": 6.800249,
+      "end_seconds": 10.598874
+    },
+    {
+      "id": "relato",
+      "duration_seconds": 3.856084,
+      "subtitle": "Hacienda habla de estabilidad. El mercado mira el costo de financiarse.",
+      "voiceover_text": "Hacienda habla de estabilidad. El mercado mira el costo de financiarse.",
+      "visual_prompt": "Photorealistic vertical image: investment desk with risk reports, red falling local asset chart, bond yield curve, dark Bogota city background.",
+      "image": "images/004_prima.png",
+      "raw_image": "images/raw_004_prima.png",
+      "prompt_file": "prompts/004_prima.txt",
+      "headline": [
+        "RELATO OFICIAL",
+        "MERCADO COBRA"
+      ],
+      "voiceover_lines": [
+        "Hacienda habla de estabilidad.",
+        "El mercado mira",
+        "el costo de financiarse."
+      ],
+      "start_seconds": 10.598874,
+      "end_seconds": 14.454958
+    },
+    {
+      "id": "prima",
+      "duration_seconds": 4.269167,
+      "subtitle": "Regla fiscal suspendida. Poco ajuste creible. La prima de riesgo se queda.",
+      "voiceover_text": "Regla fiscal suspendida. Poco ajuste creible. La prima de riesgo se queda.",
+      "visual_prompt": "Photorealistic vertical image: USD/COP trading desk, dollar and peso bills, blurred exchange board, geopolitical market glow.",
+      "image": "images/005_dolar.png",
+      "raw_image": "images/raw_005_dolar.png",
+      "prompt_file": "prompts/005_dolar.txt",
+      "headline": [
+        "PRIMA FISCAL",
+        "RIESGO EN PESO"
+      ],
+      "voiceover_lines": [
+        "Regla fiscal suspendida.",
+        "Poco ajuste creible.",
+        "La prima de riesgo se queda."
+      ],
+      "start_seconds": 14.454958,
+      "end_seconds": 18.724125
+    },
+    {
+      "id": "cta",
+      "duration_seconds": 5.04925,
+      "subtitle": "El dolar puede ceder. Pero el mercado mira tres mil ochocientos. La deuda no discute. Cobra.",
+      "voiceover_text": "El dolar puede ceder. Pero el mercado mira tres mil ochocientos. La deuda no discute. Cobra.",
+      "visual_prompt": "Photorealistic vertical closing image: dark trading terminal, USD/COP chart glow, Colombian pesos under US dollars, red risk marker.",
+      "image": "images/006_cta.png",
+      "raw_image": "images/raw_006_cta.png",
+      "prompt_file": "prompts/006_cta.txt",
+      "headline": [
+        "DOLAR DEFENSIVO",
+        "LA DEUDA COBRA"
+      ],
+      "voiceover_lines": [
+        "El dolar puede ceder.",
+        "Pero el mercado mira",
+        "tres mil ochocientos.",
+        "La deuda no discute.",
+        "Cobra."
+      ],
+      "start_seconds": 18.724125,
+      "end_seconds": 23.773375
+    }
+  ],
+  "cta": "Cobertura o calma?",
+  "outputs": {
+    "draft_video": "drafts/final.mp4",
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "review_notes": [
+    "Audio-first workflow: short TTS lines are generated before final timing.",
+    "Scene, subtitle, overlay, and final video timing are derived from measured natural audio.",
+    "Existing generated images are reused; stale subtitle-timed TTS artifacts were removed."
+  ],
+  "workflow_version": "audio_first_short_line_v1",
+  "rendered_at": "2026-05-29T02:41:08+00:00"
+}

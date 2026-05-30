@@ -2,3 +2,5 @@ beautifulsoup4
 lxml
 TTS
 pydub
+pywin32; platform_system == "Windows"
+edge-tts

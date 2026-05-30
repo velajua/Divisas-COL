@@ -1,59 +1,83 @@
 1
-00:00:00,000 --> 00:00:02,700
-Caja en dolares, deuda externa
+00:00:00,000 --> 00:00:00,987
+Caja en dolares.
 
 2
-00:00:02,700 --> 00:00:05,741
-y un peso otra vez en alerta.
+00:00:01,047 --> 00:00:01,863
+Deuda externa.
 
 3
-00:00:05,741 --> 00:00:08,650
-Hacienda dice que compra dolares
+00:00:01,923 --> 00:00:03,297
+Peso otra vez en alerta.
 
 4
-00:00:08,650 --> 00:00:11,429
-para fortalecer caja, no para intervenir la tasa.
+00:00:03,417 --> 00:00:05,053
+Hacienda dice: compra dolares
 
 5
-00:00:11,429 --> 00:00:13,600
-Pero la deuda externa ya pesa:
+00:00:05,073 --> 00:00:06,221
+para fortalecer caja.
 
 6
-00:00:13,600 --> 00:00:16,200
-doscientos cuarenta y seis mil ochocientos un millones de dolares,
+00:00:06,281 --> 00:00:07,557
+No para mover la tasa.
 
 7
-00:00:16,200 --> 00:00:19,000
-el cincuenta y tres coma ocho por ciento
+00:00:07,677 --> 00:00:09,268
+Pero la deuda externa ya pesa.
 
 8
-00:00:19,000 --> 00:00:22,226
-del PIB.
+00:00:09,328 --> 00:00:10,883
+Doscientos cuarenta y seis mil
 
 9
-00:00:22,226 --> 00:00:25,000
-Y BanRep sigue viendo inflacion incomoda,
+00:00:10,903 --> 00:00:12,918
+ochocientos un millones de dolares.
 
 10
-00:00:25,000 --> 00:00:29,685
-con tasas altas y poco espacio para cantar victoria.
+00:00:12,978 --> 00:00:14,885
+Cincuenta y tres coma ocho del PIB.
 
 11
-00:00:29,685 --> 00:00:32,550
-El problema de fondo es fiscal:
+00:00:15,005 --> 00:00:16,852
+BanRep ve inflacion incomoda.
 
 12
-00:00:32,550 --> 00:00:35,500
-gasto alto, inversion rezagada
+00:00:16,912 --> 00:00:17,678
+Tasas altas.
 
 13
-00:00:35,500 --> 00:00:37,976
-y menos credibilidad para defender el peso.
+00:00:17,738 --> 00:00:19,525
+Poco espacio para cantar victoria.
 
 14
-00:00:37,976 --> 00:00:40,900
-Esta semana la pregunta no es solo si sube el dolar.
+00:00:19,645 --> 00:00:21,216
+El problema de fondo es fiscal.
 
 15
-00:00:40,900 --> 00:00:44,166
-Es si el mercado pide mas cobertura.
+00:00:21,276 --> 00:00:22,222
+Gasto alto.
+
+16
+00:00:22,282 --> 00:00:23,409
+Inversion rezagada.
+
+17
+00:00:23,469 --> 00:00:25,645
+Menos credibilidad para defender el peso.
+
+18
+00:00:25,765 --> 00:00:26,991
+La pregunta no es solo
+
+19
+00:00:27,011 --> 00:00:27,968
+si sube el dolar.
+
+20
+00:00:28,028 --> 00:00:28,940
+Es si el mercado
+
+21
+00:00:28,960 --> 00:00:30,127
+pide mas cobertura.

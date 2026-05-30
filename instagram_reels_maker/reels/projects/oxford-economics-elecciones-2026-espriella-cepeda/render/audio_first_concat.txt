@@ -1,0 +1,13 @@
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/001_hook.png'
+duration 5.527
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/002_base.png'
+duration 5.605
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/003_continuidad.png'
+duration 5.679
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/004_inflacion_tasas.png'
+duration 6.402
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/005_bonos.png'
+duration 5.685
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/006_fiscal.png'
+duration 6.419
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-economics-elecciones-2026-espriella-cepeda/images/006_fiscal.png'

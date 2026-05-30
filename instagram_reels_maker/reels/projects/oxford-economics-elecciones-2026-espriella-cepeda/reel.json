@@ -11,66 +11,163 @@
   "niche": "analisis macro Colombia",
   "format": "editorial_news_reel",
   "created_at": "2026-05-25",
-  "target_duration_seconds": 59.97,
+  "target_duration_seconds": 35.317292,
   "voiceover": {
-    "mode": "xtts_timing_reference_only",
-    "file": "voiceover.wav",
-    "clean_file": "voiceover_clean.wav",
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
     "script_file": "script.txt",
-    "include_audio_in_draft": false
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "timing_report": "audio_first/timing_report.json",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "include_audio_in_draft": false,
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02
   },
   "caption_file": "caption.txt",
   "scenes": [
     {
       "id": "hook",
-      "duration_seconds": 8.711,
-      "voiceover_text": "Oxford Economics puso numeros al riesgo electoral de Colombia: De la Espriella o Cepeda no moverian igual la economia.",
+      "duration_seconds": 5.526875,
+      "voiceover_text": "Oxford puso numeros al riesgo electoral. De la Espriella o Cepeda no moverian igual la economia.",
       "image": "images/001_hook.png",
       "raw_image": "images/raw_001_hook.png",
-      "headline": ["RIESGO ELECTORAL", "OXFORD PONE NUMEROS"]
+      "headline": [
+        "RIESGO ELECTORAL",
+        "OXFORD PONE NUMEROS"
+      ],
+      "voiceover_lines": [
+        "Oxford puso numeros",
+        "al riesgo electoral.",
+        "De la Espriella o Cepeda",
+        "no moverian igual la economia."
+      ],
+      "subtitle": "Oxford puso numeros al riesgo electoral. De la Espriella o Cepeda no moverian igual la economia.",
+      "start_seconds": 0.0,
+      "end_seconds": 5.526875
     },
     {
       "id": "base",
-      "duration_seconds": 9.725,
-      "voiceover_text": "En su escenario base, el PIB creceria tres coma cinco por ciento en 2026, apoyado por consumo y salario minimo.",
+      "duration_seconds": 5.60475,
+      "voiceover_text": "El escenario base marca PIB de tres cinco. Consumo y salario minimo sostienen la proyeccion.",
       "image": "images/002_base.png",
       "raw_image": "images/raw_002_base.png",
-      "headline": ["ESCENARIO BASE", "PIB 3,5%"]
+      "headline": [
+        "ESCENARIO BASE",
+        "PIB 3,5%"
+      ],
+      "voiceover_lines": [
+        "El escenario base",
+        "marca PIB de tres cinco.",
+        "Consumo y salario minimo",
+        "sostienen la proyeccion."
+      ],
+      "subtitle": "El escenario base marca PIB de tres cinco. Consumo y salario minimo sostienen la proyeccion.",
+      "start_seconds": 5.526875,
+      "end_seconds": 11.131625
     },
     {
       "id": "continuidad",
-      "duration_seconds": 9.543,
-      "voiceover_text": "Pero si el proximo gobierno mantiene la linea de Petro, Oxford ve mas presion: menor inversion, menos petroleo y mas inflacion.",
+      "duration_seconds": 5.679291,
+      "voiceover_text": "Con continuidad politica, Oxford ve mas presion. Menor inversion. Menos petroleo. Mas inflacion.",
       "image": "images/003_continuidad.png",
       "raw_image": "images/raw_003_continuidad.png",
-      "headline": ["SI HAY CONTINUIDAD", "MAS PRESION"]
+      "headline": [
+        "SI HAY CONTINUIDAD",
+        "MAS PRESION"
+      ],
+      "voiceover_lines": [
+        "Con continuidad politica,",
+        "Oxford ve mas presion.",
+        "Menor inversion.",
+        "Menos petroleo.",
+        "Mas inflacion."
+      ],
+      "subtitle": "Con continuidad politica, Oxford ve mas presion. Menor inversion. Menos petroleo. Mas inflacion.",
+      "start_seconds": 11.131625,
+      "end_seconds": 16.810916
     },
     {
       "id": "inflacion_tasas",
-      "duration_seconds": 8.85,
-      "voiceover_text": "El consumo podria crecer cuatro coma ocho por ciento, pero la inflacion subiria a seis coma tres y la tasa a diez coma cinco por ciento.",
+      "duration_seconds": 6.402165,
+      "voiceover_text": "El consumo podria crecer cuatro coma ocho. Pero la inflacion sube a seis coma tres. Tasa en diez coma cinco.",
       "image": "images/004_inflacion_tasas.png",
       "raw_image": "images/raw_004_inflacion_tasas.png",
-      "headline": ["CONSUMO VS PRECIOS", "INFLACION 6,3%"]
+      "headline": [
+        "CONSUMO VS PRECIOS",
+        "INFLACION 6,3%"
+      ],
+      "voiceover_lines": [
+        "El consumo podria crecer",
+        "cuatro coma ocho.",
+        "Pero la inflacion sube",
+        "a seis coma tres.",
+        "Tasa en diez coma cinco."
+      ],
+      "subtitle": "El consumo podria crecer cuatro coma ocho. Pero la inflacion sube a seis coma tres. Tasa en diez coma cinco.",
+      "start_seconds": 16.810916,
+      "end_seconds": 23.213081
     },
     {
       "id": "bonos",
-      "duration_seconds": 10.941,
-      "voiceover_text": "En bonos, el contraste es duro: con un giro ortodoxo, diez anos cerca de nueve coma cinco; con continuidad, hasta doce coma cinco.",
+      "duration_seconds": 5.685208,
+      "voiceover_text": "En bonos, el contraste es duro. Giro ortodoxo: nueve coma cinco. Continuidad: doce coma cinco.",
       "image": "images/005_bonos.png",
       "raw_image": "images/raw_005_bonos.png",
-      "headline": ["BONOS A 10 ANOS", "9,5% VS 12,5%"]
+      "headline": [
+        "BONOS A 10 ANOS",
+        "9,5% VS 12,5%"
+      ],
+      "voiceover_lines": [
+        "En bonos,",
+        "el contraste es duro.",
+        "Giro ortodoxo: nueve coma cinco.",
+        "Continuidad: doce coma cinco."
+      ],
+      "subtitle": "En bonos, el contraste es duro. Giro ortodoxo: nueve coma cinco. Continuidad: doce coma cinco.",
+      "start_seconds": 23.213081,
+      "end_seconds": 28.898289
     },
     {
       "id": "fiscal",
-      "duration_seconds": 12.108,
-      "voiceover_text": "La alerta fiscal sigue: deficit de siete coma uno por ciento y deuda cerca de sesenta y cuatro por ciento del PIB. El mercado va a votar con cobertura.",
+      "duration_seconds": 6.419,
+      "voiceover_text": "La alerta fiscal sigue. Deficit de siete coma uno. Deuda cerca de sesenta y cuatro. El mercado vota con cobertura.",
       "image": "images/006_fiscal.png",
       "raw_image": "images/raw_006_fiscal.png",
-      "headline": ["ALERTA FISCAL", "DEUDA 64% DEL PIB"]
+      "headline": [
+        "ALERTA FISCAL",
+        "DEUDA 64% DEL PIB"
+      ],
+      "voiceover_lines": [
+        "La alerta fiscal sigue.",
+        "Deficit de siete coma uno.",
+        "Deuda cerca de sesenta y cuatro.",
+        "El mercado vota con cobertura."
+      ],
+      "subtitle": "La alerta fiscal sigue. Deficit de siete coma uno. Deuda cerca de sesenta y cuatro. El mercado vota con cobertura.",
+      "start_seconds": 28.898289,
+      "end_seconds": 35.317289
     }
   ],
   "outputs": {
-    "draft_video": "drafts/final.mp4"
-  }
+    "draft_video": "drafts/final.mp4",
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "workflow_version": "audio_first_short_line_v1",
+  "review_notes": [
+    "Audio-first workflow: short TTS lines are generated before final timing.",
+    "Scene, subtitle, overlay, and final video timing are derived from measured natural audio.",
+    "Existing generated images are reused; stale subtitle-timed TTS artifacts were removed."
+  ],
+  "rendered_at": "2026-05-29T02:41:22+00:00"
 }
