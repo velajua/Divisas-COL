@@ -1,0 +1,173 @@
+{
+  "slug": "cepeda-riesgo-economico-colombia",
+  "title": "Cepeda, riesgo economico para Colombia",
+  "status": "rendered",
+  "workflow_version": "audio_first_short_line_v1",
+  "template": "interview_reel",
+  "niche": "analisis cambiario Colombia",
+  "format": "interview_q_and_a",
+  "created_at": "2026-05-29T16:07:10+00:00",
+  "source_notes": [
+    {
+      "source": "Reuters",
+      "url": "https://www.investing.com/news/economy-news/leftist-colombia-presidential-candidate-cepeda-pledges-to-step-up-economic-social-reforms-4714063",
+      "note": "Cepeda promete profundizar reformas sociales, ampliar apoyos de ingreso y continuar la linea Petro."
+    },
+    {
+      "source": "El Pais",
+      "url": "https://elpais.com/america-colombia/elecciones-presidenciales/2026-05-18/mas-inversion-social-mas-paz-total-y-tres-revoluciones-sin-presupuesto-el-programa-de-ivan-cepeda.html",
+      "note": "El articulo reporta mas inversion social y falta de un plan formal de Gobierno conocido."
+    },
+    {
+      "source": "CARF / El Pais",
+      "url": "https://elpais.com/america-colombia/2026-03-17/el-plan-financiero-del-gobierno-de-gustavo-petro-reconoce-un-momento-fiscal-delicado.html",
+      "note": "El CARF estima un faltante cercano a 32 billones y ve poco creible el ajuste fiscal."
+    },
+    {
+      "source": "Infobae",
+      "url": "https://www.infobae.com/colombia/2026/05/26/esto-es-lo-que-proponen-los-candidatos-presidenciales-en-2026-para-que-la-economia-de-colombia-avance/",
+      "note": "Cepeda enfatiza recaudo, progresividad tributaria y redistribucion frente al desbalance fiscal."
+    },
+    {
+      "source": "El Colombiano",
+      "url": "https://www.elcolombiano.com/negocios/elecciones-propuestas-economicas-candidatos-presidenciales-2026-HC34632713",
+      "note": "Cepeda plantea redistribucion, revolucion agraria, prohibicion del fracking y transicion energetica."
+    }
+  ],
+  "voiceover": {
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
+    "script_file": "script.txt",
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "timing_report": "audio_first/timing_report.json",
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 5.170084,
+      "subtitle": "¿Cepeda es un riesgo economico para Colombia? Si, porque promete mas gasto con cuentas fragiles.",
+      "voiceover_lines": [
+        "¿Cepeda es un riesgo economico para Colombia?",
+        "Si, porque promete mas gasto con cuentas fragiles."
+      ],
+      "voiceover_text": "¿Cepeda es un riesgo economico para Colombia? Si, porque promete mas gasto con cuentas fragiles.",
+      "visual_prompt": "vertical 9:16 realistic editorial finance photo, Colombian election and economy context, pesos and dollars on a newsroom desk, serious lighting, darker lower third for subtitles",
+      "image": "images/001_hook.png",
+      "prompt_file": "prompts/001_hook.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Riesgo fiscal electoral",
+      "data_callout": "Continuidad + mas gasto",
+      "start_seconds": 0.0,
+      "end_seconds": 5.170084
+    },
+    {
+      "id": "fiscal",
+      "duration_seconds": 4.488458,
+      "subtitle": "¿Cual dato prende la alarma fiscal? El CARF estima un ajuste de 32 billones.",
+      "voiceover_lines": [
+        "¿Cual dato prende la alarma fiscal?",
+        "El CARF estima un ajuste de 32 billones."
+      ],
+      "voiceover_text": "¿Cual dato prende la alarma fiscal? El CARF estima un ajuste de 32 billones.",
+      "visual_prompt": "vertical 9:16 realistic fiscal risk news photo, budget documents, calculator, Colombian peso bills, official report on laptop, sober editorial style",
+      "image": "images/002_fiscal.png",
+      "prompt_file": "prompts/002_fiscal.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Hueco fiscal",
+      "data_callout": "32 billones",
+      "start_seconds": 5.170084,
+      "end_seconds": 9.658542
+    },
+    {
+      "id": "promesas",
+      "duration_seconds": 5.2905,
+      "subtitle": "¿Como pagaria tantas promesas sociales? Con mas recaudo y redistribucion, no recortes claros.",
+      "voiceover_lines": [
+        "¿Como pagaria tantas promesas sociales?",
+        "Con mas recaudo y redistribucion, no recortes claros."
+      ],
+      "voiceover_text": "¿Como pagaria tantas promesas sociales? Con mas recaudo y redistribucion, no recortes claros.",
+      "visual_prompt": "vertical 9:16 realistic policy desk scene, tax forms, public spending chart, Colombian pesos, blurred government office, finance journalism look",
+      "image": "images/003_promesas.png",
+      "prompt_file": "prompts/003_promesas.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Quien paga",
+      "data_callout": "Mas recaudo, pocos recortes",
+      "start_seconds": 9.658542,
+      "end_seconds": 14.949042
+    },
+    {
+      "id": "bolsillo",
+      "duration_seconds": 4.09225,
+      "subtitle": "¿Por que preocupa al bolsillo? Mas deuda encarece credito, impuestos y dolar.",
+      "voiceover_lines": [
+        "¿Por que preocupa al bolsillo?",
+        "Mas deuda encarece credito, impuestos y dolar."
+      ],
+      "voiceover_text": "¿Por que preocupa al bolsillo? Mas deuda encarece credito, impuestos y dolar.",
+      "visual_prompt": "vertical 9:16 realistic household finance photo, credit card bill, Colombian pesos, dollar exchange notes, laptop chart, darker subtitle lane",
+      "image": "images/004_bolsillo.png",
+      "prompt_file": "prompts/004_bolsillo.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Golpe al bolsillo",
+      "data_callout": "Credito + impuestos + dolar",
+      "start_seconds": 14.949042,
+      "end_seconds": 19.041292
+    },
+    {
+      "id": "energia",
+      "duration_seconds": 5.233959,
+      "subtitle": "¿Y energia puede golpear divisas? Limitar hidrocarburos reduce confianza y entrada de dolares.",
+      "voiceover_lines": [
+        "¿Y energia puede golpear divisas?",
+        "Limitar hidrocarburos reduce confianza y entrada de dolares."
+      ],
+      "voiceover_text": "¿Y energia puede golpear divisas? Limitar hidrocarburos reduce confianza y entrada de dolares.",
+      "visual_prompt": "vertical 9:16 realistic energy and FX news photo, oil sector report, renewable energy notes, dollar bills, Colombia context, no logos",
+      "image": "images/005_energia.png",
+      "prompt_file": "prompts/005_energia.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Energia y dolares",
+      "data_callout": "Menos divisas potenciales",
+      "start_seconds": 19.041292,
+      "end_seconds": 24.275251
+    },
+    {
+      "id": "cierre",
+      "duration_seconds": 4.495291,
+      "subtitle": "¿Entonces cual es la conclusion financiera? Mas Estado sin cuenta clara es mala apuesta.",
+      "voiceover_lines": [
+        "¿Entonces cual es la conclusion financiera?",
+        "Mas Estado sin cuenta clara es mala apuesta."
+      ],
+      "voiceover_text": "¿Entonces cual es la conclusion financiera? Mas Estado sin cuenta clara es mala apuesta.",
+      "visual_prompt": "vertical 9:16 realistic closing finance news photo, USD COP board, Colombian pesos, analyst desk, sober high contrast editorial style",
+      "image": "images/006_cierre.png",
+      "prompt_file": "prompts/006_cierre.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Decision financiera",
+      "data_callout": "Pregunta clave: quien paga",
+      "start_seconds": 24.275251,
+      "end_seconds": 28.770542
+    }
+  ],
+  "cta": "Antes de votar, pregunte quien paga.",
+  "outputs": {
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "review_notes": [
+    "Interview format: one sentence per question and one sentence per answer.",
+    "Voice lines are short enough for audio-first alternating neural voices.",
+    "Claims are framed as economic risk based on reported fiscal and policy data."
+  ],
+  "target_duration_seconds": 28.770542,
+  "rendered_at": "2026-05-29T16:14:49+00:00"
+}

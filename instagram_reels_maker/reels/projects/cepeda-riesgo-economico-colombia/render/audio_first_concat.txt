@@ -1,0 +1,13 @@
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/001_hook.png'
+duration 5.170
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/002_fiscal.png'
+duration 4.488
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/003_promesas.png'
+duration 5.290
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/004_bolsillo.png'
+duration 4.092
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/005_energia.png'
+duration 5.234
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/006_cierre.png'
+duration 4.495
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-riesgo-economico-colombia/images/006_cierre.png'
