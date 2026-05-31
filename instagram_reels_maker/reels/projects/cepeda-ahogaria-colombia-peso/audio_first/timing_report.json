@@ -1,0 +1,396 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "scene_id": "hook",
+    "text": "¿Cepeda puede ahogar a Colombia con malas politicas economicas?",
+    "start": 0.0,
+    "end": 3.204125,
+    "duration": 3.204125,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_001.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 3.204125,
+    "end": 3.264125,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_002_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "scene_id": "hook",
+    "text": "Si, porque mas gasto, impuestos y deuda",
+    "start": 3.264125,
+    "end": 5.42725,
+    "duration": 2.163125,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_002.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 5.42725,
+    "end": 5.44725,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_004_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "scene_id": "hook",
+    "text": "pueden dejar al peso sin aire.",
+    "start": 5.44725,
+    "end": 6.965958,
+    "duration": 1.518708,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_003.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 6.965958,
+    "end": 7.085958,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_006_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "scene_id": "confianza",
+    "text": "¿Donde empieza el problema al comprar dolares",
+    "start": 7.085958,
+    "end": 9.469041,
+    "duration": 2.383083,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_004.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 9.469041,
+    "end": 9.489041,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_008_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "scene_id": "confianza",
+    "text": "o decidir en Colombia?",
+    "start": 9.489041,
+    "end": 10.636874,
+    "duration": 1.147833,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_005.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 10.636874,
+    "end": 10.696874,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_010_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "scene_id": "confianza",
+    "text": "Empieza en la confianza,",
+    "start": 10.696874,
+    "end": 11.995249,
+    "duration": 1.298375,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_006.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 11.995249,
+    "end": 12.015249,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_012_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "scene_id": "confianza",
+    "text": "si el mercado duda de las cuentas,",
+    "start": 12.015249,
+    "end": 13.676874,
+    "duration": 1.661625,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_007.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 13.676874,
+    "end": 13.696874,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_014_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "scene_id": "confianza",
+    "text": "compra dolares.",
+    "start": 13.696874,
+    "end": 14.511582,
+    "duration": 0.814708,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_008.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 14.511582,
+    "end": 14.631582,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_016_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "scene_id": "estado",
+    "text": "¿Que vuelve peligrosa una agenda de mas Estado",
+    "start": 14.631582,
+    "end": 17.177124,
+    "duration": 2.545542,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_009.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 17.177124,
+    "end": 17.197124,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_018_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "scene_id": "estado",
+    "text": "y promesas sociales?",
+    "start": 17.197124,
+    "end": 18.484999,
+    "duration": 1.287875,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_010.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 18.484999,
+    "end": 18.544999,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_020_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "scene_id": "estado",
+    "text": "Que suena popular, pero sin plata clara,",
+    "start": 18.544999,
+    "end": 20.440749,
+    "duration": 1.89575,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_011.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 20.440749,
+    "end": 20.460749,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_022_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "scene_id": "estado",
+    "text": "termina en deuda o impuestos.",
+    "start": 20.460749,
+    "end": 21.953207,
+    "duration": 1.492458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_012.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 21.953207,
+    "end": 22.073207,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_024_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 13,
+    "scene_id": "peso",
+    "text": "¿Como se traduce eso en el peso colombiano?",
+    "start": 22.073207,
+    "end": 24.367999,
+    "duration": 2.294792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_013.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 24.367999,
+    "end": 24.427999,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_026_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 14,
+    "scene_id": "peso",
+    "text": "Un peso mas fragil, mas volatilidad",
+    "start": 24.427999,
+    "end": 26.372832,
+    "duration": 1.944833,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_014.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 26.372832,
+    "end": 26.392832,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_028_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 15,
+    "scene_id": "peso",
+    "text": "y un dolar mas dificil de proyectar.",
+    "start": 26.392832,
+    "end": 28.173915,
+    "duration": 1.781083,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_015.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 28.173915,
+    "end": 28.293915,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_030_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 16,
+    "scene_id": "decisiones",
+    "text": "¿Por que complica invertir, importar",
+    "start": 28.293915,
+    "end": 30.035207,
+    "duration": 1.741292,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_016.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 30.035207,
+    "end": 30.055207,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_032_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 17,
+    "scene_id": "decisiones",
+    "text": "o pedir credito en Colombia?",
+    "start": 30.055207,
+    "end": 31.537832,
+    "duration": 1.482625,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_017.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 31.537832,
+    "end": 31.597832,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_034_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 18,
+    "scene_id": "decisiones",
+    "text": "Porque nadie decide tranquilo con dolar nervioso,",
+    "start": 31.597832,
+    "end": 33.99829,
+    "duration": 2.400458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_018.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 33.99829,
+    "end": 34.01829,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_036_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 19,
+    "scene_id": "decisiones",
+    "text": "impuestos y credito caro.",
+    "start": 34.01829,
+    "end": 35.383207,
+    "duration": 1.364917,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_019.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 35.383207,
+    "end": 35.503207,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_038_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 20,
+    "scene_id": "advertencia",
+    "text": "¿Entonces cual es la advertencia financiera antes de votar?",
+    "start": 35.503207,
+    "end": 38.394249,
+    "duration": 2.891042,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_020.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 38.394249,
+    "end": 38.454249,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_040_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 21,
+    "scene_id": "advertencia",
+    "text": "Colombia puede elegir promesas grandes",
+    "start": 38.454249,
+    "end": 40.492416,
+    "duration": 2.038167,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_021.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "continuation",
+    "start": 40.492416,
+    "end": 40.512416,
+    "target_duration": 0.02,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\segments\\segment_042_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 22,
+    "scene_id": "advertencia",
+    "text": "y pagar con devaluacion e incertidumbre.",
+    "start": 40.512416,
+    "end": 42.395708,
+    "duration": 1.883292,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\chunks\\chunk_022.wav"
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-ahogaria-colombia-peso\\audio_first\\voiceover_natural.wav",
+    "target_duration": 42.395708,
+    "actual_duration": 42.395708
+  }
+]

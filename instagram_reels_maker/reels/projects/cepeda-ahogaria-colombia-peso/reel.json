@@ -1,0 +1,173 @@
+{
+  "slug": "cepeda-ahogaria-colombia-peso",
+  "title": "Cepeda ahogaria a Colombia",
+  "status": "rendered",
+  "workflow_version": "audio_first_short_line_v1",
+  "template": "interview_reel",
+  "niche": "analisis cambiario Colombia",
+  "format": "interview_q_and_a",
+  "created_at": "2026-05-30T00:00:00+00:00",
+  "source_notes": [
+    {
+      "source": "Reuters",
+      "url": "https://www.investing.com/news/economy-news/leftist-colombia-presidential-candidate-cepeda-pledges-to-step-up-economic-social-reforms-4714063",
+      "note": "Cepeda promete profundizar reformas economicas y sociales, ampliar programas sociales y mantener continuidad con la linea Petro."
+    },
+    {
+      "source": "El Pais",
+      "url": "https://elpais.com/america-colombia/elecciones-presidenciales/2026-05-18/mas-inversion-social-mas-paz-total-y-tres-revoluciones-sin-presupuesto-el-programa-de-ivan-cepeda.html",
+      "note": "El programa reportado enfatiza mas inversion social, transformaciones amplias y dudas sobre presupuesto suficiente."
+    },
+    {
+      "source": "CARF / Forbes Colombia",
+      "url": "https://forbes.co/2026/03/13/economia-y-finanzas/carf-alerta-que-al-plan-financiero-del-gobierno-le-faltan-32-billones-y-es-poco-creible/",
+      "note": "El CARF estima un faltante de COP 32,1 billones para cumplir la meta fiscal de 2026 y cuestiona la credibilidad del ajuste."
+    }
+  ],
+  "voiceover": {
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
+    "script_file": "script.txt",
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02,
+    "timing_report": "audio_first/timing_report.json"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 7.085958,
+      "subtitle": "¿Cepeda puede ahogar a Colombia con malas politicas economicas? Si, porque mas gasto, impuestos y deuda pueden dejar al peso sin aire.",
+      "voiceover_lines": [
+        "¿Cepeda puede ahogar a Colombia con malas politicas economicas?",
+        "Si, porque mas gasto, impuestos y deuda",
+        "pueden dejar al peso sin aire."
+      ],
+      "voiceover_text": "¿Cepeda puede ahogar a Colombia con malas politicas economicas? Si, porque mas gasto, impuestos y deuda pueden dejar al peso sin aire.",
+      "visual_prompt": "Realistic vertical 9:16 editorial finance photo about Colombia election economic risk. Analyst desk with Colombian pesos, U.S. dollars, fiscal report folders, dark newsroom lighting, clean lower subtitle lane. No politician faces, no party logos, no generated text.",
+      "image": "images/001_hook.png",
+      "prompt_file": "prompts/001_hook.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Cepeda ahogaria al peso",
+      "data_callout": "Gasto + impuestos + deuda",
+      "start_seconds": 0.0,
+      "end_seconds": 7.085958
+    },
+    {
+      "id": "confianza",
+      "duration_seconds": 7.545624,
+      "subtitle": "¿Donde empieza el problema al comprar dolares o decidir en Colombia? Empieza en la confianza, si el mercado duda de las cuentas, compra dolares.",
+      "voiceover_lines": [
+        "¿Donde empieza el problema al comprar dolares",
+        "o decidir en Colombia?",
+        "Empieza en la confianza,",
+        "si el mercado duda de las cuentas,",
+        "compra dolares."
+      ],
+      "voiceover_text": "¿Donde empieza el problema al comprar dolares o decidir en Colombia? Empieza en la confianza, si el mercado duda de las cuentas, compra dolares.",
+      "visual_prompt": "Realistic vertical 9:16 finance news photo about market confidence and dollar hedging in Colombia. Currency exchange desk, Colombian pesos, U.S. dollar bills, laptop with blurred non-readable chart, sober editorial lighting, clean lower subtitle lane. No fake ticker text.",
+      "image": "images/002_confianza.png",
+      "prompt_file": "prompts/002_confianza.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Confianza rota",
+      "data_callout": "El mercado compra dolares",
+      "start_seconds": 7.085958,
+      "end_seconds": 14.631582
+    },
+    {
+      "id": "estado",
+      "duration_seconds": 7.441625,
+      "subtitle": "¿Que vuelve peligrosa una agenda de mas Estado y promesas sociales? Que suena popular, pero sin plata clara, termina en deuda o impuestos.",
+      "voiceover_lines": [
+        "¿Que vuelve peligrosa una agenda de mas Estado",
+        "y promesas sociales?",
+        "Que suena popular, pero sin plata clara,",
+        "termina en deuda o impuestos."
+      ],
+      "voiceover_text": "¿Que vuelve peligrosa una agenda de mas Estado y promesas sociales? Que suena popular, pero sin plata clara, termina en deuda o impuestos.",
+      "visual_prompt": "Realistic vertical 9:16 policy finance photo about public spending and taxes in Colombia. Tax forms, government budget documents, calculator, Colombian pesos, blurred institutional Bogota background, high contrast editorial style, clean lower subtitle lane.",
+      "image": "images/003_estado.png",
+      "prompt_file": "prompts/003_estado.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Quien paga",
+      "data_callout": "Mas Estado, cuenta incierta",
+      "start_seconds": 14.631582,
+      "end_seconds": 22.073207
+    },
+    {
+      "id": "peso",
+      "duration_seconds": 6.220708,
+      "subtitle": "¿Como se traduce eso en el peso colombiano? Un peso mas fragil, mas volatilidad y un dolar mas dificil de proyectar.",
+      "voiceover_lines": [
+        "¿Como se traduce eso en el peso colombiano?",
+        "Un peso mas fragil, mas volatilidad",
+        "y un dolar mas dificil de proyectar."
+      ],
+      "voiceover_text": "¿Como se traduce eso en el peso colombiano? Un peso mas fragil, mas volatilidad y un dolar mas dificil de proyectar.",
+      "visual_prompt": "Realistic vertical 9:16 foreign exchange risk photo for Colombian peso volatility. USD COP exchange board blurred and non-readable, pesos and dollars on analyst desk, risk notes, sober finance newsroom style, clean dark subtitle lane.",
+      "image": "images/004_peso.png",
+      "prompt_file": "prompts/004_peso.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Peso fragil",
+      "data_callout": "Mas volatilidad",
+      "start_seconds": 22.073207,
+      "end_seconds": 28.293915
+    },
+    {
+      "id": "decisiones",
+      "duration_seconds": 7.209292,
+      "subtitle": "¿Por que complica invertir, importar o pedir credito en Colombia? Porque nadie decide tranquilo con dolar nervioso, impuestos y credito caro.",
+      "voiceover_lines": [
+        "¿Por que complica invertir, importar",
+        "o pedir credito en Colombia?",
+        "Porque nadie decide tranquilo con dolar nervioso,",
+        "impuestos y credito caro."
+      ],
+      "voiceover_text": "¿Por que complica invertir, importar o pedir credito en Colombia? Porque nadie decide tranquilo con dolar nervioso, impuestos y credito caro.",
+      "visual_prompt": "Realistic vertical 9:16 business finance photo about difficult investment and import decisions in Colombia. Small business desk, import invoice, credit paperwork, calculator, pesos and dollars, laptop with blurred chart, clean lower subtitle lane.",
+      "image": "images/005_decisiones.png",
+      "prompt_file": "prompts/005_decisiones.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Decidir cuesta",
+      "data_callout": "Dolar, impuestos, credito",
+      "start_seconds": 28.293915,
+      "end_seconds": 35.503207
+    },
+    {
+      "id": "advertencia",
+      "duration_seconds": 6.892501,
+      "subtitle": "¿Entonces cual es la advertencia financiera antes de votar? Colombia puede elegir promesas grandes y pagar con devaluacion e incertidumbre.",
+      "voiceover_lines": [
+        "¿Entonces cual es la advertencia financiera antes de votar?",
+        "Colombia puede elegir promesas grandes",
+        "y pagar con devaluacion e incertidumbre."
+      ],
+      "voiceover_text": "¿Entonces cual es la advertencia financiera antes de votar? Colombia puede elegir promesas grandes y pagar con devaluacion e incertidumbre.",
+      "visual_prompt": "Realistic vertical 9:16 closing finance news photo about devaluation and uncertainty risk in Colombia. Household expense notebook, Colombian pesos, U.S. dollars, exchange-rate notes, serious editorial lighting, clean lower subtitle lane. No campaign imagery.",
+      "image": "images/006_advertencia.png",
+      "prompt_file": "prompts/006_advertencia.txt",
+      "headline": "DIVISAS COL | COLOMBIA - Advertencia",
+      "data_callout": "Promesas hoy, devaluacion manana",
+      "start_seconds": 35.503207,
+      "end_seconds": 42.395708
+    }
+  ],
+  "cta": "Antes de votar, pregunte quien paga.",
+  "outputs": {
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "review_notes": [
+    "Interview format: one sentence per question and one sentence per answer.",
+    "Tone is aggressive but tied to fiscal, currency, tax, and credit-risk mechanisms.",
+    "Voice lines stay within audio-first short-line limits."
+  ],
+  "target_duration_seconds": 42.395708,
+  "rendered_at": "2026-05-31T00:14:54+00:00"
+}
