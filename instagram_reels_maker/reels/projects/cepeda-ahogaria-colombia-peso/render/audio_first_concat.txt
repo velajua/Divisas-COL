@@ -1,0 +1,13 @@
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/001_hook.png'
+duration 7.086
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/002_confianza.png'
+duration 7.546
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/003_estado.png'
+duration 7.442
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/004_peso.png'
+duration 6.221
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/005_decisiones.png'
+duration 7.209
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/006_advertencia.png'
+duration 6.893
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/cepeda-ahogaria-colombia-peso/images/006_advertencia.png'
