@@ -91,6 +91,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/alivio-tecnico-desconfianza-intacta.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/en/colombia/entries/caja-dolares-deuda-y-peso-en-alerta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -112,6 +117,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/en/colombia/entries/subasta-record-prima-fiscal-y-peso.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/alivio-tecnico-desconfianza-intacta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
