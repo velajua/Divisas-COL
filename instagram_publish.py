@@ -157,7 +157,7 @@ def default_date_label():
 
 def publish_manifest_for_date(root, date_label):
     selected_date = date_label or default_date_label()
-    manifest = root / "instagram_cards" / selected_date / "public" / "publish-manifest.json"
+    manifest = (root / "instagram_cards" / selected_date / "public" / "publish-manifest.json").resolve()
     if not manifest.exists():
         raise FileNotFoundError(
             f"Missing publish manifest for {selected_date}: {manifest}. "
@@ -177,7 +177,7 @@ def resolve_publish_manifest(root, value):
     if value:
         path = Path(value)
         return path if path.is_absolute() else root / path
-    return latest_publish_manifest(root)
+    return publish_manifest_for_date(root, default_date_label())
 
 
 def load_manifest(path):
