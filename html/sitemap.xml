@@ -116,6 +116,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/rebote-electoral-con-fecha-de-examen.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/en/colombia/entries/subasta-record-prima-fiscal-y-peso.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -202,6 +207,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/es/colombia/entries/pib-debil-gasto-publico-y-dolar-en-zona-critica.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/rebote-electoral-con-fecha-de-examen.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
