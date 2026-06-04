@@ -1,5 +1,5 @@
 {
-  "date": "2026-05-13",
+  "date": "2026-06-04",
   "source": "html/result.json",
   "cards": [
     {
@@ -7,7 +7,7 @@
       "group": "cities",
       "city": null,
       "page": 0,
-      "path": "instagram_cards/2026-05-13/country-00.svg",
+      "path": "instagram_cards/2026-06-04/country-00.svg",
       "description_path": null
     },
     {
@@ -15,8 +15,8 @@
       "group": "cities",
       "city": "Barranquilla",
       "page": 1,
-      "path": "instagram_cards/2026-05-13/barranquilla-01.svg",
-      "description_path": "instagram_cards/2026-05-13/barranquilla-description.txt",
+      "path": "instagram_cards/2026-06-04/barranquilla-01.svg",
+      "description_path": "instagram_cards/2026-06-04/barranquilla-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -35,8 +35,8 @@
       "group": "cities",
       "city": "Bogotá",
       "page": 1,
-      "path": "instagram_cards/2026-05-13/bogota-01.svg",
-      "description_path": "instagram_cards/2026-05-13/bogota-description.txt",
+      "path": "instagram_cards/2026-06-04/bogota-01.svg",
+      "description_path": "instagram_cards/2026-06-04/bogota-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -59,8 +59,8 @@
       "group": "cities",
       "city": "Bogotá",
       "page": 2,
-      "path": "instagram_cards/2026-05-13/bogota-02.svg",
-      "description_path": "instagram_cards/2026-05-13/bogota-description.txt",
+      "path": "instagram_cards/2026-06-04/bogota-02.svg",
+      "description_path": "instagram_cards/2026-06-04/bogota-description.txt",
       "currencies": [
         "CostarricanColon",
         "UAEDirham",
@@ -75,8 +75,8 @@
       "group": "cities",
       "city": "Cali",
       "page": 1,
-      "path": "instagram_cards/2026-05-13/cali-01.svg",
-      "description_path": "instagram_cards/2026-05-13/cali-description.txt",
+      "path": "instagram_cards/2026-06-04/cali-01.svg",
+      "description_path": "instagram_cards/2026-06-04/cali-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -94,8 +94,8 @@
       "group": "cities",
       "city": "Cartagena",
       "page": 1,
-      "path": "instagram_cards/2026-05-13/cartagena-01.svg",
-      "description_path": "instagram_cards/2026-05-13/cartagena-description.txt",
+      "path": "instagram_cards/2026-06-04/cartagena-01.svg",
+      "description_path": "instagram_cards/2026-06-04/cartagena-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -114,8 +114,8 @@
       "group": "cities",
       "city": "Medellín",
       "page": 1,
-      "path": "instagram_cards/2026-05-13/medellin-01.svg",
-      "description_path": "instagram_cards/2026-05-13/medellin-description.txt",
+      "path": "instagram_cards/2026-06-04/medellin-01.svg",
+      "description_path": "instagram_cards/2026-06-04/medellin-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -138,8 +138,8 @@
       "group": "cities",
       "city": "Medellín",
       "page": 2,
-      "path": "instagram_cards/2026-05-13/medellin-02.svg",
-      "description_path": "instagram_cards/2026-05-13/medellin-description.txt",
+      "path": "instagram_cards/2026-06-04/medellin-02.svg",
+      "description_path": "instagram_cards/2026-06-04/medellin-description.txt",
       "currencies": [
         "ThaiBaht",
         "CostarricanColon",
@@ -162,21 +162,14 @@
       "group": "cities",
       "city": "Medellín",
       "page": 3,
-      "path": "instagram_cards/2026-05-13/medellin-03.svg",
-      "description_path": "instagram_cards/2026-05-13/medellin-description.txt",
+      "path": "instagram_cards/2026-06-04/medellin-03.svg",
+      "description_path": "instagram_cards/2026-06-04/medellin-description.txt",
       "currencies": [
         "NicaraguanCordoba",
         "DanishKrone",
         "NorwegianKrone",
         "SwedishKrone"
       ]
-    },
-    {
-      "type": "newsletter",
-      "group": "newsletter",
-      "path": "instagram_cards/2026-05-13/newsletter.svg",
-      "description_path": "instagram_cards/2026-05-13/newsletter-description.txt",
-      "title": "Inflación, compras oficiales y peso sin piso"
     }
   ],
   "descriptions": [
@@ -184,75 +177,34 @@
       "type": "city_rates",
       "group": "cities",
       "city": "Barranquilla",
-      "path": "instagram_cards/2026-05-13/barranquilla-description.txt"
+      "path": "instagram_cards/2026-06-04/barranquilla-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Bogotá",
-      "path": "instagram_cards/2026-05-13/bogota-description.txt"
+      "path": "instagram_cards/2026-06-04/bogota-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Cali",
-      "path": "instagram_cards/2026-05-13/cali-description.txt"
+      "path": "instagram_cards/2026-06-04/cali-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Cartagena",
-      "path": "instagram_cards/2026-05-13/cartagena-description.txt"
+      "path": "instagram_cards/2026-06-04/cartagena-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Medellín",
-      "path": "instagram_cards/2026-05-13/medellin-description.txt"
-    },
-    {
-      "type": "newsletter",
-      "path": "instagram_cards/2026-05-13/newsletter-description.txt",
-      "title": "Inflación, compras oficiales y peso sin piso"
+      "path": "instagram_cards/2026-06-04/medellin-description.txt"
     }
   ],
   "newsletter": {
-    "matched": true,
-    "title": "Inflación, compras oficiales y peso sin piso",
-    "date": "13 may 2026",
-    "path": "instagram_cards/2026-05-13/newsletter.svg",
-    "description_path": "instagram_cards/2026-05-13/newsletter-description.txt",
-    "hashtags": [
-      "#DivisasCOL",
-      "#DolarColombia",
-      "#PesoColombiano",
-      "#MercadoCambiario",
-      "#FinanzasPersonales",
-      "#AnalisisEconomico",
-      "#NoticiasColombia",
-      "#Inflacion",
-      "#Compras",
-      "#Oficiales",
-      "#Peso",
-      "#Piso",
-      "#Analisis",
-      "#Editorial",
-      "#Rebrote",
-      "#Inflacionario",
-      "#Compra",
-      "#Oficial",
-      "#Dolares",
-      "#Presion",
-      "#Divisas",
-      "#Forex",
-      "#ForexTrading",
-      "#Trading",
-      "#Trader",
-      "#MercadoDeDivisas",
-      "#TipoDeCambio",
-      "#TasasDeCambio",
-      "#USD",
-      "#EUR"
-    ]
+    "matched": false
   }
 }
