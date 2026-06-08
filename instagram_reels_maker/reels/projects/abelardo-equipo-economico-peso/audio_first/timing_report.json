@@ -1,0 +1,216 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "scene_id": "hook",
+    "text": "Por que Abelardo luce mas preparado economicamente?",
+    "start": 0.0,
+    "end": 2.802792,
+    "duration": 2.802792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_001.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 2.802792,
+    "end": 2.862792,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_002_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "scene_id": "hook",
+    "text": "Porque suma equipo tecnico, mercado y experiencia en Hacienda.",
+    "start": 2.862792,
+    "end": 5.981042,
+    "duration": 3.11825,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_002.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 5.981042,
+    "end": 6.101042,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_004_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "scene_id": "restrepo",
+    "text": "Que cambia con Jose Manuel Restrepo en la formula?",
+    "start": 6.101042,
+    "end": 8.74025,
+    "duration": 2.639208,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_003.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 8.74025,
+    "end": 8.80025,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_006_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "scene_id": "restrepo",
+    "text": "Cambia la senal para Hacienda, comercio exterior y mercado.",
+    "start": 8.80025,
+    "end": 11.66,
+    "duration": 2.85975,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_004.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 11.66,
+    "end": 11.78,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_008_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "scene_id": "fiscal",
+    "text": "Cual es la primera tarea economica del proximo gobierno?",
+    "start": 11.78,
+    "end": 14.755417,
+    "duration": 2.975417,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_005.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 14.755417,
+    "end": 14.815417,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_010_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "scene_id": "fiscal",
+    "text": "Ordenar la caja, reducir fugas y recuperar credibilidad fiscal.",
+    "start": 14.815417,
+    "end": 18.325417,
+    "duration": 3.51,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_006.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 18.325417,
+    "end": 18.445417,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_012_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "scene_id": "inversion",
+    "text": "Por que eso importa para el dolar en Colombia?",
+    "start": 18.445417,
+    "end": 20.725709,
+    "duration": 2.280292,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_007.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 20.725709,
+    "end": 20.785709,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_014_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "scene_id": "inversion",
+    "text": "Si vuelve inversion, baja cobertura en dolares.",
+    "start": 20.785709,
+    "end": 23.207459,
+    "duration": 2.42175,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_008.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 23.207459,
+    "end": 23.327459,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_016_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "scene_id": "riesgo",
+    "text": "Eso garantiza exito automatico?",
+    "start": 23.327459,
+    "end": 25.339917,
+    "duration": 2.012458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_009.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 25.339917,
+    "end": 25.399917,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_018_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "scene_id": "riesgo",
+    "text": "No, pero la credibilidad fiscal pesa mas.",
+    "start": 25.399917,
+    "end": 27.595125,
+    "duration": 2.195208,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_010.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 27.595125,
+    "end": 27.715125,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_020_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "scene_id": "cierre",
+    "text": "Entonces que debe mirar el votante financiero?",
+    "start": 27.715125,
+    "end": 30.129375,
+    "duration": 2.41425,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_011.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 30.129375,
+    "end": 30.189375,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\segments\\segment_022_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "scene_id": "cierre",
+    "text": "Quien tiene equipo, plan y disciplina para ejecutar.",
+    "start": 30.189375,
+    "end": 32.621208,
+    "duration": 2.431833,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\chunks\\chunk_012.wav"
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\abelardo-equipo-economico-peso\\audio_first\\voiceover_natural.wav",
+    "target_duration": 32.621208,
+    "actual_duration": 32.621208
+  }
+]

@@ -1,0 +1,25 @@
+Project: abelardo-equipo-economico-peso
+Video: C:\Users\juanv\Downloads\Divisas-COL\instagram_reels_maker\reels\projects\abelardo-equipo-economico-peso\final\final_audio_first.mp4
+Manifest: C:\Users\juanv\Downloads\Divisas-COL\instagram_reels_maker\reels\projects\abelardo-equipo-economico-peso\final\publish-manifest.json
+
+Publish command:
+python reel_maker.py publish-reel --project abelardo-equipo-economico-peso
+
+Caption:
+Abelardo, equipo economico y peso
+
+Por que Abelardo luce mas preparado economicamente? Porque suma equipo tecnico, mercado y experiencia en Hacienda. Que cambia con Jose Manuel Restrepo en la formula? Cambia la senal para Hacienda, comercio exterior y mercado. Cual es la primera tarea economica del proximo gobierno? Ordenar la caja, reducir fugas y recuperar credibilidad fiscal. Por que eso importa para el dolar en Colombia?
+
+Análisis rápido de Divisas COL para leer mejor el dólar, el peso colombiano y las señales que está mirando el mercado.
+
+Guárdalo y compártelo con alguien que siga el dólar en Colombia.
+Fuente: divisascol.com
+
+.
+.
+.
+.
+.
+.
+
+#DivisasCOL #DolarColombia #PesoColombiano #USDCOP #Dolar #Colombia #EconomiaColombiana #MercadoCambiario #FinanzasPersonales #FinanzasColombia #NoticiasEconomicas #AnalisisEconomico #DolarHoy #ReelsColombia #Abelardo #Equipo #Economico #Peso

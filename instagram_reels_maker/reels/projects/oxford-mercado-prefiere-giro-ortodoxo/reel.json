@@ -1,0 +1,169 @@
+{
+  "slug": "oxford-mercado-prefiere-giro-ortodoxo",
+  "title": "Oxford y el giro ortodoxo",
+  "status": "rendered",
+  "workflow_version": "audio_first_short_line_v1",
+  "template": "interview_reel",
+  "niche": "analisis macro Colombia",
+  "format": "interview_q_and_a",
+  "created_at": "2026-06-07T19:26:10+00:00",
+  "source_notes": [
+    {
+      "source": "Infobae / Oxford Economics",
+      "url": "https://www.infobae.com/colombia/2026/02/23/asi-estaria-la-economia-colombiana-si-en-las-elecciones-de-2026-ganan-abelardo-de-la-espriella-o-ivan-cepeda-segun-oxford-economics/",
+      "note": "Oxford proyecta que un gobierno mas ortodoxo y con consolidacion fiscal fortaleceria el peso y acercaria bonos a 10 anos a 9,5%."
+    },
+    {
+      "source": "Infobae / Oxford Economics",
+      "url": "https://www.infobae.com/colombia/2026/02/23/asi-estaria-la-economia-colombiana-si-en-las-elecciones-de-2026-ganan-abelardo-de-la-espriella-o-ivan-cepeda-segun-oxford-economics/",
+      "note": "En continuidad con restricciones a hidrocarburos, Oxford ve peso mas debil y bonos a 10 anos alrededor de 12,5%."
+    },
+    {
+      "source": "El Pais",
+      "url": "https://elpais.com/america-colombia/elecciones-presidenciales/2026-06-01/las-propuestas-de-abelardo-de-la-espriella-seguridad-de-mano-dura-reduccion-del-estado-y-libertades-tributarias.html",
+      "note": "De la Espriella defiende fracking, reduccion de impuestos empresariales y desregulacion, puntos compatibles con una lectura de giro pro-inversion."
+    }
+  ],
+  "voiceover": {
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
+    "script_file": "script.txt",
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02,
+    "timing_report": "audio_first/timing_report.json"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 5.509292,
+      "subtitle": "Que dijo Oxford sobre Colombia y las elecciones? Que el resultado puede mover mercado, dolar y bonos.",
+      "voiceover_lines": [
+        "Que dijo Oxford sobre Colombia y las elecciones?",
+        "Que el resultado puede mover mercado, dolar y bonos."
+      ],
+      "voiceover_text": "Que dijo Oxford sobre Colombia y las elecciones? Que el resultado puede mover mercado, dolar y bonos.",
+      "visual_prompt": "Realistic vertical 9:16 macro finance news photo. Colombian peso, U.S. dollar, bond chart blurred, election calendar without logos, serious editorial lighting, clean lower subtitle lane.",
+      "image": "images/001_hook.png",
+      "prompt_file": "prompts/001_hook.txt",
+      "headline": "DIVISAS COL | OXFORD",
+      "data_callout": "Elecciones mueven mercados",
+      "start_seconds": 0.0,
+      "end_seconds": 5.509292,
+      "raw_image": "images/raw_001_hook.png"
+    },
+    {
+      "id": "ortodoxo",
+      "duration_seconds": 5.88775,
+      "subtitle": "Que escenario premia el mercado segun Oxford? Un giro ortodoxo con disciplina fiscal, inversion y energia.",
+      "voiceover_lines": [
+        "Que escenario premia el mercado segun Oxford?",
+        "Un giro ortodoxo con disciplina fiscal, inversion y energia."
+      ],
+      "voiceover_text": "Que escenario premia el mercado segun Oxford? Un giro ortodoxo con disciplina fiscal, inversion y energia.",
+      "visual_prompt": "Realistic vertical 9:16 finance photo about orthodox policy turn. Clean budget report, oil and gas sector folder, investment memo, COP and USD bills, sober newsroom style, clean subtitle lane.",
+      "image": "images/002_data.png",
+      "prompt_file": "prompts/002_ortodoxo.txt",
+      "headline": "DIVISAS COL | GIRO ORTODOXO",
+      "data_callout": "Fiscal + inversion + energia",
+      "start_seconds": 5.509292,
+      "end_seconds": 11.397042,
+      "raw_image": "images/raw_002_ortodoxo.png"
+    },
+    {
+      "id": "peso",
+      "duration_seconds": 4.77525,
+      "subtitle": "Que pasaria con el peso en ese escenario? Oxford ve mas fuerza con correctivos creibles.",
+      "voiceover_lines": [
+        "Que pasaria con el peso en ese escenario?",
+        "Oxford ve mas fuerza con correctivos creibles."
+      ],
+      "voiceover_text": "Que pasaria con el peso en ese escenario? Oxford ve mas fuerza con correctivos creibles.",
+      "visual_prompt": "Realistic vertical 9:16 Colombian peso strengthening concept. Currency exchange desk, pesos and dollars, upward but blurred chart, analyst notebook, sober editorial lighting, clean subtitle lane.",
+      "image": "images/003_comparison.png",
+      "prompt_file": "prompts/003_peso.txt",
+      "headline": "DIVISAS COL | PESO MAS FUERTE",
+      "data_callout": "Correctivos creibles",
+      "start_seconds": 11.397042,
+      "end_seconds": 16.172292,
+      "raw_image": "images/raw_003_peso.png"
+    },
+    {
+      "id": "bonos",
+      "duration_seconds": 5.646917,
+      "subtitle": "Que numero marca la diferencia en bonos? Ortodoxia cerca de nueve cinco, continuidad de doce cinco.",
+      "voiceover_lines": [
+        "Que numero marca la diferencia en bonos?",
+        "Ortodoxia cerca de nueve cinco, continuidad de doce cinco."
+      ],
+      "voiceover_text": "Que numero marca la diferencia en bonos? Ortodoxia cerca de nueve cinco, continuidad de doce cinco.",
+      "visual_prompt": "Realistic vertical 9:16 sovereign bond comparison photo. Two bond yield folders, calculator, Colombia flag color accents, blurred non-readable chart, clean lower subtitle lane.",
+      "image": "images/004_interpretation.png",
+      "prompt_file": "prompts/004_bonos.txt",
+      "headline": "DIVISAS COL | BONOS 10 ANOS",
+      "data_callout": "9,5% vs 12,5%",
+      "start_seconds": 16.172292,
+      "end_seconds": 21.819209,
+      "raw_image": "images/raw_004_bonos.png"
+    },
+    {
+      "id": "continuidad",
+      "duration_seconds": 4.849333,
+      "subtitle": "Que castiga Oxford en la continuidad? Menos petroleo, menos caja y mas presion cambiaria.",
+      "voiceover_lines": [
+        "Que castiga Oxford en la continuidad?",
+        "Menos petroleo, menos caja y mas presion cambiaria."
+      ],
+      "voiceover_text": "Que castiga Oxford en la continuidad? Menos petroleo, menos caja y mas presion cambiaria.",
+      "visual_prompt": "Realistic vertical 9:16 finance risk photo. Oil export folder, tax revenue report, Colombian pesos, dollars, warning-colored desk light, no logos, clean subtitle lane.",
+      "image": "images/005_cta.png",
+      "prompt_file": "prompts/005_continuidad.txt",
+      "headline": "DIVISAS COL | CONTINUIDAD",
+      "data_callout": "Menos divisas, mas presion",
+      "start_seconds": 21.819209,
+      "end_seconds": 26.668542,
+      "raw_image": "images/raw_005_continuidad.png"
+    },
+    {
+      "id": "cierre",
+      "duration_seconds": 5.671958,
+      "subtitle": "Entonces por que Abelardo gana puntos economicos? Porque su linea encaja mejor con disciplina y confianza.",
+      "voiceover_lines": [
+        "Entonces por que Abelardo gana puntos economicos?",
+        "Porque su linea encaja mejor con disciplina y confianza."
+      ],
+      "voiceover_text": "Entonces por que Abelardo gana puntos economicos? Porque su linea encaja mejor con disciplina y confianza.",
+      "visual_prompt": "Realistic vertical 9:16 closing macro analysis photo. Analyst desk, fiscal discipline folder, COP and USD bills, blank ballot paper, serious editorial lighting, clean lower subtitle lane.",
+      "image": "images/006_cierre.png",
+      "prompt_file": "prompts/006_cierre.txt",
+      "headline": "DIVISAS COL | LECTURA DE MERCADO",
+      "data_callout": "Disciplina pesa",
+      "start_seconds": 26.668542,
+      "end_seconds": 32.3405,
+      "raw_image": "images/raw_006_cierre.png"
+    }
+  ],
+  "cta": "El mercado no vota, pero si cobra.",
+  "outputs": {
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "review_notes": [
+    "Interview format: one question and one direct answer per scene.",
+    "Oxford numbers are treated as a market scenario, not as certainty.",
+    "Voice lines stay within audio-first short-line limits."
+  ],
+  "target_duration_seconds": 32.3405,
+  "rendered_at": "2026-06-07T21:20:25+00:00"
+}

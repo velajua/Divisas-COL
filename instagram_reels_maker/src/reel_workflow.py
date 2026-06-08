@@ -310,8 +310,134 @@ def generate_subtitles_from_cues(cues: list[SubtitleCue]) -> str:
     return "\n".join(blocks).strip() + "\n"
 
 
+def write_overlay_ass(path: str | Path, scenes: list[dict[str, Any]]) -> Path:
+    output_path = Path(path)
+    lines = [
+        "[Script Info]",
+        "ScriptType: v4.00+",
+        "PlayResX: 1080",
+        "PlayResY: 1920",
+        "WrapStyle: 2",
+        "ScaledBorderAndShadow: yes",
+        "",
+        "[V4+ Styles]",
+        "Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding",
+        "Style: Brand,Arial,34,&H00FFFFFF,&H000000FF,&H00000000,&H002D2DE8,-1,0,0,0,100,100,0,0,3,10,0,7,70,70,70,1",
+        "Style: Headline,Arial,58,&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,3,16,0,7,70,70,70,1",
+        "Style: Callout,Arial,42,&H0000D7FF,&H000000FF,&H00000000,&HB0000000,-1,0,0,0,100,100,0,0,3,14,0,5,70,70,70,1",
+        "",
+        "[Events]",
+        "Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text",
+    ]
+
+    for scene in scenes:
+        start = float(scene.get("start_seconds", 0.0))
+        end = float(scene.get("end_seconds", start + float(scene.get("duration_seconds", 0.0))))
+        if end <= start:
+            continue
+
+        headline = normalize_overlay_headline(scene.get("headline") or scene.get("id") or "")
+        callout = str(scene.get("data_callout") or "").strip()
+        popup_start = min(end - 0.2, start + max(0.8, (end - start) * 0.26))
+        popup_end = max(popup_start + 0.4, min(end - 0.2, popup_start + max(2.0, (end - start) * 0.48)))
+
+        lines.append(
+            f"Dialogue: 2,{format_ass_time(start)},{format_ass_time(end)},Brand,,0,0,0,,"
+            "{\\pos(72,82)\\an7}DIVISAS COL | COLOMBIA"
+        )
+        if headline:
+            lines.append(
+                f"Dialogue: 1,{format_ass_time(start)},{format_ass_time(end)},Headline,,0,0,0,,"
+                f"{{\\pos(72,152)\\an7}}{ass_wrap(headline.upper(), 22)}"
+            )
+        if callout:
+            lines.append(
+                f"Dialogue: 3,{format_ass_time(popup_start)},{format_ass_time(popup_end)},Callout,,0,0,0,,"
+                f"{{\\pos(540,1088)\\an5}}{ass_wrap(callout.upper(), 24)}"
+            )
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    write_text_lf(output_path, "\n".join(lines) + "\n")
+    return output_path
+
+
+def normalize_overlay_headline(value: Any) -> str:
+    if isinstance(value, list):
+        text = " | ".join(str(item).strip() for item in value if str(item).strip())
+    else:
+        text = str(value).strip()
+    text = re.sub(r"^DIVISAS\s+COL\s*\|\s*COLOMBIA\s*[-|]?\s*", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"^DIVISAS\s+COL\s*[-|]?\s*", "", text, flags=re.IGNORECASE)
+    return text.strip(" -|")
+
+
+def ass_wrap(text: str, max_chars: int) -> str:
+    words = ass_escape(text).split()
+    lines: list[str] = []
+    current = ""
+    for word in words:
+        candidate = f"{current} {word}".strip()
+        if len(candidate) <= max_chars:
+            current = candidate
+        else:
+            if current:
+                lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    return r"\N".join(lines[:3])
+
+
+def ass_escape(text: str) -> str:
+    return text.replace("\\", r"\\").replace("{", r"\{").replace("}", r"\}")
+
+
+def format_ass_time(seconds: float) -> str:
+    centiseconds = int(round(seconds * 100))
+    hours = centiseconds // 360000
+    centiseconds %= 360000
+    minutes = centiseconds // 6000
+    centiseconds %= 6000
+    secs = centiseconds // 100
+    centis = centiseconds % 100
+    return f"{hours}:{minutes:02d}:{secs:02d}.{centis:02d}"
+
+
 def ends_complete_sentence(text: str) -> bool:
-    return text.rstrip().endswith((".", "!", "?", "…"))
+    return voiceover_line_sentence_error(text) is None
+
+
+def voiceover_line_sentence_error(text: str) -> str | None:
+    stripped = text.strip()
+    if not stripped:
+        return "must not be blank"
+
+    terminal = ""
+    for marker in ("?!", "!?", ".", "?", "!"):
+        if stripped.endswith(marker):
+            terminal = marker
+            body = stripped[: -len(marker)]
+            break
+    else:
+        return "must end with one sentence marker: ., ?, !, ?!, or !?"
+
+    if not body.strip():
+        return "must include words before the sentence marker"
+
+    for marker in ("...", "…"):
+        if marker in stripped:
+            return "must not use ellipses"
+
+    if any(char in body for char in ".?!"):
+        return "must not contain sentence-ending punctuation before the final marker"
+
+    if terminal in ("?!", "!?"):
+        return None
+
+    if stripped.endswith(("??", "!!", "..", ".?", ".!", "?.", "!.","?!!", "!!?", "?!?", "!?!" )):
+        return "must use only one final sentence marker"
+
+    return None
 
 
 def regenerate_subtitles(root: str | Path, slug: str) -> Path:
@@ -563,14 +689,18 @@ def validate_short_voiceover_lines(scenes: list[dict[str, Any]]) -> None:
                     f"Scene {scene_id} voiceover line {line_index} must be "
                     f"{MAX_AUDIO_FIRST_LINE_CHARS} characters or fewer."
                 )
+            sentence_error = voiceover_line_sentence_error(text)
+            if sentence_error:
+                raise ReelWorkflowError(
+                    f"Scene {scene_id} voiceover line {line_index} {sentence_error}."
+                )
 
-            word_count = len(re.findall(r"\b[\wáéíóúÁÉÍÓÚñÑ]+\b", text))
+            word_count = len(re.findall(r"\b[\wÀ-ÿ]+\b", text))
             if word_count > MAX_AUDIO_FIRST_LINE_WORDS:
                 raise ReelWorkflowError(
                     f"Scene {scene_id} voiceover line {line_index} must be "
                     f"{MAX_AUDIO_FIRST_LINE_WORDS} words or fewer."
                 )
-
 
 def flatten_voiceover_lines(scenes: list[dict[str, Any]]) -> list[str]:
     lines = []
@@ -1026,6 +1156,7 @@ def build_audio_first_render(
         raise ReelWorkflowError(f"Subtitles file not found: {subtitles_file}")
 
     write_concat_file(project_path, scenes, concat_file)
+    overlay_file = write_overlay_ass(project_path / "render" / "overlays.ass", scenes)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run(
         build_render_command(
@@ -1033,6 +1164,7 @@ def build_audio_first_render(
             subtitles_file=subtitles_file,
             audio_file=audio_file,
             output_file=output_path,
+            overlay_file=overlay_file,
         ),
         check=True,
     )
@@ -1194,15 +1326,24 @@ def build_render_command(
     subtitles_file: str | Path,
     audio_file: str | Path,
     output_file: str | Path,
+    overlay_file: str | Path | None = None,
 ) -> list[str]:
     subtitle_filter = escape_subtitle_filter_path(subtitles_file)
-    vf = (
-        "fps=30,"
-        "scale=1080:1920:force_original_aspect_ratio=increase,"
-        "crop=1080:1920,"
+    filters = [
+        "fps=30",
+        "scale=1080:1920:force_original_aspect_ratio=increase",
+        "crop=1080:1920",
+    ]
+    if overlay_file is not None:
+        overlay_filter = escape_subtitle_filter_path(overlay_file)
+        filters.append(f"subtitles='{overlay_filter}'")
+    filters.append(
         f"subtitles='{subtitle_filter}':force_style='FontName=Arial,FontSize=12,"
         "PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=1,Outline=1.5,"
         "Alignment=2,MarginV=80'"
+    )
+    vf = (
+        ",".join(filters)
     )
     return [
         "ffmpeg",
@@ -1241,6 +1382,7 @@ def render_reel(root: str | Path, slug: str, use_clean_audio: bool = True) -> Pa
     concat_file = render_dir / "concat.txt"
     write_concat_file(project_dir, reel_data["scenes"], concat_file)
     subtitles_file = regenerate_subtitles(root, slug)
+    overlay_file = write_overlay_ass(render_dir / "overlays.ass", reel_data["scenes"])
 
     clean_name = reel_data["voiceover"].get("clean_file", "voiceover_clean.wav")
     raw_name = reel_data["voiceover"]["file"]
@@ -1257,6 +1399,7 @@ def render_reel(root: str | Path, slug: str, use_clean_audio: bool = True) -> Pa
             subtitles_file=subtitles_file,
             audio_file=audio_file,
             output_file=output_file,
+            overlay_file=overlay_file,
         ),
         check=True,
     )

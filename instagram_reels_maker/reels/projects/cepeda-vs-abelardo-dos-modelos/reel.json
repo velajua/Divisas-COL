@@ -1,0 +1,169 @@
+{
+  "slug": "cepeda-vs-abelardo-dos-modelos",
+  "title": "Cepeda vs Abelardo: dos modelos",
+  "status": "rendered",
+  "workflow_version": "audio_first_short_line_v1",
+  "template": "interview_reel",
+  "niche": "analisis cambiario Colombia",
+  "format": "interview_q_and_a",
+  "created_at": "2026-06-07T19:26:11+00:00",
+  "source_notes": [
+    {
+      "source": "El Espectador",
+      "url": "https://www.elespectador.com/economia/propuestas-economicas-cepeda-y-de-la-espriella-segunda-vuelta-presidencial-colombia-2026/",
+      "note": "La segunda vuelta enfrenta dos visiones economicas opuestas entre Iván Cepeda y Abelardo de la Espriella."
+    },
+    {
+      "source": "El Pais",
+      "url": "https://elpais.com/america-colombia/elecciones-presidenciales/2026-06-01/las-propuestas-de-abelardo-de-la-espriella-seguridad-de-mano-dura-reduccion-del-estado-y-libertades-tributarias.html",
+      "note": "De la Espriella propone menor Estado, libertades tributarias, desregulacion y defensa del fracking."
+    },
+    {
+      "source": "Infobae / Oxford Economics",
+      "url": "https://www.infobae.com/colombia/2026/02/23/asi-estaria-la-economia-colombiana-si-en-las-elecciones-de-2026-ganan-abelardo-de-la-espriella-o-ivan-cepeda-segun-oxford-economics/",
+      "note": "Oxford advierte que continuidad de politicas actuales mantendria restricciones a hidrocarburos, debilitando peso y presionando bonos."
+    }
+  ],
+  "voiceover": {
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
+    "script_file": "script.txt",
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02,
+    "timing_report": "audio_first/timing_report.json"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 5.179625,
+      "subtitle": "Que se juega Colombia entre Cepeda y Abelardo? Se juega confianza, deuda, dolar e inversion.",
+      "voiceover_lines": [
+        "Que se juega Colombia entre Cepeda y Abelardo?",
+        "Se juega confianza, deuda, dolar e inversion."
+      ],
+      "voiceover_text": "Que se juega Colombia entre Cepeda y Abelardo? Se juega confianza, deuda, dolar e inversion.",
+      "visual_prompt": "Realistic vertical 9:16 editorial finance photo about Colombia runoff economic choice. Split desk with budget papers, pesos, dollars, blank ballot, no politician faces, no party logos, clean subtitle lane.",
+      "image": "images/001_hook.png",
+      "prompt_file": "prompts/001_hook.txt",
+      "headline": "DIVISAS COL | DOS MODELOS",
+      "data_callout": "Confianza, deuda, dolar",
+      "start_seconds": 0.0,
+      "end_seconds": 5.179625,
+      "raw_image": "images/raw_001_hook.png"
+    },
+    {
+      "id": "cepeda",
+      "duration_seconds": 5.264625,
+      "subtitle": "Cual es el riesgo economico de Cepeda? Mas continuidad, mas Estado y una cuenta fiscal incierta.",
+      "voiceover_lines": [
+        "Cual es el riesgo economico de Cepeda?",
+        "Mas continuidad, mas Estado y una cuenta fiscal incierta."
+      ],
+      "voiceover_text": "Cual es el riesgo economico de Cepeda? Mas continuidad, mas Estado y una cuenta fiscal incierta.",
+      "visual_prompt": "Realistic vertical 9:16 finance risk photo. Public spending folders, tax forms, Colombian pesos, calculator, darker editorial lighting, no campaign imagery, clean lower subtitle lane.",
+      "image": "images/002_data.png",
+      "prompt_file": "prompts/002_cepeda.txt",
+      "headline": "DIVISAS COL | CONTINUIDAD",
+      "data_callout": "Mas Estado, cuenta incierta",
+      "start_seconds": 5.179625,
+      "end_seconds": 10.44425,
+      "raw_image": "images/raw_002_cepeda.png"
+    },
+    {
+      "id": "abelardo",
+      "duration_seconds": 5.480667,
+      "subtitle": "Cual es la apuesta economica de Abelardo? Reducir Estado, bajar trabas, atraer capital y productividad.",
+      "voiceover_lines": [
+        "Cual es la apuesta economica de Abelardo?",
+        "Reducir Estado, bajar trabas, atraer capital y productividad."
+      ],
+      "voiceover_text": "Cual es la apuesta economica de Abelardo? Reducir Estado, bajar trabas, atraer capital y productividad.",
+      "visual_prompt": "Realistic vertical 9:16 pro-investment policy photo. Business permit paperwork, infrastructure and energy folders, COP and USD bills, clean editorial finance lighting, subtitle lane.",
+      "image": "images/003_comparison.png",
+      "prompt_file": "prompts/003_abelardo.txt",
+      "headline": "DIVISAS COL | PRO INVERSION",
+      "data_callout": "Capital y productividad",
+      "start_seconds": 10.44425,
+      "end_seconds": 15.924917,
+      "raw_image": "images/raw_003_abelardo.png"
+    },
+    {
+      "id": "mercado",
+      "duration_seconds": 5.058,
+      "subtitle": "Como decide el mercado entre los dos modelos? Mira caja, energia, impuestos y reglas.",
+      "voiceover_lines": [
+        "Como decide el mercado entre los dos modelos?",
+        "Mira caja, energia, impuestos y reglas."
+      ],
+      "voiceover_text": "Como decide el mercado entre los dos modelos? Mira caja, energia, impuestos y reglas.",
+      "visual_prompt": "Realistic vertical 9:16 market analysis photo. Analyst comparing fiscal folders, energy report, tax document, exchange rate screen blurred, no logos, clean lower subtitle lane.",
+      "image": "images/004_interpretation.png",
+      "prompt_file": "prompts/004_mercado.txt",
+      "headline": "DIVISAS COL | MERCADO",
+      "data_callout": "Caja, energia, reglas",
+      "start_seconds": 15.924917,
+      "end_seconds": 20.982917,
+      "raw_image": "images/raw_004_mercado.png"
+    },
+    {
+      "id": "peso",
+      "duration_seconds": 5.35975,
+      "subtitle": "Que modelo luce mejor para el peso? El que reduzca incertidumbre fiscal y atraiga dolares productivos.",
+      "voiceover_lines": [
+        "Que modelo luce mejor para el peso?",
+        "El que reduzca incertidumbre fiscal y atraiga dolares productivos."
+      ],
+      "voiceover_text": "Que modelo luce mejor para el peso? El que reduzca incertidumbre fiscal y atraiga dolares productivos.",
+      "visual_prompt": "Realistic vertical 9:16 Colombian peso and productive dollars concept. Factory invoice, export folder, COP and USD, stabilized chart blurred, serious finance newsroom lighting, clean subtitle lane.",
+      "image": "images/005_cta.png",
+      "prompt_file": "prompts/005_peso.txt",
+      "headline": "DIVISAS COL | PESO",
+      "data_callout": "Dolares productivos",
+      "start_seconds": 20.982917,
+      "end_seconds": 26.342667,
+      "raw_image": "images/raw_005_peso.png"
+    },
+    {
+      "id": "cierre",
+      "duration_seconds": 6.261584,
+      "subtitle": "Entonces quien se ve mas calificado para la economia? Abelardo, si la prioridad es disciplina, inversion y confianza.",
+      "voiceover_lines": [
+        "Entonces quien se ve mas calificado para la economia?",
+        "Abelardo, si la prioridad es disciplina, inversion y confianza."
+      ],
+      "voiceover_text": "Entonces quien se ve mas calificado para la economia? Abelardo, si la prioridad es disciplina, inversion y confianza.",
+      "visual_prompt": "Realistic vertical 9:16 closing finance news photo. Blank ballot paper, fiscal discipline report, Colombian pesos and U.S. dollars, sober editorial lighting, clean lower subtitle lane.",
+      "image": "images/006_cierre.png",
+      "prompt_file": "prompts/006_cierre.txt",
+      "headline": "DIVISAS COL | PRIORIDAD ECONOMICA",
+      "data_callout": "Disciplina, inversion, confianza",
+      "start_seconds": 26.342667,
+      "end_seconds": 32.604251,
+      "raw_image": "images/raw_006_cierre.png"
+    }
+  ],
+  "cta": "Vote pensando tambien en el dolar.",
+  "outputs": {
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "review_notes": [
+    "Interview format: one question and one direct answer per scene.",
+    "Comparison is explicitly economic and market-facing, not a broad personal endorsement.",
+    "Voice lines stay within audio-first short-line limits."
+  ],
+  "target_duration_seconds": 32.60425,
+  "rendered_at": "2026-06-07T21:21:07+00:00"
+}

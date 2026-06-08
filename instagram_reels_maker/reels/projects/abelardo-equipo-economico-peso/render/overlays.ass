@@ -1,0 +1,33 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Brand,Arial,34,&H00FFFFFF,&H000000FF,&H00000000,&H002D2DE8,-1,0,0,0,100,100,0,0,3,10,0,7,70,70,70,1
+Style: Headline,Arial,58,&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,3,16,0,7,70,70,70,1
+Style: Callout,Arial,42,&H0000D7FF,&H000000FF,&H00000000,&HB0000000,-1,0,0,0,100,100,0,0,3,14,0,5,70,70,70,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:06.10,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:00.00,0:00:06.10,Headline,,0,0,0,,{\pos(72,152)\an7}EQUIPO ECONOMICO
+Dialogue: 3,0:00:01.59,0:00:04.51,Callout,,0,0,0,,{\pos(540,1088)\an5}HACIENDA + MERCADO +\NPESO
+Dialogue: 2,0:00:06.10,0:00:11.78,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:06.10,0:00:11.78,Headline,,0,0,0,,{\pos(72,152)\an7}SENAL TECNICA
+Dialogue: 3,0:00:07.58,0:00:10.30,Callout,,0,0,0,,{\pos(540,1088)\an5}EXMINISTRO DE HACIENDA
+Dialogue: 2,0:00:11.78,0:00:18.45,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:11.78,0:00:18.45,Headline,,0,0,0,,{\pos(72,152)\an7}ORDENAR LA CAJA
+Dialogue: 3,0:00:13.51,0:00:16.71,Callout,,0,0,0,,{\pos(540,1088)\an5}GASTO, FUGAS,\NCREDIBILIDAD
+Dialogue: 2,0:00:18.45,0:00:23.33,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:18.45,0:00:23.33,Headline,,0,0,0,,{\pos(72,152)\an7}CONFIANZA
+Dialogue: 3,0:00:19.71,0:00:22.06,Callout,,0,0,0,,{\pos(540,1088)\an5}MENOS COBERTURA EN\NDOLARES
+Dialogue: 2,0:00:23.33,0:00:27.72,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:23.33,0:00:27.72,Headline,,0,0,0,,{\pos(72,152)\an7}SIN GARANTIAS
+Dialogue: 3,0:00:24.47,0:00:26.57,Callout,,0,0,0,,{\pos(540,1088)\an5}CREDIBILIDAD > PROMESAS
+Dialogue: 2,0:00:27.72,0:00:32.62,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:27.72,0:00:32.62,Headline,,0,0,0,,{\pos(72,152)\an7}VOTO FINANCIERO
+Dialogue: 3,0:00:28.99,0:00:31.35,Callout,,0,0,0,,{\pos(540,1088)\an5}EQUIPO, PLAN, DISCIPLINA

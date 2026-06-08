@@ -1,0 +1,33 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Brand,Arial,34,&H00FFFFFF,&H000000FF,&H00000000,&H002D2DE8,-1,0,0,0,100,100,0,0,3,10,0,7,70,70,70,1
+Style: Headline,Arial,58,&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,3,16,0,7,70,70,70,1
+Style: Callout,Arial,42,&H0000D7FF,&H000000FF,&H00000000,&HB0000000,-1,0,0,0,100,100,0,0,3,14,0,5,70,70,70,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:05.51,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:00.00,0:00:05.51,Headline,,0,0,0,,{\pos(72,152)\an7}OXFORD
+Dialogue: 3,0:00:01.43,0:00:04.08,Callout,,0,0,0,,{\pos(540,1088)\an5}ELECCIONES MUEVEN\NMERCADOS
+Dialogue: 2,0:00:05.51,0:00:11.40,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:05.51,0:00:11.40,Headline,,0,0,0,,{\pos(72,152)\an7}GIRO ORTODOXO
+Dialogue: 3,0:00:07.04,0:00:09.87,Callout,,0,0,0,,{\pos(540,1088)\an5}FISCAL + INVERSION +\NENERGIA
+Dialogue: 2,0:00:11.40,0:00:16.17,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:11.40,0:00:16.17,Headline,,0,0,0,,{\pos(72,152)\an7}PESO MAS FUERTE
+Dialogue: 3,0:00:12.64,0:00:14.93,Callout,,0,0,0,,{\pos(540,1088)\an5}CORRECTIVOS CREIBLES
+Dialogue: 2,0:00:16.17,0:00:21.82,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:16.17,0:00:21.82,Headline,,0,0,0,,{\pos(72,152)\an7}BONOS 10 ANOS
+Dialogue: 3,0:00:17.64,0:00:20.35,Callout,,0,0,0,,{\pos(540,1088)\an5}9,5% VS 12,5%
+Dialogue: 2,0:00:21.82,0:00:26.67,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:21.82,0:00:26.67,Headline,,0,0,0,,{\pos(72,152)\an7}CONTINUIDAD
+Dialogue: 3,0:00:23.08,0:00:25.41,Callout,,0,0,0,,{\pos(540,1088)\an5}MENOS DIVISAS, MAS\NPRESION
+Dialogue: 2,0:00:26.67,0:00:32.34,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:26.67,0:00:32.34,Headline,,0,0,0,,{\pos(72,152)\an7}LECTURA DE MERCADO
+Dialogue: 3,0:00:28.14,0:00:30.87,Callout,,0,0,0,,{\pos(540,1088)\an5}DISCIPLINA PESA

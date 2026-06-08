@@ -1,0 +1,13 @@
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/001_hook.png'
+duration 5.509
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/002_data.png'
+duration 5.888
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/003_comparison.png'
+duration 4.775
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/004_interpretation.png'
+duration 5.647
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/005_cta.png'
+duration 4.849
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/006_cierre.png'
+duration 5.672
+file 'C:/Users/juanv/Downloads/Divisas-COL/instagram_reels_maker/reels/projects/oxford-mercado-prefiere-giro-ortodoxo/images/006_cierre.png'
