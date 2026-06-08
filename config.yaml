@@ -31,10 +31,13 @@ function_dicto: {
         },
     },
     "Medellín": {
-        "https://www.puntodollar.com/tasa-de-cambio-envigado/": {
-            "fn": "puntoDollar",
-            "args": "Envigado",
-        },
+        # Temporarily disabled: Punto Dollar's Envigado rate page currently
+        # redirects to the home page and exposes no rates table.
+        # Uncomment when the source page returns currency rows again.
+        # "https://www.puntodollar.com/tasa-de-cambio-envigado/": {
+        #     "fn": "puntoDollar",
+        #     "args": "Envigado",
+        # },
         "https://euroservicios.com.co/": {
             "fn": "euroservicios",
         },

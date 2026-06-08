@@ -1,0 +1,47 @@
+1
+00:00:00,000 --> 00:00:02,421
+Que se juega Colombia entre Cepeda y Abelardo?
+
+2
+00:00:02,481 --> 00:00:05,060
+Se juega confianza, deuda, dolar e inversion.
+
+3
+00:00:05,180 --> 00:00:07,270
+Cual es el riesgo economico de Cepeda?
+
+4
+00:00:07,330 --> 00:00:10,324
+Mas continuidad, mas Estado y una cuenta fiscal incierta.
+
+5
+00:00:10,444 --> 00:00:12,440
+Cual es la apuesta economica de Abelardo?
+
+6
+00:00:12,500 --> 00:00:15,805
+Reducir Estado, bajar trabas, atraer capital y productividad.
+
+7
+00:00:15,925 --> 00:00:18,311
+Como decide el mercado entre los dos modelos?
+
+8
+00:00:18,371 --> 00:00:20,863
+Mira caja, energia, impuestos y reglas.
+
+9
+00:00:20,983 --> 00:00:22,846
+Que modelo luce mejor para el peso?
+
+10
+00:00:22,906 --> 00:00:26,223
+El que reduzca incertidumbre fiscal y atraiga dolares productivos.
+
+11
+00:00:26,343 --> 00:00:29,208
+Entonces quien se ve mas calificado para la economia?
+
+12
+00:00:29,268 --> 00:00:32,604
+Abelardo, si la prioridad es disciplina, inversion y confianza.

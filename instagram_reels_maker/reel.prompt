@@ -19,12 +19,14 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Avoid filler and intro fluff.
 - Store every spoken phrase as short `voiceover_lines` in `reel.json`.
 - Each line should be about 4-9 spoken words and under 75 characters.
+- Each complete spoken sentence must be exactly one `voiceover_lines` item with exactly one terminal sentence marker at the end: `.`, `?`, `!`, `?!`, or `!?`.
+- Do not use ellipses, abbreviations with periods, internal `.?!`, or multiple sentences in one voiceover line, because the final sentence marker defines Dalia/Alvaro voice switching.
 
 3. Build images and overlays, then make audio-first TTS.
 - Generate Edge neural TTS from the short `voiceover_lines` by default, rotating Dalia and Alvaro by complete sentence inside each reel, then derive scene durations, subtitle timing, overlay timing, and final video length from measured audio:
   python reel_maker.py audio-first-final --project <article-slug>
 - Default voices are `es-MX-DaliaNeural` and `es-ES-AlvaroNeural`.
-- If a short line does not end with `.`, `!`, `?`, or `...`, treat it as a continuation: keep the same voice for the next line and use the tighter continuation gap.
+- If a short line does not meet the exact final-marker rule, treat it as a continuation: keep the same voice for the next line and use the tighter continuation gap.
 - Default pauses are short for fluency: 0.06 seconds between complete lines, 0.02 seconds between continuation lines, and 0.12 seconds between scenes.
 - Use XTTS only when voice cloning is required:
   python reel_maker.py audio-first-final --project <article-slug> --tts-backend xtts --voice voice_samples\voice.wav
@@ -45,25 +47,29 @@ instagram_reels_maker\reels\projects\<article-slug>
 - Do not cover headline overlays or key visuals.
 
 5. Visual style:
-- Do not use simple code-generated cards as the main visuals.
-- Generate realistic editorial/news-style images for each scene.
+- The publishable final must use actual AI-generated, theme-specific images for every scene.
+- Do not use Python-generated images, simple code-generated cards, blank placeholders, template backgrounds, or generic graphics as final visuals.
+- Generate realistic editorial/news-style images for each scene from the scene-specific visual prompt.
 - Images should look like real-life finance/news photography, not obvious AI fantasy art.
 - Use credible scenes: desks, reports, Colombian pesos, U.S. dollars, laptops with blurred charts, Bogota/government/office context.
 - Avoid giant symbols, glowing gauges, floating money, surreal dashboards, fake UI, and AI-looking concept art.
 - Preserve a darker, uncluttered bottom area for subtitles.
+- Keep exact text out of the AI image itself; headlines, source tags, and callouts are added by the renderer.
 
 6. Headline overlays:
+- Every final reel must include a visible DivisasCOL/source headline system.
 - Add exact headline text locally, not through image generation.
 - Use bold editorial headline blocks near the top/upper-middle.
 - Keep the style consistent:
-  - red source tag: “DIVISAS COL | COLOMBIA”
+  - persistent red source tag: "DIVISAS COL | COLOMBIA"
   - black translucent headline box
   - white main headline
   - yellow/gold secondary line
 - Headlines should summarize each scene, not repeat the subtitle word-for-word.
+- Set `scenes[].headline` for every scene; the renderer burns this through `render\overlays.ass`.
 
 7. Timed data overlays:
-- Add key numbers and important concepts as timed overlay callouts.
+- Add key numbers and important concepts as timed popup/tagline overlay callouts.
 - These should appear when the measured audio reaches that point.
 - Examples:
   - dollar amount
@@ -73,6 +79,7 @@ instagram_reels_maker\reels\projects\<article-slug>
   - market coverage
 - Keep data overlays above the subtitle lane.
 - Use bold, compact black boxes with white/gold text.
+- Set `scenes[].data_callout` for every scene; the renderer uses it as the timed popup when the important point is spoken.
 
 8. Output files:
 - Save all source-like project files: script, captions, reel metadata, generated images, raw images, subtitle files, render files, and review notes.

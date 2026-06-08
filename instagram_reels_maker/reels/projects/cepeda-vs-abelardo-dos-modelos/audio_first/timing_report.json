@@ -1,0 +1,216 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "scene_id": "hook",
+    "text": "Que se juega Colombia entre Cepeda y Abelardo?",
+    "start": 0.0,
+    "end": 2.42075,
+    "duration": 2.42075,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_001.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 2.42075,
+    "end": 2.48075,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_002_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "scene_id": "hook",
+    "text": "Se juega confianza, deuda, dolar e inversion.",
+    "start": 2.48075,
+    "end": 5.059625,
+    "duration": 2.578875,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_002.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 5.059625,
+    "end": 5.179625,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_004_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "scene_id": "cepeda",
+    "text": "Cual es el riesgo economico de Cepeda?",
+    "start": 5.179625,
+    "end": 7.269708,
+    "duration": 2.090083,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_003.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 7.269708,
+    "end": 7.329708,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_006_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "scene_id": "cepeda",
+    "text": "Mas continuidad, mas Estado y una cuenta fiscal incierta.",
+    "start": 7.329708,
+    "end": 10.32425,
+    "duration": 2.994542,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_004.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 10.32425,
+    "end": 10.44425,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_008_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "scene_id": "abelardo",
+    "text": "Cual es la apuesta economica de Abelardo?",
+    "start": 10.44425,
+    "end": 12.440042,
+    "duration": 1.995792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_005.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 12.440042,
+    "end": 12.500042,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_010_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "scene_id": "abelardo",
+    "text": "Reducir Estado, bajar trabas, atraer capital y productividad.",
+    "start": 12.500042,
+    "end": 15.804917,
+    "duration": 3.304875,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_006.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 15.804917,
+    "end": 15.924917,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_012_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "scene_id": "mercado",
+    "text": "Como decide el mercado entre los dos modelos?",
+    "start": 15.924917,
+    "end": 18.311084,
+    "duration": 2.386167,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_007.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 18.311084,
+    "end": 18.371084,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_014_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "scene_id": "mercado",
+    "text": "Mira caja, energia, impuestos y reglas.",
+    "start": 18.371084,
+    "end": 20.862917,
+    "duration": 2.491833,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_008.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 20.862917,
+    "end": 20.982917,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_016_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "scene_id": "peso",
+    "text": "Que modelo luce mejor para el peso?",
+    "start": 20.982917,
+    "end": 22.846209,
+    "duration": 1.863292,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_009.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 22.846209,
+    "end": 22.906209,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_018_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "scene_id": "peso",
+    "text": "El que reduzca incertidumbre fiscal y atraiga dolares productivos.",
+    "start": 22.906209,
+    "end": 26.222667,
+    "duration": 3.316458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_010.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 26.222667,
+    "end": 26.342667,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_020_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "scene_id": "cierre",
+    "text": "Entonces quien se ve mas calificado para la economia?",
+    "start": 26.342667,
+    "end": 29.207834,
+    "duration": 2.865167,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_011.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 29.207834,
+    "end": 29.267834,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\segments\\segment_022_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "scene_id": "cierre",
+    "text": "Abelardo, si la prioridad es disciplina, inversion y confianza.",
+    "start": 29.267834,
+    "end": 32.604251,
+    "duration": 3.336417,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\chunks\\chunk_012.wav"
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\cepeda-vs-abelardo-dos-modelos\\audio_first\\voiceover_natural.wav",
+    "target_duration": 32.60425,
+    "actual_duration": 32.60425
+  }
+]

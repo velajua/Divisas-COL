@@ -1,0 +1,216 @@
+[
+  {
+    "type": "voice",
+    "index": 1,
+    "scene_id": "hook",
+    "text": "Que dijo Oxford sobre Colombia y las elecciones?",
+    "start": 0.0,
+    "end": 2.629667,
+    "duration": 2.629667,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_001.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 2.629667,
+    "end": 2.689667,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_002_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 2,
+    "scene_id": "hook",
+    "text": "Que el resultado puede mover mercado, dolar y bonos.",
+    "start": 2.689667,
+    "end": 5.389292,
+    "duration": 2.699625,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_002.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 5.389292,
+    "end": 5.509292,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_004_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 3,
+    "scene_id": "ortodoxo",
+    "text": "Que escenario premia el mercado segun Oxford?",
+    "start": 5.509292,
+    "end": 7.910625,
+    "duration": 2.401333,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_003.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 7.910625,
+    "end": 7.970625,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_006_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 4,
+    "scene_id": "ortodoxo",
+    "text": "Un giro ortodoxo con disciplina fiscal, inversion y energia.",
+    "start": 7.970625,
+    "end": 11.277042,
+    "duration": 3.306417,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_004.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 11.277042,
+    "end": 11.397042,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_008_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 5,
+    "scene_id": "peso",
+    "text": "Que pasaria con el peso en ese escenario?",
+    "start": 11.397042,
+    "end": 13.611834,
+    "duration": 2.214792,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_005.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 13.611834,
+    "end": 13.671834,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_010_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 6,
+    "scene_id": "peso",
+    "text": "Oxford ve mas fuerza con correctivos creibles.",
+    "start": 13.671834,
+    "end": 16.052292,
+    "duration": 2.380458,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_006.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 16.052292,
+    "end": 16.172292,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_012_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 7,
+    "scene_id": "bonos",
+    "text": "Que numero marca la diferencia en bonos?",
+    "start": 16.172292,
+    "end": 18.313542,
+    "duration": 2.14125,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_007.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 18.313542,
+    "end": 18.373542,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_014_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 8,
+    "scene_id": "bonos",
+    "text": "Ortodoxia cerca de nueve cinco, continuidad de doce cinco.",
+    "start": 18.373542,
+    "end": 21.699209,
+    "duration": 3.325667,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_008.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 21.699209,
+    "end": 21.819209,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_016_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 9,
+    "scene_id": "continuidad",
+    "text": "Que castiga Oxford en la continuidad?",
+    "start": 21.819209,
+    "end": 23.750292,
+    "duration": 1.931083,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_009.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 23.750292,
+    "end": 23.810292,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_018_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 10,
+    "scene_id": "continuidad",
+    "text": "Menos petroleo, menos caja y mas presion cambiaria.",
+    "start": 23.810292,
+    "end": 26.548542,
+    "duration": 2.73825,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_010.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "scene",
+    "start": 26.548542,
+    "end": 26.668542,
+    "target_duration": 0.12,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_020_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 11,
+    "scene_id": "cierre",
+    "text": "Entonces por que Abelardo gana puntos economicos?",
+    "start": 26.668542,
+    "end": 29.419417,
+    "duration": 2.750875,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_011.wav"
+  },
+  {
+    "type": "silence",
+    "scope": "line",
+    "start": 29.419417,
+    "end": 29.479417,
+    "target_duration": 0.06,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\segments\\segment_022_silence.wav"
+  },
+  {
+    "type": "voice",
+    "index": 12,
+    "scene_id": "cierre",
+    "text": "Porque su linea encaja mejor con disciplina y confianza.",
+    "start": 29.479417,
+    "end": 32.3405,
+    "duration": 2.861083,
+    "source": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\chunks\\chunk_012.wav"
+  },
+  {
+    "type": "output",
+    "output": "C:\\Users\\juanv\\Downloads\\Divisas-COL\\instagram_reels_maker\\reels\\projects\\oxford-mercado-prefiere-giro-ortodoxo\\audio_first\\voiceover_natural.wav",
+    "target_duration": 32.3405,
+    "actual_duration": 32.3405
+  }
+]

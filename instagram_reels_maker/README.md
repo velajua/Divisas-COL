@@ -245,12 +245,12 @@ The workflow is:
 reel template
   -> editable reel.json structure
   -> short voiceover_lines + script.txt
-  -> image prompts + placeholder scene images
-  -> images and overlays
+  -> image prompts + AI-generated scene images
+  -> render-layer Divisas COL headline and timed popup overlays
   -> natural Edge neural TTS lines from voiceover_lines
   -> measured audio timing
   -> subtitles.srt + scene durations from measured audio
-  -> rebuilt vertical MP4 with measured subtitles and cleaned audio
+  -> rebuilt vertical MP4 with measured subtitles, overlays, and cleaned audio
   -> optional later supplied human voiceover
   -> cleaned human voiceover + final final MP4
 ```
@@ -272,7 +272,28 @@ reels\projects\peso-watch-2026-05-19\prompts\
 reels\history.json
 ```
 
-Edit `reel.json` and `script.txt` with the hook, data point, short voiceover lines, visual prompts, and CTA you want. Keep each `voiceover_lines` item short: about 4-9 spoken words and under 75 characters. The history file tracks previous reels and render status.
+Edit `reel.json` and `script.txt` with the hook, data point, short voiceover lines, visual prompts, headline overlays, timed popup callouts, and CTA you want. Keep each `voiceover_lines` item short: about 4-9 spoken words and under 75 characters. Each complete spoken sentence must be exactly one `voiceover_lines` item with exactly one terminal sentence marker at the end: `.`, `?`, `!`, `?!`, or `!?`. Do not use ellipses, abbreviations with periods, internal `.?!`, or multiple sentences in one voiceover line, because the final marker defines Dalia/Alvaro voice switching. The history file tracks previous reels and render status.
+
+Required visual asset rule:
+
+```text
+The publishable final reel must use actual AI-generated, theme-specific editorial finance/news images for each scene.
+Do not use Python-generated cards, blank placeholder PNGs, simple code graphics, or generic template backgrounds as final scene images.
+Use the placeholder images created by `new` only as temporary scaffolding while building `reel.json`.
+Before rendering, replace every `scenes[].image` with a real generated image that matches that scene's `visual_prompt`.
+Images must preserve a clean darker lower area for subtitles and must not contain baked-in headlines, captions, logos, watermarks, fake readable UI, or politician faces unless explicitly required.
+```
+
+Required overlay rule:
+
+```text
+Every publishable final reel must include render-layer overlays, not baked image text:
+- persistent red source tag: DIVISAS COL | COLOMBIA
+- scene headline from `scenes[].headline`
+- timed popup/tagline from `scenes[].data_callout`
+
+`audio-first-final` writes `render\overlays.ass` from the measured scene timing and burns it into `final\final_audio_first.mp4` before subtitles. Keep `headline` short and editorial. Keep `data_callout` compact enough to pop up above the subtitle lane when the important point is spoken.
+```
 
 If you provide your own voiceover during the project workflow, place it here:
 
@@ -314,7 +335,7 @@ reels\projects\peso-watch-2026-05-19\final.mp4
 
 The automated preview path generates short TTS lines from `voiceover_lines`, trims leading/trailing silence from each generated neural chunk, measures each trimmed chunk with `ffprobe`, derives subtitle cue timing and scene durations from those measurements, cleans the natural WAV, and rebuilds the final MP4 from the project images. This is the key rule: the final video is rendered from the measured audio timeline. It is not muxed onto an old subtitle-first draft.
 
-The default backend is Edge neural TTS through `edge-tts`, so no model or reference voice is needed. It rotates Dalia and Alvaro by complete sentence inside each reel. If a short line does not end with `.`, `!`, `?`, or `...`, the next line keeps the same voice and uses a tighter continuation gap:
+The default backend is Edge neural TTS through `edge-tts`, so no model or reference voice is needed. It rotates Dalia and Alvaro by complete sentence inside each reel. A complete sentence is defined only by a line that ends with one terminal marker: `.`, `?`, `!`, `?!`, or `!?`, with no earlier `.?!` in the same line. If a short line does not meet that exact final-marker rule, the next line keeps the same voice and uses a tighter continuation gap:
 
 ```bat
 python reel_maker.py audio-first-final --project peso-watch-2026-05-19
@@ -342,6 +363,7 @@ reels\projects\<slug>\audio_first\voiceover_natural.wav
 reels\projects\<slug>\audio_first\voiceover_natural_clean.wav
 reels\projects\<slug>\audio_first\timing_report.json
 reels\projects\<slug>\subtitles.srt
+reels\projects\<slug>\render\overlays.ass
 reels\projects\<slug>\render\audio_first_concat.txt
 reels\projects\<slug>\final\final_audio_first.mp4
 ```
@@ -354,7 +376,7 @@ python reel_maker.py audio-first-final --project deuda-record-relato-oficial-y-p
 python reel_maker.py audio-first-final --project oxford-economics-elecciones-2026-espriella-cepeda
 ```
 
-Each run rewrites the measured audio-first artifacts, `subtitles.srt`, `render\audio_first_concat.txt`, and `final\final_audio_first.mp4`. It does not use stale subtitle-first timing files as inputs.
+Each run rewrites the measured audio-first artifacts, `subtitles.srt`, `render\overlays.ass`, `render\audio_first_concat.txt`, and `final\final_audio_first.mp4`. It does not use stale subtitle-first timing files as inputs.
 
 Use a different Edge voice pool with `--voice-pool`:
 

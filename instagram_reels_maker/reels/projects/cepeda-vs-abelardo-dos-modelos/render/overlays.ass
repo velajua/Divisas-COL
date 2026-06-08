@@ -1,0 +1,33 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Brand,Arial,34,&H00FFFFFF,&H000000FF,&H00000000,&H002D2DE8,-1,0,0,0,100,100,0,0,3,10,0,7,70,70,70,1
+Style: Headline,Arial,58,&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,3,16,0,7,70,70,70,1
+Style: Callout,Arial,42,&H0000D7FF,&H000000FF,&H00000000,&HB0000000,-1,0,0,0,100,100,0,0,3,14,0,5,70,70,70,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 2,0:00:00.00,0:00:05.18,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:00.00,0:00:05.18,Headline,,0,0,0,,{\pos(72,152)\an7}DOS MODELOS
+Dialogue: 3,0:00:01.35,0:00:03.83,Callout,,0,0,0,,{\pos(540,1088)\an5}CONFIANZA, DEUDA, DOLAR
+Dialogue: 2,0:00:05.18,0:00:10.44,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:05.18,0:00:10.44,Headline,,0,0,0,,{\pos(72,152)\an7}CONTINUIDAD
+Dialogue: 3,0:00:06.55,0:00:09.08,Callout,,0,0,0,,{\pos(540,1088)\an5}MAS ESTADO, CUENTA\NINCIERTA
+Dialogue: 2,0:00:10.44,0:00:15.92,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:10.44,0:00:15.92,Headline,,0,0,0,,{\pos(72,152)\an7}PRO INVERSION
+Dialogue: 3,0:00:11.87,0:00:14.50,Callout,,0,0,0,,{\pos(540,1088)\an5}CAPITAL Y PRODUCTIVIDAD
+Dialogue: 2,0:00:15.92,0:00:20.98,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:15.92,0:00:20.98,Headline,,0,0,0,,{\pos(72,152)\an7}MERCADO
+Dialogue: 3,0:00:17.24,0:00:19.67,Callout,,0,0,0,,{\pos(540,1088)\an5}CAJA, ENERGIA, REGLAS
+Dialogue: 2,0:00:20.98,0:00:26.34,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:20.98,0:00:26.34,Headline,,0,0,0,,{\pos(72,152)\an7}PESO
+Dialogue: 3,0:00:22.38,0:00:24.95,Callout,,0,0,0,,{\pos(540,1088)\an5}DOLARES PRODUCTIVOS
+Dialogue: 2,0:00:26.34,0:00:32.60,Brand,,0,0,0,,{\pos(72,82)\an7}DIVISAS COL | COLOMBIA
+Dialogue: 1,0:00:26.34,0:00:32.60,Headline,,0,0,0,,{\pos(72,152)\an7}PRIORIDAD ECONOMICA
+Dialogue: 3,0:00:27.97,0:00:30.98,Callout,,0,0,0,,{\pos(540,1088)\an5}DISCIPLINA, INVERSION,\NCONFIANZA

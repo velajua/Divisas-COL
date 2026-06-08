@@ -1,0 +1,169 @@
+{
+  "slug": "abelardo-equipo-economico-peso",
+  "title": "Abelardo, equipo economico y peso",
+  "status": "rendered",
+  "workflow_version": "audio_first_short_line_v1",
+  "template": "interview_reel",
+  "niche": "analisis cambiario Colombia",
+  "format": "interview_q_and_a",
+  "created_at": "2026-06-07T19:26:09+00:00",
+  "source_notes": [
+    {
+      "source": "Infobae",
+      "url": "https://www.infobae.com/colombia/2026/06/04/formula-vicepresidencial-de-abelardo-de-la-espriella-asegura-que-petro-destruyo-las-finanzas-del-pais-y-propone-reducir-tamano-del-estado/",
+      "note": "Jose Manuel Restrepo, formula vicepresidencial de Abelardo, plantea reducir gasto publico, controlar fugas por evasion, contrabando y corrupcion, y reactivar sectores estrategicos."
+    },
+    {
+      "source": "El Pais",
+      "url": "https://elpais.com/america-colombia/elecciones-presidenciales/2026-06-01/las-propuestas-de-abelardo-de-la-espriella-seguridad-de-mano-dura-reduccion-del-estado-y-libertades-tributarias.html",
+      "note": "El programa de De la Espriella promete crecimiento de 7%, reduccion de impuestos empresariales, menor Estado, desregulacion y defensa del fracking."
+    },
+    {
+      "source": "Infobae / Oxford Economics",
+      "url": "https://www.infobae.com/colombia/2026/02/23/asi-estaria-la-economia-colombiana-si-en-las-elecciones-de-2026-ganan-abelardo-de-la-espriella-o-ivan-cepeda-segun-oxford-economics/",
+      "note": "Oxford Economics vincula un giro ortodoxo y consolidacion fiscal con fortalecimiento del peso y menores rendimientos de bonos."
+    }
+  ],
+  "voiceover": {
+    "mode": "audio_first_short_lines",
+    "file": "audio_first/voiceover_natural.wav",
+    "clean_file": "audio_first/voiceover_natural_clean.wav",
+    "script_file": "script.txt",
+    "voice_lines_file": "audio_first_voice_lines.txt",
+    "line_gap_seconds": 0.06,
+    "scene_gap_seconds": 0.12,
+    "tts_backend": "edge-tts",
+    "voice_name": null,
+    "voice_pool": [
+      "es-MX-DaliaNeural",
+      "es-ES-AlvaroNeural"
+    ],
+    "continuation_gap_seconds": 0.02,
+    "timing_report": "audio_first/timing_report.json"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration_seconds": 6.101042,
+      "subtitle": "Por que Abelardo luce mas preparado economicamente? Porque suma equipo tecnico, mercado y experiencia en Hacienda.",
+      "voiceover_lines": [
+        "Por que Abelardo luce mas preparado economicamente?",
+        "Porque suma equipo tecnico, mercado y experiencia en Hacienda."
+      ],
+      "voiceover_text": "Por que Abelardo luce mas preparado economicamente? Porque suma equipo tecnico, mercado y experiencia en Hacienda.",
+      "visual_prompt": "Realistic vertical 9:16 editorial finance photo about Colombia election economic team. Desk with Colombian pesos, U.S. dollars, budget folders, serious newsroom lighting, clean lower subtitle lane. No politician faces, no party logos, no generated text.",
+      "image": "images/001_hook.png",
+      "prompt_file": "prompts/001_hook.txt",
+      "headline": "DIVISAS COL | EQUIPO ECONOMICO",
+      "data_callout": "Hacienda + mercado + peso",
+      "start_seconds": 0.0,
+      "end_seconds": 6.101042,
+      "raw_image": "images/raw_001_hook.png"
+    },
+    {
+      "id": "restrepo",
+      "duration_seconds": 5.678958,
+      "subtitle": "Que cambia con Jose Manuel Restrepo en la formula? Cambia la senal para Hacienda, comercio exterior y mercado.",
+      "voiceover_lines": [
+        "Que cambia con Jose Manuel Restrepo en la formula?",
+        "Cambia la senal para Hacienda, comercio exterior y mercado."
+      ],
+      "voiceover_text": "Que cambia con Jose Manuel Restrepo en la formula? Cambia la senal para Hacienda, comercio exterior y mercado.",
+      "visual_prompt": "Realistic vertical 9:16 finance policy photo. Former finance ministry style documents, trade invoices, calculator, COP and USD bills, restrained editorial lighting, clean subtitle lane. No readable fake text.",
+      "image": "images/002_data.png",
+      "prompt_file": "prompts/002_restrepo.txt",
+      "headline": "DIVISAS COL | SENAL TECNICA",
+      "data_callout": "Exministro de Hacienda",
+      "start_seconds": 6.101042,
+      "end_seconds": 11.78,
+      "raw_image": "images/raw_002_restrepo.png"
+    },
+    {
+      "id": "fiscal",
+      "duration_seconds": 6.665417,
+      "subtitle": "Cual es la primera tarea economica del proximo gobierno? Ordenar la caja, reducir fugas y recuperar credibilidad fiscal.",
+      "voiceover_lines": [
+        "Cual es la primera tarea economica del proximo gobierno?",
+        "Ordenar la caja, reducir fugas y recuperar credibilidad fiscal."
+      ],
+      "voiceover_text": "Cual es la primera tarea economica del proximo gobierno? Ordenar la caja, reducir fugas y recuperar credibilidad fiscal.",
+      "visual_prompt": "Realistic vertical 9:16 fiscal discipline photo for Colombia. Budget spreadsheet, red deficit marks blurred, calculator, pesos, dollar bills, sober financial newsroom style, clean lower subtitle lane.",
+      "image": "images/003_comparison.png",
+      "prompt_file": "prompts/003_fiscal.txt",
+      "headline": "DIVISAS COL | ORDENAR LA CAJA",
+      "data_callout": "Gasto, fugas, credibilidad",
+      "start_seconds": 11.78,
+      "end_seconds": 18.445417,
+      "raw_image": "images/raw_003_fiscal.png"
+    },
+    {
+      "id": "inversion",
+      "duration_seconds": 4.882042,
+      "subtitle": "Por que eso importa para el dolar en Colombia? Si vuelve inversion, baja cobertura en dolares.",
+      "voiceover_lines": [
+        "Por que eso importa para el dolar en Colombia?",
+        "Si vuelve inversion, baja cobertura en dolares."
+      ],
+      "voiceover_text": "Por que eso importa para el dolar en Colombia? Si vuelve inversion, baja cobertura en dolares.",
+      "visual_prompt": "Realistic vertical 9:16 currency market photo. Investment documents, import invoices, COP and USD exchange desk, blurred chart, calm but serious editorial lighting, clean lower subtitle lane.",
+      "image": "images/004_interpretation.png",
+      "prompt_file": "prompts/004_inversion.txt",
+      "headline": "DIVISAS COL | CONFIANZA",
+      "data_callout": "Menos cobertura en dolares",
+      "start_seconds": 18.445417,
+      "end_seconds": 23.327459,
+      "raw_image": "images/raw_004_inversion.png"
+    },
+    {
+      "id": "riesgo",
+      "duration_seconds": 4.387666,
+      "subtitle": "Eso garantiza exito automatico? No, pero la credibilidad fiscal pesa mas.",
+      "voiceover_lines": [
+        "Eso garantiza exito automatico?",
+        "No, pero la credibilidad fiscal pesa mas."
+      ],
+      "voiceover_text": "Eso garantiza exito automatico? No, pero la credibilidad fiscal pesa mas.",
+      "visual_prompt": "Realistic vertical 9:16 analyst risk desk about fiscal credibility. Two folders labeled by color only, pesos, dollars, bond yield chart blurred and non-readable, serious finance lighting, clean subtitle lane.",
+      "image": "images/005_cta.png",
+      "prompt_file": "prompts/005_riesgo.txt",
+      "headline": "DIVISAS COL | SIN GARANTIAS",
+      "data_callout": "Credibilidad > promesas",
+      "start_seconds": 23.327459,
+      "end_seconds": 27.715125,
+      "raw_image": "images/raw_005_riesgo.png"
+    },
+    {
+      "id": "cierre",
+      "duration_seconds": 4.906083,
+      "subtitle": "Entonces que debe mirar el votante financiero? Quien tiene equipo, plan y disciplina para ejecutar.",
+      "voiceover_lines": [
+        "Entonces que debe mirar el votante financiero?",
+        "Quien tiene equipo, plan y disciplina para ejecutar."
+      ],
+      "voiceover_text": "Entonces que debe mirar el votante financiero? Quien tiene equipo, plan y disciplina para ejecutar.",
+      "visual_prompt": "Realistic vertical 9:16 closing finance reel photo. Colombian household budget notebook, pesos and dollars, ballot-like blank paper without logos, sober editorial lighting, clean lower subtitle lane.",
+      "image": "images/006_cierre.png",
+      "prompt_file": "prompts/006_cierre.txt",
+      "headline": "DIVISAS COL | VOTO FINANCIERO",
+      "data_callout": "Equipo, plan, disciplina",
+      "start_seconds": 27.715125,
+      "end_seconds": 32.621208,
+      "raw_image": "images/raw_006_cierre.png"
+    }
+  ],
+  "cta": "Antes de votar, pregunte quien puede cuidar la caja.",
+  "outputs": {
+    "audio_first_video": "final/final_audio_first.mp4",
+    "audio_first_render_manifest": "render/audio_first_concat.txt",
+    "publish_manifest": "final/publish-manifest.json",
+    "publish_script": "final/publish-script.txt",
+    "publish_caption": "caption.txt"
+  },
+  "review_notes": [
+    "Interview format: one question and one direct answer per scene.",
+    "Claim about qualification is limited to market-facing economic team, fiscal credibility, and sourced public proposals.",
+    "Voice lines stay within audio-first short-line limits."
+  ],
+  "target_duration_seconds": 32.621208,
+  "rendered_at": "2026-06-07T21:19:37+00:00"
+}

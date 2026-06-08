@@ -34,6 +34,27 @@
       "title": "Cepeda ahogaria a Colombia",
       "created_at": "2026-05-31T00:14:54+00:00",
       "updated_at": "2026-05-31T00:25:31+00:00"
+    },
+    {
+      "slug": "abelardo-equipo-economico-peso",
+      "status": "rendered",
+      "title": "Abelardo, equipo economico y peso",
+      "created_at": "2026-06-07T19:26:09+00:00",
+      "updated_at": "2026-06-07T21:19:37+00:00"
+    },
+    {
+      "slug": "oxford-mercado-prefiere-giro-ortodoxo",
+      "status": "rendered",
+      "title": "Oxford y el giro ortodoxo",
+      "created_at": "2026-06-07T19:26:10+00:00",
+      "updated_at": "2026-06-07T21:20:25+00:00"
+    },
+    {
+      "slug": "cepeda-vs-abelardo-dos-modelos",
+      "status": "rendered",
+      "title": "Cepeda vs Abelardo: dos modelos",
+      "created_at": "2026-06-07T19:26:11+00:00",
+      "updated_at": "2026-06-07T21:21:07+00:00"
     }
   ]
 }
