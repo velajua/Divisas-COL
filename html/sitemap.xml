@@ -131,6 +131,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/un-respiro-que-depende-demasiado-del-crudo.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/es/colombia/entries/alivio-tecnico-desconfianza-intacta.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -237,6 +242,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/es/colombia/entries/subasta-record-prima-fiscal-y-peso.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/un-respiro-que-depende-demasiado-del-crudo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
