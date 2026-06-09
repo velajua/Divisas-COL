@@ -1,5 +1,5 @@
 {
-  "date": "2026-05-18",
+  "date": "2026-06-09",
   "source": "html/result.json",
   "cards": [
     {
@@ -7,7 +7,7 @@
       "group": "cities",
       "city": null,
       "page": 0,
-      "path": "instagram_cards/2026-05-18/country-00.svg",
+      "path": "instagram_cards/2026-06-09/country-00.svg",
       "description_path": null
     },
     {
@@ -15,8 +15,8 @@
       "group": "cities",
       "city": "Barranquilla",
       "page": 1,
-      "path": "instagram_cards/2026-05-18/barranquilla-01.svg",
-      "description_path": "instagram_cards/2026-05-18/barranquilla-description.txt",
+      "path": "instagram_cards/2026-06-09/barranquilla-01.svg",
+      "description_path": "instagram_cards/2026-06-09/barranquilla-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -35,8 +35,8 @@
       "group": "cities",
       "city": "Bogotá",
       "page": 1,
-      "path": "instagram_cards/2026-05-18/bogota-01.svg",
-      "description_path": "instagram_cards/2026-05-18/bogota-description.txt",
+      "path": "instagram_cards/2026-06-09/bogota-01.svg",
+      "description_path": "instagram_cards/2026-06-09/bogota-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -59,8 +59,8 @@
       "group": "cities",
       "city": "Bogotá",
       "page": 2,
-      "path": "instagram_cards/2026-05-18/bogota-02.svg",
-      "description_path": "instagram_cards/2026-05-18/bogota-description.txt",
+      "path": "instagram_cards/2026-06-09/bogota-02.svg",
+      "description_path": "instagram_cards/2026-06-09/bogota-description.txt",
       "currencies": [
         "CostarricanColon",
         "UAEDirham",
@@ -75,8 +75,8 @@
       "group": "cities",
       "city": "Cali",
       "page": 1,
-      "path": "instagram_cards/2026-05-18/cali-01.svg",
-      "description_path": "instagram_cards/2026-05-18/cali-description.txt",
+      "path": "instagram_cards/2026-06-09/cali-01.svg",
+      "description_path": "instagram_cards/2026-06-09/cali-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -94,8 +94,8 @@
       "group": "cities",
       "city": "Cartagena",
       "page": 1,
-      "path": "instagram_cards/2026-05-18/cartagena-01.svg",
-      "description_path": "instagram_cards/2026-05-18/cartagena-description.txt",
+      "path": "instagram_cards/2026-06-09/cartagena-01.svg",
+      "description_path": "instagram_cards/2026-06-09/cartagena-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -114,8 +114,8 @@
       "group": "cities",
       "city": "Medellín",
       "page": 1,
-      "path": "instagram_cards/2026-05-18/medellin-01.svg",
-      "description_path": "instagram_cards/2026-05-18/medellin-description.txt",
+      "path": "instagram_cards/2026-06-09/medellin-01.svg",
+      "description_path": "instagram_cards/2026-06-09/medellin-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -138,8 +138,8 @@
       "group": "cities",
       "city": "Medellín",
       "page": 2,
-      "path": "instagram_cards/2026-05-18/medellin-02.svg",
-      "description_path": "instagram_cards/2026-05-18/medellin-description.txt",
+      "path": "instagram_cards/2026-06-09/medellin-02.svg",
+      "description_path": "instagram_cards/2026-06-09/medellin-description.txt",
       "currencies": [
         "ThaiBaht",
         "CostarricanColon",
@@ -162,14 +162,21 @@
       "group": "cities",
       "city": "Medellín",
       "page": 3,
-      "path": "instagram_cards/2026-05-18/medellin-03.svg",
-      "description_path": "instagram_cards/2026-05-18/medellin-description.txt",
+      "path": "instagram_cards/2026-06-09/medellin-03.svg",
+      "description_path": "instagram_cards/2026-06-09/medellin-description.txt",
       "currencies": [
         "NicaraguanCordoba",
         "DanishKrone",
         "NorwegianKrone",
         "SwedishKrone"
       ]
+    },
+    {
+      "type": "newsletter",
+      "group": "newsletter",
+      "path": "instagram_cards/2026-06-09/newsletter.svg",
+      "description_path": "instagram_cards/2026-06-09/newsletter-description.txt",
+      "title": "Un respiro que depende demasiado del crudo"
     }
   ],
   "descriptions": [
@@ -177,34 +184,75 @@
       "type": "city_rates",
       "group": "cities",
       "city": "Barranquilla",
-      "path": "instagram_cards/2026-05-18/barranquilla-description.txt"
+      "path": "instagram_cards/2026-06-09/barranquilla-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Bogotá",
-      "path": "instagram_cards/2026-05-18/bogota-description.txt"
+      "path": "instagram_cards/2026-06-09/bogota-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Cali",
-      "path": "instagram_cards/2026-05-18/cali-description.txt"
+      "path": "instagram_cards/2026-06-09/cali-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Cartagena",
-      "path": "instagram_cards/2026-05-18/cartagena-description.txt"
+      "path": "instagram_cards/2026-06-09/cartagena-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Medellín",
-      "path": "instagram_cards/2026-05-18/medellin-description.txt"
+      "path": "instagram_cards/2026-06-09/medellin-description.txt"
+    },
+    {
+      "type": "newsletter",
+      "path": "instagram_cards/2026-06-09/newsletter-description.txt",
+      "title": "Un respiro que depende demasiado del crudo"
     }
   ],
   "newsletter": {
-    "matched": false
+    "matched": true,
+    "title": "Un respiro que depende demasiado del crudo",
+    "date": "9 jun 2026",
+    "path": "instagram_cards/2026-06-09/newsletter.svg",
+    "description_path": "instagram_cards/2026-06-09/newsletter-description.txt",
+    "hashtags": [
+      "#DivisasCOL",
+      "#DolarColombia",
+      "#PesoColombiano",
+      "#MercadoCambiario",
+      "#FinanzasPersonales",
+      "#AnalisisEconomico",
+      "#NoticiasColombia",
+      "#Respiro",
+      "#Depende",
+      "#Demasiado",
+      "#Crudo",
+      "#Analisis",
+      "#Editorial",
+      "#Alivio",
+      "#Reciente",
+      "#Peso",
+      "#Colombiano",
+      "#Sigue",
+      "#Dependiendo",
+      "#Petroleo",
+      "#Divisas",
+      "#Forex",
+      "#ForexTrading",
+      "#Trading",
+      "#Trader",
+      "#MercadoDeDivisas",
+      "#TipoDeCambio",
+      "#TasasDeCambio",
+      "#USD",
+      "#EUR"
+    ]
   }
 }
