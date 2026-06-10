@@ -15,7 +15,7 @@
 <text x="72" y="102" fill="#d9f99d" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">DIVISAS COL</text>
 <text x="1008" y="102" fill="#bfdbfe" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="end">1/1</text>
 <text x="72" y="185" fill="#ffffff" font-size="60" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Barranquilla: mejores tasas</text>
-<text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-05-19</text>
+<text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-06-10</text>
 <rect x="58" y="290" width="964" height="890" rx="34" fill="#f8fafc" opacity="0.96" filter="url(#shadow)"/>
 <text x="100" y="330" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
 <text x="410" y="330" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
@@ -23,72 +23,72 @@
 <line x1="96" y1="350" x2="984" y2="350" stroke="#cbd5e1" stroke-width="2"/>
 <text x="100" y="382" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dólar Estadounidense</text>
 <text x="100" y="404" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AmericanDollar</text>
-<text x="410" y="382" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.550</text>
+<text x="410" y="382" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.600</text>
 <text x="410" y="404" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="382" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.720</text>
+<text x="760" y="382" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3.780</text>
 <text x="760" y="404" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="411" x2="984" y2="411" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="439" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Euro</text>
 <text x="100" y="461" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Euro</text>
-<text x="410" y="439" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.200</text>
+<text x="410" y="439" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.350</text>
 <text x="410" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="439" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.500</text>
+<text x="760" y="439" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.600</text>
 <text x="760" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="468" x2="984" y2="468" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="496" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Libra</text>
 <text x="100" y="518" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BritishPound</text>
-<text x="410" y="496" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.200</text>
+<text x="410" y="496" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.400</text>
 <text x="410" y="518" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="496" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$5.000</text>
+<text x="760" y="496" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$5.150</text>
 <text x="760" y="518" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="525" x2="984" y2="525" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="553" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dólar Canadiense</text>
 <text x="100" y="575" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">CanadianDollar</text>
 <text x="410" y="553" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.400</text>
 <text x="410" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="553" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.750</text>
+<text x="760" y="553" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.900</text>
 <text x="760" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="582" x2="984" y2="582" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="610" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dólar Australiano</text>
 <text x="100" y="632" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">AustralianDollar</text>
-<text x="410" y="610" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.200</text>
+<text x="410" y="610" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.250</text>
 <text x="410" y="632" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="610" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.650</text>
+<text x="760" y="610" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.700</text>
 <text x="760" y="632" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="639" x2="984" y2="639" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="667" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Mexicano</text>
 <text x="100" y="689" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">MexicanPeso</text>
-<text x="410" y="667" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$185</text>
+<text x="410" y="667" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$180</text>
 <text x="410" y="689" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="667" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$220</text>
+<text x="760" y="667" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$230</text>
 <text x="760" y="689" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="696" x2="984" y2="696" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="724" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Real Brasilero</text>
 <text x="100" y="746" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">BrasilianReal</text>
-<text x="410" y="724" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$600</text>
+<text x="410" y="724" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$650</text>
 <text x="410" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="724" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$750</text>
+<text x="760" y="724" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$850</text>
 <text x="760" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="753" x2="984" y2="753" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="781" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Franco Suizo</text>
 <text x="100" y="803" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">SwissFranc</text>
 <text x="410" y="781" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.100</text>
 <text x="410" y="803" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="781" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.700</text>
+<text x="760" y="781" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4.750</text>
 <text x="760" y="803" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="810" x2="984" y2="810" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="838" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Nuevo Sol</text>
 <text x="100" y="860" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">PeruveanNewSun</text>
 <text x="410" y="838" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$900</text>
 <text x="410" y="860" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="838" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.150</text>
+<text x="760" y="838" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.130</text>
 <text x="760" y="860" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <line x1="96" y1="867" x2="984" y2="867" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="895" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Peso Chileno</text>
 <text x="100" y="917" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ChileanPeso</text>
 <text x="410" y="895" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$3</text>
 <text x="410" y="917" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
-<text x="760" y="895" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4,80</text>
+<text x="760" y="895" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$4,70</text>
 <text x="760" y="917" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">puntoDollarBarranquilla</text>
 <text x="72" y="1256" fill="#cbd5e1" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="600" text-anchor="start">Fuente: divisascol.com/es/colombia/barranquilla</text>
 <text x="1008" y="1256" fill="#d9f99d" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="end">@divisascol</text>
