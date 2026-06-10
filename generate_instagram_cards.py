@@ -384,9 +384,22 @@ def svg_text(x, y, text, size, weight=500, color="#f8fafc", anchor="start"):
     )
 
 
-def wrapped_svg_text(x, y, text, width, size, line_height, color="#f8fafc", weight=500):
+def wrapped_svg_text(
+    x,
+    y,
+    text,
+    width,
+    size,
+    line_height,
+    color="#f8fafc",
+    weight=500,
+    max_lines=None,
+):
     max_chars = max(12, int(width / (size * 0.52)))
     lines = textwrap.wrap(str(text), width=max_chars)
+    if max_lines is not None and len(lines) > max_lines:
+        lines = lines[:max_lines]
+        lines[-1] = lines[-1][: max_chars - 3].rstrip() + "..."
     output = []
     for index, line in enumerate(lines):
         output.append(svg_text(x, y + index * line_height, line, size, weight, color))
@@ -494,6 +507,7 @@ def render_newsletter_card(entry, date_label):
         58,
         "#0f172a",
         800,
+        max_lines=3,
     )
     parts.extend(
         [
@@ -518,7 +532,17 @@ def render_newsletter_card(entry, date_label):
         [
             f'<rect x="100" y="{cta_y}" width="885" height="92" rx="24" fill="#0f5132"/>',
             svg_text(136, cta_y + 58, "Leer en divisascol.com/es/colombia/newsletter", 32, 800, "#ffffff"),
-            svg_text(100, 1088, "divisas.col/" + entry.get("url", "es/colombia/newsletter/"), 25, 600, "#475569"),
+            wrapped_svg_text(
+                100,
+                1088,
+                "divisas.col/" + entry.get("url", "es/colombia/newsletter/"),
+                885,
+                25,
+                31,
+                "#475569",
+                600,
+                max_lines=2,
+            )[0],
             svg_text(72, 1256, "Opinion y contexto para moverse mejor con el dolar", 24, 600, "#cbd5e1"),
             svg_text(1008, 1256, "@divisascol", 24, 700, "#d9f99d", "end"),
             "</svg>",
