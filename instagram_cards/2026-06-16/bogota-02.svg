@@ -15,7 +15,7 @@
 <text x="72" y="102" fill="#d9f99d" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">DIVISAS COL</text>
 <text x="1008" y="102" fill="#bfdbfe" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="end">2/2</text>
 <text x="72" y="185" fill="#ffffff" font-size="60" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Bogotá: mejores tasas</text>
-<text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-05-25</text>
+<text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-06-16</text>
 <rect x="58" y="290" width="964" height="890" rx="34" fill="#f8fafc" opacity="0.96" filter="url(#shadow)"/>
 <text x="100" y="330" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
 <text x="410" y="330" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
@@ -30,9 +30,9 @@
 <line x1="96" y1="411" x2="984" y2="411" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="439" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Dirham</text>
 <text x="100" y="461" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">UAEDirham</text>
-<text x="410" y="439" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.150</text>
+<text x="410" y="439" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.130</text>
 <text x="410" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
-<text x="760" y="439" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.150</text>
+<text x="760" y="439" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.130</text>
 <text x="760" y="461" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
 <line x1="96" y1="468" x2="984" y2="468" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="496" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Lira</text>
@@ -44,10 +44,10 @@
 <line x1="96" y1="525" x2="984" y2="525" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="553" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Quetzal</text>
 <text x="100" y="575" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">GuatemalanQuetzal</text>
-<text x="410" y="553" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$500</text>
-<text x="410" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">amerikanCashCalle122</text>
+<text x="410" y="553" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$520</text>
+<text x="410" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
 <text x="760" y="553" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$590</text>
-<text x="760" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">cambiosKapital</text>
+<text x="760" y="575" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">eurodolar</text>
 <line x1="96" y1="582" x2="984" y2="582" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="610" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Rublo - Rusia</text>
 <text x="100" y="632" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">RussianRuble</text>
