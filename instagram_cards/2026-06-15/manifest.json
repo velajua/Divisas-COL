@@ -1,0 +1,258 @@
+{
+  "date": "2026-06-15",
+  "source": "html/result.json",
+  "cards": [
+    {
+      "type": "country_cover",
+      "group": "cities",
+      "city": null,
+      "page": 0,
+      "path": "instagram_cards/2026-06-15/country-00.svg",
+      "description_path": null
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Barranquilla",
+      "page": 1,
+      "path": "instagram_cards/2026-06-15/barranquilla-01.svg",
+      "description_path": "instagram_cards/2026-06-15/barranquilla-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso",
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Bogotá",
+      "page": 1,
+      "path": "instagram_cards/2026-06-15/bogota-01.svg",
+      "description_path": "instagram_cards/2026-06-15/bogota-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso",
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso",
+        "ArgentineanPeso",
+        "JapaneseYen",
+        "ChineseYuan",
+        "DominicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Bogotá",
+      "page": 2,
+      "path": "instagram_cards/2026-06-15/bogota-02.svg",
+      "description_path": "instagram_cards/2026-06-15/bogota-description.txt",
+      "currencies": [
+        "CostarricanColon",
+        "UAEDirham",
+        "TurkishLira",
+        "GuatemalanQuetzal",
+        "RussianRuble",
+        "SouthKoreanWon"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Cali",
+      "page": 1,
+      "path": "instagram_cards/2026-06-15/cali-01.svg",
+      "description_path": "instagram_cards/2026-06-15/cali-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso",
+        "BrasilianReal",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Cartagena",
+      "page": 1,
+      "path": "instagram_cards/2026-06-15/cartagena-01.svg",
+      "description_path": "instagram_cards/2026-06-15/cartagena-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso",
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Medellín",
+      "page": 1,
+      "path": "instagram_cards/2026-06-15/medellin-01.svg",
+      "description_path": "instagram_cards/2026-06-15/medellin-description.txt",
+      "currencies": [
+        "AmericanDollar",
+        "Euro",
+        "BritishPound",
+        "CanadianDollar",
+        "AustralianDollar",
+        "MexicanPeso",
+        "BrasilianReal",
+        "SwissFranc",
+        "PeruveanNewSun",
+        "ChileanPeso",
+        "ArgentineanPeso",
+        "JapaneseYen",
+        "ChineseYuan",
+        "DominicanPeso"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Medellín",
+      "page": 2,
+      "path": "instagram_cards/2026-06-15/medellin-02.svg",
+      "description_path": "instagram_cards/2026-06-15/medellin-description.txt",
+      "currencies": [
+        "ThaiBaht",
+        "CostarricanColon",
+        "UAEDirham",
+        "HongKongDollar",
+        "BahamianDollar",
+        "NewZealandDollar",
+        "ArubanFlorin",
+        "NetherlandsAntilleanGuilder",
+        "HonduranLempira",
+        "TurkishLira",
+        "BolivianBoliviano",
+        "UruguayanPeso",
+        "GuatemalanQuetzal",
+        "SouthKoreanWon"
+      ]
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Medellín",
+      "page": 3,
+      "path": "instagram_cards/2026-06-15/medellin-03.svg",
+      "description_path": "instagram_cards/2026-06-15/medellin-description.txt",
+      "currencies": [
+        "NicaraguanCordoba",
+        "DanishKrone",
+        "NorwegianKrone",
+        "SwedishKrone"
+      ]
+    },
+    {
+      "type": "newsletter",
+      "group": "newsletter",
+      "path": "instagram_cards/2026-06-15/newsletter.svg",
+      "description_path": "instagram_cards/2026-06-15/newsletter-description.txt",
+      "title": "El dólar barato oficial choca con las cuentas"
+    }
+  ],
+  "descriptions": [
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Barranquilla",
+      "path": "instagram_cards/2026-06-15/barranquilla-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Bogotá",
+      "path": "instagram_cards/2026-06-15/bogota-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Cali",
+      "path": "instagram_cards/2026-06-15/cali-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Cartagena",
+      "path": "instagram_cards/2026-06-15/cartagena-description.txt"
+    },
+    {
+      "type": "city_rates",
+      "group": "cities",
+      "city": "Medellín",
+      "path": "instagram_cards/2026-06-15/medellin-description.txt"
+    },
+    {
+      "type": "newsletter",
+      "path": "instagram_cards/2026-06-15/newsletter-description.txt",
+      "title": "El dólar barato oficial choca con las cuentas"
+    }
+  ],
+  "newsletter": {
+    "matched": true,
+    "title": "El dólar barato oficial choca con las cuentas",
+    "date": "15 jun 2026",
+    "path": "instagram_cards/2026-06-15/newsletter.svg",
+    "description_path": "instagram_cards/2026-06-15/newsletter-description.txt",
+    "hashtags": [
+      "#DivisasCOL",
+      "#DolarColombia",
+      "#PesoColombiano",
+      "#MercadoCambiario",
+      "#FinanzasPersonales",
+      "#AnalisisEconomico",
+      "#NoticiasColombia",
+      "#Dolar",
+      "#Barato",
+      "#Oficial",
+      "#Choca",
+      "#Cuentas",
+      "#Analisis",
+      "#Editorial",
+      "#Nuevo",
+      "#Marco",
+      "#Fiscal",
+      "#Colombia",
+      "#Proyeccion",
+      "#Tensiones",
+      "#Divisas",
+      "#Forex",
+      "#ForexTrading",
+      "#Trading",
+      "#Trader",
+      "#MercadoDeDivisas",
+      "#TipoDeCambio",
+      "#TasasDeCambio",
+      "#USD",
+      "#EUR"
+    ]
+  }
+}
