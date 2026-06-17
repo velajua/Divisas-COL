@@ -15,7 +15,7 @@
 <text x="72" y="102" fill="#d9f99d" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">DIVISAS COL</text>
 <text x="1008" y="102" fill="#bfdbfe" font-size="28" font-family="Inter, Arial, sans-serif" font-weight="700" text-anchor="end">2/3</text>
 <text x="72" y="185" fill="#ffffff" font-size="60" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Medellín: mejores tasas</text>
-<text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-05-26</text>
+<text x="72" y="238" fill="#cbd5e1" font-size="30" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">Compra mas alta y venta mas baja por moneda - 2026-06-17</text>
 <rect x="58" y="290" width="964" height="890" rx="34" fill="#f8fafc" opacity="0.96" filter="url(#shadow)"/>
 <text x="100" y="330" fill="#334155" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Moneda</text>
 <text x="410" y="330" fill="#166534" font-size="24" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Mejor compra</text>
@@ -67,7 +67,7 @@
 <text x="100" y="746" fill="#64748b" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">ArubanFlorin</text>
 <text x="410" y="724" fill="#15803d" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.500</text>
 <text x="410" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
-<text x="760" y="724" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$2.050</text>
+<text x="760" y="724" fill="#0369a1" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">$1.950</text>
 <text x="760" y="746" fill="#475569" font-size="15" font-family="Inter, Arial, sans-serif" font-weight="500" text-anchor="start">euroservicios</text>
 <line x1="96" y1="753" x2="984" y2="753" stroke="#e2e8f0" stroke-width="2"/>
 <text x="100" y="781" fill="#0f172a" font-size="20" font-family="Inter, Arial, sans-serif" font-weight="800" text-anchor="start">Florin Caribeno</text>
