@@ -126,6 +126,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/peso-firme-frente-a-un-estado-sin-margen.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/en/colombia/entries/pib-debil-gasto-publico-y-dolar-en-zona-critica.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -232,6 +237,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/es/colombia/entries/la-tregua-del-dolar-necesita-algo-mas-que-urnas.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/peso-firme-frente-a-un-estado-sin-margen.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
