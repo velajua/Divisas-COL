@@ -18,7 +18,7 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
 
             resolved = instagram_publish.publish_manifest_for_date(root, "2026-05-10")
 
-            self.assertEqual(manifest, resolved)
+            self.assertEqual(manifest.resolve(), resolved)
 
     def test_manifest_for_default_date_uses_bogota_today(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -30,7 +30,14 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
 
             resolved = instagram_publish.publish_manifest_for_date(root, None)
 
-            self.assertEqual(manifest, resolved)
+            self.assertEqual(manifest.resolve(), resolved)
+
+    def test_resolve_publish_manifest_rejects_missing_explicit_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+
+            with self.assertRaises(FileNotFoundError):
+                instagram_publish.resolve_publish_manifest(root, "instagram_cards/2026-05-10/public/publish-manifest.json")
 
     def test_groups_carousel_posts_by_first_filename_word_in_manifest_order(self):
         posts = [
@@ -301,7 +308,7 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
                 instagram_publish.post_with_meta_retry("https://graph.facebook.com/test", data={})
 
         self.assertEqual(1, mock_post.call_count)
-        mock_sleep.assert_called_once_with(instagram_publish.DEFAULT_META_CALL_COOLDOWN_SECONDS)
+        mock_sleep.assert_called_once_with(instagram_publish.DEFAULT_META_COOLDOWN_SECONDS)
 
     def test_every_tenth_meta_post_waits_before_request(self):
         class FakeResponse:
@@ -328,7 +335,7 @@ class InstagramPublishWorkflowTests(unittest.TestCase):
 
         self.assertEqual(1, mock_post.call_count)
         self.assertEqual(
-            [instagram_publish.DEFAULT_META_CALL_COOLDOWN_SECONDS, instagram_publish.DEFAULT_META_COOLDOWN_SECONDS],
+            [instagram_publish.DEFAULT_META_COOLDOWN_SECONDS, instagram_publish.DEFAULT_META_COOLDOWN_SECONDS],
             sleeps,
         )
         self.assertEqual(10, instagram_publish.META_CALL_COUNT)
