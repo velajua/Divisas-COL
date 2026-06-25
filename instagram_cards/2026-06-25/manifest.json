@@ -1,5 +1,5 @@
 {
-  "date": "2026-06-03",
+  "date": "2026-06-25",
   "source": "html/result.json",
   "cards": [
     {
@@ -7,7 +7,7 @@
       "group": "cities",
       "city": null,
       "page": 0,
-      "path": "instagram_cards/2026-06-03/country-00.svg",
+      "path": "instagram_cards/2026-06-25/country-00.svg",
       "description_path": null
     },
     {
@@ -15,8 +15,8 @@
       "group": "cities",
       "city": "Barranquilla",
       "page": 1,
-      "path": "instagram_cards/2026-06-03/barranquilla-01.svg",
-      "description_path": "instagram_cards/2026-06-03/barranquilla-description.txt",
+      "path": "instagram_cards/2026-06-25/barranquilla-01.svg",
+      "description_path": "instagram_cards/2026-06-25/barranquilla-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -35,8 +35,8 @@
       "group": "cities",
       "city": "Bogotá",
       "page": 1,
-      "path": "instagram_cards/2026-06-03/bogota-01.svg",
-      "description_path": "instagram_cards/2026-06-03/bogota-description.txt",
+      "path": "instagram_cards/2026-06-25/bogota-01.svg",
+      "description_path": "instagram_cards/2026-06-25/bogota-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -59,8 +59,8 @@
       "group": "cities",
       "city": "Bogotá",
       "page": 2,
-      "path": "instagram_cards/2026-06-03/bogota-02.svg",
-      "description_path": "instagram_cards/2026-06-03/bogota-description.txt",
+      "path": "instagram_cards/2026-06-25/bogota-02.svg",
+      "description_path": "instagram_cards/2026-06-25/bogota-description.txt",
       "currencies": [
         "CostarricanColon",
         "UAEDirham",
@@ -75,8 +75,8 @@
       "group": "cities",
       "city": "Cali",
       "page": 1,
-      "path": "instagram_cards/2026-06-03/cali-01.svg",
-      "description_path": "instagram_cards/2026-06-03/cali-description.txt",
+      "path": "instagram_cards/2026-06-25/cali-01.svg",
+      "description_path": "instagram_cards/2026-06-25/cali-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -94,8 +94,8 @@
       "group": "cities",
       "city": "Cartagena",
       "page": 1,
-      "path": "instagram_cards/2026-06-03/cartagena-01.svg",
-      "description_path": "instagram_cards/2026-06-03/cartagena-description.txt",
+      "path": "instagram_cards/2026-06-25/cartagena-01.svg",
+      "description_path": "instagram_cards/2026-06-25/cartagena-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -114,8 +114,8 @@
       "group": "cities",
       "city": "Medellín",
       "page": 1,
-      "path": "instagram_cards/2026-06-03/medellin-01.svg",
-      "description_path": "instagram_cards/2026-06-03/medellin-description.txt",
+      "path": "instagram_cards/2026-06-25/medellin-01.svg",
+      "description_path": "instagram_cards/2026-06-25/medellin-description.txt",
       "currencies": [
         "AmericanDollar",
         "Euro",
@@ -138,8 +138,8 @@
       "group": "cities",
       "city": "Medellín",
       "page": 2,
-      "path": "instagram_cards/2026-06-03/medellin-02.svg",
-      "description_path": "instagram_cards/2026-06-03/medellin-description.txt",
+      "path": "instagram_cards/2026-06-25/medellin-02.svg",
+      "description_path": "instagram_cards/2026-06-25/medellin-description.txt",
       "currencies": [
         "ThaiBaht",
         "CostarricanColon",
@@ -162,21 +162,14 @@
       "group": "cities",
       "city": "Medellín",
       "page": 3,
-      "path": "instagram_cards/2026-06-03/medellin-03.svg",
-      "description_path": "instagram_cards/2026-06-03/medellin-description.txt",
+      "path": "instagram_cards/2026-06-25/medellin-03.svg",
+      "description_path": "instagram_cards/2026-06-25/medellin-description.txt",
       "currencies": [
         "NicaraguanCordoba",
         "DanishKrone",
         "NorwegianKrone",
         "SwedishKrone"
       ]
-    },
-    {
-      "type": "newsletter",
-      "group": "newsletter",
-      "path": "instagram_cards/2026-06-03/newsletter.svg",
-      "description_path": "instagram_cards/2026-06-03/newsletter-description.txt",
-      "title": "Rebote electoral con fecha de examen"
     }
   ],
   "descriptions": [
@@ -184,75 +177,34 @@
       "type": "city_rates",
       "group": "cities",
       "city": "Barranquilla",
-      "path": "instagram_cards/2026-06-03/barranquilla-description.txt"
+      "path": "instagram_cards/2026-06-25/barranquilla-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Bogotá",
-      "path": "instagram_cards/2026-06-03/bogota-description.txt"
+      "path": "instagram_cards/2026-06-25/bogota-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Cali",
-      "path": "instagram_cards/2026-06-03/cali-description.txt"
+      "path": "instagram_cards/2026-06-25/cali-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Cartagena",
-      "path": "instagram_cards/2026-06-03/cartagena-description.txt"
+      "path": "instagram_cards/2026-06-25/cartagena-description.txt"
     },
     {
       "type": "city_rates",
       "group": "cities",
       "city": "Medellín",
-      "path": "instagram_cards/2026-06-03/medellin-description.txt"
-    },
-    {
-      "type": "newsletter",
-      "path": "instagram_cards/2026-06-03/newsletter-description.txt",
-      "title": "Rebote electoral con fecha de examen"
+      "path": "instagram_cards/2026-06-25/medellin-description.txt"
     }
   ],
   "newsletter": {
-    "matched": true,
-    "title": "Rebote electoral con fecha de examen",
-    "date": "03 jun 2026",
-    "path": "instagram_cards/2026-06-03/newsletter.svg",
-    "description_path": "instagram_cards/2026-06-03/newsletter-description.txt",
-    "hashtags": [
-      "#DivisasCOL",
-      "#DolarColombia",
-      "#PesoColombiano",
-      "#MercadoCambiario",
-      "#FinanzasPersonales",
-      "#AnalisisEconomico",
-      "#NoticiasColombia",
-      "#Rebote",
-      "#Electoral",
-      "#Fecha",
-      "#Examen",
-      "#Analisis",
-      "#Editorial",
-      "#Salto",
-      "#Peso",
-      "#Tras",
-      "#Primera",
-      "#Vuelta",
-      "#Caida",
-      "#Dolar",
-      "#Divisas",
-      "#Forex",
-      "#ForexTrading",
-      "#Trading",
-      "#Trader",
-      "#MercadoDeDivisas",
-      "#TipoDeCambio",
-      "#TasasDeCambio",
-      "#USD",
-      "#EUR"
-    ]
+    "matched": false
   }
 }
