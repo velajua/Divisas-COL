@@ -101,6 +101,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/deuda-al-centro-mientras-banrep-entra-en-silencio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/en/colombia/entries/deuda-cara-tasas-altas-y-peso-sin-colchon.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -177,6 +182,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/es/colombia/entries/deficit-banrep-y-rebote-del-dolar.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/deuda-al-centro-mientras-banrep-entra-en-silencio.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
