@@ -121,7 +121,17 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/en/colombia/entries/el-peso-compro-tiempo-no-credibilidad.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/en/colombia/entries/el-peso-llega-fuerte-a-una-cita-que-puede-voltearlo-todo.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/en/colombia/entries/la-fortaleza-del-peso-no-absuelve-al-fisco.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -211,6 +221,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://divisascol.com/es/colombia/entries/el-peso-compro-tiempo-no-credibilidad.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://divisascol.com/es/colombia/entries/el-peso-llega-fuerte-a-una-cita-que-puede-voltearlo-todo.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -242,6 +257,11 @@
   </url>
   <url>
     <loc>https://divisascol.com/es/colombia/entries/inflacion-tasas-presion-global.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://divisascol.com/es/colombia/entries/la-fortaleza-del-peso-no-absuelve-al-fisco.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
